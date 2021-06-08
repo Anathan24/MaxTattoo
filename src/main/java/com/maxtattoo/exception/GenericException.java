@@ -1,4 +1,4 @@
 package com.maxtattoo.exception;
 
-public class GenericException {
+public abstract class GenericException extends RuntimeException{
 }
