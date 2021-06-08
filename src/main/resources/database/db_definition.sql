@@ -10,20 +10,20 @@ DROP TABLE IF EXISTS location;
 DROP TABLE IF EXISTS city;
 DROP TABLE IF EXISTS client;
 
-CREATE TABLE client(
+CREATE TABLE clients(
     clientId INT PRIMARY KEY,
     name VARCHAR(50) NOT NULL,
     surname VARCHAR(50) NOT NULL,
     gender VARCHAR(10) NOT NULL,
-    specifications VARCHAR(250)
+    description VARCHAR(250)
 );
 
-CREATE TABLE city(
+CREATE TABLE cities(
     cityId INT PRIMARY KEY,
-    name VARCHAR(50)
+    cityName VARCHAR(50)
 );
 
-CREATE TABLE location(
+CREATE TABLE locations(
     locationId INT PRIMARY KEY,
     clientId INT,
     cityId INT,
@@ -32,19 +32,19 @@ CREATE TABLE location(
     FOREIGN KEY(cityId) REFERENCES city(cityId)
 );
 
-CREATE TABLE state(
+CREATE TABLE states(
     stateId INT PRIMARY KEY,
     state VARCHAR(15)
 );
 
-CREATE TABLE orderType(
+CREATE TABLE orderTypes(
     orderTypeId INT PRIMARY KEY,
     type VARCHAR(15)
 );
 
-CREATE TABLE clientsOrder(
-    clientsOrderId INT PRIMARY KEY,
-    sittingNumber INT NOT NULL CHECK(sittingNumber > 0),
+CREATE TABLE orders(
+    orderId INT PRIMARY KEY,
+    sittingNumber INT default 1,
     orderPrice INT default 0,
     prepayment INT default 0,
     startDate date,
@@ -59,19 +59,19 @@ CREATE TABLE clientsOrder(
     FOREIGN key(clientId) REFERENCES client(clientId)
 );
 
-CREATE TABLE sitting(
+CREATE TABLE sittings(
     sittingId int PRIMARY KEY,
     sittingDate date NOT NULL,
-    spentHours INT,
+    spentHours DOUBLE,
     sittingPrice int default 0,
-    note VARCHAR(250),
+    sittingNote VARCHAR(250),
 
     stateId INT,
-    clientsOrderId INT,
+    ordersId INT,
     FOREIGN KEY(stateId) REFERENCES state(stateId),
     FOREIGN KEY(clientsOrderId) REFERENCES clientsOrder(clientsOrderId)
 );
-
+===========================================================================
 CREATE TABLE paint(
     paintId INT PRIMARY KEY,
     producer VARCHAR(25),
