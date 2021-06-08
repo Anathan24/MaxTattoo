@@ -28,8 +28,8 @@ CREATE TABLE locations(
     clientId INT,
     cityId INT,
 
-    FOREIGN KEY(clientId) REFERENCES client(clientId),
-    FOREIGN KEY(cityId) REFERENCES city(cityId)
+    FOREIGN KEY(clientId) REFERENCES clients(clientId),
+    FOREIGN KEY(cityId) REFERENCES cities(cityId)
 );
 
 CREATE TABLE states(
@@ -54,9 +54,9 @@ CREATE TABLE orders(
     stateId INT,
     orderTypeId INT,
     clientId INT,
-    FOREIGN KEY(stateId) REFERENCES state(stateId),
-    FOREIGN KEY(orderTypeId) REFERENCES orderType(orderTypeId),
-    FOREIGN key(clientId) REFERENCES client(clientId)
+    FOREIGN KEY(stateId) REFERENCES states(stateId),
+    FOREIGN KEY(orderTypeId) REFERENCES orderTypes(orderTypeId),
+    FOREIGN key(clientId) REFERENCES clients(clientId)
 );
 
 CREATE TABLE sittings(
@@ -68,37 +68,37 @@ CREATE TABLE sittings(
 
     stateId INT,
     ordersId INT,
-    FOREIGN KEY(stateId) REFERENCES state(stateId),
-    FOREIGN KEY(clientsOrderId) REFERENCES clientsOrder(clientsOrderId)
+    FOREIGN KEY(stateId) REFERENCES states(stateId),
+    FOREIGN KEY(clientsOrderId) REFERENCES orders(orderId)
 );
-===========================================================================
-CREATE TABLE paint(
+
+CREATE TABLE paints(
     paintId INT PRIMARY KEY,
     producer VARCHAR(25),
     color VARCHAR(25)
 );
 
-CREATE TABLE sitting_paint(
+CREATE TABLE sittings_paints(
     sittingPaintId INT PRIMARY KEY,
     sittingId INT,
     paintId INT,
 
-    FOREIGN KEY(sittingId) REFERENCES sitting(sittingId),
-    FOREIGN KEY(paintId) REFERENCES paint(paintId)
+    FOREIGN KEY(sittingId) REFERENCES sittings(sittingId),
+    FOREIGN KEY(paintId) REFERENCES paints(paintId)
 );
 
-CREATE TABLE needle(
+CREATE TABLE needles(
     needleId INT PRIMARY KEY,
     producer VARCHAR(50),
-    code CHAR(10),
+    needleCode CHAR(10),
     needleSharpening CHAR(10)
 );
 
-CREATE TABLE sitting_needle(
+CREATE TABLE sittings_needles(
     sittingNeedleId INT PRIMARY KEY,
     sittingId INT,
     needleId INT UNIQUE,
 
-    FOREIGN KEY(sittingId) REFERENCES sitting(sittingId),
-    FOREIGN KEY(needleId) REFERENCES needle(needleId)
+    FOREIGN KEY(sittingId) REFERENCES sittings(sittingId),
+    FOREIGN KEY(needleId) REFERENCES needles(needleId)
 );

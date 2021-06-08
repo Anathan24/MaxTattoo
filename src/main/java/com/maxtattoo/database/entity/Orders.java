@@ -20,11 +20,11 @@ public class Orders {
     @Column(name = "orderId")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column(columnDefinition = "INT default = 1")
+    @Column
     private int sittingNumber;
-    @Column(columnDefinition = "INT default = 0")
+    @Column
     private int orderPrice;
-    @Column(columnDefinition = "INT default = 0")
+    @Column
     private int prepayment;
     @Column
     private Date startDate;
