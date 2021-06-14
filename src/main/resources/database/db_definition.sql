@@ -25,8 +25,9 @@ CREATE TABLE cities(
 
 CREATE TABLE locations(
     locationId INT PRIMARY KEY,
-    clientId INT,
+    name VARCHAR(25),
     cityId INT,
+    clientId INT,
 
     FOREIGN KEY(clientId) REFERENCES clients(clientId),
     FOREIGN KEY(cityId) REFERENCES cities(cityId)
@@ -39,7 +40,7 @@ CREATE TABLE states(
 
 CREATE TABLE orderTypes(
     orderTypeId INT PRIMARY KEY,
-    type VARCHAR(15)
+    orderType VARCHAR(15)
 );
 
 CREATE TABLE orders(
@@ -49,7 +50,6 @@ CREATE TABLE orders(
     prepayment INT default 0,
     startDate date,
     endDate date,
-    orderType VARCHAR(10),
 
     stateId INT,
     orderTypeId INT,

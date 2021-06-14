@@ -20,6 +20,6 @@ public class OrderType {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Column
-    private String type;
+    private String orderType;
 
 }

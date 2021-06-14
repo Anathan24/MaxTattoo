@@ -21,6 +21,8 @@ public class Location {
     private int id;
 
     @Column
+    private String name;
+    @Column
     private int clientId;
     @Column
     private int cityId;

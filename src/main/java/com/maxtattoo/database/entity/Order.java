@@ -14,7 +14,7 @@ import java.sql.Date;
 @AllArgsConstructor
 @Entity
 @Table(name = "orders")
-public class Orders {
+public class Order {
 
     @Id
     @Column(name = "orderId")
