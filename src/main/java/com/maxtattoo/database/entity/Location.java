@@ -13,7 +13,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Entity
 @Table(name = "locations")
-public class Location {
+public class Location implements BaseEntity{
 
     @Id
     @Column(name = "locationId")

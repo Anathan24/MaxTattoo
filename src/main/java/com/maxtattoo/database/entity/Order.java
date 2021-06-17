@@ -14,7 +14,7 @@ import java.sql.Date;
 @AllArgsConstructor
 @Entity
 @Table(name = "orders")
-public class Order {
+public class Order implements BaseEntity{
 
     @Id
     @Column(name = "orderId")

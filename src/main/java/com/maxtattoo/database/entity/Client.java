@@ -14,7 +14,7 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 @Entity
 @Table(name = "clients")
-public class Client {
+public class Client implements BaseEntity{
 
     @Id
     @Column(name = "clientId")

@@ -15,7 +15,7 @@ import java.sql.Date;
 @AllArgsConstructor
 @Entity
 @Table(name = "sittings")
-public class Sitting {
+public class Sitting implements BaseEntity{
 
     @Id
     @Column(name = "sittingId")

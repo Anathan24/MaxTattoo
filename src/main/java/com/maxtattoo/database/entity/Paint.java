@@ -13,7 +13,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Entity
 @Table(name = "paints")
-public class Paint {
+public class Paint implements BaseEntity{
 
     @Id
     @Column(name = "paintId")

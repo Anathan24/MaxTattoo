@@ -13,7 +13,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Entity
 @Table(name = "sittings_paints")
-public class SittingPaint {
+public class SittingPaint implements BaseEntity{
 
     @Id
     @Column(name = "sittingPaintId")
