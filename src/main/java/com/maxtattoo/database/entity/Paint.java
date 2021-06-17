@@ -18,7 +18,7 @@ public class Paint {
     @Id
     @Column(name = "paintId")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
     @Column
     private String producer;
     @Column

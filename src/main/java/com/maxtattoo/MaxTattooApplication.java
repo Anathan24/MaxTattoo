@@ -12,7 +12,6 @@ public class MaxTattooApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(MaxTattooApplication.class, args);
-
 	}
 
 //	private void httpResponceExample(){

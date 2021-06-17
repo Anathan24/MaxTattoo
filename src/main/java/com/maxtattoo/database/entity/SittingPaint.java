@@ -18,7 +18,7 @@ public class SittingPaint {
     @Id
     @Column(name = "sittingPaintId")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     @Column
     private int sittingId;

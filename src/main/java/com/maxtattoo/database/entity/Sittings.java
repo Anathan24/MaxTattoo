@@ -20,7 +20,7 @@ public class Sittings {
     @Id
     @Column(name = "sittingId")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
     @Column @NotNull
     private Date sittingDtae;
     @Column

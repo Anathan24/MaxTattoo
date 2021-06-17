@@ -11,7 +11,7 @@ DROP TABLE IF EXISTS cities;
 DROP TABLE IF EXISTS clients;
 
 CREATE TABLE clients(
-    clientId INT PRIMARY KEY,
+    clientId BIGINT PRIMARY KEY,
     name VARCHAR(50) NOT NULL,
     surname VARCHAR(50) NOT NULL,
     gender VARCHAR(10) NOT NULL,
@@ -19,12 +19,12 @@ CREATE TABLE clients(
 );
 
 CREATE TABLE cities(
-    cityId INT PRIMARY KEY,
+    cityId BIGINT PRIMARY KEY,
     cityName VARCHAR(50)
 );
 
 CREATE TABLE locations(
-    locationId INT PRIMARY KEY,
+    locationId BIGINT PRIMARY KEY,
     name VARCHAR(25),
     cityId INT,
     clientId INT,
@@ -34,17 +34,17 @@ CREATE TABLE locations(
 );
 
 CREATE TABLE states(
-    stateId INT PRIMARY KEY,
+    stateId BIGINT PRIMARY KEY,
     state VARCHAR(15)
 );
 
 CREATE TABLE orderTypes(
-    orderTypeId INT PRIMARY KEY,
-    orderType VARCHAR(15)
+    orderTypeId BIGINT PRIMARY KEY,
+    type VARCHAR(15)
 );
 
 CREATE TABLE orders(
-    orderId INT PRIMARY KEY,
+    orderId BIGINT PRIMARY KEY,
     sittingNumber INT default 1,
     orderPrice INT default 0,
     prepayment INT default 0,
@@ -60,7 +60,7 @@ CREATE TABLE orders(
 );
 
 CREATE TABLE sittings(
-    sittingId int PRIMARY KEY,
+    sittingId BIGINT PRIMARY KEY,
     sittingDate date NOT NULL,
     spentHours NUMERIC,
     sittingPrice int default 0,
@@ -73,13 +73,13 @@ CREATE TABLE sittings(
 );
 
 CREATE TABLE paints(
-    paintId INT PRIMARY KEY,
+    paintId BIGINT PRIMARY KEY,
     producer VARCHAR(25),
     color VARCHAR(25)
 );
 
 CREATE TABLE sittings_paints(
-    sittingPaintId INT PRIMARY KEY,
+    sittingPaintId BIGINT PRIMARY KEY,
     sittingId INT,
     paintId INT,
 
@@ -88,7 +88,7 @@ CREATE TABLE sittings_paints(
 );
 
 CREATE TABLE needles(
-    needleId INT PRIMARY KEY,
+    needleId BIGINT PRIMARY KEY,
     producer VARCHAR(50),
     needleCode CHAR(10),
     needleSharpening CHAR(10)
