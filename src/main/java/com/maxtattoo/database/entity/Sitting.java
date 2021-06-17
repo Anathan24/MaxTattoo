@@ -15,17 +15,17 @@ import java.sql.Date;
 @AllArgsConstructor
 @Entity
 @Table(name = "sittings")
-public class Sittings {
+public class Sitting {
 
     @Id
     @Column(name = "sittingId")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long sittingId;
     @Column @NotNull
-    private Date sittingDtae;
+    private Date sittingDate;
     @Column
     private double spentHours;
-    @Column(columnDefinition = "int default 0")
+    @Column
     private int sittingPrice;
     @Column
     private String sittingNote;
@@ -33,6 +33,6 @@ public class Sittings {
     @Column
     private int stateId;
     @Column
-    private int ordersId;
+    private int orderId;
 
 }

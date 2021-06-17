@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Data
 @ToString
@@ -18,10 +19,10 @@ public class Client {
     @Id
     @Column(name = "clientId")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    @Column
+    private Long clientId;
+    @Column @NotNull
     private String name;
-    @Column
+    @Column @NotNull
     private String surname;
     @Column
     private String gender;

@@ -18,7 +18,7 @@ public class SittingNeedle {
     @Id
     @Column(name = "sittingNeedleId")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long sittingNeedleId;
 
     @Column
     private int sittingId;

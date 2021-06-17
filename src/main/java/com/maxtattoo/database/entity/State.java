@@ -13,13 +13,13 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Entity
 @Table(name = "states")
-public class States {
+public class State {
 
     @Id
     @Column(name = "stateId")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long stateId;
     @Column
-    private String state;
+    private String stateName;
 
 }

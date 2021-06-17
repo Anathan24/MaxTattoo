@@ -18,7 +18,7 @@ public class OrderType {
     @Id
     @Column(name = "orderTypeId")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long orderTypeId;
     @Column
     private String type;
 

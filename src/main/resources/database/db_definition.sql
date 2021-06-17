@@ -14,7 +14,7 @@ CREATE TABLE clients(
     clientId BIGINT PRIMARY KEY,
     name VARCHAR(50) NOT NULL,
     surname VARCHAR(50) NOT NULL,
-    gender VARCHAR(10) NOT NULL,
+    gender VARCHAR(10),
     description VARCHAR(250)
 );
 
@@ -35,7 +35,7 @@ CREATE TABLE locations(
 
 CREATE TABLE states(
     stateId BIGINT PRIMARY KEY,
-    state VARCHAR(15)
+    stateName VARCHAR(15)
 );
 
 CREATE TABLE orderTypes(
@@ -62,14 +62,14 @@ CREATE TABLE orders(
 CREATE TABLE sittings(
     sittingId BIGINT PRIMARY KEY,
     sittingDate date NOT NULL,
-    spentHours NUMERIC,
-    sittingPrice int default 0,
+    spentHours DOUBLE PRECISION,
+    sittingPrice int,
     sittingNote VARCHAR(250),
 
     stateId INT,
-    ordersId INT,
+    orderId INT,
     FOREIGN KEY(stateId) REFERENCES states(stateId),
-    FOREIGN KEY(ordersId) REFERENCES orders(orderId)
+    FOREIGN KEY(orderId) REFERENCES orders(orderId)
 );
 
 CREATE TABLE paints(
