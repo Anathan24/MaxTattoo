@@ -1,14 +1,14 @@
-DROP TABLE IF EXISTS sitting_paint;
-DROP TABLE IF EXISTS sitting_needle;
-DROP TABLE IF EXISTS paint;
-DROP TABLE IF EXISTS needle;
-DROP TABLE IF EXISTS sitting;
-DROP TABLE IF EXISTS clientsOrder;
-DROP TABLE IF EXISTS state;
-DROP TABLE IF EXISTS orderType;
-DROP TABLE IF EXISTS location;
-DROP TABLE IF EXISTS city;
-DROP TABLE IF EXISTS client;
+DROP TABLE IF EXISTS sittings_paints;
+DROP TABLE IF EXISTS sittings_needles;
+DROP TABLE IF EXISTS paints;
+DROP TABLE IF EXISTS needles;
+DROP TABLE IF EXISTS sittings;
+DROP TABLE IF EXISTS orders;
+DROP TABLE IF EXISTS states;
+DROP TABLE IF EXISTS orderTypes;
+DROP TABLE IF EXISTS locations;
+DROP TABLE IF EXISTS cities;
+DROP TABLE IF EXISTS clients;
 
 CREATE TABLE clients(
     clientId INT PRIMARY KEY,
@@ -62,14 +62,14 @@ CREATE TABLE orders(
 CREATE TABLE sittings(
     sittingId int PRIMARY KEY,
     sittingDate date NOT NULL,
-    spentHours DOUBLE,
+    spentHours NUMERIC,
     sittingPrice int default 0,
     sittingNote VARCHAR(250),
 
     stateId INT,
     ordersId INT,
     FOREIGN KEY(stateId) REFERENCES states(stateId),
-    FOREIGN KEY(clientsOrderId) REFERENCES orders(orderId)
+    FOREIGN KEY(ordersId) REFERENCES orders(orderId)
 );
 
 CREATE TABLE paints(

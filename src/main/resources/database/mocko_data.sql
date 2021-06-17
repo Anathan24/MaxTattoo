@@ -22,11 +22,11 @@ INSERT INTO states(stateId, state) VALUES(4, 'Finished');
 
 INSERT INTO orderTypes(orderTypeId, orderType) VALUES(1, 'Tattoo');
 
-INSERT INTO orders(orderId, sittingNumber, orderPrice, prepayment, startDate, endDate, stateId, orderTypeId, clientId) VALUES(1, 200, 50, '20/04/2021','20/06/2022', 1, 1, 1);
-INSERT INTO orders(orderId, sittingNumber, orderPrice, prepayment, startDate, endDate, stateId, orderTypeId, clientId) VALUES(2, 200, 50, '20/04/2021','20/06/2022', 2, 1, 2);
-INSERT INTO orders(orderId, sittingNumber, orderPrice, prepayment, startDate, endDate, stateId, orderTypeId, clientId) VALUES(3, 200, 50, '20/04/2021','20/06/2022', 3, 1, 3);
-INSERT INTO orders(orderId, sittingNumber, orderPrice, prepayment, startDate, endDate, stateId, orderTypeId, clientId) VALUES(4, 200, 50, '20/04/2021','20/06/2022', 2, 1, 4);
-INSERT INTO orders(orderId, sittingNumber, orderPrice, prepayment, startDate, endDate, stateId, orderTypeId, clientId) VALUES(5, 200, 50, '20/04/2021','20/06/2022', 3, 1, 5);
+INSERT INTO orders(orderId, sittingNumber, orderPrice, prepayment, startDate, endDate, stateId, orderTypeId, clientId) VALUES(1, 5, 200, 100, '20/04/2021','20/06/2022', 1, 1, 1);
+INSERT INTO orders(orderId, sittingNumber, orderPrice, prepayment, startDate, endDate, stateId, orderTypeId, clientId) VALUES(2, 3, 456, 150, '20/04/2021','20/06/2022', 2, 1, 2);
+INSERT INTO orders(orderId, sittingNumber, orderPrice, prepayment, startDate, endDate, stateId, orderTypeId, clientId) VALUES(3, 6, 777, 200, '20/04/2021','20/06/2022', 3, 1, 3);
+INSERT INTO orders(orderId, sittingNumber, orderPrice, prepayment, startDate, endDate, stateId, orderTypeId, clientId) VALUES(4, 7, 444, 450, '20/04/2021','20/06/2022', 2, 1, 4);
+INSERT INTO orders(orderId, sittingNumber, orderPrice, prepayment, startDate, endDate, stateId, orderTypeId, clientId) VALUES(5, 2, 456, 744, '20/04/2021','20/06/2022', 3, 1, 5);
 
 INSERT INTO sittings(sittingId, sittingDate, spentHours, sittingPrice, sittingNote, stateId, ordersId)VALUES(1, '22/04/2020', 1, 50, 'SittingNote 1', 4, 1);
 INSERT INTO sittings(sittingId, sittingDate, spentHours, sittingPrice, sittingNote, stateId, ordersId)VALUES(2, '22/04/2020', 5, 25, 'SittingNote 2', 4, 1);
@@ -55,10 +55,11 @@ INSERT INTO sittings_paints(sittingPaintId, sittingId, paintId) VALUES (5, 6, 2)
 INSERT INTO needles(needleId, producer, needleCode, needleSharpening) VALUES (1, 'Producer 1', '1rl', '5ra');
 INSERT INTO needles(needleId, producer, needleCode, needleSharpening) VALUES (2, 'Producer 2', '4rl', '10ra');
 INSERT INTO needles(needleId, producer, needleCode, needleSharpening) VALUES (3, 'Producer 3', '3rl', '15ra');
+INSERT INTO needles(needleId, producer, needleCode, needleSharpening) VALUES (4, 'Producer 4', '4rl', '16ra');
+INSERT INTO needles(needleId, producer, needleCode, needleSharpening) VALUES (5, 'Producer 5', '3rl', '23ra');
 
 INSERT INTO sittings_needles(sittingNeedleId, sittingId, needleId) VALUES (1, 3, 1);
 INSERT INTO sittings_needles(sittingNeedleId, sittingId, needleId) VALUES (2, 2, 2);
-INSERT INTO sittings_needles(sittingNeedleId, sittingId, needleId) VALUES (3, 9, 2);
-INSERT INTO sittings_needles(sittingNeedleId, sittingId, needleId) VALUES (4, 1, 3);
-INSERT INTO sittings_needles(sittingNeedleId, sittingId, needleId) VALUES (5, 4, 1);
-INSERT INTO sittings_needles(sittingNeedleId, sittingId, needleId) VALUES (6, 5, 1);
+INSERT INTO sittings_needles(sittingNeedleId, sittingId, needleId) VALUES (3, 9, 3);
+INSERT INTO sittings_needles(sittingNeedleId, sittingId, needleId) VALUES (4, 1, 4);
+INSERT INTO sittings_needles(sittingNeedleId, sittingId, needleId) VALUES (5, 4, 5);

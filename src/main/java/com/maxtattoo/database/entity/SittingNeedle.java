@@ -13,7 +13,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Entity
 @Table(name = "sittings_needles")
-public class Sitting_Needle {
+public class SittingNeedle {
 
     @Id
     @Column(name = "sittingNeedleId")
@@ -22,7 +22,7 @@ public class Sitting_Needle {
 
     @Column
     private int sittingId;
-    @Column
+    @Column(unique = true)
     private int needleId;
 
 }
