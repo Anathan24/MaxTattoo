@@ -11,7 +11,7 @@ import java.util.List;
 @AllArgsConstructor
 @ToString
 @EqualsAndHashCode
-public class LocationModel {
+public class LocationModel implements GenericModel{
     //TODO da specificare i dettagli
 
     private Long locationId;

@@ -12,7 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 @ToString
 @EqualsAndHashCode
-public class OrderModel {
+public class OrderModel implements GenericModel{
 
     private Long orderId;
     private int sittingNumber;

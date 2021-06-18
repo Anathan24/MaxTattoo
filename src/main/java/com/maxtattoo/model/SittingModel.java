@@ -11,7 +11,7 @@ import java.util.List;
 @AllArgsConstructor
 @ToString
 @EqualsAndHashCode
-public class SittingModel {
+public class SittingModel implements GenericModel{
 
     private Long sittingId;
     private Timestamp sittingDate;

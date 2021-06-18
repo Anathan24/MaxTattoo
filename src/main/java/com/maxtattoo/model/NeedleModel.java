@@ -7,7 +7,7 @@ import lombok.*;
 @AllArgsConstructor
 @ToString
 @EqualsAndHashCode
-public class NeedleModel {
+public class NeedleModel implements GenericModel{
 
     private Long needleId;
     private String producer;

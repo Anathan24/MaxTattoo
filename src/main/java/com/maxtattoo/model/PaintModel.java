@@ -7,7 +7,7 @@ import lombok.*;
 @AllArgsConstructor
 @ToString
 @EqualsAndHashCode
-public class PaintModel {
+public class PaintModel implements GenericModel{
 
     private Long paintId;
     private String producer;
