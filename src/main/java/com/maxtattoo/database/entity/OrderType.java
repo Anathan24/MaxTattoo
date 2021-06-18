@@ -13,11 +13,10 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "orderTypes")
+@Table(name = "order_types")
 public class OrderType implements BaseEntity {
 
     @Id
-    @Column(name = "orderTypeId")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long orderTypeId;
     @Column

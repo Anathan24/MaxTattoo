@@ -17,7 +17,6 @@ import javax.persistence.*;
 public class State implements BaseEntity {
 
     @Id
-    @Column(name = "stateId")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long stateId;
     @Column

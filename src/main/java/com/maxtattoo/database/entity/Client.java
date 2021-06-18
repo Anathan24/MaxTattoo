@@ -18,7 +18,6 @@ import javax.validation.constraints.NotNull;
 public class Client implements BaseEntity {
 
     @Id
-    @Column(name = "clientId")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long clientId;
     @Column @NotNull

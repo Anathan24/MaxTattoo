@@ -7,10 +7,15 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Repository
 @Transactional
 public interface SittingNeedleRepository extends JpaRepository<SittingNeedle, Long> {
 
-    @Query("SELECT sd FROM SittingNeedle sd WHERE sd.sittingNeedleId=(:sittingNeedleId)")
+    @Query("SELECT sn FROM SittingNeedle sn WHERE sn.sittingNeedleId=(:sittingNeedleId)")
     SittingNeedle findSittingNeedleById(@Param("sittingNeedleId") Long sittingNeedleId);
+
+    @Query("SELECT sn FROM SittingNeedle sn WHERE sn.sittingId=(:sittingId)")
+    List<SittingNeedle> findSittingNeedleBySittingId(@Param("sittingId") Long sittingId);
 }

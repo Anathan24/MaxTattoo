@@ -13,4 +13,5 @@ public interface NeedleRepository extends JpaRepository<Needle, Long> {
 
     @Query("SELECT n FROM Needle n WHERE n.needleId=(:needleId)")
     Needle findNeedleById(@Param("needleId") Long needleId);
+
 }

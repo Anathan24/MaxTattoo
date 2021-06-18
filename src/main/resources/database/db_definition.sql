@@ -1,11 +1,11 @@
-DROP TABLE IF EXISTS sittings_paints;
-DROP TABLE IF EXISTS sittings_needles;
+DROP TABLE IF EXISTS sitting_paints;
+DROP TABLE IF EXISTS sitting_needles;
 DROP TABLE IF EXISTS paints;
 DROP TABLE IF EXISTS needles;
 DROP TABLE IF EXISTS sittings;
 DROP TABLE IF EXISTS orders;
 DROP TABLE IF EXISTS states;
-DROP TABLE IF EXISTS orderTypes;
+DROP TABLE IF EXISTS order_types;
 DROP TABLE IF EXISTS locations;
 DROP TABLE IF EXISTS cities;
 DROP TABLE IF EXISTS clients;
@@ -38,7 +38,7 @@ CREATE TABLE states(
     stateName VARCHAR(15)
 );
 
-CREATE TABLE orderTypes(
+CREATE TABLE order_types(
     orderTypeId BIGINT PRIMARY KEY,
     type VARCHAR(15)
 );
@@ -55,7 +55,7 @@ CREATE TABLE orders(
     orderTypeId INT,
     clientId INT,
     FOREIGN KEY(stateId) REFERENCES states(stateId),
-    FOREIGN KEY(orderTypeId) REFERENCES orderTypes(orderTypeId),
+    FOREIGN KEY(orderTypeId) REFERENCES order_types(orderTypeId),
     FOREIGN key(clientId) REFERENCES clients(clientId)
 );
 
@@ -78,10 +78,10 @@ CREATE TABLE paints(
     color VARCHAR(25)
 );
 
-CREATE TABLE sittings_paints(
+CREATE TABLE sitting_paints(
     sittingPaintId BIGINT PRIMARY KEY,
-    sittingId INT,
-    paintId INT,
+    sittingId BIGINT,
+    paintId BIGINT,
 
     FOREIGN KEY(sittingId) REFERENCES sittings(sittingId),
     FOREIGN KEY(paintId) REFERENCES paints(paintId)
@@ -94,10 +94,10 @@ CREATE TABLE needles(
     needleSharpening CHAR(10)
 );
 
-CREATE TABLE sittings_needles(
+CREATE TABLE sitting_needles(
     sittingNeedleId INT PRIMARY KEY,
-    sittingId INT,
-    needleId INT UNIQUE,
+    sittingId BIGINT,
+    needleId BIGINT UNIQUE,
 
     FOREIGN KEY(sittingId) REFERENCES sittings(sittingId),
     FOREIGN KEY(needleId) REFERENCES needles(needleId)

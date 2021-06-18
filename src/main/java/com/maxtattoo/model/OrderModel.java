@@ -1,7 +1,5 @@
 package com.maxtattoo.model;
 
-import com.maxtattoo.model.enums.OrderType;
-import com.maxtattoo.model.enums.State;
 import com.maxtattoo.model.interfaces.GenericModel;
 import lombok.*;
 import java.sql.Date;
@@ -22,8 +20,8 @@ public class OrderModel implements GenericModel {
     private Date startDate;
     private Date endDate;
 
-    private OrderType orderType;
-    private State state;
+    private String orderType;
+    private String state;
     private List<SittingModel> sittings = new ArrayList<>();
 
 }

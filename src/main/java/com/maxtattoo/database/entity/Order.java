@@ -18,7 +18,6 @@ import java.sql.Date;
 public class Order implements BaseEntity {
 
     @Id
-    @Column(name = "orderId")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long orderId;
     @Column
@@ -31,8 +30,6 @@ public class Order implements BaseEntity {
     private Date startDate;
     @Column
     private Date endDate;
-    @Column
-    private String orderType;
 
     @Column
     private int stateId;

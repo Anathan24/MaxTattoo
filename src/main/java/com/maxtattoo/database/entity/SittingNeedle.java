@@ -13,17 +13,16 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "sittings_needles")
+@Table(name = "sitting_needles")
 public class SittingNeedle implements BaseEntity {
 
     @Id
-    @Column(name = "sittingNeedleId")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long sittingNeedleId;
 
     @Column
-    private int sittingId;
+    private Long sittingId;
     @Column(unique = true)
-    private int needleId;
+    private Long needleId;
 
 }

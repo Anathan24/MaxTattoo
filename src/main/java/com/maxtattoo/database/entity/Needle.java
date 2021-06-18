@@ -17,7 +17,6 @@ import javax.persistence.*;
 public class Needle implements BaseEntity {
 
     @Id
-    @Column(name = "needleId")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long needleId;
     @Column

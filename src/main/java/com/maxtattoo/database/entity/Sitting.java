@@ -18,7 +18,6 @@ import java.sql.Timestamp;
 public class Sitting implements BaseEntity {
 
     @Id
-    @Column(name = "sittingId")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long sittingId;
     @Column

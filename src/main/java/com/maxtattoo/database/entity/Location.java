@@ -17,7 +17,6 @@ import javax.persistence.*;
 public class Location implements BaseEntity {
 
     @Id
-    @Column(name = "locationId")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long locationId;
 

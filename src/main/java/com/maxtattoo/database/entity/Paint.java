@@ -17,7 +17,6 @@ import javax.persistence.*;
 public class Paint implements BaseEntity {
 
     @Id
-    @Column(name = "paintId")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long paintId;
     @Column
