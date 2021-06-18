@@ -1,5 +1,6 @@
 package com.maxtattoo.database.entity;
 
+import com.maxtattoo.database.entity.interfaces.BaseEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,7 +14,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Entity
 @Table(name = "sittings_needles")
-public class SittingNeedle implements BaseEntity{
+public class SittingNeedle implements BaseEntity {
 
     @Id
     @Column(name = "sittingNeedleId")

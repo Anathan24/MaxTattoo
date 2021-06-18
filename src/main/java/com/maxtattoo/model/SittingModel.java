@@ -1,6 +1,7 @@
 package com.maxtattoo.model;
 
 import com.maxtattoo.model.enums.State;
+import com.maxtattoo.model.interfaces.GenericModel;
 import lombok.*;
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -11,7 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 @ToString
 @EqualsAndHashCode
-public class SittingModel implements GenericModel{
+public class SittingModel implements GenericModel {
 
     private Long sittingId;
     private Timestamp sittingDate;

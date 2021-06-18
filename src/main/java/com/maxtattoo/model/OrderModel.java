@@ -2,6 +2,7 @@ package com.maxtattoo.model;
 
 import com.maxtattoo.model.enums.OrderType;
 import com.maxtattoo.model.enums.State;
+import com.maxtattoo.model.interfaces.GenericModel;
 import lombok.*;
 import java.sql.Date;
 import java.util.ArrayList;
@@ -12,7 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 @ToString
 @EqualsAndHashCode
-public class OrderModel implements GenericModel{
+public class OrderModel implements GenericModel {
 
     private Long orderId;
     private int sittingNumber;

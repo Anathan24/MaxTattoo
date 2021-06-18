@@ -1,5 +1,6 @@
 package com.maxtattoo.model;
 
+import com.maxtattoo.model.interfaces.GenericModel;
 import lombok.*;
 
 @Data
@@ -7,7 +8,7 @@ import lombok.*;
 @AllArgsConstructor
 @ToString
 @EqualsAndHashCode
-public class PaintModel implements GenericModel{
+public class PaintModel implements GenericModel {
 
     private Long paintId;
     private String producer;

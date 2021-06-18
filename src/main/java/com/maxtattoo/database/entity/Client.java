@@ -1,5 +1,6 @@
 package com.maxtattoo.database.entity;
 
+import com.maxtattoo.database.entity.interfaces.BaseEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,7 +15,7 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 @Entity
 @Table(name = "clients")
-public class Client implements BaseEntity{
+public class Client implements BaseEntity {
 
     @Id
     @Column(name = "clientId")
