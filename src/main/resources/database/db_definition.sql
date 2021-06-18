@@ -61,9 +61,9 @@ CREATE TABLE orders(
 
 CREATE TABLE sittings(
     sittingId BIGINT PRIMARY KEY,
-    sittingDate date NOT NULL,
+    sittingDate TIMESTAMP,
     spentHours DOUBLE PRECISION,
-    sittingPrice int,
+    sittingPrice INT,
     sittingNote VARCHAR(250),
 
     stateId INT,

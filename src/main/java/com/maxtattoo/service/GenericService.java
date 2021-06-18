@@ -1,4 +1,4 @@
 package com.maxtattoo.service;
 
-public interface BaseService {
+public interface GenericService {
 }

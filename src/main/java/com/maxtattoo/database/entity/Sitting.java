@@ -6,8 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import java.sql.Date;
+import java.sql.Timestamp;
 
 @Data
 @ToString
@@ -21,8 +20,8 @@ public class Sitting implements BaseEntity{
     @Column(name = "sittingId")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long sittingId;
-    @Column @NotNull
-    private Date sittingDate;
+    @Column
+    private Timestamp sittingDate;
     @Column
     private double spentHours;
     @Column
