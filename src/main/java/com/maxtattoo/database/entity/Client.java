@@ -1,6 +1,6 @@
 package com.maxtattoo.database.entity;
 
-import com.maxtattoo.database.entity.interfaces.BaseEntity;
+import com.maxtattoo.database.entity.interfaces.GenericEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,7 +15,7 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 @Entity
 @Table(name = "clients")
-public class Client implements BaseEntity {
+public class Client implements GenericEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

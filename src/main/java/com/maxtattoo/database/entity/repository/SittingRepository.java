@@ -1,4 +1,4 @@
-package com.maxtattoo.database.repository;
+package com.maxtattoo.database.entity.repository;
 
 import com.maxtattoo.database.entity.Sitting;
 import org.springframework.data.jpa.repository.JpaRepository;

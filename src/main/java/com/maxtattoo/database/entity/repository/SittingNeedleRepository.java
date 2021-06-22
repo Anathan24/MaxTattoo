@@ -1,4 +1,4 @@
-package com.maxtattoo.database.repository;
+package com.maxtattoo.database.entity.repository;
 
 import com.maxtattoo.database.entity.SittingNeedle;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -12,9 +12,6 @@ import java.util.List;
 @Repository
 @Transactional
 public interface SittingNeedleRepository extends JpaRepository<SittingNeedle, Long> {
-
-    @Query("SELECT sn FROM SittingNeedle sn WHERE sn.sittingNeedleId=(:sittingNeedleId)")
-    SittingNeedle findSittingNeedleById(@Param("sittingNeedleId") Long sittingNeedleId);
 
     @Query("SELECT sn FROM SittingNeedle sn WHERE sn.sittingId=(:sittingId)")
     List<SittingNeedle> findSittingNeedleBySittingId(@Param("sittingId") Long sittingId);

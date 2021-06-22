@@ -1,6 +1,6 @@
 package com.maxtattoo.database.entity;
 
-import com.maxtattoo.database.entity.interfaces.BaseEntity;
+import com.maxtattoo.database.entity.interfaces.GenericEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,13 +14,13 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Entity
 @Table(name = "paints")
-public class Paint implements BaseEntity {
+public class Paint implements GenericEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long paintId;
     @Column
-    private String producer;
+    private String paintProducer;
     @Column
     private String color;
 

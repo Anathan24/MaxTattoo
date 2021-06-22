@@ -74,7 +74,7 @@ CREATE TABLE sittings(
 
 CREATE TABLE paints(
     paintId BIGINT PRIMARY KEY,
-    producer VARCHAR(25),
+    paintProducer VARCHAR(25),
     color VARCHAR(25)
 );
 
@@ -89,7 +89,7 @@ CREATE TABLE sitting_paints(
 
 CREATE TABLE needles(
     needleId BIGINT PRIMARY KEY,
-    producer VARCHAR(50),
+    needleProducer VARCHAR(50),
     needleCode CHAR(10),
     needleSharpening CHAR(10)
 );

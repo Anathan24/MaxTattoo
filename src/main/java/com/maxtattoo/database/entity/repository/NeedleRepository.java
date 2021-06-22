@@ -1,4 +1,4 @@
-package com.maxtattoo.database.repository;
+package com.maxtattoo.database.entity.repository;
 
 import com.maxtattoo.database.entity.Needle;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -13,5 +13,4 @@ public interface NeedleRepository extends JpaRepository<Needle, Long> {
 
     @Query("SELECT n FROM Needle n WHERE n.needleId=(:needleId)")
     Needle findNeedleById(@Param("needleId") Long needleId);
-
 }

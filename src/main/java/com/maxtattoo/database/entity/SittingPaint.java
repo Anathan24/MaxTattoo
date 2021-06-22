@@ -1,6 +1,6 @@
 package com.maxtattoo.database.entity;
 
-import com.maxtattoo.database.entity.interfaces.BaseEntity;
+import com.maxtattoo.database.entity.interfaces.GenericEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,7 +14,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Entity
 @Table(name = "sitting_paints")
-public class SittingPaint implements BaseEntity {
+public class SittingPaint implements GenericEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

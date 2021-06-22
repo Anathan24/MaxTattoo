@@ -1,4 +1,4 @@
-package com.maxtattoo.database.repository;
+package com.maxtattoo.database.entity.repository;
 
 import com.maxtattoo.database.entity.SittingPaint;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -12,9 +12,6 @@ import java.util.List;
 @Repository
 @Transactional
 public interface SittingPaintRepository extends JpaRepository<SittingPaint, Long> {
-
-    @Query("SELECT sp FROM SittingPaint sp WHERE sp.sittingPaintId=(:sittingPaintId)")
-    SittingPaint findSittingPaintById(@Param("sittingPaintId") Long sittingPaintId);
 
     @Query("SELECT sp FROM SittingPaint sp WHERE sp.sittingId=(:sittingId)")
     List<SittingPaint> findSittingPaintBySittingId(@Param("sittingId") Long sittingId);
