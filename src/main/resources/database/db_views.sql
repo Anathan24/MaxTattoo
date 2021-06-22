@@ -10,8 +10,7 @@ CREATE OR REPLACE VIEW OrderView AS
 
 CREATE OR REPLACE VIEW SittingView AS
 	SELECT s.sittingId, s.sittingDate, s.spentHours, s.sittingPrice, s.sittingNote,
-	pn.paintId, pn.paintProducer, pn.color,
-	nd.needleId, nd.needleProducer, nd.needleCode, nd.needleSharpening
+	pn.paintId, pn.paintProducer, pn.color, nd.needleId, nd.needleProducer, nd.needleCode, nd.needleSharpening
 
 	FROM Sittings s INNER JOIN Sitting_Paints sp ON s.sittingId=sp.sittingId INNER JOIN Paints pn ON sp.paintId = pn.paintId
 					INNER JOIN Sitting_Needles sd ON s.sittingId=sd.sittingId INNER JOIN Needles nd ON sd.needleId = nd.needleId
