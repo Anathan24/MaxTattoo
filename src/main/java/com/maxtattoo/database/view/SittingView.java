@@ -22,7 +22,7 @@ public class SittingView implements GenericView {
     private int spentHours;
     private double sittingPrice;
     private String sittingNote;
-
+    //TODO da aggiungere lo stato della seduta
     private List<PaintView> paints;
     private List<NeedleView> needles;
 }
