@@ -13,6 +13,6 @@ import java.util.List;
 @Transactional
 public interface SittingPaintRepository extends JpaRepository<SittingPaint, Long> {
 
-    @Query("SELECT sp FROM SittingPaint sp WHERE sp.sittingId=(:sittingId)")
-    List<SittingPaint> findSittingPaintBySittingId(@Param("sittingId") Long sittingId);
+    @Query("SELECT sp FROM sitting_paint sp WHERE sp.sitting_paintId=(:sittingPaintId)")
+    SittingPaint findBySittingPaintId(@Param("sittingPaintId") Long sittingPaint);
 }

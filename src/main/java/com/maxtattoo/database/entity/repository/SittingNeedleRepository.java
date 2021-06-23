@@ -13,6 +13,6 @@ import java.util.List;
 @Transactional
 public interface SittingNeedleRepository extends JpaRepository<SittingNeedle, Long> {
 
-    @Query("SELECT sn FROM SittingNeedle sn WHERE sn.sittingId=(:sittingId)")
-    List<SittingNeedle> findSittingNeedleBySittingId(@Param("sittingId") Long sittingId);
+    @Query("SELECT sn FROM sitting_needle sd WHERE sd.sitting_needle_id=(:sittingNeedleId)")
+    SittingNeedle findSittingNeedleById(@Param("sittingNeedleId") Long sittingNeedleId);
 }
