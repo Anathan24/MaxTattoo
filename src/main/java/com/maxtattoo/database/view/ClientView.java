@@ -4,6 +4,7 @@ import com.maxtattoo.database.view.interfaces.GenericView;
 import lombok.*;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Data
@@ -15,6 +16,7 @@ import javax.persistence.Table;
 @Table(name = "ClientView")
 public class ClientView implements GenericView {
 
+    @Id
     private Long clientId;
     private String name;
     private String surname;

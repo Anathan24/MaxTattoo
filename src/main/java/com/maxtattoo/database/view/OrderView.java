@@ -4,6 +4,7 @@ import com.maxtattoo.database.view.interfaces.GenericView;
 import lombok.*;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Table;
 import java.sql.Date;
 
@@ -16,6 +17,7 @@ import java.sql.Date;
 @Table(name = "OrderView")
 public class OrderView implements GenericView {
 
+    @Id
     private Long orderId;
     private int sittingNumber;
     private int orderPrice;

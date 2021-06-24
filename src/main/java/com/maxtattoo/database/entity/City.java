@@ -18,6 +18,7 @@ public class City implements GenericEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "cityid")
     private Long cityId;
     @Column
     private String cityName;

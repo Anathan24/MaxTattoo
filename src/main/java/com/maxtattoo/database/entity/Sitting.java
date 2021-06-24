@@ -19,6 +19,7 @@ public class Sitting implements GenericEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "sittingid")
     private Long sittingId;
     @Column
     private Timestamp sittingDate;

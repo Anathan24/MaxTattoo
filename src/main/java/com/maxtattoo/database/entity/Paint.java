@@ -18,6 +18,7 @@ public class Paint implements GenericEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "paintid")
     private Long paintId;
     @Column
     private String paintProducer;

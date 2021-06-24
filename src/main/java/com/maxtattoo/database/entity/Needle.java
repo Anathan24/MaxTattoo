@@ -18,6 +18,7 @@ public class Needle implements GenericEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "needleid")
     private Long needleId;
     @Column
     private String needleProducer;

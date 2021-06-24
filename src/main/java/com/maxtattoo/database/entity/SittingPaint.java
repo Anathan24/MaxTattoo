@@ -18,6 +18,7 @@ public class SittingPaint implements GenericEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "sittingpaintid")
     private Long sittingPaintId;
 
     @Column
