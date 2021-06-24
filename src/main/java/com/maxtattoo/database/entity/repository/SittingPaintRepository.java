@@ -11,6 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public interface SittingPaintRepository extends JpaRepository<SittingPaint, Long> {
 
-    @Query("SELECT sp FROM sitting_paint sp WHERE sp.sitting_paintId=(:sittingPaintId)")
+    @Query("SELECT sp FROM sitting_paint sp WHERE sp.sittingPaintId=(:sittingPaintId)")
     SittingPaint findBySittingPaintId(@Param("sittingPaintId") Long sittingPaint);
 }

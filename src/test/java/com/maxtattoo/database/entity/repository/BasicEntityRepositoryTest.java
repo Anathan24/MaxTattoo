@@ -5,7 +5,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class BasicRepositoryTest {
+public class BasicEntityRepositoryTest {
 
     private final Long entityId = 1L;
 
