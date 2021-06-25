@@ -18,9 +18,9 @@ public class State implements GenericEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "stateid")
+    @Column(name = "state_id_pk")
     private Long stateId;
-    @Column
+    @Column(name = "state_name")
     private String stateName;
 
 }

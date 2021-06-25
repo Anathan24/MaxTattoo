@@ -19,20 +19,25 @@ public class Sitting implements GenericEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "sittingid")
+    @Column(name = "sitting_id_pk")
     private Long sittingId;
-    @Column
+
+    @Column(name = "sitting_date")
     private Timestamp sittingDate;
-    @Column
+
+    @Column(name = "spent_hours")
     private double spentHours;
-    @Column
+
+    @Column(name = "sitting_price")
     private int sittingPrice;
-    @Column
+
+    @Column(name = "sitting_note")
     private String sittingNote;
 
-    @Column
+    @Column(name = "state_id_fk")
     private int stateId;
-    @Column
+
+    @Column(name = "order_id_fk")
     private int orderId;
 
 }

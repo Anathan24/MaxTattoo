@@ -4,14 +4,18 @@ import com.maxtattoo.database.entity.*;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+@DataJpaTest
 @RunWith(SpringRunner.class)
 public class BasicEntityRepositoryTest {
 
     private final Long entityId = 1L;
+    private final static Logger logger = LoggerFactory.getLogger(BasicEntityRepositoryTest.class);
 
     @Autowired
     private ClientRepository clientRepository;
@@ -38,8 +42,14 @@ public class BasicEntityRepositoryTest {
 
     @Test
     public void clientRepositoryTest(){
-        Client client = clientRepository.findClientById(entityId);
-        Assert.assertNotNull("ClientRepository returns null", client);
+        Client client = new Client();
+        client.setName("Test");
+        client.setSurname("Test");
+        clientRepository.save(client);
+
+        Client savedClient = clientRepository.findClientById(client.getClientId());
+        logger.info("CLIENT: {}", savedClient);
+        Assert.assertNotNull("ClientRepository returns null", savedClient);
     }
 
     @Test

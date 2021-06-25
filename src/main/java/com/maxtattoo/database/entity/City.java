@@ -18,9 +18,10 @@ public class City implements GenericEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "cityid")
+    @Column(name = "city_id_pk")
     private Long cityId;
-    @Column
+
+    @Column(name = "city_name")
     private String cityName;
 
 }

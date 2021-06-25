@@ -11,7 +11,7 @@ DROP TABLE IF EXISTS cities;
 DROP TABLE IF EXISTS clients;
 
 CREATE TABLE clients(
-    clientId BIGINT PRIMARY KEY,
+    client_id_fk BIGINT PRIMARY KEY,
     name VARCHAR(50) NOT NULL,
     surname VARCHAR(50) NOT NULL,
     gender VARCHAR(10),
@@ -19,86 +19,86 @@ CREATE TABLE clients(
 );
 
 CREATE TABLE cities(
-    cityId BIGINT PRIMARY KEY,
-    cityName VARCHAR(50)
+    city_id_pk BIGINT PRIMARY KEY,
+    city_name VARCHAR(50)
 );
 
 CREATE TABLE locations(
-    locationId BIGINT PRIMARY KEY,
+    location_id_pk BIGINT PRIMARY KEY,
     name VARCHAR(25),
-    cityId INT,
-    clientId INT,
+    city_id_fk INT,
+    client_id_fk INT,
 
-    FOREIGN KEY(clientId) REFERENCES clients(clientId),
-    FOREIGN KEY(cityId) REFERENCES cities(cityId)
+    FOREIGN KEY(client_id_fk) REFERENCES clients(client_id_fk),
+    FOREIGN KEY(city_id_fk) REFERENCES cities(city_id_pk)
 );
 
 CREATE TABLE states(
-    stateId BIGINT PRIMARY KEY,
-    stateName VARCHAR(15)
+    state_id_pk BIGINT PRIMARY KEY,
+    state_name VARCHAR(15)
 );
 
 CREATE TABLE order_types(
-    orderTypeId BIGINT PRIMARY KEY,
+    order_type_id_pk BIGINT PRIMARY KEY,
     type VARCHAR(15)
 );
 
 CREATE TABLE orders(
-    orderId BIGINT PRIMARY KEY,
-    sittingNumber INT default 1,
-    orderPrice INT default 0,
+    order_id_pk BIGINT PRIMARY KEY,
+    sitting_number INT default 1,
+    order_price INT default 0,
     prepayment INT default 0,
-    startDate date,
-    endDate date,
+    start_date date,
+    end_date date,
 
-    stateId INT,
-    orderTypeId INT,
-    clientId INT,
-    FOREIGN KEY(stateId) REFERENCES states(stateId),
-    FOREIGN KEY(orderTypeId) REFERENCES order_types(orderTypeId),
-    FOREIGN key(clientId) REFERENCES clients(clientId)
+    state_id_fk INT,
+    order_type_id_fk INT,
+    client_id_fk INT,
+    FOREIGN KEY(state_id_fk) REFERENCES states(state_id_pk),
+    FOREIGN KEY(order_type_id_fk) REFERENCES order_types(order_type_id_pk),
+    FOREIGN key(client_id_fk) REFERENCES clients(client_id_fk)
 );
 
 CREATE TABLE sittings(
-    sittingId BIGINT PRIMARY KEY,
-    sittingDate TIMESTAMP,
-    spentHours DOUBLE PRECISION,
-    sittingPrice INT,
-    sittingNote VARCHAR(250),
+    sitting_id_pk BIGINT PRIMARY KEY,
+    sitting_date TIMESTAMP,
+    spent_hours DOUBLE PRECISION,
+    sitting_price INT,
+    sitting_note VARCHAR(250),
 
-    stateId INT,
-    orderId INT,
-    FOREIGN KEY(stateId) REFERENCES states(stateId),
-    FOREIGN KEY(orderId) REFERENCES orders(orderId)
+    state_id_fk INT,
+    order_id_fk INT,
+    FOREIGN KEY(state_id_fk) REFERENCES states(state_id_pk),
+    FOREIGN KEY(order_id_fk) REFERENCES orders(order_id_pk)
 );
 
 CREATE TABLE paints(
-    paintId BIGINT PRIMARY KEY,
-    paintProducer VARCHAR(25),
+    paint_id_pk BIGINT PRIMARY KEY,
+    paint_producer VARCHAR(25),
     color VARCHAR(25)
 );
 
 CREATE TABLE sitting_paints(
-    sittingPaintId BIGINT PRIMARY KEY,
-    sittingId BIGINT,
-    paintId BIGINT,
+    sitting_paint_id_pk BIGINT PRIMARY KEY,
+    sitting_id_fk BIGINT,
+    paint_id_fk BIGINT,
 
-    FOREIGN KEY(sittingId) REFERENCES sittings(sittingId),
-    FOREIGN KEY(paintId) REFERENCES paints(paintId)
+    FOREIGN KEY(sitting_id_fk) REFERENCES sittings(sitting_id_pk),
+    FOREIGN KEY(paint_id_fk) REFERENCES paints(paint_id_pk)
 );
 
 CREATE TABLE needles(
-    needleId BIGINT PRIMARY KEY,
-    needleProducer VARCHAR(50),
-    needleCode CHAR(10),
-    needleSharpening CHAR(10)
+    needle_id_pk BIGINT PRIMARY KEY,
+    needle_producer VARCHAR(50),
+    needle_code CHAR(10),
+    needle_sharpening CHAR(10)
 );
 
 CREATE TABLE sitting_needles(
-    sittingNeedleId INT PRIMARY KEY,
-    sittingId BIGINT,
-    needleId BIGINT UNIQUE,
+    sitting_needle_id_pk INT PRIMARY KEY,
+    sitting_id_fk BIGINT,
+    needle_id_fk BIGINT UNIQUE,
 
-    FOREIGN KEY(sittingId) REFERENCES sittings(sittingId),
-    FOREIGN KEY(needleId) REFERENCES needles(needleId)
+    FOREIGN KEY(sitting_id_fk) REFERENCES sittings(sitting_id_pk),
+    FOREIGN KEY(needle_id_fk) REFERENCES needles(needle_id_pk)
 );

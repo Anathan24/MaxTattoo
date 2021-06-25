@@ -18,12 +18,13 @@ public class SittingNeedle implements GenericEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "sittingneedleid")
+    @Column(name = "sitting_needle_id_pk")
     private Long sittingNeedleId;
 
-    @Column
+    @Column(name = "sitting_id_fk")
     private Long sittingId;
-    @Column(unique = true)
+
+    @Column(name = "needle_id_fk", unique = true)
     private Long needleId;
 
 }

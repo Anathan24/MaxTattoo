@@ -18,13 +18,16 @@ public class Needle implements GenericEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "needleid")
+    @Column(name = "needle_id_pk")
     private Long needleId;
-    @Column
+
+    @Column(name = "needle_producer")
     private String needleProducer;
-    @Column
+
+    @Column(name = "needle_code")
     private String needleCode;
-    @Column
+
+    @Column(name = "needle_sharpening")
     private String needleSharpening;
 
 }

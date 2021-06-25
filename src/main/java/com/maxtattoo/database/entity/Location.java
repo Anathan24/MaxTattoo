@@ -18,14 +18,16 @@ public class Location implements GenericEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "locationid")
+    @Column(name = "location_id_pk")
     private Long locationId;
 
     @Column
     private String name;
-    @Column
+
+    @Column(name = "client_id_fk")
     private int clientId;
-    @Column
+
+    @Column(name = "city_id_fk")
     private int cityId;
 
 }

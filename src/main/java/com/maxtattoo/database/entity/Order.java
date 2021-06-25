@@ -8,6 +8,8 @@ import lombok.ToString;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @ToString
@@ -19,24 +21,37 @@ public class Order implements GenericEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "orderid")
+    @Column(name = "order_id_pk")
     private Long orderId;
-    @Column
+
+    @Column(name = "sitting_number")
     private int sittingNumber;
-    @Column
+
+    @Column(name = "order_price")
     private int orderPrice;
-    @Column
+
+    @Column(name = "prepayment")
     private int prepayment;
-    @Column
+
+    @Column(name = "start_date")
     private Date startDate;
-    @Column
+
+    @Column(name = "end_date")
     private Date endDate;
 
-    @Column
-    private int stateId;
-    @Column
-    private int orderTypeId;
-    @Column
-    private int clientId;
+    @Column(name = "client_id_fk")
+    private int clientIdFk;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "order_type_id_fk")
+    private OrderType type;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "state_id_fk")
+    private State state;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "order_id_fk")
+    private List<Sitting> sittings = new ArrayList<>();
 
 }
