@@ -8,6 +8,8 @@ import lombok.ToString;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.HashSet;
+import java.util.Set;
 
 @Data
 @ToString
@@ -19,7 +21,7 @@ public class Client implements GenericEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "client_id_fk")
+    @Column(name = "client_id_pk")
     private Long clientId;
 
     @Column @NotNull
@@ -33,5 +35,9 @@ public class Client implements GenericEntity {
 
     @Column
     private String description;
+
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(name = "clients_orders", joinColumns = @JoinColumn(name = "client_id_fk"), inverseJoinColumns = @JoinColumn(name = "order_id_fk"))
+    private Set<Order> orders = new HashSet<>();
 
 }
