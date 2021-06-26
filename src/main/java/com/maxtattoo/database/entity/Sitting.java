@@ -37,10 +37,10 @@ public class Sitting implements GenericEntity {
     private String sittingNote;
 
     @Column(name = "state_id_fk")
-    private int stateId;
+    private Long stateId;
 
     @Column(name = "order_id_fk")
-    private int orderId;
+    private Long orderId;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "sittings_paints", joinColumns = @JoinColumn(name = "sitting_id_fk"), inverseJoinColumns = @JoinColumn(name = "paint_id_fk"))

@@ -25,9 +25,9 @@ public class Location implements GenericEntity {
     private String name;
 
     @Column(name = "client_id_fk")
-    private int clientId;
+    private Long clientId;
 
     @Column(name = "city_id_fk")
-    private int cityId;
+    private Long cityId;
 
 }

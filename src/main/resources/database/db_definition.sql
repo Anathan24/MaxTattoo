@@ -26,8 +26,8 @@ CREATE TABLE cities(
 CREATE TABLE locations(
     location_id_pk BIGINT PRIMARY KEY,
     name VARCHAR(25),
-    city_id_fk INT,
-    client_id_fk INT,
+    city_id_fk BIGINT,
+    client_id_fk BIGINT,
 
     FOREIGN KEY(client_id_fk) REFERENCES clients(client_id_fk),
     FOREIGN KEY(city_id_fk) REFERENCES cities(city_id_pk)
@@ -51,9 +51,9 @@ CREATE TABLE orders(
     start_date date,
     end_date date,
 
-    state_id_fk INT,
-    order_type_id_fk INT,
-    client_id_fk INT,
+    state_id_fk BIGINT,
+    order_type_id_fk BIGINT,
+    client_id_fk BIGINT,
     FOREIGN KEY(state_id_fk) REFERENCES states(state_id_pk),
     FOREIGN KEY(order_type_id_fk) REFERENCES order_types(order_type_id_pk),
     FOREIGN key(client_id_fk) REFERENCES clients(client_id_fk)
@@ -66,8 +66,8 @@ CREATE TABLE sittings(
     sitting_price INT,
     sitting_note VARCHAR(250),
 
-    state_id_fk INT,
-    order_id_fk INT,
+    state_id_fk BIGINT,
+    order_id_fk BIGINT,
     FOREIGN KEY(state_id_fk) REFERENCES states(state_id_pk),
     FOREIGN KEY(order_id_fk) REFERENCES orders(order_id_pk)
 );
@@ -95,9 +95,9 @@ CREATE TABLE needles(
 );
 
 CREATE TABLE sittings_needles(
-    sitting_needle_id_pk INT PRIMARY KEY,
+    sitting_needle_id_pk BIGINT PRIMARY KEY,
     sitting_id_fk BIGINT,
-    needle_id_fk BIGINT UNIQUE,
+    needle_id_fk BIGINT,
 
     FOREIGN KEY(sitting_id_fk) REFERENCES sittings(sitting_id_pk),
     FOREIGN KEY(needle_id_fk) REFERENCES needles(needle_id_pk)
