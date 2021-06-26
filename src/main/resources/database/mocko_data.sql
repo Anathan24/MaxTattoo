@@ -48,11 +48,11 @@ INSERT INTO paints(paint_id_pk, paint_producer, color) VALUES('3', 'Producer 3',
 INSERT INTO paints(paint_id_pk, paint_producer, color) VALUES('4', 'Producer 4', 'Blue');
 INSERT INTO paints(paint_id_pk, paint_producer, color) VALUES('5', 'Producer 5', 'Purpure');
 
-INSERT INTO sitting_paints(sitting_paint_id_pk, sitting_id_fk, paint_id_fk) VALUES ('1', 1, 2);
-INSERT INTO sitting_paints(sitting_paint_id_pk, sitting_id_fk, paint_id_fk) VALUES ('2', 10, 4);
-INSERT INTO sitting_paints(sitting_paint_id_pk, sitting_id_fk, paint_id_fk) VALUES ('3', 4, 3);
-INSERT INTO sitting_paints(sitting_paint_id_pk, sitting_id_fk, paint_id_fk) VALUES ('4', 3, 5);
-INSERT INTO sitting_paints(sitting_paint_id_pk, sitting_id_fk, paint_id_fk) VALUES ('5', 6, 2);
+INSERT INTO sittings_paints(sitting_paint_id_pk, sitting_id_fk, paint_id_fk) VALUES ('1', 1, 2);
+INSERT INTO sittings_paints(sitting_paint_id_pk, sitting_id_fk, paint_id_fk) VALUES ('2', 10, 4);
+INSERT INTO sittings_paints(sitting_paint_id_pk, sitting_id_fk, paint_id_fk) VALUES ('3', 4, 3);
+INSERT INTO sittings_paints(sitting_paint_id_pk, sitting_id_fk, paint_id_fk) VALUES ('4', 3, 5);
+INSERT INTO sittings_paints(sitting_paint_id_pk, sitting_id_fk, paint_id_fk) VALUES ('5', 6, 2);
 
 INSERT INTO needles(needle_id_pk, needle_producer, needle_code, needle_sharpening) VALUES ('1', 'Producer 1', '1rl', '5ra');
 INSERT INTO needles(needle_id_pk, needle_producer, needle_code, needle_sharpening) VALUES ('2', 'Producer 2', '4rl', '10ra');
@@ -60,8 +60,8 @@ INSERT INTO needles(needle_id_pk, needle_producer, needle_code, needle_sharpenin
 INSERT INTO needles(needle_id_pk, needle_producer, needle_code, needle_sharpening) VALUES ('4', 'Producer 4', '4rl', '16ra');
 INSERT INTO needles(needle_id_pk, needle_producer, needle_code, needle_sharpening) VALUES ('5', 'Producer 5', '3rl', '23ra');
 
-INSERT INTO sitting_needles(sitting_needle_id_pk, sitting_id_fk, needle_id_fk) VALUES ('1', 3, 1);
-INSERT INTO sitting_needles(sitting_needle_id_pk, sitting_id_fk, needle_id_fk) VALUES ('2', 2, 2);
-INSERT INTO sitting_needles(sitting_needle_id_pk, sitting_id_fk, needle_id_fk) VALUES ('3', 9, 3);
-INSERT INTO sitting_needles(sitting_needle_id_pk, sitting_id_fk, needle_id_fk) VALUES ('4', 1, 4);
-INSERT INTO sitting_needles(sitting_needle_id_pk, sitting_id_fk, needle_id_fk) VALUES ('5', 4, 5);
+INSERT INTO sittings_needles(sitting_needle_id_pk, sitting_id_fk, needle_id_fk) VALUES ('1', 3, 1);
+INSERT INTO sittings_needles(sitting_needle_id_pk, sitting_id_fk, needle_id_fk) VALUES ('2', 2, 2);
+INSERT INTO sittings_needles(sitting_needle_id_pk, sitting_id_fk, needle_id_fk) VALUES ('3', 9, 3);
+INSERT INTO sittings_needles(sitting_needle_id_pk, sitting_id_fk, needle_id_fk) VALUES ('4', 1, 4);
+INSERT INTO sittings_needles(sitting_needle_id_pk, sitting_id_fk, needle_id_fk) VALUES ('5', 4, 5);

@@ -13,7 +13,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "sitting_needles")
+@Table(name = "sittings_needles")
 public class SittingNeedle implements GenericEntity {
 
     @Id
@@ -24,7 +24,7 @@ public class SittingNeedle implements GenericEntity {
     @Column(name = "sitting_id_fk")
     private Long sittingId;
 
-    @Column(name = "needle_id_fk", unique = true)
+    @Column(name = "needle_id_fk")
     private Long needleId;
 
 }

@@ -1,6 +1,6 @@
 package com.maxtattoo;
 
-import com.maxtattoo.database.entity.repository.OrderRepository;
+import com.maxtattoo.database.entity.repository.SittingRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,9 +12,9 @@ public class MaxTattooApplication {
 
 	private static final Logger logger = LoggerFactory.getLogger(MaxTattooApplication.class);
 
-	public MaxTattooApplication(@Autowired OrderRepository orderRepository){
-		var order = orderRepository.findOrderById(1L);
-		logger.info("ORDERS: {}", order);
+	public MaxTattooApplication(@Autowired SittingRepository sittingRepository){
+		var sittings = sittingRepository.findSittingById(1L);
+		logger.info("ORDERS: {}", sittings);
 	}
 
 	public static void main(String[] args){

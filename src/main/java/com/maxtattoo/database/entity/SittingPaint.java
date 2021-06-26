@@ -13,7 +13,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "sitting_paints")
+@Table(name = "sittings_paints")
 public class SittingPaint implements GenericEntity {
 
     @Id

@@ -8,8 +8,8 @@ import lombok.ToString;
 
 import javax.persistence.*;
 import java.sql.Date;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Data
 @ToString
@@ -44,14 +44,14 @@ public class Order implements GenericEntity {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "order_type_id_fk")
-    private OrderType type;
+    private OrderType orderType;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "state_id_fk")
-    private State state;
+    private State orderState;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "order_id_fk")
-    private List<Sitting> sittings = new ArrayList<>();
+    private Set<Sitting> sittings = new HashSet<>();
 
 }

@@ -1,5 +1,5 @@
-DROP TABLE IF EXISTS sitting_paints;
-DROP TABLE IF EXISTS sitting_needles;
+DROP TABLE IF EXISTS sittings_paints;
+DROP TABLE IF EXISTS sittings_needles;
 DROP TABLE IF EXISTS paints;
 DROP TABLE IF EXISTS needles;
 DROP TABLE IF EXISTS sittings;
@@ -78,7 +78,7 @@ CREATE TABLE paints(
     color VARCHAR(25)
 );
 
-CREATE TABLE sitting_paints(
+CREATE TABLE sittings_paints(
     sitting_paint_id_pk BIGINT PRIMARY KEY,
     sitting_id_fk BIGINT,
     paint_id_fk BIGINT,
@@ -94,7 +94,7 @@ CREATE TABLE needles(
     needle_sharpening CHAR(10)
 );
 
-CREATE TABLE sitting_needles(
+CREATE TABLE sittings_needles(
     sitting_needle_id_pk INT PRIMARY KEY,
     sitting_id_fk BIGINT,
     needle_id_fk BIGINT UNIQUE,
