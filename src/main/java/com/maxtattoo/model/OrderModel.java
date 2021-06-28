@@ -3,7 +3,7 @@ package com.maxtattoo.model;
 import com.maxtattoo.model.interfaces.GenericModel;
 import lombok.*;
 import java.sql.Date;
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 @Data
@@ -20,8 +20,8 @@ public class OrderModel implements GenericModel {
     private Date startDate;
     private Date endDate;
 
-    private String orderType;
-    private String state;
+    private OrderTypeModel orderType;
+    private StateModel state;
 
-    private List<SittingModel> sittings = new ArrayList<>();
+    private List<SittingModel> sittings = new LinkedList<>();
 }

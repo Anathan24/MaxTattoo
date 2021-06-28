@@ -3,6 +3,8 @@ package com.maxtattoo.model;
 import com.maxtattoo.model.interfaces.GenericModel;
 import lombok.*;
 import java.sql.Timestamp;
+import java.util.LinkedList;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -16,8 +18,8 @@ public class SittingModel implements GenericModel {
     private double hours;
     private int price;
     private String note;
-    //TODO aggiungere la gestione dello stato
-//    private List<PaintModel> paints = new ArrayList<>();
-//    private List<NeedleModel> needles = new ArrayList<>();
+    private StateModel state;
+    private List<PaintModel> paints = new LinkedList<>();
+    private List<NeedleModel> needles = new LinkedList<>();
 
 }

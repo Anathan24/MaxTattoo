@@ -3,7 +3,7 @@ package com.maxtattoo.model;
 import com.maxtattoo.model.interfaces.GenericModel;
 import lombok.*;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 @Data
@@ -20,5 +20,5 @@ public class ClientModel implements GenericModel {
     private String description;
 
     private LocationModel location;
-    private List<OrderModel> orders = new ArrayList<>();
+    private List<OrderModel> orders = new LinkedList<>();
 }

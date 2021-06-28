@@ -36,11 +36,11 @@ public class Sitting implements GenericEntity {
     @Column(name = "sitting_note")
     private String sittingNote;
 
-    @Column(name = "state_id_fk")
-    private Long stateId;    //TODO aggiungere la gestione dello stato
-
     @Column(name = "order_id_fk")
     private Long orderId;
+
+    @Column(name = "state_id_fk")//TODO agganciare la tabella al campo corrente
+    private State sittingState;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "sittings_paints", joinColumns = @JoinColumn(name = "sitting_id_fk"), inverseJoinColumns = @JoinColumn(name = "paint_id_fk"))
