@@ -37,7 +37,7 @@ public class Sitting implements GenericEntity {
     private String sittingNote;
 
     @Column(name = "state_id_fk")
-    private Long stateId;
+    private Long stateId;    //TODO aggiungere la gestione dello stato
 
     @Column(name = "order_id_fk")
     private Long orderId;

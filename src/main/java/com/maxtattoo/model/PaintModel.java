@@ -10,7 +10,7 @@ import lombok.*;
 @EqualsAndHashCode
 public class PaintModel implements GenericModel {
 
-    private Long paintId;
+    private Long id;
     private String producer;
     private String color;
 

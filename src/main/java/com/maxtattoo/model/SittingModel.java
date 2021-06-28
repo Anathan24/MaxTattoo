@@ -1,11 +1,8 @@
 package com.maxtattoo.model;
 
-import com.maxtattoo.model.enums.State;
 import com.maxtattoo.model.interfaces.GenericModel;
 import lombok.*;
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -14,14 +11,13 @@ import java.util.List;
 @EqualsAndHashCode
 public class SittingModel implements GenericModel {
 
-    private Long sittingId;
-    private Timestamp sittingDate;
-    private double spentHours;
-    private int sittingPrice;
-    private String sittingNote;
-
-    private State state;
-    private List<PaintModel> paints = new ArrayList<>();
-    private List<NeedleModel> needles = new ArrayList<>();
+    private Long id;
+    private Timestamp date;
+    private double hours;
+    private int price;
+    private String note;
+    //TODO aggiungere la gestione dello stato
+//    private List<PaintModel> paints = new ArrayList<>();
+//    private List<NeedleModel> needles = new ArrayList<>();
 
 }

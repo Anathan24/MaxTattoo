@@ -10,9 +10,9 @@ import lombok.*;
 @EqualsAndHashCode
 public class NeedleModel implements GenericModel {
 
-    private Long needleId;
+    private Long id;
     private String producer;
-    private String needleCode;
-    private String needleSharpening;
+    private String code;
+    private String sharpening;
 
 }

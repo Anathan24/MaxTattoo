@@ -13,7 +13,7 @@ import java.util.List;
 @EqualsAndHashCode
 public class ClientModel implements GenericModel {
 
-    private Long clientId;
+    private Long id;
     private String name;
     private String surname;
     private String gender;

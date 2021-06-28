@@ -13,7 +13,7 @@ import java.util.List;
 @EqualsAndHashCode
 public class OrderModel implements GenericModel {
 
-    private Long orderId;
+    private Long id;
     private int sittingNumber;
     private int orderPrice;
     private int prepayment;
@@ -22,6 +22,6 @@ public class OrderModel implements GenericModel {
 
     private String orderType;
     private String state;
-    private List<SittingModel> sittings = new ArrayList<>();
 
+    private List<SittingModel> sittings = new ArrayList<>();
 }
