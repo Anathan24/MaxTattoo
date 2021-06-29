@@ -1,13 +1,10 @@
-package com.maxtattoo.util;
+package com.maxtattoo.utils;
 
 import com.maxtattoo.database.entity.*;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
-
-import static org.apache.tomcat.jni.Time.now;
 
 @Service
 public class EntityMock {

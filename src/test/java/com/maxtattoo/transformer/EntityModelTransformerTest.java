@@ -2,7 +2,7 @@ package com.maxtattoo.transformer;
 
 import com.maxtattoo.database.entity.*;
 import com.maxtattoo.model.*;
-import com.maxtattoo.util.EntityMock;
+import com.maxtattoo.utils.EntityMock;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -26,10 +26,11 @@ public class EntityModelTransformerTest {
     public void clientTransformerTest(){
         List<Client> client = new ArrayList<>();
         client.add(entityMock.createClientEntity(1L));
+        client.add(entityMock.createClientEntity(2L));
         List<ClientModel> clientModel = entityModelTransformer.clientEntityModelTransformer(client);
 
         Assert.assertNotNull(clientModel);
-        Assert.assertEquals(1, clientModel.size());
+        Assert.assertEquals(2, clientModel.size());
     }
 
     @Test
