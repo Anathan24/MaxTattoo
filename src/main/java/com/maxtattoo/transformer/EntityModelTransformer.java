@@ -2,16 +2,18 @@ package com.maxtattoo.transformer;
 
 import com.maxtattoo.database.entity.*;
 import com.maxtattoo.model.*;
+import org.springframework.stereotype.Service;
 
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public abstract class EntityModelTransformer {
+@Service
+public class EntityModelTransformer {
 
     public List<ClientModel> clientEntityModelTransformer(List<Client> clients){
         return clients.stream().map(client -> {
-            ClientModel clientModel = new ClientModel();
+            var clientModel = new ClientModel();
             clientModel.setId(client.getClientId());
             clientModel.setName(client.getName());
             clientModel.setSurname(client.getSurname());
@@ -23,7 +25,7 @@ public abstract class EntityModelTransformer {
     }
 
     public OrderModel orderEntityModelTransformer(Order order){
-        OrderModel orderModel = new OrderModel();
+        var orderModel = new OrderModel();
         orderModel.setId(order.getOrderId());
         orderModel.setSittingNumber(order.getSittingNumber());
         orderModel.setOrderPrice(order.getOrderPrice());
@@ -41,12 +43,13 @@ public abstract class EntityModelTransformer {
     }
 
     public SittingModel sittingEntityModelTransformer(Sitting sitting){
-        SittingModel sittingModel = new SittingModel();
+        var sittingModel = new SittingModel();
         sittingModel.setId(sitting.getSittingId());
         sittingModel.setDate(sitting.getSittingDate());
         sittingModel.setHours(sitting.getSpentHours());
         sittingModel.setPrice(sitting.getSittingPrice());
         sittingModel.setNote(sitting.getSittingNote());
+        sittingModel.setOrderId(sitting.getOrderId());
         sittingModel.setState(stateEntityModelTransformer(sitting.getSittingState()));
         sittingModel.setPaints(sitting.getPaints().stream().map(this::paintEntityModelTransformer).collect(Collectors.toCollection(LinkedList::new)));
         sittingModel.setNeedles(sitting.getNeedles().stream().map(this::needleEntityModelTransformer).collect(Collectors.toCollection(LinkedList::new)));
