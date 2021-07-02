@@ -13,16 +13,18 @@ import java.util.stream.Collectors;
 public class ModelBuilder implements GenerciBuilder {
 
     public List<ClientModel> createClientModel(List<Client> clients){
-        return clients.stream().map(client -> {
-            var clientModel = new ClientModel();
-            clientModel.setId(client.getClientId());
-            clientModel.setName(client.getName());
-            clientModel.setSurname(client.getSurname());
-            clientModel.setGender(client.getGender());
-            clientModel.setDescription(client.getDescription());
-            clientModel.setOrders(client.getOrders().stream().map(this::createOrderModel).collect(Collectors.toCollection(LinkedList::new)));
-            return clientModel;
-        }).collect(Collectors.toCollection(LinkedList::new));
+        return clients.stream().map(this::createClientModel).collect(Collectors.toCollection(LinkedList::new));
+    }
+
+    public ClientModel createClientModel(Client client){
+        var clientModel = new ClientModel();
+        clientModel.setId(client.getClientId());
+        clientModel.setName(client.getName());
+        clientModel.setSurname(client.getSurname());
+        clientModel.setGender(client.getGender());
+        clientModel.setDescription(client.getDescription());
+        clientModel.setOrders(client.getOrders().stream().map(this::createOrderModel).collect(Collectors.toCollection(LinkedList::new)));
+        return clientModel;
     }
 
     public OrderModel createOrderModel(Order order){

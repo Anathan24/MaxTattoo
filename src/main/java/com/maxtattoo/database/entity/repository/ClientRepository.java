@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 @Repository
-@Transactional
 public interface ClientRepository extends JpaRepository<Client, Long> {
 
     @Query("SELECT c FROM Client c WHERE c.clientId=(:clientId)")

@@ -3,24 +3,28 @@ package com.maxtattoo.builder;
 import com.maxtattoo.builder.interfaces.GenerciBuilder;
 import com.maxtattoo.model.*;
 import com.maxtattoo.response.*;
+import org.springframework.stereotype.Service;
 
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Service
 public class ResponseBuilder implements GenerciBuilder {
 
     public List<ClientResponse> createClientResponse(List<ClientModel> clients){
-        return clients.stream().map(client -> {
-            var clientResponse = new ClientResponse();
-            clientResponse.setId(client.getId());
-            clientResponse.setName(client.getName());
-            clientResponse.setSurname(client.getSurname());
-            clientResponse.setGender(client.getGender());
-            clientResponse.setDescription(client.getDescription());
-            clientResponse.setOrders(client.getOrders().stream().map(this::createOrderResponse).collect(Collectors.toCollection(LinkedList::new)));
-            return clientResponse;
-        }).collect(Collectors.toCollection(LinkedList::new));
+        return clients.stream().map(this::createClientResponse).collect(Collectors.toCollection(LinkedList::new));
+    }
+
+    public ClientResponse createClientResponse(ClientModel clientModel){
+        var clientResponse = new ClientResponse();
+        clientResponse.setId(clientModel.getId());
+        clientResponse.setName(clientModel.getName());
+        clientResponse.setSurname(clientModel.getSurname());
+        clientResponse.setGender(clientModel.getGender());
+        clientResponse.setDescription(clientModel.getDescription());
+        clientResponse.setOrders(clientModel.getOrders().stream().map(this::createOrderResponse).collect(Collectors.toCollection(LinkedList::new)));
+        return clientResponse;
     }
 
     public OrderResponse createOrderResponse(OrderModel order){
