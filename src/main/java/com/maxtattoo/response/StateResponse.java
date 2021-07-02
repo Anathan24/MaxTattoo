@@ -1,6 +1,6 @@
-package com.maxtattoo.model;
+package com.maxtattoo.response;
 
-import com.maxtattoo.model.interfaces.GenericModel;
+import com.maxtattoo.response.interfaces.GenericResponse;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,7 +10,7 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class OrderTypeModel implements GenericModel {
+public class StateResponse implements GenericResponse {
 
     private Long id;
     private String value;

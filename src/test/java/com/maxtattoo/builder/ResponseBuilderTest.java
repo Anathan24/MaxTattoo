@@ -1,8 +1,8 @@
-package com.maxtattoo.transformer;
+package com.maxtattoo.builder;
 
-import com.maxtattoo.database.entity.*;
 import com.maxtattoo.model.*;
-import com.maxtattoo.utils.EntityMock;
+import com.maxtattoo.response.*;
+import com.maxtattoo.utils.ResponseMock;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,20 +14,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(SpringRunner.class)
-@ContextConfiguration(classes = {EntityModelTransformer.class, EntityMock.class})
-public class EntityModelTransformerTest {
+@ContextConfiguration(classes = {ResponseBuilder.class, ResponseMock.class})
+public class ResponseBuilderTest {
 
     @Autowired
-    private EntityMock entityMock;
+    private ResponseMock entityMock;
     @Autowired
-    private EntityModelTransformer entityModelTransformer;
+    private ResponseBuilder modelBuilder;
 
     @Test
     public void clientTransformerTest(){
-        List<Client> client = new ArrayList<>();
-        client.add(entityMock.createClientEntity(1L));
-        client.add(entityMock.createClientEntity(2L));
-        List<ClientModel> clientModel = entityModelTransformer.clientEntityModelTransformer(client);
+        List<ClientModel> client = new ArrayList<>();
+        client.add(entityMock.createClientModel(1L));
+        client.add(entityMock.createClientModel(2L));
+        List<ClientResponse> clientModel = modelBuilder.createClientResponse(client);
 
         Assert.assertNotNull(clientModel);
         Assert.assertEquals(2, clientModel.size());
@@ -35,8 +35,8 @@ public class EntityModelTransformerTest {
 
     @Test
     public void orderTransformerTest(){
-        Order order = entityMock.createOrderEntity(1L);
-        OrderModel orderModel = entityModelTransformer.orderEntityModelTransformer(order);
+        OrderModel order = entityMock.createOrderModel(1L);
+        OrderResponse orderModel = modelBuilder.createOrderResponse(order);
 
         Assert.assertNotNull(orderModel);
         Assert.assertEquals(1L, orderModel.getId().longValue());
@@ -44,8 +44,8 @@ public class EntityModelTransformerTest {
 
     @Test
     public void sittingTransformerTest(){
-        Sitting sitting = entityMock.createSittingEntity(1L, 1L);
-        SittingModel sittingModel = entityModelTransformer.sittingEntityModelTransformer(sitting);
+        SittingModel sitting = entityMock.createSittingModel(1L, 1L);
+        SittingResponse sittingModel = modelBuilder.createSittingResponse(sitting);
 
         Assert.assertNotNull(sittingModel);
         Assert.assertEquals(1L, sittingModel.getOrderId().longValue());
@@ -53,8 +53,8 @@ public class EntityModelTransformerTest {
 
     @Test
     public void orderTypeTransformerTest(){
-        OrderType orderType = entityMock.createOrderTypeEntity(1L, "Tattoo");
-        OrderTypeModel orderTypeModel = entityModelTransformer.orderTypeEntityModelTransformer(orderType);
+        OrderTypeModel orderType = entityMock.createOrderTypeModel(1L, "Tattoo");
+        OrderTypeResponse orderTypeModel = modelBuilder.createOrderTypeModel(orderType);
 
         Assert.assertNotNull(orderTypeModel);
         Assert.assertEquals(1L, orderTypeModel.getId().longValue());
@@ -63,8 +63,8 @@ public class EntityModelTransformerTest {
 
     @Test
     public void stateTransformerTest(){
-        State state = entityMock.createStateEntity(1L, "In progress");
-        StateModel stateModel = entityModelTransformer.stateEntityModelTransformer(state);
+        StateModel state = entityMock.createStateModel(1L, "In progress");
+        StateResponse stateModel = modelBuilder.createStateResponse(state);
 
         Assert.assertNotNull(stateModel);
         Assert.assertEquals("In progress", stateModel.getValue());
@@ -72,8 +72,8 @@ public class EntityModelTransformerTest {
 
     @Test
     public void paintTransformerTest(){
-        Paint paint = entityMock.createPaintEntity(1L);
-        PaintModel paintModel = entityModelTransformer.paintEntityModelTransformer(paint);
+        PaintModel paint = entityMock.createPaintModel(1L);
+        PaintResponse paintModel = modelBuilder.createPaintResponse(paint);
 
         Assert.assertNotNull(paintModel);
         Assert.assertEquals(1L, paintModel.getId().longValue());
@@ -81,8 +81,8 @@ public class EntityModelTransformerTest {
 
     @Test
     public void needleTransformerTest(){
-        Needle needle = entityMock.createNeedleEntity(1L);
-        NeedleModel needleModel = entityModelTransformer.needleEntityModelTransformer(needle);
+        NeedleModel needle = entityMock.createNeedleModel(1L);
+        NeedleResponse needleModel = modelBuilder.createNeedleResponse(needle);
 
         Assert.assertNotNull(needleModel);
         Assert.assertEquals(1L, needleModel.getId().longValue());
