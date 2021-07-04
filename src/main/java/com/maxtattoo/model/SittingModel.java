@@ -18,6 +18,7 @@ public class SittingModel implements GenericModel {
     private double hours;
     private int price;
     private String note;
+    private int paid;
     private Long orderId;
     private StateModel state;
     private List<PaintModel> paints = new LinkedList<>();

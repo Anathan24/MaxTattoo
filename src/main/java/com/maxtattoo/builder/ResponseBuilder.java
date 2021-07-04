@@ -47,6 +47,7 @@ public class ResponseBuilder implements GenerciBuilder {
         sittingResponse.setDate(sitting.getDate());
         sittingResponse.setHours(sitting.getHours());
         sittingResponse.setPrice(sitting.getPrice());
+        sittingResponse.setPaid(sitting.getPaid());
         sittingResponse.setNote(sitting.getNote());
         sittingResponse.setOrderId(sitting.getOrderId());
         sittingResponse.setState(createStateResponse(sitting.getState()));

@@ -19,6 +19,7 @@ public class SittingResponse implements GenericResponse {
     private double hours;
     private int price;
     private String note;
+    private int paid;
     private Long orderId;
     private StateResponse state;
     private List<PaintResponse> paints = new LinkedList<>();

@@ -47,6 +47,7 @@ public class ModelBuilder implements GenerciBuilder {
         sittingModel.setDate(sitting.getSittingDate());
         sittingModel.setHours(sitting.getSpentHours());
         sittingModel.setPrice(sitting.getSittingPrice());
+        sittingModel.setPaid(sitting.getPaid());
         sittingModel.setNote(sitting.getSittingNote());
         sittingModel.setOrderId(sitting.getOrderId());
         sittingModel.setState(createStateModel(sitting.getSittingState()));

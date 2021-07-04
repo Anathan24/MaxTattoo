@@ -36,6 +36,9 @@ public class Sitting implements GenericEntity {
     @Column(name = "sitting_note")
     private String sittingNote;
 
+    @Column(name = "paid")
+    private int paid;
+
     @Column(name = "order_id_fk")
     private Long orderId;
 

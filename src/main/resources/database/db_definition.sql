@@ -64,6 +64,7 @@ CREATE TABLE sittings(
     spent_hours DOUBLE PRECISION,
     sitting_price INT,
     sitting_note VARCHAR(250),
+    paid INT,
 
     state_id_fk BIGINT,
     order_id_fk BIGINT,
