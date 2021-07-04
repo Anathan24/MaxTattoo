@@ -37,6 +37,7 @@ public class ResponseMock {
         sitting.setId(sittingId);
         sitting.setOrderId(orderId);
         sitting.setDate(new Timestamp(System.currentTimeMillis()));
+        sitting.setPaid(0);
         sitting.setNote("Sitting Note");
         sitting.setPrice(75);
         sitting.setHours(4);
