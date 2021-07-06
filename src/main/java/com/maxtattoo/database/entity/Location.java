@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Data
 @ToString
@@ -21,13 +23,11 @@ public class Location implements GenericEntity {
     @Column(name = "location_id_pk")
     private Long locationId;
 
-    @Column
-    private String name;
+    @Column(name = "location_name")
+    private String locationName;
 
-    @Column(name = "client_id_fk")
-    private Long clientId;
-
-    @Column(name = "city_id_fk")
-    private Long cityId;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "location_id_fk")
+    private Set<City> cities = new HashSet<>();
 
 }

@@ -36,6 +36,10 @@ public class Client implements GenericEntity {
     @Column
     private String description;
 
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
+    @JoinColumn(name = "location_id_fk")
+    private Location location;
+
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
     @JoinTable(name = "clients_orders", joinColumns = @JoinColumn(name = "client_id_fk"), inverseJoinColumns = @JoinColumn(name = "order_id_fk"))
     private Set<Order> orders = new HashSet<>();

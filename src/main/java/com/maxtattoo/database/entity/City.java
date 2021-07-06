@@ -24,4 +24,7 @@ public class City implements GenericEntity {
     @Column(name = "city_name")
     private String cityName;
 
+    @Column(name = "location_id_fk")
+    private Long locationId;
+
 }

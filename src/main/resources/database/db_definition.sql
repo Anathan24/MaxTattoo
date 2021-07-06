@@ -7,31 +7,32 @@ DROP TABLE IF EXISTS sittings;
 DROP TABLE IF EXISTS orders;
 DROP TABLE IF EXISTS states;
 DROP TABLE IF EXISTS order_types;
-DROP TABLE IF EXISTS locations;
 DROP TABLE IF EXISTS cities;
 DROP TABLE IF EXISTS clients;
+DROP TABLE IF EXISTS locations;
+
+CREATE TABLE locations(
+    location_id_pk BIGINT PRIMARY KEY,
+    location_name VARCHAR(25)
+);
+
+CREATE TABLE cities(
+    city_id_pk BIGINT PRIMARY KEY,
+    city_name VARCHAR(50),
+    location_id_fk BIGINT,
+
+    FOREIGN KEY(location_id_fk) REFERENCES locations(location_id_pk)
+);
 
 CREATE TABLE clients(
     client_id_pk BIGINT PRIMARY KEY,
     name VARCHAR(50) NOT NULL,
     surname VARCHAR(50) NOT NULL,
     gender VARCHAR(10),
-    description VARCHAR(250)
-);
+    description VARCHAR(250),
+    location_id_fk BIGINT,
 
-CREATE TABLE cities(
-    city_id_pk BIGINT PRIMARY KEY,
-    city_name VARCHAR(50)
-);
-
-CREATE TABLE locations(
-    location_id_pk BIGINT PRIMARY KEY,
-    name VARCHAR(25),
-    city_id_fk BIGINT,
-    client_id_fk BIGINT,
-
-    FOREIGN KEY(client_id_fk) REFERENCES clients(client_id_pk),
-    FOREIGN KEY(city_id_fk) REFERENCES cities(city_id_pk)
+    FOREIGN KEY(location_id_fk) REFERENCES locations(location_id_pk)
 );
 
 CREATE TABLE states(

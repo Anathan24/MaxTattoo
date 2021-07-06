@@ -1,19 +1,19 @@
-INSERT INTO clients(client_id_pk, name, surname, gender, description) VALUES ('1', 'User Name 1', 'User Surname 1', 'Male', 'Description');
-INSERT INTO clients(client_id_pk, name, surname, gender, description) VALUES ('2', 'User Name 2', 'User Surname 2', 'Female', 'Description');
-INSERT INTO clients(client_id_pk, name, surname, gender, description) VALUES ('3', 'User Name 3', 'User Surname 3', 'Male', 'Description');
-INSERT INTO clients(client_id_pk, name, surname, gender, description) VALUES ('4', 'User Name 4', 'User Surname 4', 'Female', 'Description');
-INSERT INTO clients(client_id_pk, name, surname, gender, description) VALUES ('5', 'User Name 5', 'User Surname 5', 'Male', 'Description');
+INSERT INTO locations(location_id_pk, location_name) VALUES('1', 'Location Varese');
+INSERT INTO locations(location_id_pk, location_name) VALUES('2', 'Location Varese');
+INSERT INTO locations(location_id_pk, location_name) VALUES('3', 'Location Varese');
+INSERT INTO locations(location_id_pk, location_name) VALUES('4', 'Location Milano');
+INSERT INTO locations(location_id_pk, location_name) VALUES('5', 'Location Milano');
 
-INSERT INTO cities(city_id_pk, city_name) VALUES ('1', 'Varese');
-INSERT INTO cities(city_id_pk, city_name) VALUES ('2', 'Milano');
-INSERT INTO cities(city_id_pk, city_name) VALUES ('3', 'Gallarate');
-INSERT INTO cities(city_id_pk, city_name) VALUES ('4', 'Busto Arsizio');
+INSERT INTO cities(city_id_pk, city_name, location_id_fk) VALUES ('1', 'Varese', 1);
+INSERT INTO cities(city_id_pk, city_name, location_id_fk) VALUES ('2', 'Milano', 1);
+INSERT INTO cities(city_id_pk, city_name, location_id_fk) VALUES ('3', 'Gallarate', 2);
+INSERT INTO cities(city_id_pk, city_name, location_id_fk) VALUES ('4', 'Busto Arsizio', 3);
 
-INSERT INTO locations(location_id_pk, name, city_id_fk, client_id_fk) VALUES('1', 'Location Varese', 1, 1);
-INSERT INTO locations(location_id_pk, name, city_id_fk, client_id_fk) VALUES('2', 'Location Varese', 1, 2);
-INSERT INTO locations(location_id_pk, name, city_id_fk, client_id_fk) VALUES('3', 'Location Varese', 1, 2);
-INSERT INTO locations(location_id_pk, name, city_id_fk, client_id_fk) VALUES('4', 'Location Milano', 2, 5);
-INSERT INTO locations(location_id_pk, name, city_id_fk, client_id_fk) VALUES('5', 'Location Milano', 2, 5);
+INSERT INTO clients(client_id_pk, name, surname, gender, description, location_id_fk) VALUES ('1', 'User Name 1', 'User Surname 1', 'Male', 'Description', 1);
+INSERT INTO clients(client_id_pk, name, surname, gender, description, location_id_fk) VALUES ('2', 'User Name 2', 'User Surname 2', 'Female', 'Description', 1);
+INSERT INTO clients(client_id_pk, name, surname, gender, description, location_id_fk) VALUES ('3', 'User Name 3', 'User Surname 3', 'Male', 'Description', 2);
+INSERT INTO clients(client_id_pk, name, surname, gender, description, location_id_fk) VALUES ('4', 'User Name 4', 'User Surname 4', 'Female', 'Description', 3);
+INSERT INTO clients(client_id_pk, name, surname, gender, description, location_id_fk) VALUES ('5', 'User Name 5', 'User Surname 5', 'Male', 'Description', 4);
 
 INSERT INTO states(state_id_pk, state_name) VALUES('1', 'Preview');
 INSERT INTO states(state_id_pk, state_name) VALUES('2', 'TO DO');
@@ -39,17 +39,17 @@ INSERT INTO clients_orders(client_order_id_pk, client_id_fk, order_id_fk) VALUES
 INSERT INTO clients_orders(client_order_id_pk, client_id_fk, order_id_fk) VALUES('6', '4', '6');
 INSERT INTO clients_orders(client_order_id_pk, client_id_fk, order_id_fk) VALUES('7', '5', '7');
 
-INSERT INTO sittings(sitting_id_pk, sitting_date, spent_hours, sitting_price, sitting_note, paid, state_id_fk, order_id_fk)VALUES('1', '22/04/2020', 1.5, 50, 'SittingNote 1', 0, 4, 1);
-INSERT INTO sittings(sitting_id_pk, sitting_date, spent_hours, sitting_price, sitting_note, paid, state_id_fk, order_id_fk)VALUES('2', '22/04/2020', 5.5, 25, 'SittingNote 2', 0, 4, 1);
-INSERT INTO sittings(sitting_id_pk, sitting_date, spent_hours, sitting_price, sitting_note, paid, state_id_fk, order_id_fk)VALUES('3', '22/04/2020', 3, 100, 'SittingNote 3', 0, 4, 2);
-INSERT INTO sittings(sitting_id_pk, sitting_date, spent_hours, sitting_price, sitting_note, paid, state_id_fk, order_id_fk)VALUES('4', '22/04/2020', 6, 10, 'SittingNote 4', 0, 4, 2);
-INSERT INTO sittings(sitting_id_pk, sitting_date, spent_hours, sitting_price, sitting_note, paid, state_id_fk, order_id_fk)VALUES('5', '22/04/2020', 8.5, 70, 'SittingNote 5', 0, 4, 2);
-INSERT INTO sittings(sitting_id_pk, sitting_date, spent_hours, sitting_price, sitting_note, paid, state_id_fk, order_id_fk)VALUES('6', '22/04/2020', 10, 45, 'SittingNote 6', 0, 4, 3);
-INSERT INTO sittings(sitting_id_pk, sitting_date, spent_hours, sitting_price, sitting_note, paid, state_id_fk, order_id_fk)VALUES('7', '22/04/2020', 3, 65, 'SittingNote 7', 0, 4, 3);
-INSERT INTO sittings(sitting_id_pk, sitting_date, spent_hours, sitting_price, sitting_note, paid, state_id_fk, order_id_fk)VALUES('8', '22/04/2020', 6, 45, 'SittingNote 8', 0, 4, 3);
-INSERT INTO sittings(sitting_id_pk, sitting_date, spent_hours, sitting_price, sitting_note, paid, state_id_fk, order_id_fk)VALUES('9', '22/04/2020', 7, 15, 'SittingNote 9', 0, 4, 4);
-INSERT INTO sittings(sitting_id_pk, sitting_date, spent_hours, sitting_price, sitting_note, paid, state_id_fk, order_id_fk)VALUES('10', '22/04/2020', 9, 95, 'SittingNote 10', 0, 4, 4);
-INSERT INTO sittings(sitting_id_pk, sitting_date, spent_hours, sitting_price, sitting_note, paid, state_id_fk, order_id_fk)VALUES('11', '22/04/2020', 8, 65, 'SittingNote 11', 0, 4, 5);
+INSERT INTO sittings(sitting_id_pk, sitting_date, spent_hours, sitting_price, sitting_note, paid, state_id_fk, order_id_fk)VALUES('1', '22/04/2020', 1.5, 50, 'SittingNote 1', 120, 4, 1);
+INSERT INTO sittings(sitting_id_pk, sitting_date, spent_hours, sitting_price, sitting_note, paid, state_id_fk, order_id_fk)VALUES('2', '22/04/2020', 5.5, 25, 'SittingNote 2', 10, 4, 1);
+INSERT INTO sittings(sitting_id_pk, sitting_date, spent_hours, sitting_price, sitting_note, paid, state_id_fk, order_id_fk)VALUES('3', '22/04/2020', 3, 100, 'SittingNote 3', 50, 4, 2);
+INSERT INTO sittings(sitting_id_pk, sitting_date, spent_hours, sitting_price, sitting_note, paid, state_id_fk, order_id_fk)VALUES('4', '22/04/2020', 6, 10, 'SittingNote 4', 600, 4, 2);
+INSERT INTO sittings(sitting_id_pk, sitting_date, spent_hours, sitting_price, sitting_note, paid, state_id_fk, order_id_fk)VALUES('5', '22/04/2020', 8.5, 70, 'SittingNote 5', 233, 4, 2);
+INSERT INTO sittings(sitting_id_pk, sitting_date, spent_hours, sitting_price, sitting_note, paid, state_id_fk, order_id_fk)VALUES('6', '22/04/2020', 10, 45, 'SittingNote 6', 44, 4, 3);
+INSERT INTO sittings(sitting_id_pk, sitting_date, spent_hours, sitting_price, sitting_note, paid, state_id_fk, order_id_fk)VALUES('7', '22/04/2020', 3, 65, 'SittingNote 7', 76, 4, 3);
+INSERT INTO sittings(sitting_id_pk, sitting_date, spent_hours, sitting_price, sitting_note, paid, state_id_fk, order_id_fk)VALUES('8', '22/04/2020', 6, 45, 'SittingNote 8', 33, 4, 3);
+INSERT INTO sittings(sitting_id_pk, sitting_date, spent_hours, sitting_price, sitting_note, paid, state_id_fk, order_id_fk)VALUES('9', '22/04/2020', 7, 15, 'SittingNote 9', 76, 4, 4);
+INSERT INTO sittings(sitting_id_pk, sitting_date, spent_hours, sitting_price, sitting_note, paid, state_id_fk, order_id_fk)VALUES('10', '22/04/2020', 9, 95, 'SittingNote 10', 70, 4, 4);
+INSERT INTO sittings(sitting_id_pk, sitting_date, spent_hours, sitting_price, sitting_note, paid, state_id_fk, order_id_fk)VALUES('11', '22/04/2020', 8, 65, 'SittingNote 11', 67, 4, 5);
 
 INSERT INTO paints(paint_id_pk, paint_producer, color) VALUES('1', 'Producer 1', 'Yellow');
 INSERT INTO paints(paint_id_pk, paint_producer, color) VALUES('2', 'Producer 2', 'Black');

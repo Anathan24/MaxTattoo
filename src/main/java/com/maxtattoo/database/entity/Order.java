@@ -43,7 +43,7 @@ public class Order implements GenericEntity {
     @JoinColumn(name = "order_type_id_fk")
     private OrderType orderType;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE},fetch = FetchType.EAGER)
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
     @JoinColumn(name = "state_id_fk")
     private State orderState;
 
