@@ -1,6 +1,6 @@
 package com.maxtattoo;
 
-import com.maxtattoo.service.interfaces.ClientDataService;
+import com.maxtattoo.service.ClientDataService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,24 +1,29 @@
 package com.maxtattoo.controller;
 
-import com.maxtattoo.database.entity.Client;
-import com.maxtattoo.database.repository.ClientRepository;
+import com.maxtattoo.command.ClientDataCommand;
+import com.maxtattoo.model.ClientModel;
+import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("client")
 public class GenericRestController {
 
     @Autowired
-    private ClientRepository clientRepository;
+    private final BeanFactory getBean;
 
-    public GenericRestController(@Autowired ClientRepository clientRepository){
-        this.clientRepository = clientRepository;
+    public GenericRestController(@Autowired BeanFactory beanFactory){
+        this.getBean = beanFactory;
     }
 
-    @GetMapping("/client")
-    public Client getClientById(){
-        Client client = clientRepository.findClientById(1L);
-        return client;
+    @GetMapping(value = "/{id}", produces = "application/json")
+    public ResponseEntity<ClientModel> allClientData(@PathVariable("id") Long id){
+        ClientDataCommand clientCommand = getBean.getBean(ClientDataCommand.class);
+        var clientModel = clientCommand.execute(id);
+        return new ResponseEntity<>(clientModel, HttpStatus.OK);
     }
+
 }

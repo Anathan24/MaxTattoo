@@ -1,4 +1,4 @@
-package com.maxtattoo.service.interfaces;
+package com.maxtattoo.service;
 
 import com.maxtattoo.builder.ModelBuilder;
 import com.maxtattoo.database.repository.ClientRepository;
