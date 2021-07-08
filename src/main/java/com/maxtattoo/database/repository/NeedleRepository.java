@@ -1,6 +1,6 @@
-package com.maxtattoo.database.entity.repository;
+package com.maxtattoo.database.repository;
 
-import com.maxtattoo.database.entity.Location;
+import com.maxtattoo.database.entity.Needle;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -9,8 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 @Transactional
-public interface LocationRepository extends JpaRepository<Location, Long> {
+public interface NeedleRepository extends JpaRepository<Needle, Long> {
 
-    @Query("SELECT l FROM Location l WHERE l.locationId=(:locationId)")
-    Location findLocationById(@Param("locationId") Long locationId);
+    @Query("SELECT n FROM Needle n WHERE n.needleId=(:needleId)")
+    Needle findNeedleById(@Param("needleId") Long needleId);
 }

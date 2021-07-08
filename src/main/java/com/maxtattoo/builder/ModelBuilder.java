@@ -23,6 +23,7 @@ public class ModelBuilder implements GenerciBuilder {
         clientModel.setSurname(client.getSurname());
         clientModel.setGender(client.getGender());
         clientModel.setDescription(client.getDescription());
+        clientModel.setLocation(this.creatLocationModel(client.getLocation()));
         clientModel.setOrders(client.getOrders().stream().map(this::createOrderModel).collect(Collectors.toCollection(LinkedList::new)));
         return clientModel;
     }
@@ -54,6 +55,18 @@ public class ModelBuilder implements GenerciBuilder {
         sittingModel.setPaints(sitting.getPaints().stream().map(this::createPaintModel).collect(Collectors.toCollection(LinkedList::new)));
         sittingModel.setNeedles(sitting.getNeedles().stream().map(this::createNeedleModel).collect(Collectors.toCollection(LinkedList::new)));
         return sittingModel;
+    }
+
+    public CityModel createCityModel(City city){
+        return new CityModel(city.getCityId(), city.getCityName());
+    }
+
+    public LocationModel creatLocationModel(Location location){
+        var locationModel = new LocationModel();
+        locationModel.setId(location.getLocationId());
+        locationModel.setName(location.getLocationName());
+        locationModel.setCites(location.getCities().stream().map(this::createCityModel).collect(Collectors.toCollection(LinkedList::new)));
+        return locationModel;
     }
 
     public OrderTypeModel createOrderTypeModel(OrderType orderType){

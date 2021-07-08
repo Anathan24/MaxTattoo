@@ -1,6 +1,5 @@
 package com.maxtattoo;
 
-import com.maxtattoo.database.entity.repository.ClientRepository;
 import com.maxtattoo.service.interfaces.ClientDataService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,15 +15,9 @@ public class MaxTattooApplication {
 	@Autowired
 	private final ClientDataService clientDataService;
 
-	@Autowired
-	private ClientRepository clientRepository;
-
-	public MaxTattooApplication(@Autowired ClientDataService clientDataService,
-								@Autowired ClientRepository clientRepository){
+	public MaxTattooApplication(@Autowired ClientDataService clientDataService){
 		this.clientDataService = clientDataService;
-		this.clientRepository = clientRepository;
-
-		logger.info("CLIENT: {}", clientRepository.findClientById(1L));
+		logger.info("CLIENT: {}", clientDataService.getAllClientData(1L));
 	}
 
 	public static void main(String[] args){

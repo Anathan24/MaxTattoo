@@ -13,8 +13,8 @@ import java.util.List;
 @EqualsAndHashCode
 public class LocationModel implements GenericModel {
 
-    private Long locationId;
-    private String description;
-    private List<CityModel> name = new ArrayList<>();
+    private Long id;
+    private String name;
+    private List<CityModel> cites = new ArrayList<>();
 
 }
