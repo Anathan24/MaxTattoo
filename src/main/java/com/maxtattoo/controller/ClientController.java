@@ -20,15 +20,15 @@ public class ClientController extends GenericController {
     private BeanFactory beanFactory;
 
     @GetMapping(value = "/id/{id}")
-    public ResponseEntity<ClientModel> findClientById(@PathVariable Long id){
-        ClientCommand clientCommand = beanFactory.getBean(ClientCommand.class);
+    public ResponseEntity<ClientModel> findClientById(@PathVariable Long id) {
+        var clientCommand = beanFactory.getBean(ClientCommand.class);
         var clientModel = clientCommand.findClientById(id);
         return ok(clientModel);
     }
 
     @GetMapping(value = "/name/{name}/surname/{surname}")
-    public ResponseEntity<List<ClientModel>> findClientByNameAndSurname(@PathVariable String name, @PathVariable String surname){
-        ClientCommand clientCommand = beanFactory.getBean(ClientCommand.class);
+    public ResponseEntity<List<ClientModel>> findClientByNameAndSurname(@PathVariable String name, @PathVariable String surname) {
+        var clientCommand = beanFactory.getBean(ClientCommand.class);
         var clientsModel = clientCommand.findClientByNameAndSurname(name, surname);
         return ok(clientsModel);
     }

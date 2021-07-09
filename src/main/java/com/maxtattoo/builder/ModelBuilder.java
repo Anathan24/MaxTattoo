@@ -28,6 +28,10 @@ public class ModelBuilder implements GenerciBuilder {
         return clientModel;
     }
 
+    public List<OrderModel> createOrderModel(List<Order> orders){
+        return orders.stream().map(this::createOrderModel).collect(Collectors.toCollection(LinkedList::new));
+    }
+
     public OrderModel createOrderModel(Order order){
         var orderModel = new OrderModel();
         orderModel.setId(order.getOrderId());

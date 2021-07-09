@@ -21,7 +21,7 @@ public class OrderType implements GenericEntity {
     @Column(name = "order_type_id_pk")
     private Long orderTypeId;
 
-    @Column
+    @Column(name = "type")
     private String type;
 
 }

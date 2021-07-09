@@ -11,7 +11,10 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public interface OrderTypeRepository extends JpaRepository<OrderType, Long> {
 
-    @Query("SELECT od FROM OrderType od WHERE od.orderTypeId=(:orderTypeId)")
+    @Query("SELECT od FROM OrderType od WHERE od.orderTypeId = (:orderTypeId)")
     OrderType findOrderTypeById(@Param("orderTypeId") Long orderTypeId);
+
+    @Query("SELECT od FROM OrderType od WHERE od.type = (:type)")
+    OrderType findOrderTypeByType(@Param("type") String type);
 
 }
