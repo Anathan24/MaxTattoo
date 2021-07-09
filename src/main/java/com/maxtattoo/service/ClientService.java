@@ -3,26 +3,27 @@ package com.maxtattoo.service;
 import com.maxtattoo.builder.ModelBuilder;
 import com.maxtattoo.database.repository.ClientRepository;
 import com.maxtattoo.model.ClientModel;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-@Service
-public class ClientDataService {
+import java.util.List;
 
-    private static final Logger logger = LoggerFactory.getLogger(ClientDataService.class);
+@Service
+public class ClientService extends GenericService{
 
     @Autowired
     private ClientRepository clientRepository;
     @Autowired
     private ModelBuilder modelBuilder;
 
-    public ClientModel getAllClientData(Long clientId){
-        logger.info("Go to get client entity from database...");
+    public ClientModel findClientById(Long clientId){
         var clientEntity = clientRepository.findClientById(clientId);
-        logger.info("Transform client entity into model...");
         return modelBuilder.createClientModel(clientEntity);
+    }
+
+    public List<ClientModel> findClientByNameAndSurname(String name, String surname){
+        var clientsEntity = clientRepository.findClientByNameAndSurname(name, surname);
+        return modelBuilder.createClientModel(clientsEntity);
     }
 
 }
