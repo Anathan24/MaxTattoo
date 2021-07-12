@@ -1,7 +1,6 @@
 package com.maxtattoo.database.entity;
 
 import com.maxtattoo.database.entity.interfaces.GenericEntity;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -11,7 +10,6 @@ import javax.persistence.*;
 @Data
 @ToString
 @NoArgsConstructor
-@AllArgsConstructor
 @Entity
 @Table(name = "sittings_paints")
 public class SittingPaint implements GenericEntity {
@@ -22,9 +20,14 @@ public class SittingPaint implements GenericEntity {
     private Long sittingPaintId;
 
     @Column(name = "sitting_id_fk")
-    private Long sittingId;
+    private Long sittingIdFk;
 
     @Column(name = "paint_id_fk")
-    private Long paintId;
+    private Long paintIdFk;
+
+    public SittingPaint(Long sittingId, Long paintId){
+        this.sittingIdFk = sittingId;
+        this.paintIdFk = paintId;
+    }
 
 }

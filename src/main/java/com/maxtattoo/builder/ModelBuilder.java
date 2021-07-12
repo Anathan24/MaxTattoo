@@ -23,7 +23,7 @@ public class ModelBuilder implements GenerciBuilder {
         clientModel.setSurname(client.getSurname());
         clientModel.setGender(client.getGender());
         clientModel.setDescription(client.getDescription());
-        clientModel.setLocation(this.creatLocationModel(client.getLocation()));
+        clientModel.setLocation(this.createLocationModel(client.getLocation()));
         clientModel.setOrders(client.getOrders().stream().map(this::createOrderModel).collect(Collectors.toCollection(LinkedList::new)));
         return clientModel;
     }
@@ -65,7 +65,7 @@ public class ModelBuilder implements GenerciBuilder {
         return new CityModel(city.getCityId(), city.getCityName());
     }
 
-    public LocationModel creatLocationModel(Location location){
+    public LocationModel createLocationModel(Location location){
         var locationModel = new LocationModel();
         locationModel.setId(location.getLocationId());
         locationModel.setName(location.getLocationName());

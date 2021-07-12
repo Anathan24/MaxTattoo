@@ -1,6 +1,5 @@
 package com.maxtattoo.database.entity;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -10,7 +9,6 @@ import javax.persistence.*;
 @Data
 @ToString
 @NoArgsConstructor
-@AllArgsConstructor
 @Entity
 @Table(name = "clients_orders")
 public class ClientOrder {
@@ -25,5 +23,10 @@ public class ClientOrder {
 
     @Column(name = "order_id_fk")
     private Long orderIdFk;
+
+    public ClientOrder(Long clientId, Long orderId){
+        this.clientIdFk = clientId;
+        this.orderIdFk = orderId;
+    }
 
 }
