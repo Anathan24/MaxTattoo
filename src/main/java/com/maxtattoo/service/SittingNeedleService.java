@@ -17,8 +17,7 @@ public class SittingNeedleService extends GenericService{
      * @param needleId
      * @return il risultato dell'inserimento
      */
-    public SittingNeedle createSittingNeedleRelation(Long sittingId, Long needleId){
-        SittingNeedle relation = new SittingNeedle(sittingId, needleId);
-        return sittingNeedleRepository.save(relation);
+    public Long createSittingNeedleRelation(Long sittingId, Long needleId){
+        return sittingNeedleRepository.save(new SittingNeedle(sittingId, needleId)).getSittingNeedleId();
     }
 }

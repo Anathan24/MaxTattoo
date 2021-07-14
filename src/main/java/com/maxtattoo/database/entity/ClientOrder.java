@@ -11,7 +11,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Entity
 @Table(name = "clients_orders")
-public class ClientOrder {
+public class ClientOrder implements GenericEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

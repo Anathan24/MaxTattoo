@@ -13,12 +13,11 @@ public class ClientOrderService extends GenericService{
 
     /**
      * Creazione della relazione tra il cliente ed il suo ordine
-     * @param clientId
-     * @param orderId
+     * @param clientId l'id del cliente
+     * @param orderId l'id dell'ordine
      * @return il risultato dell'inserimento
      */
-    public ClientOrder createClientOrderRelation(Long clientId, Long orderId){
-        ClientOrder relation = new ClientOrder(clientId, orderId);
-        return clientOrderRepository.save(relation);
+    public Long createClientOrderRelation(Long clientId, Long orderId){
+        return clientOrderRepository.save(new ClientOrder(clientId, orderId)).getClientOrderId();
     }
 }

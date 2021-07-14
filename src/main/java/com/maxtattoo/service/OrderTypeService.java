@@ -11,6 +11,11 @@ public class OrderTypeService extends GenericService{
     @Autowired
     private OrderTypeRepository orderTypeRepository;
 
+    public OrderTypeModel findOrderTypeById(Long id){
+        var orderType = orderTypeRepository.findOrderTypeById(id);
+        return super.modelBuilder.createOrderTypeModel(orderType);
+    }
+
     public OrderTypeModel findOrderTypeByType(String type){
         var orderType = orderTypeRepository.findOrderTypeByType(type);
         return super.modelBuilder.createOrderTypeModel(orderType);

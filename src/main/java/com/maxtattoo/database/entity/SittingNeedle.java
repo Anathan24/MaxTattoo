@@ -1,6 +1,5 @@
 package com.maxtattoo.database.entity;
 
-import com.maxtattoo.database.entity.interfaces.GenericEntity;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;

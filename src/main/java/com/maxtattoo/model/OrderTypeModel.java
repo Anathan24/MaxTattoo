@@ -1,6 +1,5 @@
 package com.maxtattoo.model;
 
-import com.maxtattoo.model.interfaces.GenericModel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

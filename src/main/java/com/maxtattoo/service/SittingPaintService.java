@@ -11,8 +11,7 @@ public class SittingPaintService extends GenericService{
     @Autowired
     private SittingPaintRepository sittingPaintRepository;
 
-    public SittingPaint createSittingPaintRelation(Long sittingId, Long paintId){
-        SittingPaint relation = new SittingPaint(sittingId, paintId);
-        return sittingPaintRepository.save(relation);
+    public Long createSittingPaintRelation(Long sittingId, Long paintId){
+        return sittingPaintRepository.save(new SittingPaint(sittingId, paintId)).getSittingPaintId();
     }
 }

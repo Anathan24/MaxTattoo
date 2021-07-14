@@ -1,6 +1,5 @@
 package com.maxtattoo.model;
 
-import com.maxtattoo.model.interfaces.GenericModel;
 import lombok.*;
 import java.sql.Date;
 import java.util.LinkedList;
