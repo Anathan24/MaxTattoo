@@ -27,7 +27,7 @@ public class ResponseMock {
         order.setEndDate(new Date(System.currentTimeMillis()));
         order.setSittingNumber(17);
         order.setPrepayment(200);
-        order.setState(createStateModel(1L, "Finished"));
+        order.setState(StateEnum.findByValue("Finished"));
         order.setOrderType(createOrderTypeModel(1L, "Tattoo"));
         return order;
     }
@@ -41,15 +41,8 @@ public class ResponseMock {
         sitting.setNote("Sitting Note");
         sitting.setPrice(75);
         sitting.setHours(4);
-        sitting.setState(createStateModel(1L, "TODO"));
+        sitting.setState(StateEnum.findByValue("TODO"));
         return sitting;
-    }
-
-    public StateModel createStateModel(Long stateId, String stateName){
-        StateModel state = new StateModel();
-        state.setId(stateId);
-        state.setValue(stateName);
-        return state;
     }
 
     public OrderTypeModel createOrderTypeModel(Long orderTypeId, String type){

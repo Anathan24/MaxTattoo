@@ -3,6 +3,7 @@ package com.maxtattoo.builder;
 import com.maxtattoo.database.entity.*;
 import com.maxtattoo.model.*;
 import com.maxtattoo.utils.EntityMock;
+import com.maxtattoo.utils.StateEnum;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -64,7 +65,7 @@ public class ModelBuilderTest {
     @Test
     public void stateTransformerTest(){
         State state = entityMock.createStateEntity(1L, "In progress");
-        StateModel stateModel = modelBuilder.createStateModel(state);
+        StateEnum stateModel = modelBuilder.createStateModel(state.getStateName());
 
         Assert.assertNotNull(stateModel);
         Assert.assertEquals("In progress", stateModel.getValue());

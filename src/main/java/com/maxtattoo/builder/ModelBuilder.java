@@ -1,8 +1,8 @@
 package com.maxtattoo.builder;
 
-import com.maxtattoo.builder.interfaces.GenerciBuilder;
 import com.maxtattoo.database.entity.*;
 import com.maxtattoo.model.*;
+import com.maxtattoo.utils.StateEnum;
 import org.springframework.stereotype.Service;
 
 import java.util.LinkedList;
@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class ModelBuilder implements GenerciBuilder {
+public class ModelBuilder implements GenericBuilder {
 
     public List<ClientModel> createClientModel(List<Client> clients){
         return clients.stream().map(this::createClientModel).collect(Collectors.toCollection(LinkedList::new));
@@ -41,7 +41,7 @@ public class ModelBuilder implements GenerciBuilder {
         orderModel.setStartDate(order.getStartDate());
         orderModel.setEndDate(order.getEndDate());
         orderModel.setOrderType(createOrderTypeModel(order.getOrderType()));
-        orderModel.setState(createStateModel(order.getOrderState()));
+        orderModel.setState(createStateModel(order.getOrderState().getStateName()));
         orderModel.setSittings(order.getSittings().stream().map(this::createSittingModel).collect(Collectors.toCollection(LinkedList::new)));
         return orderModel;
     }
@@ -55,7 +55,7 @@ public class ModelBuilder implements GenerciBuilder {
         sittingModel.setPaid(sitting.getPaid());
         sittingModel.setNote(sitting.getSittingNote());
         sittingModel.setOrderId(sitting.getOrderId());
-        sittingModel.setState(createStateModel(sitting.getSittingState()));
+        sittingModel.setState(createStateModel(sitting.getSittingState().getStateName()));
         sittingModel.setPaints(sitting.getPaints().stream().map(this::createPaintModel).collect(Collectors.toCollection(LinkedList::new)));
         sittingModel.setNeedles(sitting.getNeedles().stream().map(this::createNeedleModel).collect(Collectors.toCollection(LinkedList::new)));
         return sittingModel;
@@ -77,8 +77,8 @@ public class ModelBuilder implements GenerciBuilder {
         return new OrderTypeModel(orderType.getOrderTypeId(), orderType.getType());
     }
 
-    public StateModel createStateModel(State state){
-        return new StateModel(state.getStateId(), state.getStateName());
+    public StateEnum createStateModel(String value){
+        return StateEnum.findByValue(value);
     }
 
     public PaintModel createPaintModel(Paint paint){

@@ -1,5 +1,6 @@
 package com.maxtattoo.model;
 
+import com.maxtattoo.utils.StateEnum;
 import lombok.*;
 import java.sql.Date;
 import java.util.LinkedList;
@@ -20,7 +21,7 @@ public class OrderModel implements GenericModel {
     private Date endDate;
 
     private OrderTypeModel orderType;
-    private StateModel state;
+    private StateEnum state;
 
     private List<SittingModel> sittings = new LinkedList<>();
 }
