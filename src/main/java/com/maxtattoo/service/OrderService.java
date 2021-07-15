@@ -19,8 +19,4 @@ public class OrderService extends GenericService{
         return super.modelBuilder.createOrderModel(order);
     }
 
-/*    public List<OrderModel> finaAllOrdersByType(Long id){
-        var orders = orderRepository.findAllOrdersByType(id);
-        return super.modelBuilder.createOrderModel(orders);
-    }*/
 }

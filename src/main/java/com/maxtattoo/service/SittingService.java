@@ -2,7 +2,7 @@ package com.maxtattoo.service;
 
 import com.maxtattoo.database.repository.SittingRepository;
 import com.maxtattoo.model.SittingModel;
-import org.jvnet.hk2.annotations.Service;
+import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @Service
