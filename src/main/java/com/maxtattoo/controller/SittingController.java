@@ -4,10 +4,7 @@ import com.maxtattoo.command.SittingCommand;
 import com.maxtattoo.model.SittingModel;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import static org.springframework.http.ResponseEntity.ok;
 
@@ -20,5 +17,19 @@ public class SittingController extends GenericController{
         var sittingCommand = super.beanFactory.getBean(SittingCommand.class);
         var sittingModel = sittingCommand.findSittingById(id);
         return ok(sittingModel);
+    }
+
+    @PutMapping(value = "/createSittingNeedleRelation")
+    public ResponseEntity<Long> createSittingNeedleRelation(@RequestParam Long sittingId, @RequestParam Long needleId){
+        var sittingCommand = super.beanFactory.getBean(SittingCommand.class);
+        var relationId = sittingCommand.createSittingNeedleRelation(sittingId, needleId);
+        return ok(relationId);
+    }
+
+    @PutMapping(value = "/createSittingPaintRelation")
+    public ResponseEntity<Long> createSittingPaintRelation(@RequestParam Long sittingId, @RequestParam Long paintId){
+        var sittingCommand = super.beanFactory.getBean(SittingCommand.class);
+        var relationId = sittingCommand.createSittingPaintRelation(sittingId, paintId);
+        return ok(relationId);
     }
 }

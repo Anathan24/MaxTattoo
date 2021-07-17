@@ -16,4 +16,12 @@ public class SittingCommand extends GenericCommand{
     public SittingModel findSittingById(Long id){
         return sittingService.findSittingById(id);
     }
+
+    public Long createSittingNeedleRelation(Long sittingId, Long needleId){
+        return sittingService.createSittingNeedleRelation(sittingId, needleId);
+    }
+
+    public Long createSittingPaintRelation(Long sittingId, Long paintId){
+        return sittingService.createSittingPaintRelation(sittingId, paintId);
+    }
 }
