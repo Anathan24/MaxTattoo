@@ -14,14 +14,14 @@ import static org.springframework.http.ResponseEntity.ok;
 @RequestMapping(value = "/client", produces = {MediaType.APPLICATION_JSON_VALUE, "application/hal+json"})
 public class ClientController extends GenericController {
 
-    @GetMapping(value = "/findClientById")
+    @GetMapping(value = "/findById")
     public ResponseEntity<ClientModel> findClientById(@RequestParam Long id) {
         var clientCommand = beanFactory.getBean(ClientCommand.class);
         var clientModel = clientCommand.findClientById(id);
         return ok(clientModel);
     }
 
-    @GetMapping(value = "/findClientByNameAndSurname")
+    @GetMapping(value = "/findByNameAndSurname")
     public ResponseEntity<List<ClientModel>> findClientByNameAndSurname(@RequestParam String name, @RequestParam String surname) {
         var clientCommand = beanFactory.getBean(ClientCommand.class);
         var clientsModel = clientCommand.findClientByNameAndSurname(name, surname);

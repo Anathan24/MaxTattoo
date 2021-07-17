@@ -12,7 +12,7 @@ import static org.springframework.http.ResponseEntity.ok;
 @RequestMapping(value = "/order", produces = {MediaType.APPLICATION_JSON_VALUE, "application/hal+json"})
 public class OrderController extends GenericController {
 
-    @GetMapping(value = "/findOrderById")
+    @GetMapping(value = "/findById")
     public ResponseEntity<OrderModel> findOrderById(@RequestParam Long id){
         var orderCommand = beanFactory.getBean(OrderCommand.class);
         var order = orderCommand.findOrderById(id);

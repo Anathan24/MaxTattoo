@@ -15,7 +15,7 @@ import static org.springframework.http.ResponseEntity.ok;
 @RequestMapping(value = "/city", produces = {MediaType.APPLICATION_JSON_VALUE, "application/hal+json"})
 public class CityController extends GenericController {
 
-    @GetMapping(value = "/findCityById")
+    @GetMapping(value = "/findById")
     public ResponseEntity<CityModel> findCityById(@RequestParam Long id){
         var cityCommand = beanFactory.getBean(CityCommand.class);
         var cityModel = cityCommand.findCityById(id);

@@ -13,14 +13,14 @@ import java.util.List;
 public class ClientCommand extends GenericCommand {
 
     @Autowired
-    private ClientService clientDataService;
+    private ClientService clientService;
 
     public ClientModel findClientById(Long id){
-        return clientDataService.findClientById(id);
+        return clientService.findClientById(id);
     }
 
     public List<ClientModel> findClientByNameAndSurname(String name, String surname){
-        return clientDataService.findClientByNameAndSurname(name, surname);
+        return clientService.findClientByNameAndSurname(name, surname);
     }
 
 }
