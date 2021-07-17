@@ -18,6 +18,8 @@ public class ClientOrderService extends GenericService{
      * @return il risultato dell'inserimento
      */
     public Long createClientOrderRelation(Long clientId, Long orderId){
-        return clientOrderRepository.save(new ClientOrder(clientId, orderId)).getClientOrderId();
+        //TODO da risolvere il problema della insert
+       // return clientOrderRepository.save(new ClientOrder(clientId, orderId)).getClientOrderId();
+        return null;
     }
 }

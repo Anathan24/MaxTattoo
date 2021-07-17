@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 @Repository
-@Transactional
 public interface OrderTypeRepository extends JpaRepository<OrderType, Long> {
 
     @Query("SELECT od FROM OrderType od WHERE od.orderTypeId = (:orderTypeId)")

@@ -18,6 +18,8 @@ public class SittingNeedleService extends GenericService{
      * @return il risultato dell'inserimento
      */
     public Long createSittingNeedleRelation(Long sittingId, Long needleId){
-        return sittingNeedleRepository.save(new SittingNeedle(sittingId, needleId)).getSittingNeedleId();
+        //TODO da gestire l'inserimento di una relazione N a N
+        //return sittingNeedleRepository.save(new SittingNeedle(sittingId, needleId)).getSittingNeedleId();
+        return null;
     }
 }

@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 @Repository
-@Transactional
 public interface SittingNeedleRepository extends JpaRepository<SittingNeedle, Long> {
 
     @Query("SELECT sn FROM SittingNeedle sn WHERE sn.sittingNeedleId=(:sittingNeedleId)")

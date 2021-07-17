@@ -11,7 +11,7 @@ public class LocationService extends GenericService{
     @Autowired
     private LocationRepository locationRepository;
 
-    public LocationModel findLocationById(Long id){
+    public LocationModel findById(Long id){
         var location = locationRepository.findLocationById(id);
         return super.modelBuilder.createLocationModel(location);
     }

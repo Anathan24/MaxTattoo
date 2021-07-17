@@ -1,8 +1,6 @@
 package com.maxtattoo.controller;
 
 import com.maxtattoo.command.ClientOrderCommand;
-import org.springframework.beans.factory.BeanFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,12 +14,8 @@ import static org.springframework.http.ResponseEntity.ok;
 @RequestMapping(value = "/clientOrder", produces = {MediaType.APPLICATION_JSON_VALUE, "application/hal+json"})
 public class ClientOrderController extends GenericController {
 
-    @Autowired
-    private BeanFactory beanFactory;
-
-
     @PostMapping(value = "/createClientOrderRelation")
-    public ResponseEntity<Long> r(@RequestParam Long clientId, @RequestParam Long orderId){
+    public ResponseEntity<Long> createClientOrderRelation(@RequestParam Long clientId, @RequestParam Long orderId){
         var clientOrderCommand = beanFactory.getBean(ClientOrderCommand.class);
         var relationId = clientOrderCommand.createClientOrderRelation(clientId, orderId);
         return ok(relationId);

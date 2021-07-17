@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Repository
-@Transactional
 public interface SittingRepository extends JpaRepository<Sitting, Long> {
 
     @Query("SELECT s FROM Sitting s WHERE s.sittingId=(:sittingId)")

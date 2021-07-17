@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 @Repository
-@Transactional
 public interface PaintRepository extends JpaRepository<Paint, Long> {
 
     @Query("SELECT p FROM Paint p WHERE p.paintId=(:paintId)")
