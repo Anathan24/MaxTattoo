@@ -8,17 +8,19 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.time.format.DateTimeFormatter;
 
+import static org.junit.Assert.assertTrue;
+
 @RunWith(SpringRunner.class)
-@ContextConfiguration(classes = {DateUtils.class})
+@ContextConfiguration(classes = {
+
+})
 public class DateUtilsTest {
 
-    @Autowired
-    private DateUtils dateUtils;
 
     private final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
 
     @Test
     public void changeDateTimeToFrontEndFormatTest(){
-
+        assertTrue(true);
     }
 }
