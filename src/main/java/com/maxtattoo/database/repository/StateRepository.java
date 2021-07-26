@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Repository
 public interface StateRepository extends JpaRepository<State, Long> {
 
-    @Query("SELECT s FROM State s WHERE s.stateId=(:stateId)")
+    @Query("SELECT s FROM State s WHERE s.id=(:stateId)")
     State findStateById(@Param("stateId") Long stateId);
 
 }

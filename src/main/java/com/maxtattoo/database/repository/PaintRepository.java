@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Repository
 public interface PaintRepository extends JpaRepository<Paint, Long> {
 
-    @Query("SELECT p FROM Paint p WHERE p.paintId=(:paintId)")
+    @Query("SELECT p FROM Paint p WHERE p.id=(:paintId)")
     Paint findPaintById(@Param("paintId") Long paintId);
 
 }

@@ -10,6 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 @Repository
 public interface SittingNeedleRepository extends JpaRepository<SittingNeedle, Long> {
 
-    @Query("SELECT sn FROM SittingNeedle sn WHERE sn.sittingNeedleId=(:sittingNeedleId)")
+    @Query("SELECT sn FROM SittingNeedle sn WHERE sn.id=(:sittingNeedleId)")
     SittingNeedle findSittingNeedleById(@Param("sittingNeedleId") Long sittingNeedleId);
 }

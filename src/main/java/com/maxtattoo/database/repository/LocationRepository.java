@@ -10,6 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 @Repository
 public interface LocationRepository extends JpaRepository<Location, Long> {
 
-    @Query("SELECT l FROM Location l WHERE l.locationId=(:locationId)")
+    @Query("SELECT l FROM Location l WHERE l.id=(:locationId)")
     Location findLocationById(@Param("locationId") Long locationId);
 }

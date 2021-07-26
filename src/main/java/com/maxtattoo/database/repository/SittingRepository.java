@@ -12,7 +12,7 @@ import java.util.List;
 @Repository
 public interface SittingRepository extends JpaRepository<Sitting, Long> {
 
-    @Query("SELECT s FROM Sitting s WHERE s.sittingId=(:sittingId)")
+    @Query("SELECT s FROM Sitting s WHERE s.id=(:sittingId)")
     Sitting findSittingById(@Param("sittingId") Long sittingId);
 
     @Query("SELECT s FROM Sitting s WHERE s.orderId=(:orderId)")

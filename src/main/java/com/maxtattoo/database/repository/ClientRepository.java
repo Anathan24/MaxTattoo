@@ -12,7 +12,7 @@ import java.util.List;
 @Repository
 public interface ClientRepository extends JpaRepository<Client, Long> {
 
-    @Query("SELECT c FROM Client c WHERE c.clientId=(:clientId)")
+    @Query("SELECT c FROM Client c WHERE c.id=(:clientId)")
     Client findClientById(@Param("clientId") Long clientId);
 
     @Query("SELECT c FROM Client c WHERE c.name=(:name) AND c.surname=(:surname)")

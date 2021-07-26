@@ -20,10 +20,10 @@ public class Location implements GenericEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "location_id_pk")
-    private Long locationId;
+    private Long id;
 
     @Column(name = "location_name")
-    private String locationName;
+    private String name;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "location_id_fk")

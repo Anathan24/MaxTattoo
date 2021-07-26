@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Repository
 public interface OrderRepository extends JpaRepository<Order, Long> {
 
-    @Query("SELECT o FROM Order o WHERE o.orderId = (:orderId)")
+    @Query("SELECT o FROM Order o WHERE o.id = (:orderId)")
     Order findOrderById(@Param("orderId") Long orderId);
 
 }
