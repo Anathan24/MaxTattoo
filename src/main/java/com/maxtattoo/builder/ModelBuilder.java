@@ -17,16 +17,21 @@ public class ModelBuilder implements GenerciBuilder {
         return clients.stream().map(this::createClientModel).collect(Collectors.toCollection(LinkedList::new));
     }
 
+    public List<OrderModel> createOrderModel(List<Order> orders){
+        return orders.stream().map(this::createOrderModel).collect(Collectors.toCollection(LinkedList::new));
+    }
+
+    public List<OrderTypeModel> createOrderTypeModel(List<OrderType> orderTypes){
+        return orderTypes.stream().map(this::createOrderTypeModel).collect(Collectors.toCollection(LinkedList::new));
+    }
+
+
     public ClientModel createClientModel(Client client){
         var model = new ClientModel();
         BeanUtils.copyProperties(client, model);
         model.setLocation(createLocationModel(client.getLocation()));
         model.setOrders(client.getOrders().stream().map(this::createOrderModel).collect(Collectors.toCollection(LinkedList::new)));
         return model;
-    }
-
-    public List<OrderModel> createOrderModel(List<Order> orders){
-        return orders.stream().map(this::createOrderModel).collect(Collectors.toCollection(LinkedList::new));
     }
 
     public OrderModel createOrderModel(Order order){

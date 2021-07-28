@@ -28,8 +28,8 @@ INSERT INTO orders(order_id_pk, sitting_number, order_price, prepayment, start_d
 INSERT INTO orders(order_id_pk, sitting_number, order_price, prepayment, start_date, end_date, state_id_fk, order_type_id_fk, client_id_fk) VALUES('3', 6, 777, 200, '20/04/2021','20/06/2022', 3, 1, 1);
 INSERT INTO orders(order_id_pk, sitting_number, order_price, prepayment, start_date, end_date, state_id_fk, order_type_id_fk, client_id_fk) VALUES('4', 7, 444, 450, '20/04/2021','20/06/2022', 2, 1, 2);
 INSERT INTO orders(order_id_pk, sitting_number, order_price, prepayment, start_date, end_date, state_id_fk, order_type_id_fk, client_id_fk) VALUES('5', 2, 456, 744, '20/04/2021','20/06/2022', 3, 1, 3);
-INSERT INTO orders(order_id_pk, sitting_number, order_price, prepayment, start_date, end_date, state_id_fk, order_type_id_fk, client_id_fk) VALUES('6', 5, 200, 100, '20/04/2021','20/06/2022', 1, 1, 4);
-INSERT INTO orders(order_id_pk, sitting_number, order_price, prepayment, start_date, end_date, state_id_fk, order_type_id_fk, client_id_fk) VALUES('7', 5, 200, 100, '20/04/2021','20/06/2022', 1, 1, 5);
+INSERT INTO orders(order_id_pk, sitting_number, order_price, prepayment, start_date, end_date, state_id_fk, order_type_id_fk, client_id_fk) VALUES('6', 5, 200, 100, '20/04/2021','20/06/2022', 1, 2, 4);
+INSERT INTO orders(order_id_pk, sitting_number, order_price, prepayment, start_date, end_date, state_id_fk, order_type_id_fk, client_id_fk) VALUES('7', 5, 555, 100, '20/04/2021','20/06/2022', 1, 2, 5);
 
 INSERT INTO sittings(sitting_id_pk, sitting_date, spent_hours, sitting_price, sitting_note, paid, state_id_fk, order_id_fk)VALUES('1', '22/04/2020', 1.5, 50, 'SittingNote 1', 120, 4, 1);
 INSERT INTO sittings(sitting_id_pk, sitting_date, spent_hours, sitting_price, sitting_note, paid, state_id_fk, order_id_fk)VALUES('2', '22/04/2020', 5.5, 25, 'SittingNote 2', 10, 4, 1);
