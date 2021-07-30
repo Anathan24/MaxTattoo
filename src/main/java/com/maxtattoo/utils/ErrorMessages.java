@@ -1,4 +1,4 @@
-package com.maxtattoo.service;
+package com.maxtattoo.utils;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

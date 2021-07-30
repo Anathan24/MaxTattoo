@@ -15,9 +15,9 @@ import static org.springframework.http.ResponseEntity.ok;
 public class ClientController extends GenericController {
 
     @GetMapping(value = "/findById")
-    public ResponseEntity<ClientModel> findClientById(@RequestParam Long id) {
+    public ResponseEntity<ClientModel> findById(@RequestParam Long id) {
         var clientCommand = beanFactory.getBean(ClientCommand.class);
-        var clientModel = clientCommand.findClientById(id);
+        var clientModel = clientCommand.findById(id);
         return ok(clientModel);
     }
 

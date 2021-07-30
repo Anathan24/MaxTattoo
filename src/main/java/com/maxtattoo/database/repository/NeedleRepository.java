@@ -10,6 +10,4 @@ import org.springframework.transaction.annotation.Transactional;
 @Repository
 public interface NeedleRepository extends JpaRepository<Needle, Long> {
 
-    @Query("SELECT n FROM Needle n WHERE n.id=(:needleId)")
-    Needle findNeedleById(@Param("needleId") Long needleId);
 }

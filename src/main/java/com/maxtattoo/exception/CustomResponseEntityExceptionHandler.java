@@ -14,7 +14,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 public class CustomResponseEntityExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(ResourceNotFoundException.class)
-    public final ResponseEntity<ExceptionResponseMessage> handleNotFoundException(ResourceNotFoundException ex, WebRequest request) {
+    public final ResponseEntity<ExceptionResponseMessage> handleResourceNotFoundException(ResourceNotFoundException ex, WebRequest request) {
         ExceptionResponseMessage exceptionResponseMessage = new ExceptionResponseMessage(
                 DateUtils.getNow(),
                 HttpStatus.NOT_FOUND.value(),

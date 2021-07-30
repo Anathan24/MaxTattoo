@@ -18,7 +18,7 @@ public class PaintController extends GenericController{
     @GetMapping(value = "/findById")
     public ResponseEntity<PaintModel> findById(@RequestParam Long id){
         var paintCommand = super.beanFactory.getBean(PaintCommand.class);
-        var paintModel = paintCommand.findPaindById(id);
+        var paintModel = paintCommand.findById(id);
         return ok(paintModel);
     }
 }

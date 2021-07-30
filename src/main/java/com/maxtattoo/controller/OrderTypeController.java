@@ -18,7 +18,7 @@ public class OrderTypeController extends GenericController{
     @GetMapping(value = "/findById")
     private ResponseEntity<OrderTypeModel> findById(@RequestParam Long id){
         var orderTypeCommand = super.beanFactory.getBean(OrderTypeCommand.class);
-        var orderTypeModel = orderTypeCommand.findOrderTypeById(id);
+        var orderTypeModel = orderTypeCommand.findById(id);
         return ok(orderTypeModel);
     }
 }

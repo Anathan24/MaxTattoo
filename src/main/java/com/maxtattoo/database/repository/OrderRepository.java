@@ -11,11 +11,6 @@ import java.sql.Date;
 @Repository
 public interface OrderRepository extends JpaRepository<Order, Long> {
 
-    @Query("SELECT o " +
-           "FROM Order o " +
-           "WHERE o.id = :orderId ")
-    Order findOrderById(@Param("orderId") Long orderId);
-
     @Query("SELECT count(o) " +
            "FROM Order o " +
            "WHERE (:orderType is null or o.orderType.value = :orderType) AND (o.startDate <= :startDate AND o.endDate >= :endDate)")

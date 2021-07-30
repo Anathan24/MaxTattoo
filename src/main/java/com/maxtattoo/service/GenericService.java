@@ -11,4 +11,8 @@ abstract class GenericService{
 
     @Autowired
     protected ModelBuilder modelBuilder;
+
+    public String buildEntityId(String entityName, Long id){
+        return entityName + "(" + id + ")";
+    }
 }

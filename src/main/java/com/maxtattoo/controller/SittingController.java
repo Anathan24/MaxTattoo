@@ -15,7 +15,7 @@ public class SittingController extends GenericController{
     @GetMapping(value = "/findById")
     public ResponseEntity<SittingModel> findById(@RequestParam Long id){
         var sittingCommand = super.beanFactory.getBean(SittingCommand.class);
-        var sittingModel = sittingCommand.findSittingById(id);
+        var sittingModel = sittingCommand.findById(id);
         return ok(sittingModel);
     }
 

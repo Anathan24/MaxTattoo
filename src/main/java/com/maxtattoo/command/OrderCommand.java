@@ -13,8 +13,8 @@ public class OrderCommand extends GenericCommand{
     @Autowired
     private OrderService orderService;
 
-    public OrderModel findOrderById(Long id){
-        return orderService.findOrderById(id);
+    public OrderModel findById(Long id){
+        return orderService.findById(id);
     }
 
 }

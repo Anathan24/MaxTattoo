@@ -13,9 +13,9 @@ import static org.springframework.http.ResponseEntity.ok;
 public class OrderController extends GenericController {
 
     @GetMapping(value = "/findById")
-    public ResponseEntity<OrderModel> findOrderById(@RequestParam Long id){
+    public ResponseEntity<OrderModel> findById(@RequestParam Long id){
         var orderCommand = beanFactory.getBean(OrderCommand.class);
-        var order = orderCommand.findOrderById(id);
+        var order = orderCommand.findById(id);
         return ok(order);
     }
 

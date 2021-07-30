@@ -18,7 +18,7 @@ public class NeedleController extends GenericController{
     @GetMapping(value = "/findById")
     public ResponseEntity<NeedleModel> findById(@RequestParam Long id){
         var needleCommand = super.beanFactory.getBean(NeedleCommand.class);
-        var needleModel = needleCommand.findNeedleById(id);
+        var needleModel = needleCommand.findById(id);
         return ok(needleModel);
     }
 }

@@ -15,8 +15,8 @@ public class ClientCommand extends GenericCommand {
     @Autowired
     private ClientService clientService;
 
-    public ClientModel findClientById(Long id){
-        return clientService.findClientById(id);
+    public ClientModel findById(Long id){
+        return clientService.findById(id);
     }
 
     public List<ClientModel> findClientByNameAndSurname(String name, String surname){
