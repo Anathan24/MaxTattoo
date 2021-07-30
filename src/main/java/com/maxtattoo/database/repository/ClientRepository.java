@@ -6,21 +6,25 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.sql.Date;
 import java.util.List;
 
 @Repository
 public interface ClientRepository extends JpaRepository<Client, Long> {
 
-    @Query("SELECT c FROM Client c WHERE c.id=(:clientId)")
+    @Query("SELECT c " +
+           "FROM Client c " +
+           "WHERE c.id= :clientId ")
     Client findClientById(@Param("clientId") Long clientId);
 
-    @Query("SELECT c FROM Client c WHERE c.name=(:name) AND c.surname=(:surname)")
+    @Query("SELECT c " +
+           "FROM Client c " +
+           "WHERE c.name = :name AND c.surname= :surname")
     List<Client> findClientByNameAndSurname(@Param("name") String name, @Param("surname") String surname);
 
-    @Query("SELECT count(c) FROM Client c")
-    int countTotalClientsNumber();
-
-    @Query("SELECT count(c) FROM Client c WHERE c.gender = (:gender)")
-    int countTotalClientsNumber(@Param("gender") String gender);
+    @Query("SELECT COUNT(DISTINCT(c.id)) " +
+           "FROM Client c INNER JOIN Order o ON c.id = o.clientId " +
+           "WHERE (o.startDate <= :startDate AND o.endDate >= :endDate) AND (:gender is null or c.gender = :gender)" )
+    Integer countTotalClientsNumber(@Param("startDate") Date startDate, @Param("endDate") Date endDate, @Param("gender") String gender);
 
 }

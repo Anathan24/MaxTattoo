@@ -9,7 +9,9 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface CityRepository extends JpaRepository<City, Long> {
 
-    @Query("SELECT c FROM City c WHERE c.id=(:cityId)")
+    @Query("SELECT c " +
+            "FROM City c " +
+            "WHERE c.id= :cityId ")
     City findCityById(@Param("cityId") Long cityId);
 
 }

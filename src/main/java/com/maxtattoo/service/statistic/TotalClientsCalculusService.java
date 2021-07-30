@@ -5,6 +5,8 @@ import com.maxtattoo.model.statistic.TotalStatisticWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Date;
+
 @Service
 public class TotalClientsCalculusService {
 
@@ -14,13 +16,9 @@ public class TotalClientsCalculusService {
     @Autowired
     private ClientRepository clientRepository;
 
-    public void calculateTotalClientsStatistic(TotalStatisticWrapper statistic, String startDate, String endDate) {
-        Integer totalClients = clientRepository.countTotalClientsNumber();
-        Integer totalMales = clientRepository.countTotalClientsNumber(MALE);
-        Integer totalFemales = clientRepository.countTotalClientsNumber(FEMALE);
-
-        statistic.getClientsStatistic().setTotalClientsNumber(totalClients);
-        statistic.getClientsStatistic().setNumberOfMales(totalMales);
-        statistic.getClientsStatistic().setNumberOfFemales(totalFemales);
+    public void calculateClientsTotalStatistic(TotalStatisticWrapper statistic, Date startDate, Date endDate) {
+        statistic.getClientsStatistic().setTotalClientsNumber(clientRepository.countTotalClientsNumber(startDate, endDate, null));
+        statistic.getClientsStatistic().setNumberOfMales(clientRepository.countTotalClientsNumber(startDate, endDate, MALE));
+        statistic.getClientsStatistic().setNumberOfFemales(clientRepository.countTotalClientsNumber(startDate, endDate, FEMALE));
     }
 }

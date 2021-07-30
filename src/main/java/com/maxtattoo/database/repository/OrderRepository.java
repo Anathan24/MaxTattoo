@@ -6,21 +6,23 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.sql.Date;
+
 @Repository
 public interface OrderRepository extends JpaRepository<Order, Long> {
 
-    @Query("SELECT o FROM Order o WHERE o.id = (:orderId)")
+    @Query("SELECT o " +
+           "FROM Order o " +
+           "WHERE o.id = :orderId ")
     Order findOrderById(@Param("orderId") Long orderId);
 
-    @Query("SELECT count(o) FROM Order o")
-    Integer calculateTotalOrdersNumber();
+    @Query("SELECT count(o) " +
+           "FROM Order o " +
+           "WHERE (:orderType is null or o.orderType.value = :orderType) AND (o.startDate <= :startDate AND o.endDate >= :endDate)")
+    Integer calculateOrdersTotalNumber(@Param("orderType") String orderType, @Param("startDate") Date startDate, @Param("endDate") Date endDate);
 
-    @Query("SELECT count(o) FROM Order o WHERE o.orderType.id = (:orderTypeId)")
-    Integer calculateTotalOrdersNumberByOrderTypeTypeId(@Param("orderTypeId") Long orderTypeId);
-
-    @Query("SELECT sum(o.orderPrice) FROM Order o")
-    Integer calculateTotalOrdersPrice();
-
-    @Query("SELECT sum(o.orderPrice) FROM Order o WHERE o.orderType.id = (:orderTypeId)")
-    Integer calculateTotalOrderPriceByOrderTypeId(@Param("orderTypeId") Long orderTypeId);
+    @Query("SELECT sum(o.orderPrice) " +
+           "FROM Order o " +
+           "WHERE (:orderType is null or o.orderType.value = :orderType) AND (o.startDate <= :startDate AND o.endDate >= :endDate)")
+    Integer calculateOrdersTotalPrice(@Param("orderType") String orderType, @Param("startDate") Date startDate, @Param("endDate") Date endDate);
 }

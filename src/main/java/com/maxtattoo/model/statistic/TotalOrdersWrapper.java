@@ -13,6 +13,6 @@ public class TotalOrdersWrapper {
 
     private Integer totalOrders;
     private Integer totalPrice;
-    private List<OrderStatistic> ordersStatisticByOrderType = new LinkedList<>();
+    private List<OrderStatistic> ordersStatisticByType = new LinkedList<>();
 
 }

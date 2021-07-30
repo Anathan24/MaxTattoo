@@ -1,48 +1,26 @@
 package com.maxtattoo.utils;
 
-import java.sql.Timestamp;
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class DateUtils {
 
-    private static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
-    private static final String EUROPE_ROME = "Europe/Rome";
+    private static final String DATE_FORMAT = "yyyy-MM-dd";
 
     private DateUtils(){}
 
-    public static LocalDateTime getLocalDateTimeFrom(Long mills) {
-        return LocalDateTime.ofInstant(Instant.ofEpochMilli(mills), ZoneId.of(EUROPE_ROME));
-    }
+    public static java.sql.Date getDateFromString(String date){
+        Date parsedDate = null;
+        try {
+            parsedDate = new SimpleDateFormat(DATE_FORMAT).parse(date);
+        } catch (ParseException e) {
+            //TODO gestire l'eccezione relativa al fornmato della data
+            e.printStackTrace();
+        }
+        if(parsedDate == null)
+            throw new NullPointerException("Parsed date is null!");
 
-    public static Long getLongFromLocalDateTime(LocalDateTime dateTime) {
-        return dateTime.atZone(ZoneId.of(EUROPE_ROME)).toInstant().toEpochMilli();
-    }
-
-    public static String getStringFromLocalDateTime(LocalDateTime dateTime) {
-        return dateTime.format(dateTimeFormatter);
-    }
-
-    public static LocalDate getLocalDateFromString(String date){
-        return (date != null)? LocalDate.parse(date, dateTimeFormatter) : null;
-    }
-
-    public static String getStringFromLocalDate(LocalDate date){
-        return date.format(dateTimeFormatter);
-    }
-
-    public LocalDateTime localDateTimeFromTimeStamp(Timestamp dateTime) {
-        return dateTime.toLocalDateTime();
-    }
-
-    public LocalDateTime localDateTimeFromString(String dateTime) {
-        return LocalDateTime.parse(dateTime, dateTimeFormatter);
-    }
-
-    public Timestamp timestampFromLocalDateTIme(LocalDateTime dateTime) {
-        return Timestamp.valueOf(dateTime);
+        return new java.sql.Date(parsedDate.getTime());
     }
 }

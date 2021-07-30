@@ -6,25 +6,24 @@ import com.maxtattoo.model.statistic.TotalStatisticWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Date;
+
 @Service
 public class OrdersStatisticCalculusService {
 
     @Autowired
     private OrderRepository orderRepository;
 
-    public void calculateOrdersStatistic(TotalStatisticWrapper statistic, String startDate, String endDate){
-        Integer totalOrdersNumber = orderRepository.calculateTotalOrdersNumber();
-        Integer totalOrderPrice = orderRepository.calculateTotalOrdersPrice();
-
-        statistic.getOrdersStatistic().setTotalOrders(totalOrdersNumber);
-        statistic.getOrdersStatistic().setTotalPrice(totalOrderPrice);
+    public void calculateOrdersTotalStatistic(TotalStatisticWrapper statistic, Date startDate, Date endDate){
+        statistic.getOrdersStatistic().setTotalOrders(orderRepository.calculateOrdersTotalNumber(null, startDate, endDate));
+        statistic.getOrdersStatistic().setTotalPrice(orderRepository.calculateOrdersTotalPrice(null, startDate, endDate));
     }
 
-    public OrderStatistic calculateOrdersStatisticByType(Long orderId, String type, String startDate, String endDate){
+    public OrderStatistic calculateOrdersStatisticByType(String orderType, Date startDate, Date endDate){
         OrderStatistic orderStatistic = new OrderStatistic();
-        orderStatistic.setOrderType(type);
-        orderStatistic.setTotalOrders(orderRepository.calculateTotalOrdersNumberByOrderTypeTypeId(orderId));
-        orderStatistic.setTotalPrice(orderRepository.calculateTotalOrderPriceByOrderTypeId(orderId));
+        orderStatistic.setOrderType(orderType);
+        orderStatistic.setTotalOrders(orderRepository.calculateOrdersTotalNumber(orderType, startDate, endDate));
+        orderStatistic.setTotalPrice(orderRepository.calculateOrdersTotalPrice(orderType, startDate, endDate));
         return orderStatistic;
     }
 }
