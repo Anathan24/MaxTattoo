@@ -1,8 +1,14 @@
 package com.maxtattoo.utils;
 
-import java.text.ParseException;
+import com.maxtattoo.exception.DateFormatException;
+import lombok.SneakyThrows;
+import org.springframework.http.HttpStatus;
+
+import java.sql.Date;
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.regex.Pattern;
+
+import static com.maxtattoo.utils.ErrorMessages.WRONG_DATE_FORMAT;
 
 public class DateUtils {
 
@@ -12,19 +18,16 @@ public class DateUtils {
     private DateUtils(){}
 
     public static String getNow(){
-        return new SimpleDateFormat(DATE_TIME_FORMAT).format(new Date());
+        return new SimpleDateFormat(DATE_TIME_FORMAT).format(new Date(System.currentTimeMillis()));
     }
 
-    public static java.sql.Date getDateFromString(String date){
-        Date parsedDate = null;
-        try {
-            parsedDate = new SimpleDateFormat(DATE_FORMAT).parse(date);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        if(parsedDate == null)
-            throw new NullPointerException("Parsed date is null!");
+    @SneakyThrows
+    public static Date getDateFromString(String date){
+        String regex = "\\d{4}-\\d{2}-\\d{2}";
 
-        return new java.sql.Date(parsedDate.getTime());
+        if(!Pattern.matches(regex, date))
+            throw new DateFormatException(WRONG_DATE_FORMAT.getValue().concat(" The format must be: "+DATE_FORMAT), HttpStatus.NOT_ACCEPTABLE);
+
+        return new Date(new SimpleDateFormat(DATE_FORMAT).parse(date).getTime());
     }
 }
