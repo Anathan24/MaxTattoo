@@ -19,7 +19,7 @@ public interface ClientRepository extends JpaRepository<Client, Long> {
 
     @Query("SELECT COUNT(DISTINCT(c.id)) " +
            "FROM Client c INNER JOIN Order o ON c.id = o.clientId " +
-           "WHERE (o.startDate <= :startDate AND o.endDate >= :endDate) AND (:gender is null or c.gender = :gender)" )
+           "WHERE (o.startDate >= :startDate AND o.endDate <= :endDate) AND (:gender is null or c.gender = :gender)" )
     Integer countTotalClientsNumber(@Param("startDate") Date startDate, @Param("endDate") Date endDate, @Param("gender") String gender);
 
 }
