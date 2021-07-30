@@ -5,6 +5,7 @@ import com.maxtattoo.database.repository.OrderTypeRepository;
 import com.maxtattoo.exception.ResourceNotFoundException;
 import com.maxtattoo.model.OrderTypeModel;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -25,7 +26,7 @@ public class OrderTypeService extends GenericService{
         if(result.isPresent())
             return super.modelBuilder.createOrderTypeModel(result.get());
         else
-            throw new ResourceNotFoundException(FIND_BY_ID.getValue().concat(super.buildEntityId(ENTITY_NAME, id)));
+            throw new ResourceNotFoundException(FIND_BY_ID.getValue().concat(super.buildEntityId(ENTITY_NAME, id)), HttpStatus.NOT_FOUND);
     }
 
     public OrderTypeModel findOrderTypeByType(String type){

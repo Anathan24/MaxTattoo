@@ -1,7 +1,7 @@
-package com.maxtattoo.exception;
+package com.maxtattoo.exception.supportclasses;
 
+import com.maxtattoo.exception.GenericException;
 import com.maxtattoo.utils.DateUtils;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -13,14 +13,14 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @RestController
 public class CustomResponseEntityExceptionHandler extends ResponseEntityExceptionHandler {
 
-    @ExceptionHandler(ResourceNotFoundException.class)
-    public final ResponseEntity<ExceptionResponseMessage> handleResourceNotFoundException(ResourceNotFoundException ex, WebRequest request) {
+    @ExceptionHandler(GenericException.class)
+    public final ResponseEntity<ExceptionResponseMessage> handleResourceNotFoundException(GenericException exception, WebRequest request) {
         ExceptionResponseMessage exceptionResponseMessage = new ExceptionResponseMessage(
                 DateUtils.getNow(),
-                HttpStatus.NOT_FOUND.value(),
-                HttpStatus.NOT_FOUND.getReasonPhrase(),
-                ex.getMessage(),
+                exception.getStatus().value(),
+                exception.getStatus().getReasonPhrase(),
+                exception.getMessage(),
                 request.getDescription(false));
-        return new ResponseEntity<>(exceptionResponseMessage, HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(exceptionResponseMessage, exception.getStatus());
     }
 }

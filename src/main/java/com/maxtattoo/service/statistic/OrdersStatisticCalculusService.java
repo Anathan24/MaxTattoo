@@ -15,15 +15,15 @@ public class OrdersStatisticCalculusService {
     private OrderRepository orderRepository;
 
     public void calculateOrdersTotalStatistic(TotalStatisticWrapper statistic, Date startDate, Date endDate){
-        statistic.getOrdersStatistic().setTotalOrders(orderRepository.calculateOrdersTotalNumber(null, startDate, endDate));
-        statistic.getOrdersStatistic().setTotalPrice(orderRepository.calculateOrdersTotalPrice(null, startDate, endDate));
+        statistic.getOrdersStatistic().setTotalOrders(orderRepository.calculateOrdersTotalNumber(startDate, endDate, null));
+        statistic.getOrdersStatistic().setTotalPrice(orderRepository.calculateOrdersTotalPrice(startDate, endDate, null));
     }
 
-    public OrderStatistic calculateOrdersStatisticByType(String orderType, Date startDate, Date endDate){
+    public OrderStatistic calculateOrdersStatisticByType(Date startDate, Date endDate, String orderType){
         OrderStatistic orderStatistic = new OrderStatistic();
         orderStatistic.setOrderType(orderType);
-        orderStatistic.setTotalOrders(orderRepository.calculateOrdersTotalNumber(orderType, startDate, endDate));
-        orderStatistic.setTotalPrice(orderRepository.calculateOrdersTotalPrice(orderType, startDate, endDate));
+        orderStatistic.setTotalOrders(orderRepository.calculateOrdersTotalNumber(startDate, endDate, orderType));
+        orderStatistic.setTotalPrice(orderRepository.calculateOrdersTotalPrice( startDate, endDate, orderType));
         return orderStatistic;
     }
 }

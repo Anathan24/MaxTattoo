@@ -4,6 +4,7 @@ import com.maxtattoo.database.entity.Paint;
 import com.maxtattoo.database.repository.PaintRepository;
 import com.maxtattoo.exception.ResourceNotFoundException;
 import com.maxtattoo.model.PaintModel;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -23,6 +24,6 @@ public class PaintService extends GenericService{
         if(result.isPresent())
             return super.modelBuilder.createPaintModel(result.get());
         else
-            throw new ResourceNotFoundException(FIND_BY_ID.getValue().concat(super.buildEntityId(ENTITY_NAME, id)));
+            throw new ResourceNotFoundException(FIND_BY_ID.getValue().concat(super.buildEntityId(ENTITY_NAME, id)), HttpStatus.NOT_FOUND);
     }
 }

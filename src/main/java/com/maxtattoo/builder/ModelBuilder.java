@@ -1,6 +1,5 @@
 package com.maxtattoo.builder;
 
-import com.maxtattoo.builder.interfaces.GenerciBuilder;
 import com.maxtattoo.database.entity.*;
 import com.maxtattoo.model.*;
 import org.springframework.beans.BeanUtils;

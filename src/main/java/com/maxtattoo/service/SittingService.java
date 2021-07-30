@@ -6,6 +6,7 @@ import com.maxtattoo.database.repository.SittingPaintRepository;
 import com.maxtattoo.database.repository.SittingRepository;
 import com.maxtattoo.exception.ResourceNotFoundException;
 import com.maxtattoo.model.SittingModel;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -29,7 +30,7 @@ public class SittingService extends GenericService{
         if(result.isPresent())
             return super.modelBuilder.createSittingModel(result.get());
         else
-            throw new ResourceNotFoundException(FIND_BY_ID.getValue().concat(super.buildEntityId(ENTITY_NAME, id)));
+            throw new ResourceNotFoundException(FIND_BY_ID.getValue().concat(super.buildEntityId(ENTITY_NAME, id)), HttpStatus.NOT_FOUND);
     }
 
     public Long createSittingNeedleRelation(Long sittingId, Long needleId){

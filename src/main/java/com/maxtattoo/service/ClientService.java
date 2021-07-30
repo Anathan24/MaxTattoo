@@ -5,6 +5,7 @@ import com.maxtattoo.database.repository.ClientRepository;
 import com.maxtattoo.exception.ResourceNotFoundException;
 import com.maxtattoo.model.ClientModel;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -25,7 +26,7 @@ public class ClientService extends GenericService{
         if(result.isPresent())
             return super.modelBuilder.createClientModel(result.get());
         else
-            throw new ResourceNotFoundException(FIND_BY_ID.getValue().concat(super.buildEntityId(ENTITY_NAME, id)));
+            throw new ResourceNotFoundException(FIND_BY_ID.getValue().concat(super.buildEntityId(ENTITY_NAME, id)), HttpStatus.NOT_FOUND);
     }
 
     public List<ClientModel> findClientByNameAndSurname(String name, String surname){

@@ -4,6 +4,7 @@ import com.maxtattoo.database.entity.Needle;
 import com.maxtattoo.database.repository.NeedleRepository;
 import com.maxtattoo.exception.ResourceNotFoundException;
 import com.maxtattoo.model.NeedleModel;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -23,6 +24,6 @@ public class NeedleService extends GenericService{
         if(result.isPresent())
             return super.modelBuilder.createNeedleModel(result.get());
         else
-            throw new ResourceNotFoundException(FIND_BY_ID.getValue().concat(super.buildEntityId(ENTITY_NAME, id)));
+            throw new ResourceNotFoundException(FIND_BY_ID.getValue().concat(super.buildEntityId(ENTITY_NAME, id)), HttpStatus.NOT_FOUND);
     }
 }

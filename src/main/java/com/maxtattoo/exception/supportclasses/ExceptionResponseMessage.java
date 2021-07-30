@@ -1,11 +1,8 @@
-package com.maxtattoo.exception;
+package com.maxtattoo.exception.supportclasses;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.ToString;
-import org.springframework.http.HttpStatus;
-
-import java.util.Date;
 
 @Data
 @ToString
