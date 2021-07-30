@@ -13,7 +13,7 @@ public class CityCommand {
     @Autowired
     private CityService cityService;
 
-    public CityModel findCityById(Long id){
-        return cityService.findCityById(id);
+    public CityModel findById(Long id){
+        return cityService.findById(id);
     }
 }

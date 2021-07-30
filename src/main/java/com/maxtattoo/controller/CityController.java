@@ -16,9 +16,9 @@ import static org.springframework.http.ResponseEntity.ok;
 public class CityController extends GenericController {
 
     @GetMapping(value = "/findById")
-    public ResponseEntity<CityModel> findCityById(@RequestParam Long id){
+    public ResponseEntity<CityModel> findById(@RequestParam Long id){
         var cityCommand = beanFactory.getBean(CityCommand.class);
-        var cityModel = cityCommand.findCityById(id);
+        var cityModel = cityCommand.findById(id);
         return ok(cityModel);
     }
 }
