@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 
 import java.sql.Date;
 
-import static com.maxtattoo.utils.ErrorMessages.START_DATE_GREATER_THEN_END_DATE;
+import static com.maxtattoo.utils.ErrorMessage.START_DATE_GREATER_THEN_END_DATE;
 
 @Component
 @Scope("prototype")

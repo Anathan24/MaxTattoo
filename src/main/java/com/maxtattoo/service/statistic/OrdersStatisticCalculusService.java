@@ -3,13 +3,14 @@ package com.maxtattoo.service.statistic;
 import com.maxtattoo.database.repository.OrderRepository;
 import com.maxtattoo.model.statistic.OrderStatistic;
 import com.maxtattoo.model.statistic.TotalStatisticWrapper;
+import com.maxtattoo.service.GenericService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
 
 @Service
-public class OrdersStatisticCalculusService {
+public class OrdersStatisticCalculusService extends GenericService {
 
     @Autowired
     private OrderRepository orderRepository;

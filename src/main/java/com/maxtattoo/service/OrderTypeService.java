@@ -11,12 +11,10 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-import static com.maxtattoo.utils.ErrorMessages.FIND_BY_ID;
+import static com.maxtattoo.utils.ErrorMessage.FIND_BY_ID;
 
 @Service
 public class OrderTypeService extends GenericService{
-
-    private static final String ENTITY_NAME = OrderType.class.getSimpleName();
 
     @Autowired
     private OrderTypeRepository orderTypeRepository;
@@ -29,7 +27,7 @@ public class OrderTypeService extends GenericService{
         if(result.isPresent())
             return super.modelBuilder.createOrderTypeModel(result.get());
         else
-            throw new ResourceNotFoundException(FIND_BY_ID.getValue().concat(super.buildEntityId(ENTITY_NAME, id)), HttpStatus.NOT_FOUND);
+            throw new ResourceNotFoundException(super.buildErrorMessage(FIND_BY_ID, id), HttpStatus.NOT_FOUND);
     }
 
     public OrderTypeModel findOrderTypeByType(String type){

@@ -8,7 +8,7 @@ import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.regex.Pattern;
 
-import static com.maxtattoo.utils.ErrorMessages.WRONG_DATE_FORMAT;
+import static com.maxtattoo.utils.ErrorMessage.WRONG_DATE_FORMAT;
 
 public class DateUtils {
 
