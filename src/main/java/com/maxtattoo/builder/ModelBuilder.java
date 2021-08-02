@@ -7,23 +7,10 @@ import com.maxtattoo.utils.StateEnum;
 import org.springframework.stereotype.Service;
 
 import java.util.LinkedList;
-import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
 public class ModelBuilder implements GenericBuilder {
-
-    public List<ClientModel> createClientModel(List<Client> clients){
-        return clients.stream().map(this::createClientModel).collect(Collectors.toCollection(LinkedList::new));
-    }
-
-    public List<OrderModel> createOrderModel(List<Order> orders){
-        return orders.stream().map(this::createOrderModel).collect(Collectors.toCollection(LinkedList::new));
-    }
-
-    public List<OrderTypeModel> createOrderTypeModel(List<OrderType> orderTypes){
-        return orderTypes.stream().map(this::createOrderTypeModel).collect(Collectors.toCollection(LinkedList::new));
-    }
 
     public ClientModel createClientModel(Client client){
         var model = new ClientModel();
@@ -33,16 +20,16 @@ public class ModelBuilder implements GenericBuilder {
         return model;
     }
 
-    public OrderModel createOrderModel(Order order){
+    public OrderModel createOrderModel(Order order) {
         var model = new OrderModel();
         BeanUtils.copyProperties(order, model);
         model.setOrderType(createOrderTypeModel(order.getOrderType()));
-        model.setState(createStateModel(order.getOrderState().getValue()));
+        model.setState(StateEnum.findByValue(order.getOrderState().getValue()));
         model.setSittings(order.getSittings().stream().map(this::createSittingModel).collect(Collectors.toCollection(LinkedList::new)));
         return model;
     }
 
-    public SittingModel createSittingModel(Sitting sitting){
+    public SittingModel createSittingModel(Sitting sitting) {
         var model = new SittingModel();
         BeanUtils.copyProperties(sitting, model);
         model.setState(StateEnum.findByValue(sitting.getSittingState().getValue()));
@@ -51,35 +38,32 @@ public class ModelBuilder implements GenericBuilder {
         return model;
     }
 
-    public CityModel createCityModel(City city){
-        return new CityModel(city.getId(), city.getName());
+    public CityModel createCityModel(City city) {
+        var model = new CityModel();
+        BeanUtils.copyProperties(city, model);
+        return model;
     }
 
-    public LocationModel createLocationModel(Location location){
+    public LocationModel createLocationModel(Location location) {
         var model = new LocationModel();
         BeanUtils.copyProperties(location, model);
         model.setCites(location.getCities().stream().map(this::createCityModel).collect(Collectors.toCollection(LinkedList::new)));
         return model;
     }
 
-    public OrderTypeModel createOrderTypeModel(OrderType orderType){
+    public OrderTypeModel createOrderTypeModel(OrderType orderType) {
         var model = new OrderTypeModel();
         BeanUtils.copyProperties(orderType, model);
         return model;
     }
 
-
-    public StateEnum createStateModel(String value){
-        return StateEnum.findByValue(value);
-    }
-
-    public PaintModel createPaintModel(Paint paint){
+    public PaintModel createPaintModel(Paint paint) {
         var model = new PaintModel();
         BeanUtils.copyProperties(paint, model);
         return model;
     }
 
-    public NeedleModel createNeedleModel(Needle needle){
+    public NeedleModel createNeedleModel(Needle needle) {
         var model = new NeedleModel();
         BeanUtils.copyProperties(needle, model);
         return model;

@@ -1,5 +1,6 @@
 package com.maxtattoo.service;
 
+import com.maxtattoo.builder.ListModelBuilder;
 import com.maxtattoo.database.entity.OrderType;
 import com.maxtattoo.database.repository.OrderTypeRepository;
 import com.maxtattoo.exception.ResourceNotFoundException;
@@ -19,6 +20,8 @@ public class OrderTypeService extends GenericService{
 
     @Autowired
     private OrderTypeRepository orderTypeRepository;
+    @Autowired
+    private ListModelBuilder listModelBuilder;
 
     public OrderTypeModel findById(Long id){
         var result = orderTypeRepository.findById(id);
@@ -36,6 +39,6 @@ public class OrderTypeService extends GenericService{
 
     public List<OrderTypeModel> findAllOrderTypes(){
         var orderTypes = orderTypeRepository.findAll();
-        return super.modelBuilder.createOrderTypeModel(orderTypes);
+        return listModelBuilder.createOrderTypeModel(orderTypes);
     }
 }

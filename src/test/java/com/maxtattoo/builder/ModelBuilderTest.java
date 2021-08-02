@@ -22,13 +22,15 @@ public class ModelBuilderTest {
     private EntityMock entityMock;
     @Autowired
     private ModelBuilder modelBuilder;
+    @Autowired
+    private ListModelBuilder listModelBuilder;
 
     @Test
     public void clientTransformerTest(){
         List<Client> client = new ArrayList<>();
         client.add(entityMock.createClientEntity(1L));
         client.add(entityMock.createClientEntity(2L));
-        List<ClientModel> clientModel = modelBuilder.createClientModel(client);
+        List<ClientModel> clientModel = listModelBuilder.createClientModel(client);
 
         Assert.assertNotNull(clientModel);
         Assert.assertEquals(2, clientModel.size());
@@ -65,7 +67,7 @@ public class ModelBuilderTest {
     @Test
     public void stateTransformerTest(){
         State state = entityMock.createStateEntity(1L, "In progress");
-        StateEnum stateModel = modelBuilder.createStateModel(state.getValue());
+        StateEnum stateModel = StateEnum.findByValue(state.getValue());
 
         Assert.assertNotNull(stateModel);
         Assert.assertEquals("In progress", stateModel.getValue());

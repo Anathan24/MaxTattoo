@@ -11,8 +11,8 @@ import java.util.Optional;
 @Getter
 public enum StateEnum {
 
-    PREVIEW("PREVIEW"),
-    TODO("TODO"),
+    PREVIEW("Preview"),
+    TODO("Todo"),
     IN_PROGRESS("In Progress"),
     FINISHED("Finished");
 

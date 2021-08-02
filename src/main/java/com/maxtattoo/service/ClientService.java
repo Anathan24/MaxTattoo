@@ -1,5 +1,6 @@
 package com.maxtattoo.service;
 
+import com.maxtattoo.builder.ListModelBuilder;
 import com.maxtattoo.database.entity.Client;
 import com.maxtattoo.database.repository.ClientRepository;
 import com.maxtattoo.exception.ResourceNotFoundException;
@@ -19,6 +20,8 @@ public class ClientService extends GenericService{
 
     @Autowired
     private ClientRepository clientRepository;
+    @Autowired
+    private ListModelBuilder listModelBuilder;
 
     public ClientModel findById(Long id){
         var result = clientRepository.findById(id);
@@ -31,6 +34,6 @@ public class ClientService extends GenericService{
 
     public List<ClientModel> findClientByNameAndSurname(String name, String surname){
         var clientsEntity = clientRepository.findClientByNameAndSurname(name, surname);
-        return super.modelBuilder.createClientModel(clientsEntity);
+        return listModelBuilder.createClientModel(clientsEntity);
     }
 }
