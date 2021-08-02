@@ -41,8 +41,6 @@ public class ResponseMock {
         sitting.setNotes("Sitting Note");
         sitting.setPrice(75);
         sitting.setSpentHours(4);
-        sitting.setState(createStateModel(1L, "TODO"));
-        sitting.setHours(4);
         sitting.setState(StateEnum.findByValue("TODO"));
         return sitting;
     }

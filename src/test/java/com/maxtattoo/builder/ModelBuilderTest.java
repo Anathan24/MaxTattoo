@@ -65,7 +65,7 @@ public class ModelBuilderTest {
     @Test
     public void stateTransformerTest(){
         State state = entityMock.createStateEntity(1L, "In progress");
-        StateEnum stateModel = modelBuilder.createStateModel(state.getStateName());
+        StateEnum stateModel = modelBuilder.createStateModel(state.getValue());
 
         Assert.assertNotNull(stateModel);
         Assert.assertEquals("In progress", stateModel.getValue());

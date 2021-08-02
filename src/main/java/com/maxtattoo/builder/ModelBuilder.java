@@ -25,7 +25,6 @@ public class ModelBuilder implements GenericBuilder {
         return orderTypes.stream().map(this::createOrderTypeModel).collect(Collectors.toCollection(LinkedList::new));
     }
 
-
     public ClientModel createClientModel(Client client){
         var model = new ClientModel();
         BeanUtils.copyProperties(client, model);
@@ -38,7 +37,7 @@ public class ModelBuilder implements GenericBuilder {
         var model = new OrderModel();
         BeanUtils.copyProperties(order, model);
         model.setOrderType(createOrderTypeModel(order.getOrderType()));
-        model.setState(createStateModel(order.getOrderState()));
+        model.setState(createStateModel(order.getOrderState().getValue()));
         model.setSittings(order.getSittings().stream().map(this::createSittingModel).collect(Collectors.toCollection(LinkedList::new)));
         return model;
     }
@@ -46,7 +45,7 @@ public class ModelBuilder implements GenericBuilder {
     public SittingModel createSittingModel(Sitting sitting){
         var model = new SittingModel();
         BeanUtils.copyProperties(sitting, model);
-        model.setState(createStateModel(sitting.getSittingState()));
+        model.setState(StateEnum.findByValue(sitting.getSittingState().getValue()));
         model.setPaints(sitting.getPaints().stream().map(this::createPaintModel).collect(Collectors.toCollection(LinkedList::new)));
         model.setNeedles(sitting.getNeedles().stream().map(this::createNeedleModel).collect(Collectors.toCollection(LinkedList::new)));
         return model;
@@ -69,10 +68,7 @@ public class ModelBuilder implements GenericBuilder {
         return model;
     }
 
-    public StateModel createStateModel(State state){
-        var model = new StateModel();
-        BeanUtils.copyProperties(state, model);
-        return model;
+
     public StateEnum createStateModel(String value){
         return StateEnum.findByValue(value);
     }
