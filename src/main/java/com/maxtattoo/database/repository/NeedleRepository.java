@@ -8,9 +8,6 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 @Repository
-@Transactional
 public interface NeedleRepository extends JpaRepository<Needle, Long> {
 
-    @Query("SELECT n FROM Needle n WHERE n.needleId=(:needleId)")
-    Needle findNeedleById(@Param("needleId") Long needleId);
 }

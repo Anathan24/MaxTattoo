@@ -13,7 +13,7 @@ public class LocationCommand extends GenericCommand {
     @Autowired
     private LocationService locationService;
 
-    public LocationModel findLocationById(Long id){
-        return locationService.findLocationById(id);
+    public LocationModel findById(Long id){
+        return locationService.findById(id);
     }
 }

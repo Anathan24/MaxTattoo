@@ -11,7 +11,7 @@ public class EntityMock {
 
     public Client createClientEntity(Long clientId){
         Client client = new Client();
-        client.setClientId(clientId);
+        client.setId(clientId);
         client.setName("Client Name");
         client.setSurname("Client Surname");
         client.setGender("Male/Female");
@@ -21,7 +21,7 @@ public class EntityMock {
 
     public Order createOrderEntity(Long orderId){
         Order order = new Order();
-        order.setOrderId(orderId);
+        order.setId(orderId);
         order.setOrderPrice(100);
         order.setStartDate(new Date(System.currentTimeMillis()));
         order.setEndDate(new Date(System.currentTimeMillis()));
@@ -34,12 +34,12 @@ public class EntityMock {
 
     public Sitting createSittingEntity(Long sittingId, Long orderId){
         Sitting sitting = new Sitting();
-        sitting.setSittingId(sittingId);
+        sitting.setId(sittingId);
         sitting.setOrderId(orderId);
-        sitting.setSittingDate(new Timestamp(System.currentTimeMillis()));
+        sitting.setDate(new Timestamp(System.currentTimeMillis()));
         sitting.setPaid(0);
-        sitting.setSittingNote("Sitting Note");
-        sitting.setSittingPrice(75);
+        sitting.setNotes("Sitting Note");
+        sitting.setPrice(75);
         sitting.setSpentHours(4);
         sitting.setSittingState(createStateEntity(1L, "TODO"));
         return sitting;
@@ -47,32 +47,32 @@ public class EntityMock {
 
     public State createStateEntity(Long stateId, String stateName){
         State state = new State();
-        state.setStateId(stateId);
-        state.setStateName(stateName);
+        state.setId(stateId);
+        state.setValue(stateName);
         return state;
     }
 
     public OrderType createOrderTypeEntity(Long orderTypeId, String type){
         OrderType orderType = new OrderType();
-        orderType.setOrderTypeId(orderTypeId);
-        orderType.setType(type);
+        orderType.setId(orderTypeId);
+        orderType.setValue(type);
         return orderType;
     }
 
     public Paint createPaintEntity(Long paintId){
         Paint paint = new Paint();
-        paint.setPaintId(paintId);
-        paint.setPaintProducer("Paint producer");
+        paint.setId(paintId);
+        paint.setProducer("Paint producer");
         paint.setColor("Blue");
         return paint;
     }
 
     public Needle createNeedleEntity(Long needleId){
         Needle needle = new Needle();
-        needle.setNeedleId(needleId);
-        needle.setNeedleCode("12c");
-        needle.setNeedleProducer("Needle producer");
-        needle.setNeedleSharpening("Needle Sharpening");
+        needle.setId(needleId);
+        needle.setCode("12c");
+        needle.setProducer("Needle producer");
+        needle.setSharpening("Needle Sharpening");
         return needle;
     }
 }

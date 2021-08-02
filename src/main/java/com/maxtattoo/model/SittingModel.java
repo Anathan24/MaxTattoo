@@ -15,9 +15,9 @@ public class SittingModel implements GenericModel {
 
     private Long id;
     private Timestamp date;
-    private double hours;
+    private double spentHours;
     private int price;
-    private String note;
+    private String notes;
     private int paid;
     private Long orderId;
     private StateEnum state;

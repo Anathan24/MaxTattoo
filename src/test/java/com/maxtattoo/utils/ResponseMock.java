@@ -38,8 +38,10 @@ public class ResponseMock {
         sitting.setOrderId(orderId);
         sitting.setDate(new Timestamp(System.currentTimeMillis()));
         sitting.setPaid(0);
-        sitting.setNote("Sitting Note");
+        sitting.setNotes("Sitting Note");
         sitting.setPrice(75);
+        sitting.setSpentHours(4);
+        sitting.setState(createStateModel(1L, "TODO"));
         sitting.setHours(4);
         sitting.setState(StateEnum.findByValue("TODO"));
         return sitting;

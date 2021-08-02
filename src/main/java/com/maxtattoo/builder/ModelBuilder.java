@@ -2,6 +2,7 @@ package com.maxtattoo.builder;
 
 import com.maxtattoo.database.entity.*;
 import com.maxtattoo.model.*;
+import org.springframework.beans.BeanUtils;
 import com.maxtattoo.utils.StateEnum;
 import org.springframework.stereotype.Service;
 
@@ -16,76 +17,75 @@ public class ModelBuilder implements GenericBuilder {
         return clients.stream().map(this::createClientModel).collect(Collectors.toCollection(LinkedList::new));
     }
 
-    public ClientModel createClientModel(Client client){
-        var clientModel = new ClientModel();
-        clientModel.setId(client.getClientId());
-        clientModel.setName(client.getName());
-        clientModel.setSurname(client.getSurname());
-        clientModel.setGender(client.getGender());
-        clientModel.setDescription(client.getDescription());
-        clientModel.setLocation(this.createLocationModel(client.getLocation()));
-        clientModel.setOrders(client.getOrders().stream().map(this::createOrderModel).collect(Collectors.toCollection(LinkedList::new)));
-        return clientModel;
-    }
-
     public List<OrderModel> createOrderModel(List<Order> orders){
         return orders.stream().map(this::createOrderModel).collect(Collectors.toCollection(LinkedList::new));
     }
 
+    public List<OrderTypeModel> createOrderTypeModel(List<OrderType> orderTypes){
+        return orderTypes.stream().map(this::createOrderTypeModel).collect(Collectors.toCollection(LinkedList::new));
+    }
+
+
+    public ClientModel createClientModel(Client client){
+        var model = new ClientModel();
+        BeanUtils.copyProperties(client, model);
+        model.setLocation(createLocationModel(client.getLocation()));
+        model.setOrders(client.getOrders().stream().map(this::createOrderModel).collect(Collectors.toCollection(LinkedList::new)));
+        return model;
+    }
+
     public OrderModel createOrderModel(Order order){
-        var orderModel = new OrderModel();
-        orderModel.setId(order.getOrderId());
-        orderModel.setSittingNumber(order.getSittingNumber());
-        orderModel.setOrderPrice(order.getOrderPrice());
-        orderModel.setPrepayment(order.getPrepayment());
-        orderModel.setStartDate(order.getStartDate());
-        orderModel.setEndDate(order.getEndDate());
-        orderModel.setOrderType(createOrderTypeModel(order.getOrderType()));
-        orderModel.setState(createStateModel(order.getOrderState().getStateName()));
-        orderModel.setSittings(order.getSittings().stream().map(this::createSittingModel).collect(Collectors.toCollection(LinkedList::new)));
-        return orderModel;
+        var model = new OrderModel();
+        BeanUtils.copyProperties(order, model);
+        model.setOrderType(createOrderTypeModel(order.getOrderType()));
+        model.setState(createStateModel(order.getOrderState()));
+        model.setSittings(order.getSittings().stream().map(this::createSittingModel).collect(Collectors.toCollection(LinkedList::new)));
+        return model;
     }
 
     public SittingModel createSittingModel(Sitting sitting){
-        var sittingModel = new SittingModel();
-        sittingModel.setId(sitting.getSittingId());
-        sittingModel.setDate(sitting.getSittingDate());
-        sittingModel.setHours(sitting.getSpentHours());
-        sittingModel.setPrice(sitting.getSittingPrice());
-        sittingModel.setPaid(sitting.getPaid());
-        sittingModel.setNote(sitting.getSittingNote());
-        sittingModel.setOrderId(sitting.getOrderId());
-        sittingModel.setState(createStateModel(sitting.getSittingState().getStateName()));
-        sittingModel.setPaints(sitting.getPaints().stream().map(this::createPaintModel).collect(Collectors.toCollection(LinkedList::new)));
-        sittingModel.setNeedles(sitting.getNeedles().stream().map(this::createNeedleModel).collect(Collectors.toCollection(LinkedList::new)));
-        return sittingModel;
+        var model = new SittingModel();
+        BeanUtils.copyProperties(sitting, model);
+        model.setState(createStateModel(sitting.getSittingState()));
+        model.setPaints(sitting.getPaints().stream().map(this::createPaintModel).collect(Collectors.toCollection(LinkedList::new)));
+        model.setNeedles(sitting.getNeedles().stream().map(this::createNeedleModel).collect(Collectors.toCollection(LinkedList::new)));
+        return model;
     }
 
     public CityModel createCityModel(City city){
-        return new CityModel(city.getCityId(), city.getCityName());
+        return new CityModel(city.getId(), city.getName());
     }
 
     public LocationModel createLocationModel(Location location){
-        var locationModel = new LocationModel();
-        locationModel.setId(location.getLocationId());
-        locationModel.setName(location.getLocationName());
-        locationModel.setCites(location.getCities().stream().map(this::createCityModel).collect(Collectors.toCollection(LinkedList::new)));
-        return locationModel;
+        var model = new LocationModel();
+        BeanUtils.copyProperties(location, model);
+        model.setCites(location.getCities().stream().map(this::createCityModel).collect(Collectors.toCollection(LinkedList::new)));
+        return model;
     }
 
     public OrderTypeModel createOrderTypeModel(OrderType orderType){
-        return new OrderTypeModel(orderType.getOrderTypeId(), orderType.getType());
+        var model = new OrderTypeModel();
+        BeanUtils.copyProperties(orderType, model);
+        return model;
     }
 
+    public StateModel createStateModel(State state){
+        var model = new StateModel();
+        BeanUtils.copyProperties(state, model);
+        return model;
     public StateEnum createStateModel(String value){
         return StateEnum.findByValue(value);
     }
 
     public PaintModel createPaintModel(Paint paint){
-        return new PaintModel(paint.getPaintId(), paint.getPaintProducer(), paint.getColor());
+        var model = new PaintModel();
+        BeanUtils.copyProperties(paint, model);
+        return model;
     }
 
     public NeedleModel createNeedleModel(Needle needle){
-        return new NeedleModel(needle.getNeedleId(),needle.getNeedleProducer(), needle.getNeedleCode(), needle.getNeedleSharpening());
+        var model = new NeedleModel();
+        BeanUtils.copyProperties(needle, model);
+        return model;
     }
 }

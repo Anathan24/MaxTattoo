@@ -21,7 +21,7 @@ public class Order implements GenericEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "order_id_pk")
-    private Long orderId;
+    private Long id;
 
     @Column(name = "sitting_number")
     private int sittingNumber;
@@ -37,6 +37,9 @@ public class Order implements GenericEntity {
 
     @Column(name = "end_date")
     private Date endDate;
+
+    @Column(name = "client_id_fk")
+    private Long clientId;
 
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
     @JoinColumn(name = "order_type_id_fk")

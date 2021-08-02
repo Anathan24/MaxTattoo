@@ -13,7 +13,7 @@ public class NeedleCommand extends GenericCommand {
     @Autowired
     private NeedleService needleService;
 
-    public NeedleModel findNeedleById(Long id){
-        return needleService.findNeedleById(id);
+    public NeedleModel findById(Long id){
+        return needleService.findById(id);
     }
 }

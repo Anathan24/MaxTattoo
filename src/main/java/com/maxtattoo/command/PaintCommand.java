@@ -13,7 +13,7 @@ public class PaintCommand extends GenericCommand{
     @Autowired
     private PaintService paintService;
 
-    public PaintModel findPaindById(Long id){
-        return paintService.findPaintById(id);
+    public PaintModel findById(Long id){
+        return paintService.findById(id);
     }
 }
