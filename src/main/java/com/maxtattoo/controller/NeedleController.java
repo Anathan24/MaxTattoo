@@ -1,7 +1,7 @@
 package com.maxtattoo.controller;
 
 import com.maxtattoo.command.NeedleCommand;
-import com.maxtattoo.model.NeedleModel;
+import com.maxtattoo.pojo.model.NeedleModel;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

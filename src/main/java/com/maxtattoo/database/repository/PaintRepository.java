@@ -1,6 +1,6 @@
 package com.maxtattoo.database.repository;
 
-import com.maxtattoo.database.entity.Paint;
+import com.maxtattoo.pojo.entity.Paint;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

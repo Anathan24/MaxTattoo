@@ -1,4 +1,4 @@
-package com.maxtattoo.database.entity;
+package com.maxtattoo.pojo.entity;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,10 +23,5 @@ public class SittingPaint implements GenericEntity {
 
     @Column(name = "paint_id_fk")
     private Long paintIdFk;
-
-    public SittingPaint(Long sittingId, Long paintId){
-        this.sittingIdFk = sittingId;
-        this.paintIdFk = paintId;
-    }
 
 }

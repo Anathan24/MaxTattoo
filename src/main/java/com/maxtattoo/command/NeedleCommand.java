@@ -1,6 +1,6 @@
 package com.maxtattoo.command;
 
-import com.maxtattoo.model.NeedleModel;
+import com.maxtattoo.pojo.model.NeedleModel;
 import com.maxtattoo.service.NeedleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;

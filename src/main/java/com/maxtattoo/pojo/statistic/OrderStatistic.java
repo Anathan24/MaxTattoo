@@ -1,4 +1,4 @@
-package com.maxtattoo.model.statistic;
+package com.maxtattoo.pojo.statistic;
 
 import lombok.*;
 

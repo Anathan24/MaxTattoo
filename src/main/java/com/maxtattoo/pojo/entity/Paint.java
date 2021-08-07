@@ -1,4 +1,4 @@
-package com.maxtattoo.database.entity;
+package com.maxtattoo.pojo.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,18 +12,18 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "cities")
-public class City implements GenericEntity {
+@Table(name = "paints")
+public class Paint implements GenericEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "city_id_pk")
+    @Column(name = "paint_id_pk")
     private Long id;
 
-    @Column(name = "city_name")
-    private String name;
+    @Column(name = "paint_producer")
+    private String producer;
 
-    @Column(name = "location_id_fk")
-    private Long locationId;
+    @Column
+    private String color;
 
 }

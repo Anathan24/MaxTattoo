@@ -1,7 +1,7 @@
 package com.maxtattoo.controller;
 
 import com.maxtattoo.command.StatisticCommand;
-import com.maxtattoo.model.statistic.TotalStatisticWrapper;
+import com.maxtattoo.pojo.statistic.TotalStatisticWrapper;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

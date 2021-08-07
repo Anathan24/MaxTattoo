@@ -1,7 +1,7 @@
 package com.maxtattoo.controller;
 
 import com.maxtattoo.command.SittingCommand;
-import com.maxtattoo.model.SittingModel;
+import com.maxtattoo.pojo.model.SittingModel;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

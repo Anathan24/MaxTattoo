@@ -1,7 +1,7 @@
 package com.maxtattoo.builder;
 
-import com.maxtattoo.database.entity.*;
-import com.maxtattoo.model.*;
+import com.maxtattoo.pojo.entity.*;
+import com.maxtattoo.pojo.model.*;
 import org.springframework.beans.BeanUtils;
 import com.maxtattoo.utils.StateEnum;
 import org.springframework.stereotype.Service;

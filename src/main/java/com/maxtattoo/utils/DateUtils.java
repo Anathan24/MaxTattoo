@@ -5,6 +5,7 @@ import lombok.SneakyThrows;
 import org.springframework.http.HttpStatus;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.regex.Pattern;
 
@@ -29,5 +30,11 @@ public class DateUtils {
             throw new DateFormatException(WRONG_DATE_FORMAT.getValue().concat(" The format must be: "+DATE_FORMAT), HttpStatus.NOT_ACCEPTABLE);
 
         return new Date(new SimpleDateFormat(DATE_FORMAT).parse(date).getTime());
+    }
+
+    @SneakyThrows
+    public static Timestamp getTimestampFromString(String date){
+        //TODO da implementare il passaggio da stringa a timestamp
+        return new Timestamp(new SimpleDateFormat(DATE_TIME_FORMAT).parse(date).getTime());
     }
 }

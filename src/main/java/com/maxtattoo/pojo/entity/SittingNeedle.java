@@ -1,4 +1,4 @@
-package com.maxtattoo.database.entity;
+package com.maxtattoo.pojo.entity;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,10 +23,5 @@ public class SittingNeedle implements GenericEntity {
 
     @Column(name = "needle_id_fk")
     private Long needleIdFk;
-
-    public SittingNeedle(Long sittingId, Long needleId){
-        this.sittingIdFk = sittingId;
-        this.needleIdFk = needleId;
-    }
 
 }

@@ -1,7 +1,7 @@
 package com.maxtattoo.command;
 
 import com.maxtattoo.exception.DateFormatException;
-import com.maxtattoo.model.statistic.TotalStatisticWrapper;
+import com.maxtattoo.pojo.statistic.TotalStatisticWrapper;
 import com.maxtattoo.service.OrderTypeService;
 import com.maxtattoo.service.statistic.OrdersStatisticCalculusService;
 import com.maxtattoo.service.statistic.TotalClientsCalculusService;

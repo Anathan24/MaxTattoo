@@ -1,4 +1,4 @@
-package com.maxtattoo.model;
+package com.maxtattoo.pojo.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

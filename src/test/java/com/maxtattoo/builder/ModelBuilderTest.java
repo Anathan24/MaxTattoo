@@ -1,7 +1,7 @@
 package com.maxtattoo.builder;
 
-import com.maxtattoo.database.entity.*;
-import com.maxtattoo.model.*;
+import com.maxtattoo.pojo.entity.*;
+import com.maxtattoo.pojo.model.*;
 import com.maxtattoo.utils.EntityMock;
 import com.maxtattoo.utils.StateEnum;
 import org.junit.Assert;

@@ -1,6 +1,6 @@
 package com.maxtattoo.utils;
 
-import com.maxtattoo.model.*;
+import com.maxtattoo.pojo.model.*;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;

@@ -1,12 +1,12 @@
 package com.maxtattoo.builder;
 
-import com.maxtattoo.database.entity.Client;
-import com.maxtattoo.database.entity.Order;
-import com.maxtattoo.database.entity.OrderType;
-import com.maxtattoo.model.ClientModel;
-import com.maxtattoo.model.OrderModel;
-import com.maxtattoo.model.OrderTypeModel;
-import org.jvnet.hk2.annotations.Service;
+import com.maxtattoo.pojo.entity.Client;
+import com.maxtattoo.pojo.entity.Order;
+import com.maxtattoo.pojo.entity.OrderType;
+import com.maxtattoo.pojo.model.ClientModel;
+import com.maxtattoo.pojo.model.OrderModel;
+import com.maxtattoo.pojo.model.OrderTypeModel;
+import org.springframework.stereotype.Service;
 
 import java.util.LinkedList;
 import java.util.List;

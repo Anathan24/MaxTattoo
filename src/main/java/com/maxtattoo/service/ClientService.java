@@ -3,7 +3,7 @@ package com.maxtattoo.service;
 import com.maxtattoo.builder.ListModelBuilder;
 import com.maxtattoo.database.repository.ClientRepository;
 import com.maxtattoo.exception.ResourceNotFoundException;
-import com.maxtattoo.model.ClientModel;
+import com.maxtattoo.pojo.model.ClientModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;

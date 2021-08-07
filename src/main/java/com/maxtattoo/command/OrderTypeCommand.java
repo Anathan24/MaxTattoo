@@ -1,6 +1,7 @@
 package com.maxtattoo.command;
 
-import com.maxtattoo.model.OrderTypeModel;
+import com.maxtattoo.pojo.model.OrderTypeModel;
+import com.maxtattoo.pojo.request.OrderTypeRequest;
 import com.maxtattoo.service.OrderTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -15,5 +16,9 @@ public class OrderTypeCommand extends GenericCommand {
 
     public OrderTypeModel findById(Long id){
         return orderTypeService.findById(id);
+    }
+
+    public OrderTypeModel saveOrderType(OrderTypeRequest request){
+        return orderTypeService.saveOrderType(request);
     }
 }

@@ -1,7 +1,7 @@
 package com.maxtattoo.controller;
 
 import com.maxtattoo.command.LocationCommand;
-import com.maxtattoo.model.LocationModel;
+import com.maxtattoo.pojo.model.LocationModel;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
