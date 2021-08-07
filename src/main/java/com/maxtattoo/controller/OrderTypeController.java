@@ -15,15 +15,18 @@ public class OrderTypeController extends GenericController{
 
     @GetMapping(value = "/findById", produces = {MediaType.APPLICATION_JSON_VALUE, "application/hal+json"})
     private ResponseEntity<OrderTypeModel> findById(@RequestParam Long id){
+        logger.info("findById with requestId: {}", id);
         var orderTypeCommand = super.beanFactory.getBean(OrderTypeCommand.class);
         var orderTypeModel = orderTypeCommand.findById(id);
         return ok(orderTypeModel);
     }
 
     @PostMapping(value = "/createOrderType", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<OrderTypeModel> createOrderType(@RequestBody OrderTypeRequest request){
+    public ResponseEntity<OrderTypeModel> saveOrderType(@RequestBody OrderTypeRequest request){
+        logger.info("REQUEST: {}", request);
         var orderTypeCommand = super.beanFactory.getBean(OrderTypeCommand.class);
         var orderTypeModel = orderTypeCommand.saveOrderType(request);
+        logger.info("MODEL: {}", orderTypeModel);
         return ok(orderTypeModel);
     }
 }

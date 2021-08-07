@@ -6,7 +6,6 @@ import com.maxtattoo.database.repository.OrderTypeRepository;
 import com.maxtattoo.database.repository.StateRepository;
 import com.maxtattoo.exception.ResourceNotFoundException;
 import com.maxtattoo.pojo.model.OrderTypeModel;
-import com.maxtattoo.pojo.request.OrderTypeRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -39,10 +38,7 @@ public class OrderTypeService extends GenericService{
         return listModelBuilder.createOrderTypeModel(orderTypes);
     }
 
-    public OrderTypeModel saveOrderType(OrderTypeRequest request){
-        var entity = new OrderType();
-        entity.setId(request.getId());
-        entity.setValue(request.getValue());
+    public OrderTypeModel saveOrderType(OrderType entity){
         entity = orderTypeRepository.save(entity);
         return super.modelBuilder.createOrderTypeModel(entity);
     }
