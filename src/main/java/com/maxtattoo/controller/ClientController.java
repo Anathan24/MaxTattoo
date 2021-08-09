@@ -11,21 +11,27 @@ import java.util.List;
 import static org.springframework.http.ResponseEntity.ok;
 
 @RestController
-@RequestMapping(value = "/client", produces = {MediaType.APPLICATION_JSON_VALUE, "application/hal+json"})
+@RequestMapping(value = "/client")
 public class ClientController extends GenericController {
 
-    @GetMapping(value = "/findById")
+    @GetMapping(value = "/findById", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ClientModel> findById(@RequestParam Long id) {
-        var clientCommand = beanFactory.getBean(ClientCommand.class);
-        var clientModel = clientCommand.findById(id);
-        return ok(clientModel);
+        logger.info(START);
+        var command = beanFactory.getBean(ClientCommand.class);
+        logger.info("{}: {}",REQUEST, id);
+        var model = command.findById(id);
+        logger.info(END);
+        return ok(model);
     }
 
-    @GetMapping(value = "/findByNameAndSurname")
+    @GetMapping(value = "/findByNameAndSurname", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<ClientModel>> findClientByNameAndSurname(@RequestParam String name, @RequestParam String surname) {
-        var clientCommand = beanFactory.getBean(ClientCommand.class);
-        var clientsModel = clientCommand.findClientByNameAndSurname(name, surname);
-        return ok(clientsModel);
+        logger.info(START);
+        var command = beanFactory.getBean(ClientCommand.class);
+        logger.info("{} = name: {}, surname: {}",REQUEST, name, surname);
+        var model = command.findClientByNameAndSurname(name, surname);
+        logger.info(END);
+        return ok(model);
     }
 
 }

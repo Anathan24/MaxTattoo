@@ -9,8 +9,6 @@ import static com.maxtattoo.utils.ErrorMessage.FIND_BY_ID;
 
 abstract class GenericCommand {
     final Logger logger = LoggerFactory.getLogger(this.getClass());
-    final String REQUEST = "REQUEST";
-
     final String ENTITY_NAME = this.getClass().getSimpleName();
     final String ENTITY = "ENTITY";
 

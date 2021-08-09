@@ -8,9 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 abstract class GenericController {
     final String START = "====================START====================";
     final String REQUEST = "REQUEST";
-    final String END = "====================END====================";
+    final String END = "=====================END====================";
     final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     BeanFactory beanFactory;
+
 }

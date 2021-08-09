@@ -17,6 +17,7 @@ public class NeedleController extends GenericController{
     public ResponseEntity<NeedleModel> findById(@RequestParam Long id){
         logger.info(START);
         var command = super.beanFactory.getBean(NeedleCommand.class);
+        logger.info("{} id: {}", REQUEST, id);
         var model = command.findById(id);
         logger.info(END);
         return ok(model);
@@ -26,6 +27,7 @@ public class NeedleController extends GenericController{
     public ResponseEntity<NeedleModel> saveNeedle(@RequestBody NeedleRequest request){
         logger.info(START);
         var command = super.beanFactory.getBean(NeedleCommand.class);
+        logger.info("{}: {}", REQUEST, request);
         var model = command.saveNeedle(request);
         logger.info(END);
         return ok(model);

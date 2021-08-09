@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import static org.springframework.http.ResponseEntity.ok;
 
 @RestController
-@RequestMapping(value = "/paint" )
+@RequestMapping(value = "/paint")
 public class PaintController extends GenericController{
 
     @GetMapping(value = "/findById", produces = MediaType.APPLICATION_JSON_VALUE)

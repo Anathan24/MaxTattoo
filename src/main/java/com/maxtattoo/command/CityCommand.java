@@ -25,10 +25,13 @@ public class CityCommand extends GenericCommand {
     public CityModel findById(Long id){
         var result = cityRepository.findById(id);
         logger.info("{}: {}", ENTITY, result);
-        if(result.isPresent())
+        if(result.isPresent()) {
             return super.modelBuilder.createCityModel(result.get());
-        else
-            throw new ResourceNotFoundException(super.buildEntityNotFoundErrorMessage(id), HttpStatus.NOT_FOUND);
+        } else {
+            String message = super.buildEntityNotFoundErrorMessage(id);
+            logger.warn(message);
+            throw new ResourceNotFoundException(message, HttpStatus.NOT_FOUND);
+        }
     }
 
     public CityModel saveCity(CityRequest request){

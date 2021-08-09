@@ -13,10 +13,11 @@ import static org.springframework.http.ResponseEntity.ok;
 @RequestMapping(value = "/orderType")
 public class OrderTypeController extends GenericController{
 
-    @GetMapping(value = "/findById", produces = {MediaType.APPLICATION_JSON_VALUE, "application/hal+json"})
+    @GetMapping(value = "/findById", produces = MediaType.APPLICATION_JSON_VALUE)
     private ResponseEntity<OrderTypeModel> findById(@RequestParam Long id){
         logger.info(START);
         var command = super.beanFactory.getBean(OrderTypeCommand.class);
+        logger.info("{} id: {}", REQUEST, id);
         var model = command.findById(id);
         logger.info(END);
         return ok(model);
@@ -26,6 +27,7 @@ public class OrderTypeController extends GenericController{
     public ResponseEntity<OrderTypeModel> saveOrderType(@RequestBody OrderTypeRequest request){
         logger.info(START);
         var command = super.beanFactory.getBean(OrderTypeCommand.class);
+        logger.info("{}: {}", REQUEST, request);
         var model = command.saveOrderType(request);
         logger.info(END);
         return ok(model);

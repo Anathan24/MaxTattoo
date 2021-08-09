@@ -9,27 +9,16 @@ import org.springframework.web.bind.annotation.*;
 import static org.springframework.http.ResponseEntity.ok;
 
 @RestController
-@RequestMapping(value = "/sitting", produces = {MediaType.APPLICATION_JSON_VALUE, "application/hal+json"})
+@RequestMapping(value = "/sitting")
 public class SittingController extends GenericController{
 
-    @GetMapping(value = "/findById")
+    @GetMapping(value = "/findById", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<SittingModel> findById(@RequestParam Long id){
+        logger.info(START);
         var sittingCommand = super.beanFactory.getBean(SittingCommand.class);
+        logger.info("{}: {}",REQUEST, id);
         var sittingModel = sittingCommand.findById(id);
+        logger.info(END);
         return ok(sittingModel);
-    }
-
-    @PutMapping(value = "/createSittingNeedleRelation")
-    public ResponseEntity<Long> createSittingNeedleRelation(@RequestParam Long sittingId, @RequestParam Long needleId){
-        var sittingCommand = super.beanFactory.getBean(SittingCommand.class);
-        var relationId = sittingCommand.createSittingNeedleRelation(sittingId, needleId);
-        return ok(relationId);
-    }
-
-    @PutMapping(value = "/createSittingPaintRelation")
-    public ResponseEntity<Long> createSittingPaintRelation(@RequestParam Long sittingId, @RequestParam Long paintId){
-        var sittingCommand = super.beanFactory.getBean(SittingCommand.class);
-        var relationId = sittingCommand.createSittingPaintRelation(sittingId, paintId);
-        return ok(relationId);
     }
 }

@@ -6,7 +6,6 @@ import org.springframework.beans.BeanUtils;
 import com.maxtattoo.utils.StateEnum;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.stream.Collectors;
 
@@ -18,6 +17,7 @@ public class ModelBuilder extends GenericBuilder {
         BeanUtils.copyProperties(client, model);
         model.setLocation(createLocationModel(client.getLocation()));
         model.setOrders(client.getOrders().stream().map(this::createOrderModel).collect(Collectors.toCollection(LinkedList::new)));
+        logger.info(MODEL_STRING, model);
         return model;
     }
 
@@ -27,6 +27,7 @@ public class ModelBuilder extends GenericBuilder {
         model.setOrderType(createOrderTypeModel(order.getOrderType()));
         model.setState(StateEnum.findByValue(order.getOrderState().getValue()));
         model.setSittings(order.getSittings().stream().map(this::createSittingModel).collect(Collectors.toCollection(LinkedList::new)));
+        logger.info(MODEL_STRING, model);
         return model;
     }
 
@@ -36,6 +37,7 @@ public class ModelBuilder extends GenericBuilder {
         model.setState(StateEnum.findByValue(sitting.getSittingState().getValue()));
         model.setPaints(sitting.getPaints().stream().map(this::createPaintModel).collect(Collectors.toCollection(LinkedList::new)));
         model.setNeedles(sitting.getNeedles().stream().map(this::createNeedleModel).collect(Collectors.toCollection(LinkedList::new)));
+        logger.info(MODEL_STRING, model);
         return model;
     }
 

@@ -12,13 +12,16 @@ import org.springframework.web.bind.annotation.RestController;
 import static org.springframework.http.ResponseEntity.ok;
 
 @RestController
-@RequestMapping(value = "/statistic", produces = {MediaType.APPLICATION_JSON_VALUE, "application/hal+json"})
+@RequestMapping(value = "/statistic")
 public class StatisticController extends GenericController{
 
-    @GetMapping(value = "calculateStatisticByPeriod")
+    @GetMapping(value = "calculateStatisticByPeriod", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<TotalStatisticWrapper> calculateStatisticByPeriod(@RequestParam String startDate, @RequestParam String endDate){
-        var statisticCommand = super.beanFactory.getBean(StatisticCommand.class);
-        var statistic = statisticCommand.calculateStatisticByPeriod(startDate,endDate);
+        logger.info(START);
+        var command = super.beanFactory.getBean(StatisticCommand.class);
+        logger.info("{} = StartDate: {}, EndDate: {}",REQUEST, startDate, endDate);
+        var statistic = command.calculateStatisticByPeriod(startDate,endDate);
+        logger.info(END);
         return ok(statistic);
     }
 }

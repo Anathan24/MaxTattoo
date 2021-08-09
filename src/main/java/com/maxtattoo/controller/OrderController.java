@@ -9,14 +9,16 @@ import org.springframework.web.bind.annotation.*;
 import static org.springframework.http.ResponseEntity.ok;
 
 @RestController
-@RequestMapping(value = "/order", produces = {MediaType.APPLICATION_JSON_VALUE, "application/hal+json"})
+@RequestMapping(value = "/order")
 public class OrderController extends GenericController {
 
-    @GetMapping(value = "/findById")
+    @GetMapping(value = "/findById", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<OrderModel> findById(@RequestParam Long id){
+        logger.info(START);
         var orderCommand = beanFactory.getBean(OrderCommand.class);
+        logger.info("{} id: {}", REQUEST, id);
         var order = orderCommand.findById(id);
+        logger.info(END);
         return ok(order);
     }
-
 }

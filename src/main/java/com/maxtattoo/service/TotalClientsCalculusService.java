@@ -1,4 +1,4 @@
-package com.maxtattoo.service.statistic;
+package com.maxtattoo.service;
 
 import com.maxtattoo.database.repository.ClientRepository;
 import com.maxtattoo.pojo.statistic.TotalStatisticWrapper;
@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import java.sql.Date;
 
 @Service
-public class TotalClientsCalculusService {
+public class TotalClientsCalculusService extends GenericService {
 
     private static final String FEMALE = "Female";
     private static final String MALE = "Male";

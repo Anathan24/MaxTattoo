@@ -2,9 +2,8 @@ package com.maxtattoo.command;
 
 import com.maxtattoo.exception.DateFormatException;
 import com.maxtattoo.pojo.statistic.TotalStatisticWrapper;
-import com.maxtattoo.service.OrderTypeService;
-import com.maxtattoo.service.statistic.OrdersStatisticCalculusService;
-import com.maxtattoo.service.statistic.TotalClientsCalculusService;
+import com.maxtattoo.service.OrdersStatisticCalculusService;
+import com.maxtattoo.service.TotalClientsCalculusService;
 import com.maxtattoo.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -24,21 +23,23 @@ public class StatisticCommand extends GenericCommand{
     @Autowired
     private OrdersStatisticCalculusService ordersStatisticCalculusService;
     @Autowired
-    private OrderTypeService orderTypeService;
+    private OrderTypeCommand orderTypeCommand;
 
     public TotalStatisticWrapper calculateStatisticByPeriod(String startDate, String endDate){
         Date start = DateUtils.getDateFromString(startDate);
         Date end = DateUtils.getDateFromString(endDate);
 
         if(start.after(end)){
-            throw new DateFormatException(START_DATE_GREATER_THEN_END_DATE.getValue(), HttpStatus.NOT_ACCEPTABLE);
+            String message = START_DATE_GREATER_THEN_END_DATE.getValue();
+            logger.warn(message);
+            throw new DateFormatException(message, HttpStatus.NOT_ACCEPTABLE);
         }
 
         final TotalStatisticWrapper statistic = new TotalStatisticWrapper();
         totalClientsCalculusService.calculateClientsTotalStatistic(statistic, start, end);
         ordersStatisticCalculusService.calculateOrdersTotalStatistic(statistic, start, end);
 
-        var orderTypes = orderTypeService.findAllOrderTypes();
+        var orderTypes = orderTypeCommand.findAllOrderTypes();
         var orderStatistic = statistic.getOrdersStatistic().getOrdersStatisticByType();
 
         orderTypes.forEach(type -> orderStatistic.add(ordersStatisticCalculusService.calculateOrdersStatisticByType(start, end, type.getValue())));
