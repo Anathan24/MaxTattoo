@@ -1,12 +1,16 @@
 package com.maxtattoo.command;
 
+import com.maxtattoo.database.repository.CityRepository;
+import com.maxtattoo.database.repository.LocationRepository;
+import com.maxtattoo.exception.ForeignKeyViolationException;
+import com.maxtattoo.exception.ResourceNotFoundException;
 import com.maxtattoo.pojo.entity.City;
 import com.maxtattoo.pojo.model.CityModel;
 import com.maxtattoo.pojo.request.CityRequest;
-import com.maxtattoo.service.CityService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -14,17 +18,30 @@ import org.springframework.stereotype.Component;
 public class CityCommand extends GenericCommand {
 
     @Autowired
-    private CityService cityService;
+    private CityRepository cityRepository;
+    @Autowired
+    private LocationRepository locationRepository;
 
     public CityModel findById(Long id){
-        logger.info("{} id: {}", REQUEST, id);
-        return cityService.findById(id);
+        var result = cityRepository.findById(id);
+        logger.info("{}: {}", ENTITY, result);
+        if(result.isPresent())
+            return super.modelBuilder.createCityModel(result.get());
+        else
+            throw new ResourceNotFoundException(super.buildEntityNotFoundErrorMessage(id), HttpStatus.NOT_FOUND);
     }
 
     public CityModel saveCity(CityRequest request){
-        logger.info("{}: {}", REQUEST, request);
         var entity = new City();
         BeanUtils.copyProperties(request, entity);
-        return cityService.saveCity(entity);
+
+        if(!locationRepository.existsById(entity.getLocationId())){
+            String message = "location id does not exist! Insert an existing location id.";
+            logger.error(message);
+            throw new ForeignKeyViolationException(message, HttpStatus.NOT_ACCEPTABLE);
+        }
+
+        entity = cityRepository.save(entity);
+        return super.modelBuilder.createCityModel(entity);
     }
 }

@@ -17,6 +17,7 @@ public class CityController extends GenericController {
     public ResponseEntity<CityModel> findById(@RequestParam Long id){
         logger.info(START);
         var cityCommand = beanFactory.getBean(CityCommand.class);
+        logger.info("{} id: {}", REQUEST, id);
         var cityModel = cityCommand.findById(id);
         logger.info(END);
         return ok(cityModel);
@@ -26,6 +27,7 @@ public class CityController extends GenericController {
     public ResponseEntity<CityModel> saveCity(@RequestBody CityRequest request){
         logger.info(START);
         var command = super.beanFactory.getBean(CityCommand.class);
+        logger.info("{} id: {}", REQUEST, request);
         var model = command.saveCity(request);
         logger.info(END);
         return ok(model);

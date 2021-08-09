@@ -17,6 +17,7 @@ public class PaintController extends GenericController{
     public ResponseEntity<PaintModel> findById(@RequestParam Long id){
         logger.info(START);
         var command = super.beanFactory.getBean(PaintCommand.class);
+        logger.info("{} id: {}", REQUEST, id);
         var model = command.findById(id);
         logger.info(END);
         return ok(model);
