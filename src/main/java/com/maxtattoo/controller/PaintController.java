@@ -2,23 +2,33 @@ package com.maxtattoo.controller;
 
 import com.maxtattoo.command.PaintCommand;
 import com.maxtattoo.pojo.model.PaintModel;
+import com.maxtattoo.pojo.request.PaintRequest;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import static org.springframework.http.ResponseEntity.ok;
 
 @RestController
-@RequestMapping(value = "/paint", produces = {MediaType.APPLICATION_JSON_VALUE, "application/hal+json"})
+@RequestMapping(value = "/paint" )
 public class PaintController extends GenericController{
 
-    @GetMapping(value = "/findById")
+    @GetMapping(value = "/findById", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<PaintModel> findById(@RequestParam Long id){
-        var paintCommand = super.beanFactory.getBean(PaintCommand.class);
-        var paintModel = paintCommand.findById(id);
-        return ok(paintModel);
+        logger.info(START);
+        var command = super.beanFactory.getBean(PaintCommand.class);
+        var model = command.findById(id);
+        logger.info(END);
+        return ok(model);
     }
+
+    @PostMapping(value = "/save", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<PaintModel> savePaint(@RequestBody PaintRequest request){
+        logger.info(START);
+        var command = super.beanFactory.getBean(PaintCommand.class);
+        var model = command.savePaint(request);
+        logger.info(END);
+        return ok(model);
+    }
+
 }

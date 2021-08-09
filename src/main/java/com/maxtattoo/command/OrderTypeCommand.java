@@ -17,13 +17,14 @@ public class OrderTypeCommand extends GenericCommand {
     private OrderTypeService orderTypeService;
 
     public OrderTypeModel findById(Long id){
+        logger.info("{} id: {}", REQUEST, id);
         return orderTypeService.findById(id);
     }
 
     public OrderTypeModel saveOrderType(OrderTypeRequest request){
+        logger.info("{}: {}", REQUEST, request);
         var entity = new OrderType();
         BeanUtils.copyProperties(request, entity);
-        logger.info("ENTITY: {}", entity);
         return orderTypeService.saveOrderType(entity);
     }
 }

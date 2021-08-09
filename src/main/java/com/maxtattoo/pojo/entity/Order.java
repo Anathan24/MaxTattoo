@@ -1,8 +1,6 @@
 package com.maxtattoo.pojo.entity;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
@@ -12,8 +10,6 @@ import java.util.Set;
 
 @Data
 @ToString
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
 @Table(name = "orders")
 public class Order implements GenericEntity {
@@ -38,19 +34,19 @@ public class Order implements GenericEntity {
     @Column(name = "end_date")
     private Date endDate;
 
-    @Column(name = "client_id_fk")
+    @Column(name = "client_id_fk", updatable = false)
     private Long clientId;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
-    @JoinColumn(name = "order_type_id_fk")
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "order_type_id_fk", updatable = false)
     private OrderType orderType;
 
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
     @JoinColumn(name = "state_id_fk")
     private State orderState;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "order_id_fk")
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE}, fetch = FetchType.EAGER)
+    @JoinColumn(name = "order_id_fk", updatable = false)
     private Set<Sitting> sittings = new HashSet<>();
 
 }

@@ -1,16 +1,12 @@
 package com.maxtattoo.pojo.entity;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
 
 @Data
 @ToString
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
 @Table(name = "paints")
 public class Paint implements GenericEntity {
@@ -23,7 +19,7 @@ public class Paint implements GenericEntity {
     @Column(name = "paint_producer")
     private String producer;
 
-    @Column
+    @Column(name = "color")
     private String color;
 
 }

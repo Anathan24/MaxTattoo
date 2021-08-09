@@ -1,8 +1,6 @@
 package com.maxtattoo.pojo.entity;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
@@ -12,8 +10,6 @@ import java.util.Set;
 
 @Data
 @ToString
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
 @Table(name = "clients")
 public class Client implements GenericEntity {
@@ -36,11 +32,11 @@ public class Client implements GenericEntity {
     private String description;
 
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
-    @JoinColumn(name = "location_id_fk")
+    @JoinColumn(name = "location_id_fk", updatable = false)
     private Location location;
 
     @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
-    @JoinColumn(name = "client_id_fk")
+    @JoinColumn(name = "client_id_fk", updatable = false)
     private Set<Order> orders = new HashSet<>();
 
 }

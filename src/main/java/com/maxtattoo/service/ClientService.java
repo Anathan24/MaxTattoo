@@ -10,8 +10,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-import static com.maxtattoo.utils.ErrorMessage.FIND_BY_ID;
-
 @Service
 public class ClientService extends GenericService {
 
@@ -22,11 +20,15 @@ public class ClientService extends GenericService {
 
     public ClientModel findById(Long id) {
         var result = clientRepository.findById(id);
+        logger.info("{}: {}", ENTITY, result);
 
-        if (result.isPresent())
+        if (result.isPresent()) {
             return super.modelBuilder.createClientModel(result.get());
-        else
-            throw new ResourceNotFoundException(super.buildErrorMessage(FIND_BY_ID, id), HttpStatus.NOT_FOUND);
+        }else {
+            String message = super.buildEntityNotFoundErrorMessage(id);
+            logger.warn(message);
+            throw new ResourceNotFoundException(message, HttpStatus.NOT_FOUND);
+        }
     }
 
     public List<ClientModel> findClientByNameAndSurname(String name, String surname) {

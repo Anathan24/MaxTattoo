@@ -6,6 +6,8 @@ import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 abstract class GenericController {
+    final String START = "START";
+    final String END = "END";
     final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired

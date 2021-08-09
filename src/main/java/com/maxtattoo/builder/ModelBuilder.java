@@ -6,11 +6,12 @@ import org.springframework.beans.BeanUtils;
 import com.maxtattoo.utils.StateEnum;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.stream.Collectors;
 
 @Service
-public class ModelBuilder implements GenericBuilder {
+public class ModelBuilder extends GenericBuilder {
 
     public ClientModel createClientModel(Client client){
         var model = new ClientModel();
@@ -41,6 +42,7 @@ public class ModelBuilder implements GenericBuilder {
     public CityModel createCityModel(City city) {
         var model = new CityModel();
         BeanUtils.copyProperties(city, model);
+        logger.info(MODEL_STRING, model);
         return model;
     }
 
@@ -48,24 +50,28 @@ public class ModelBuilder implements GenericBuilder {
         var model = new LocationModel();
         BeanUtils.copyProperties(location, model);
         model.setCites(location.getCities().stream().map(this::createCityModel).collect(Collectors.toCollection(LinkedList::new)));
+        logger.info(MODEL_STRING, model);
         return model;
     }
 
     public OrderTypeModel createOrderTypeModel(OrderType orderType) {
         var model = new OrderTypeModel();
         BeanUtils.copyProperties(orderType, model);
+        logger.info(MODEL_STRING, model);
         return model;
     }
 
     public PaintModel createPaintModel(Paint paint) {
         var model = new PaintModel();
         BeanUtils.copyProperties(paint, model);
+        logger.info(MODEL_STRING, model);
         return model;
     }
 
     public NeedleModel createNeedleModel(Needle needle) {
         var model = new NeedleModel();
         BeanUtils.copyProperties(needle, model);
+        logger.info(MODEL_STRING, model);
         return model;
     }
 }

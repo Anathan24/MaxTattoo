@@ -1,14 +1,12 @@
 package com.maxtattoo.pojo.entity;
 
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
 
 @Data
 @ToString
-@NoArgsConstructor
 @Entity
 @Table(name = "sittings_paints")
 public class SittingPaint implements GenericEntity {
@@ -18,10 +16,10 @@ public class SittingPaint implements GenericEntity {
     @Column(name = "sitting_paint_id_pk")
     private Long id;
 
-    @Column(name = "sitting_id_fk")
+    @Column(name = "sitting_id_fk", updatable = false)
     private Long sittingIdFk;
 
-    @Column(name = "paint_id_fk")
+    @Column(name = "paint_id_fk", updatable = false)
     private Long paintIdFk;
 
 }

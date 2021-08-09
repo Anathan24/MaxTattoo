@@ -1,16 +1,12 @@
 package com.maxtattoo.pojo.entity;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
 
 @Data
 @ToString
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
 @Table(name = "cities")
 public class City implements GenericEntity {
@@ -23,7 +19,7 @@ public class City implements GenericEntity {
     @Column(name = "city_name")
     private String name;
 
-    @Column(name = "location_id_fk")
+    @Column(name = "location_id_fk", updatable = false)
     private Long locationId;
 
 }

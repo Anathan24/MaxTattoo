@@ -1,8 +1,6 @@
 package com.maxtattoo.pojo.entity;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
@@ -12,8 +10,6 @@ import java.util.Set;
 
 @Data
 @ToString
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
 @Table(name = "sittings")
 public class Sitting implements GenericEntity {
@@ -38,19 +34,19 @@ public class Sitting implements GenericEntity {
     @Column(name = "paid")
     private int paid;
 
-    @Column(name = "order_id_fk")
+    @Column(name = "order_id_fk", updatable = false)
     private Long orderId;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
     @JoinColumn(name = "state_id_fk")
     private State sittingState;
 
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
-    @JoinTable(name = "sittings_paints", joinColumns = @JoinColumn(name = "sitting_id_fk"), inverseJoinColumns = @JoinColumn(name = "paint_id_fk"))
+    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    @JoinTable(name = "sittings_paints", joinColumns = @JoinColumn(name = "sitting_id_fk", updatable = false), inverseJoinColumns = @JoinColumn(name = "paint_id_fk", updatable = false))
     private Set<Paint> paints = new HashSet<>();
 
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
-    @JoinTable(name = "sittings_needles", joinColumns = @JoinColumn(name = "sitting_id_fk"), inverseJoinColumns = @JoinColumn(name = "needle_id_fk"))
+    @ManyToMany(cascade =  CascadeType.MERGE, fetch = FetchType.EAGER)
+    @JoinTable(name = "sittings_needles", joinColumns = @JoinColumn(name = "sitting_id_fk", updatable = false), inverseJoinColumns = @JoinColumn(name = "needle_id_fk", updatable = false))
     private Set<Needle> needles = new HashSet<>();
 
 }
