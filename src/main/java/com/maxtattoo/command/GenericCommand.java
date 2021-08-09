@@ -9,13 +9,12 @@ import static com.maxtattoo.utils.ErrorMessage.FIND_BY_ID;
 
 abstract class GenericCommand {
     final Logger logger = LoggerFactory.getLogger(this.getClass());
-    final String ENTITY_NAME = this.getClass().getSimpleName();
     final String ENTITY = "ENTITY";
 
     @Autowired
     protected ModelBuilder modelBuilder;
 
-    String buildEntityNotFoundErrorMessage(Long entityId){
-        return FIND_BY_ID.getValue().concat(ENTITY_NAME + "(" + entityId + ")");
+    String buildEntityNotFoundErrorMessage(String entityName, Long entityId){
+        return FIND_BY_ID.getValue().concat(entityName + "(" + entityId + ")");
     }
 }

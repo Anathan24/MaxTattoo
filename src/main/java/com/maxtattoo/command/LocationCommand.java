@@ -25,7 +25,7 @@ public class LocationCommand extends GenericCommand {
         if(result.isPresent()) {
             return super.modelBuilder.createLocationModel(result.get());
         }else{
-            String message = super.buildEntityNotFoundErrorMessage(id);
+            String message = super.buildEntityNotFoundErrorMessage(Location.class.getSimpleName(), id);
             logger.warn(message);
             throw new ResourceNotFoundException(message, HttpStatus.NOT_FOUND);
         }

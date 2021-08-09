@@ -33,7 +33,7 @@ public class OrderTypeCommand extends GenericCommand {
         if(result.isPresent()) {
             return super.modelBuilder.createOrderTypeModel(result.get());
         }else{
-            String message = super.buildEntityNotFoundErrorMessage(id);
+            String message = super.buildEntityNotFoundErrorMessage(OrderType.class.getSimpleName(), id);
             logger.warn(message);
             throw new ResourceNotFoundException(message, HttpStatus.NOT_FOUND);
         }

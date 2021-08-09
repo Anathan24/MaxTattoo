@@ -1,4 +1,4 @@
 package com.maxtattoo.pojo.entity;
 
-interface GenericEntity {
+public interface GenericEntity {
 }

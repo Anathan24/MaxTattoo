@@ -15,10 +15,10 @@ public class OrderController extends GenericController {
     @GetMapping(value = "/findById", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<OrderModel> findById(@RequestParam Long id){
         logger.info(START);
-        var orderCommand = beanFactory.getBean(OrderCommand.class);
+        var command = beanFactory.getBean(OrderCommand.class);
         logger.info("{} id: {}", REQUEST, id);
-        var order = orderCommand.findById(id);
+        var model = command.findById(id);
         logger.info(END);
-        return ok(order);
+        return ok(model);
     }
 }

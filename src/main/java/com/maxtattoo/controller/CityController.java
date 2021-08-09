@@ -16,11 +16,11 @@ public class CityController extends GenericController {
     @GetMapping(value = "/findById", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<CityModel> findById(@RequestParam Long id){
         logger.info(START);
-        var cityCommand = beanFactory.getBean(CityCommand.class);
+        var command = beanFactory.getBean(CityCommand.class);
         logger.info("{} id: {}", REQUEST, id);
-        var cityModel = cityCommand.findById(id);
+        var model = command.findById(id);
         logger.info(END);
-        return ok(cityModel);
+        return ok(model);
     }
 
     @PostMapping(value = "/save", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)

@@ -15,10 +15,10 @@ public class SittingController extends GenericController{
     @GetMapping(value = "/findById", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<SittingModel> findById(@RequestParam Long id){
         logger.info(START);
-        var sittingCommand = super.beanFactory.getBean(SittingCommand.class);
+        var command = super.beanFactory.getBean(SittingCommand.class);
         logger.info("{}: {}",REQUEST, id);
-        var sittingModel = sittingCommand.findById(id);
+        var model = command.findById(id);
         logger.info(END);
-        return ok(sittingModel);
+        return ok(model);
     }
 }

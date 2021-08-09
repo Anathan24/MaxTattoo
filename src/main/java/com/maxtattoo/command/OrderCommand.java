@@ -2,6 +2,7 @@ package com.maxtattoo.command;
 
 import com.maxtattoo.database.repository.OrderRepository;
 import com.maxtattoo.exception.ResourceNotFoundException;
+import com.maxtattoo.pojo.entity.Order;
 import com.maxtattoo.pojo.model.OrderModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -22,7 +23,7 @@ public class OrderCommand extends GenericCommand {
         if(result.isPresent()) {
             return super.modelBuilder.createOrderModel(result.get());
         }else{
-            String message = super.buildEntityNotFoundErrorMessage(id);
+            String message = super.buildEntityNotFoundErrorMessage(Order.class.getSimpleName(), id);
             logger.warn(message);
             throw new ResourceNotFoundException(message, HttpStatus.NOT_FOUND);
         }

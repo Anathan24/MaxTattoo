@@ -2,6 +2,7 @@ package com.maxtattoo.controller;
 
 import com.maxtattoo.command.ClientCommand;
 import com.maxtattoo.pojo.model.ClientModel;
+import com.maxtattoo.pojo.request.ClientRequest;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -30,6 +31,16 @@ public class ClientController extends GenericController {
         var command = beanFactory.getBean(ClientCommand.class);
         logger.info("{} = name: {}, surname: {}",REQUEST, name, surname);
         var model = command.findClientByNameAndSurname(name, surname);
+        logger.info(END);
+        return ok(model);
+    }
+
+    @PostMapping(value = "/save", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<ClientModel> saveClient(@RequestBody ClientRequest request){
+        logger.info(START);
+        var command = beanFactory.getBean(ClientCommand.class);
+        logger.info("{}: {}",REQUEST, request);
+        var model = command.save(request);
         logger.info(END);
         return ok(model);
     }

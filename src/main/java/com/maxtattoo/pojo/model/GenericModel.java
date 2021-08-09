@@ -1,4 +1,4 @@
 package com.maxtattoo.pojo.model;
 
-interface GenericModel {
+public interface GenericModel {
 }

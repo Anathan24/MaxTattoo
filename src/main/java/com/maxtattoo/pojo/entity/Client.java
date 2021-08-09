@@ -32,7 +32,7 @@ public class Client implements GenericEntity {
     private String description;
 
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
-    @JoinColumn(name = "location_id_fk", updatable = false)
+    @JoinColumn(name = "location_id_fk")
     private Location location;
 
     @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)

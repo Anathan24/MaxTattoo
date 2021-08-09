@@ -4,6 +4,7 @@ import com.maxtattoo.database.repository.SittingNeedleRepository;
 import com.maxtattoo.database.repository.SittingPaintRepository;
 import com.maxtattoo.database.repository.SittingRepository;
 import com.maxtattoo.exception.ResourceNotFoundException;
+import com.maxtattoo.pojo.entity.Sitting;
 import com.maxtattoo.pojo.model.SittingModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -28,7 +29,7 @@ public class SittingCommand extends GenericCommand{
         if(result.isPresent()) {
             return super.modelBuilder.createSittingModel(result.get());
         }else{
-            String message = super.buildEntityNotFoundErrorMessage(id);
+            String message = super.buildEntityNotFoundErrorMessage(Sitting.class.getSimpleName(), id);
             logger.warn(message);
             throw new ResourceNotFoundException(message, HttpStatus.NOT_FOUND);
         }

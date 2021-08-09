@@ -28,7 +28,7 @@ public class CityCommand extends GenericCommand {
         if(result.isPresent()) {
             return super.modelBuilder.createCityModel(result.get());
         } else {
-            String message = super.buildEntityNotFoundErrorMessage(id);
+            String message = super.buildEntityNotFoundErrorMessage(City.class.getSimpleName(), id);
             logger.warn(message);
             throw new ResourceNotFoundException(message, HttpStatus.NOT_FOUND);
         }
@@ -37,6 +37,7 @@ public class CityCommand extends GenericCommand {
     public CityModel saveCity(CityRequest request){
         var entity = new City();
         BeanUtils.copyProperties(request, entity);
+        logger.info("{}: {}", ENTITY, entity);
 
         if(!locationRepository.existsById(entity.getLocationId())){
             String message = "location id does not exist! Insert an existing location id.";
