@@ -9,7 +9,13 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface StateRepository extends JpaRepository<State, Long> {
 
-    @Query("SELECT s FROM State s WHERE s.id=(:stateId)")
+    @Query("SELECT s FROM State s WHERE s.id= :stateId")
     State findStateById(@Param("stateId") Long stateId);
+
+    @Query("SELECT 1 FROM State s WHERE s.value = :value")
+    Integer stateExists(@Param("value") String value);
+
+    @Query("SELECT s FROM State s WHERE s.value = :value")
+    State findStateByValue(@Param("value") String value);
 
 }

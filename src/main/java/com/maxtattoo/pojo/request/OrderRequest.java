@@ -16,7 +16,7 @@ public class OrderRequest implements GenericRequest {
     private Date startDate;
     private Date endDate;
     private Long clientId;
-    private Long orderTypeId;
-    private Long orderState;
+    private String orderType;
+    private String orderState;
 
 }

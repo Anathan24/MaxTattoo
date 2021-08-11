@@ -10,7 +10,7 @@ import java.sql.Timestamp;
 public class SittingRequest implements GenericRequest {
 
     private Long id;
-    private Timestamp date;
+    private String date;
     private double spentHours;
     private int price;
     private String notes;

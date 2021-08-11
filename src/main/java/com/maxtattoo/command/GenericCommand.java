@@ -10,6 +10,7 @@ import static com.maxtattoo.utils.ErrorMessage.FIND_BY_ID;
 abstract class GenericCommand {
     final Logger logger = LoggerFactory.getLogger(this.getClass());
     final String ENTITY = "ENTITY";
+    final String REQUEST_PARAMETER = "Request parameter ";
 
     @Autowired
     protected ModelBuilder modelBuilder;

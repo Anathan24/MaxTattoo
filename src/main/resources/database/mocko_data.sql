@@ -16,7 +16,7 @@ INSERT INTO clients(client_id_pk, name, surname, gender, description, location_i
 INSERT INTO clients(client_id_pk, name, surname, gender, description, location_id_fk) VALUES (115, 'User Name 5', 'User Surname 5', 'Male', 'Description', 114);
 
 INSERT INTO states(state_id_pk, state_name) VALUES(111, 'Preview');
-INSERT INTO states(state_id_pk, state_name) VALUES(112, 'To do');
+INSERT INTO states(state_id_pk, state_name) VALUES(112, 'Todo');
 INSERT INTO states(state_id_pk, state_name) VALUES(113, 'In Progress');
 INSERT INTO states(state_id_pk, state_name) VALUES(114, 'Finished');
 

@@ -34,11 +34,11 @@ public class Order implements GenericEntity {
     @Column(name = "end_date")
     private Date endDate;
 
-    @Column(name = "client_id_fk", updatable = false)
+    @Column(name = "client_id_fk")
     private Long clientId;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "order_type_id_fk", updatable = false)
+    @JoinColumn(name = "order_type_id_fk")
     private OrderType orderType;
 
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
