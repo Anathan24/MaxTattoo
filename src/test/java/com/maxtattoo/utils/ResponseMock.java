@@ -27,7 +27,7 @@ public class ResponseMock {
         order.setEndDate(new Date(System.currentTimeMillis()));
         order.setSittingNumber(17);
         order.setPrepayment(200);
-        order.setState(StateEnum.findByValue("Finished"));
+        order.setState(StateEnum.findByValue("Finished").getValue());
         order.setOrderType(createOrderTypeModel(1L, "Tattoo"));
         return order;
     }
@@ -41,7 +41,7 @@ public class ResponseMock {
         sitting.setNotes("Sitting Note");
         sitting.setPrice(75);
         sitting.setSpentHours(4);
-        sitting.setState(StateEnum.findByValue("TODO"));
+        sitting.setState(StateEnum.findByValue("To do").getValue());
         return sitting;
     }
 

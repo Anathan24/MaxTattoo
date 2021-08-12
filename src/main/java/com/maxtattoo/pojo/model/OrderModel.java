@@ -1,6 +1,5 @@
 package com.maxtattoo.pojo.model;
 
-import com.maxtattoo.utils.StateEnum;
 import lombok.*;
 import java.sql.Date;
 import java.util.LinkedList;
@@ -21,7 +20,7 @@ public class OrderModel implements GenericModel {
     private Date endDate;
 
     private OrderTypeModel orderType;
-    private StateEnum state;
+    private String state;
 
     private List<SittingModel> sittings = new LinkedList<>();
 }

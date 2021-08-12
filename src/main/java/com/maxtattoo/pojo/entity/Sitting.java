@@ -37,7 +37,7 @@ public class Sitting implements GenericEntity {
     @Column(name = "order_id_fk", updatable = false)
     private Long orderId;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
+    @ManyToOne(cascade =  CascadeType.MERGE, fetch = FetchType.EAGER)
     @JoinColumn(name = "state_id_fk")
     private State sittingState;
 

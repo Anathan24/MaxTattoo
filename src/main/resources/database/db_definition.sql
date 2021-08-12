@@ -1,5 +1,6 @@
 DROP TABLE IF EXISTS sittings_paints;
 DROP TABLE IF EXISTS sittings_needles;
+DROP TABLE IF EXISTS locations_cities;
 DROP TABLE IF EXISTS paints;
 DROP TABLE IF EXISTS needles;
 DROP TABLE IF EXISTS sittings;
@@ -12,15 +13,21 @@ DROP TABLE IF EXISTS locations;
 
 CREATE TABLE locations(
     location_id_pk BIGINT PRIMARY KEY,
-    location_name VARCHAR(25)
+    location_name VARCHAR(50)
 );
 
 CREATE TABLE cities(
     city_id_pk BIGINT PRIMARY KEY,
-    city_name VARCHAR(50),
-    location_id_fk BIGINT,
+    city_name VARCHAR(50)
+);
 
-    FOREIGN KEY(location_id_fk) REFERENCES locations(location_id_pk)
+CREATE TABLE locations_cities(
+    locations_cities_id_pk BIGINT PRIMARY KEY,
+    location_id_fk BIGINT,
+    city_id_fk BIGINT,
+
+    FOREIGN KEY (location_id_fk) REFERENCES locations(location_id_pk),
+    FOREIGN KEY (city_id_fk) REFERENCES cities(city_id_pk)
 );
 
 CREATE TABLE clients(

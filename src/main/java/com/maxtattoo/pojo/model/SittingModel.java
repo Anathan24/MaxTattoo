@@ -1,6 +1,5 @@
 package com.maxtattoo.pojo.model;
 
-import com.maxtattoo.utils.StateEnum;
 import lombok.*;
 
 import java.sql.Timestamp;
@@ -19,7 +18,7 @@ public class SittingModel implements GenericModel {
     private String notes;
     private int paid;
     private Long orderId;
-    private StateEnum state;
+    private String state;
     private List<PaintModel> paints = new LinkedList<>();
     private List<NeedleModel> needles = new LinkedList<>();
 

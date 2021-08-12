@@ -19,8 +19,4 @@ public class City implements GenericEntity {
     @Column(name = "city_name")
     private String name;
 
-    //TODO Riprogettare la entità city in modo che sia possibile assegnare una stessa città a più locations
-    @Column(name = "location_id_fk", updatable = false)
-    private Long locationId;
-
 }

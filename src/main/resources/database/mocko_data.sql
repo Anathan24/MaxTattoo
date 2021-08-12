@@ -1,19 +1,21 @@
 INSERT INTO locations(location_id_pk, location_name) VALUES(111, 'Location Varese');
-INSERT INTO locations(location_id_pk, location_name) VALUES(112, 'Location Varese');
-INSERT INTO locations(location_id_pk, location_name) VALUES(113, 'Location Varese');
-INSERT INTO locations(location_id_pk, location_name) VALUES(114, 'Location Milano');
-INSERT INTO locations(location_id_pk, location_name) VALUES(115, 'Location Milano');
+INSERT INTO locations(location_id_pk, location_name) VALUES(112, 'Location Milano');
 
-INSERT INTO cities(city_id_pk, city_name, location_id_fk) VALUES (111, 'Varese', 111);
-INSERT INTO cities(city_id_pk, city_name, location_id_fk) VALUES (112, 'Milano', 111);
-INSERT INTO cities(city_id_pk, city_name, location_id_fk) VALUES (113, 'Gallarate', 112);
-INSERT INTO cities(city_id_pk, city_name, location_id_fk) VALUES (114, 'Busto Arsizio', 113);
+INSERT INTO cities(city_id_pk, city_name) VALUES (111, 'Varese');
+INSERT INTO cities(city_id_pk, city_name) VALUES (112, 'Milano');
+INSERT INTO cities(city_id_pk, city_name) VALUES (113, 'Gallarate');
+INSERT INTO cities(city_id_pk, city_name) VALUES (114, 'Busto Arsizio');
+
+INSERT INTO locations_cities(locations_cities_id_pk, location_id_fk, city_id_fk) VALUES (111, 111, 111);
+INSERT INTO locations_cities(locations_cities_id_pk, location_id_fk, city_id_fk) VALUES (112, 112, 112);
+INSERT INTO locations_cities(locations_cities_id_pk, location_id_fk, city_id_fk) VALUES (113, 111, 113);
+INSERT INTO locations_cities(locations_cities_id_pk, location_id_fk, city_id_fk) VALUES (114, 112, 114);
 
 INSERT INTO clients(client_id_pk, name, surname, gender, description, location_id_fk) VALUES (111, 'User Name 1', 'User Surname 1', 'Male', 'Description', 111);
 INSERT INTO clients(client_id_pk, name, surname, gender, description, location_id_fk) VALUES (112, 'User Name 2', 'User Surname 2', 'Female', 'Description', 111);
 INSERT INTO clients(client_id_pk, name, surname, gender, description, location_id_fk) VALUES (113, 'User Name 3', 'User Surname 3', 'Male', 'Description', 112);
-INSERT INTO clients(client_id_pk, name, surname, gender, description, location_id_fk) VALUES (114, 'User Name 4', 'User Surname 4', 'Female', 'Description', 113);
-INSERT INTO clients(client_id_pk, name, surname, gender, description, location_id_fk) VALUES (115, 'User Name 5', 'User Surname 5', 'Male', 'Description', 114);
+INSERT INTO clients(client_id_pk, name, surname, gender, description, location_id_fk) VALUES (114, 'User Name 4', 'User Surname 4', 'Female', 'Description', 112);
+INSERT INTO clients(client_id_pk, name, surname, gender, description, location_id_fk) VALUES (115, 'User Name 5', 'User Surname 5', 'Male', 'Description', 111);
 
 INSERT INTO states(state_id_pk, state_name) VALUES(111, 'Preview');
 INSERT INTO states(state_id_pk, state_name) VALUES(112, 'To do');

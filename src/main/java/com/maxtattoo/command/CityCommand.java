@@ -38,11 +38,12 @@ public class CityCommand extends GenericCommand {
         var entity = new City();
         BeanUtils.copyProperties(request, entity);
 
-        if(!locationRepository.existsById(entity.getLocationId())){
+        //TODO da implementare il controllo sulla presenza della location indicata
+      /*  if(!locationRepository.existsById(entity.getLocationId())){
             String message = "location id does not exist! Insert an existing location id.";
             logger.error(message);
             throw new ForeignKeyViolationException(message, HttpStatus.NOT_ACCEPTABLE);
-        }
+        }*/
         logger.info("{}: {}", ENTITY, entity);
         entity = cityRepository.save(entity);
         return super.modelBuilder.createCityModel(entity);

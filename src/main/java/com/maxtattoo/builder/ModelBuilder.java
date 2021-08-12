@@ -33,7 +33,7 @@ public class ModelBuilder extends GenericBuilder {
         var model = (OrderModel)ModelFactory.getEntity(OrderModel.class.getSimpleName());
         BeanUtils.copyProperties(order, model);
         model.setOrderType(createOrderTypeModel(order.getOrderType()));
-        model.setState(StateEnum.findByValue(order.getOrderState().getValue()));
+        model.setState(StateEnum.findByValue(order.getOrderState().getValue()).getValue());
         model.setSittings(order.getSittings().stream().map(this::createSittingModel).collect(Collectors.toCollection(LinkedList::new)));
         logger.info(MODEL_STRING, model);
         return model;
@@ -45,8 +45,8 @@ public class ModelBuilder extends GenericBuilder {
 
         var model = (SittingModel)ModelFactory.getEntity(SittingModel.class.getSimpleName());
         BeanUtils.copyProperties(sitting, model);
-        model.setDate(DateUtils.getTimestampFromString(sitting.getDate().toString()));
-        model.setState(StateEnum.findByValue(sitting.getSittingState().getValue()));
+        //model.setDate(DateUtils.getTimestampFromString(sitting.getDate().toString()));
+        model.setState(StateEnum.findByValue(sitting.getSittingState().getValue()).getValue());
         model.setPaints(sitting.getPaints().stream().map(this::createPaintModel).collect(Collectors.toCollection(LinkedList::new)));
         model.setNeedles(sitting.getNeedles().stream().map(this::createNeedleModel).collect(Collectors.toCollection(LinkedList::new)));
         logger.info(MODEL_STRING, model);

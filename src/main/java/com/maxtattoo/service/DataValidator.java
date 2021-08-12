@@ -60,6 +60,11 @@ public class DataValidator extends GenericService {
         }
     }
 
+    public OrderType orderTypeIdValidation(){
+        //TODO da implementare.
+        return null;
+    }
+
     public OrderType orderTypeValidation(String orderType){
         if (orderType != null && orderTypeRepository.orderTypeExists(orderType) != null){
             return orderTypeRepository.findOrderTypeByValue(orderType);

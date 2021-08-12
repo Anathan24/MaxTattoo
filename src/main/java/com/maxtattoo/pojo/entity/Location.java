@@ -21,8 +21,8 @@ public class Location implements GenericEntity {
     @Column(name = "location_name")
     private String name;
 
-    @OneToMany(fetch = FetchType.EAGER)
-    @JoinColumn(name = "location_id_fk", updatable = false)
+    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    @JoinTable(name = "locations_cities", joinColumns = @JoinColumn(name = "location_id_fk"), inverseJoinColumns = @JoinColumn(name = "city_id_fk"))
     private Set<City> cities = new HashSet<>();
 
 }
