@@ -36,7 +36,7 @@ public class EntityMock {
         Sitting sitting = new Sitting();
         sitting.setId(sittingId);
         sitting.setOrderId(orderId);
-        sitting.setDate(new Timestamp(System.currentTimeMillis()));
+        //sitting.setDate(new Timestamp(System.currentTimeMillis()));
         sitting.setPaid(0);
         sitting.setNotes("Sitting Note");
         sitting.setPrice(75);

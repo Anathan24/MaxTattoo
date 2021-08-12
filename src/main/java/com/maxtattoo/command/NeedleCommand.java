@@ -34,8 +34,8 @@ public class NeedleCommand extends GenericCommand {
     public NeedleModel saveNeedle(NeedleRequest request){
         var entity = new Needle();
         BeanUtils.copyProperties(request, entity);
-        logger.info("{}: {}", ENTITY, entity);
 
+        logger.info("{}: {}", ENTITY, entity);
         entity = needleRepository.save(entity);
         return super.modelBuilder.createNeedleModel(entity);
     }

@@ -3,8 +3,6 @@ package com.maxtattoo.pojo.request;
 import lombok.Data;
 import lombok.ToString;
 
-import java.sql.Timestamp;
-
 @Data
 @ToString
 public class SittingRequest implements GenericRequest {

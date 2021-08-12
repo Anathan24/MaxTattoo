@@ -13,8 +13,8 @@ public class OrderRequest implements GenericRequest {
     private int sittingNumber;
     private int orderPrice;
     private int prepayment;
-    private Date startDate;
-    private Date endDate;
+    private String startDate;
+    private String endDate;
     private Long clientId;
     private String orderType;
     private String orderState;

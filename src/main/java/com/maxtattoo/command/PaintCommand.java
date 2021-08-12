@@ -34,8 +34,8 @@ public class PaintCommand extends GenericCommand{
     public PaintModel savePaint(PaintRequest request){
         var entity = new Paint();
         BeanUtils.copyProperties(request, entity);
-        logger.info("{}: {}", ENTITY, entity);
 
+        logger.info("{}: {}", ENTITY, entity);
         entity = paintRepository.save(entity);
         return super.modelBuilder.createPaintModel(entity);
     }

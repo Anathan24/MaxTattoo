@@ -14,7 +14,7 @@ import static com.maxtattoo.utils.ErrorMessage.WRONG_DATE_FORMAT;
 public class DateUtils {
 
     private static final String DATE_FORMAT = "yyyy-MM-dd";
-    private static final String DATE_TIME_FORMAT = "HH:mm:ss yy-MM-dd";
+    private static final String DATE_TIME_FORMAT = "yy-MM-dd HH:mm";
 
     private DateUtils(){}
 
@@ -24,17 +24,21 @@ public class DateUtils {
 
     @SneakyThrows
     public static Date getDateFromString(String date){
-        String regex = "\\d{4}-\\d{2}-\\d{2}";
+        final String dateFormat = "\\d{4}-\\d{2}-\\d{2}";
 
-        if(!Pattern.matches(regex, date))
+        if(!Pattern.matches(dateFormat, date))
             throw new DateFormatException(WRONG_DATE_FORMAT.getValue().concat(" The format must be: "+DATE_FORMAT), HttpStatus.NOT_ACCEPTABLE);
 
         return new Date(new SimpleDateFormat(DATE_FORMAT).parse(date).getTime());
     }
 
     @SneakyThrows
-    public static Timestamp getTimestampFromString(String date){
-        //TODO da implementare il passaggio da stringa a timestamp
-        return new Timestamp(new SimpleDateFormat(DATE_TIME_FORMAT).parse(date).getTime());
+    public static Timestamp getTimestampFromString(String dateTime) {
+        final String dateTimeFormat = "\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}";
+
+        if(!Pattern.matches(dateTimeFormat, dateTime))
+            throw new DateFormatException(WRONG_DATE_FORMAT.getValue().concat(" The format must be: "+DATE_TIME_FORMAT), HttpStatus.NOT_ACCEPTABLE);
+
+        return new Timestamp(new SimpleDateFormat(DATE_TIME_FORMAT).parse(dateTime).getTime());
     }
 }

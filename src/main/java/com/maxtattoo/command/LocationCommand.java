@@ -34,8 +34,8 @@ public class LocationCommand extends GenericCommand {
     public LocationModel saveLocation(LocationRequest request){
         var entity = new Location();
         BeanUtils.copyProperties(request, entity);
-        logger.info("{}: {}", ENTITY, entity);
 
+        logger.info("{}: {}", ENTITY, entity);
         entity = locationRepository.save(entity);
         return super.modelBuilder.createLocationModel(entity);
     }

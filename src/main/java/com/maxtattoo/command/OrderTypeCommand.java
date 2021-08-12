@@ -42,8 +42,8 @@ public class OrderTypeCommand extends GenericCommand {
     public OrderTypeModel saveOrderType(OrderTypeRequest request){
         var entity = new OrderType();
         BeanUtils.copyProperties(request, entity);
-        logger.info("{}: {}", ENTITY, entity);
 
+        logger.info("{}: {}", ENTITY, entity);
         entity = orderTypeRepository.save(entity);
         return super.modelBuilder.createOrderTypeModel(entity);
     }

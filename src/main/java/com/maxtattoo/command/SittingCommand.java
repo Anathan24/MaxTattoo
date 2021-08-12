@@ -4,9 +4,9 @@ import com.maxtattoo.database.repository.*;
 import com.maxtattoo.exception.ResourceNotFoundException;
 import com.maxtattoo.pojo.EntityFactory;
 import com.maxtattoo.pojo.entity.Sitting;
-import com.maxtattoo.pojo.entity.State;
 import com.maxtattoo.pojo.model.SittingModel;
 import com.maxtattoo.pojo.request.SittingRequest;
+import com.maxtattoo.service.DataValidator;
 import com.maxtattoo.utils.DateUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,9 +21,7 @@ public class SittingCommand extends GenericCommand {
     @Autowired
     private SittingRepository sittingRepository;
     @Autowired
-    private StateRepository stateRepository;
-    @Autowired
-    private OrderRepository orderRepository;
+    private DataValidator dataValidator;
 
     public SittingModel findById(Long id) {
         var result = sittingRepository.findById(id);
@@ -41,31 +39,14 @@ public class SittingCommand extends GenericCommand {
     public SittingModel save(SittingRequest request) {
         var entity = (Sitting) EntityFactory.getEntity(Sitting.class.getSimpleName());
         BeanUtils.copyProperties(request, entity);
+
+        entity.setDate(DateUtils.getTimestampFromString(request.getDate()));
+        entity.setSittingState(dataValidator.stateValidation(request.getSittingState()));
+        entity.setOrderId(dataValidator.orderIdValidation(request.getOrderId()));
+
         logger.info("{}: {}", ENTITY, entity);
-
-        //entity.setDate(DateUtils.getTimestampFromString(request.getDate()));
-        entity.setSittingState(stateValidation(request.getSittingState()));
-        orderIdValidation(request.getOrderId());
-
         entity = sittingRepository.save(entity);
         return super.modelBuilder.createSittingModel(entity);
     }
 
-    private State stateValidation(String state) {
-        if(state != null && stateRepository.stateExists(state) != null) {
-            return stateRepository.findStateByValue(state);
-        } else {
-            String message = REQUEST_PARAMETER+"State ("+state+") not found! Insert an existing state.";
-            logger.warn(message);
-            throw new ResourceNotFoundException(message, HttpStatus.NOT_FOUND);
-        }
-    }
-
-    private void orderIdValidation(Long orderId) {
-        if(orderId == null || !orderRepository.existsById(orderId)){
-            String message = REQUEST_PARAMETER+"orderId("+orderId+") not found! Insert an existing client id.";
-            logger.warn(message);
-            throw new ResourceNotFoundException(message, HttpStatus.NOT_FOUND);
-        }
-    }
 }

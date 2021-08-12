@@ -2,13 +2,12 @@ package com.maxtattoo.pojo.model;
 
 import com.maxtattoo.utils.StateEnum;
 import lombok.*;
+
 import java.sql.Timestamp;
 import java.util.LinkedList;
 import java.util.List;
 
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 @ToString
 @EqualsAndHashCode
 public class SittingModel implements GenericModel {

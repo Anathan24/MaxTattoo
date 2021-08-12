@@ -3,6 +3,7 @@ package com.maxtattoo.builder;
 import com.maxtattoo.pojo.ModelFactory;
 import com.maxtattoo.pojo.entity.*;
 import com.maxtattoo.pojo.model.*;
+import com.maxtattoo.utils.DateUtils;
 import org.springframework.beans.BeanUtils;
 import com.maxtattoo.utils.StateEnum;
 import org.springframework.stereotype.Service;
@@ -44,6 +45,7 @@ public class ModelBuilder extends GenericBuilder {
 
         var model = (SittingModel)ModelFactory.getEntity(SittingModel.class.getSimpleName());
         BeanUtils.copyProperties(sitting, model);
+        model.setDate(DateUtils.getTimestampFromString(sitting.getDate().toString()));
         model.setState(StateEnum.findByValue(sitting.getSittingState().getValue()));
         model.setPaints(sitting.getPaints().stream().map(this::createPaintModel).collect(Collectors.toCollection(LinkedList::new)));
         model.setNeedles(sitting.getNeedles().stream().map(this::createNeedleModel).collect(Collectors.toCollection(LinkedList::new)));
