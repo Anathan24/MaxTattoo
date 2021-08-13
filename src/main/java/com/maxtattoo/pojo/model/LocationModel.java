@@ -6,10 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 @ToString
-@EqualsAndHashCode
 public class LocationModel implements GenericModel {
 
     private Long id;

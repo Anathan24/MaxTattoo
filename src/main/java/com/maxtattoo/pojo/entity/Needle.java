@@ -13,7 +13,7 @@ public class Needle implements GenericEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "needle_id_pk")
+    @Column(name = "needle_id_pk", columnDefinition = "SERIAL")
     private Long id;
 
     @Column(name = "needle_producer")

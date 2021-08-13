@@ -12,17 +12,17 @@ DROP TABLE IF EXISTS clients;
 DROP TABLE IF EXISTS locations;
 
 CREATE TABLE locations(
-    location_id_pk BIGINT PRIMARY KEY,
-    location_name VARCHAR(50)
+    location_id_pk BIGSERIAL PRIMARY KEY,
+    location_name VARCHAR
 );
 
 CREATE TABLE cities(
-    city_id_pk BIGINT PRIMARY KEY,
-    city_name VARCHAR(50)
+    city_id_pk BIGSERIAL PRIMARY KEY,
+    city_name VARCHAR
 );
 
 CREATE TABLE locations_cities(
-    locations_cities_id_pk BIGINT PRIMARY KEY,
+    locations_cities_id_pk BIGSERIAL PRIMARY KEY,
     location_id_fk BIGINT,
     city_id_fk BIGINT,
 
@@ -31,31 +31,31 @@ CREATE TABLE locations_cities(
 );
 
 CREATE TABLE clients(
-    client_id_pk BIGINT PRIMARY KEY,
-    name VARCHAR(50) NOT NULL,
-    surname VARCHAR(50) NOT NULL,
-    gender VARCHAR(10),
-    description VARCHAR(250),
+    client_id_pk BIGSERIAL PRIMARY KEY,
+    name VARCHAR NOT NULL,
+    surname VARCHAR NOT NULL,
+    gender VARCHAR,
+    description VARCHAR,
     location_id_fk BIGINT,
 
     FOREIGN KEY(location_id_fk) REFERENCES locations(location_id_pk)
 );
 
 CREATE TABLE states(
-    state_id_pk BIGINT PRIMARY KEY,
-    state_name VARCHAR(15)
+    state_id_pk BIGSERIAL PRIMARY KEY,
+    state_name VARCHAR
 );
 
 CREATE TABLE order_types(
-    order_type_id_pk BIGINT PRIMARY KEY,
-    type VARCHAR(25)
+    order_type_id_pk BIGSERIAL PRIMARY KEY,
+    type VARCHAR
 );
 
 CREATE TABLE orders(
-    order_id_pk BIGINT PRIMARY KEY,
-    sitting_number INT default 1,
-    order_price INT default 0,
-    prepayment INT default 0,
+    order_id_pk BIGSERIAL PRIMARY KEY,
+    sitting_number NUMERIC,
+    order_price NUMERIC,
+    prepayment NUMERIC,
     start_date date,
     end_date date,
 
@@ -68,12 +68,12 @@ CREATE TABLE orders(
 );
 
 CREATE TABLE sittings(
-    sitting_id_pk BIGINT PRIMARY KEY,
+    sitting_id_pk BIGSERIAL PRIMARY KEY,
     sitting_date TIMESTAMP,
     spent_hours DOUBLE PRECISION,
-    sitting_price INT,
-    sitting_note VARCHAR(250),
-    paid INT,
+    sitting_price NUMERIC,
+    sitting_note VARCHAR,
+    paid NUMERIC,
 
     state_id_fk BIGINT,
     order_id_fk BIGINT,
@@ -82,20 +82,20 @@ CREATE TABLE sittings(
 );
 
 CREATE TABLE paints(
-    paint_id_pk BIGINT PRIMARY KEY,
-    paint_producer VARCHAR(25),
-    color VARCHAR(25)
+    paint_id_pk BIGSERIAL PRIMARY KEY,
+    paint_producer VARCHAR,
+    color VARCHAR
 );
 
 CREATE TABLE needles(
-    needle_id_pk BIGINT PRIMARY KEY,
-    needle_producer VARCHAR(50),
-    needle_code CHAR(10),
-    needle_sharpening CHAR(10)
+    needle_id_pk BIGSERIAL PRIMARY KEY,
+    needle_producer VARCHAR,
+    needle_code VARCHAR,
+    needle_sharpening VARCHAR
 );
 
 CREATE TABLE sittings_paints(
-    sitting_paint_id_pk BIGINT PRIMARY KEY,
+    sitting_paint_id_pk BIGSERIAL PRIMARY KEY,
     sitting_id_fk BIGINT,
     paint_id_fk BIGINT,
 
@@ -104,7 +104,7 @@ CREATE TABLE sittings_paints(
 );
 
 CREATE TABLE sittings_needles(
-    sitting_needle_id_pk BIGINT PRIMARY KEY,
+    sitting_needle_id_pk BIGSERIAL PRIMARY KEY,
     sitting_id_fk BIGINT,
     needle_id_fk BIGINT,
 

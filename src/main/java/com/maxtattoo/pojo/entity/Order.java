@@ -16,7 +16,7 @@ public class Order implements GenericEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "order_id_pk")
+    @Column(name = "order_id_pk", columnDefinition = "SERIAL")
     private Long id;
 
     @Column(name = "sitting_number")
@@ -46,7 +46,7 @@ public class Order implements GenericEntity {
     private State orderState;
 
     @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE}, fetch = FetchType.EAGER)
-    @JoinColumn(name = "order_id_fk", updatable = false)
+    @JoinColumn(name = "order_id_fk")
     private Set<Sitting> sittings = new HashSet<>();
 
 }

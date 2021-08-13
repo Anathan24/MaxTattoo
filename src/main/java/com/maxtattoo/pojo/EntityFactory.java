@@ -14,6 +14,8 @@ public class EntityFactory {
                 return new Client();
             case "Location":
                 return new Location();
+            case "LocationCities":
+                return new LocationCities();
             case "City":
                 return new City();
             case "Order":

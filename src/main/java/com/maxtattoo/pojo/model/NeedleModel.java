@@ -3,10 +3,7 @@ package com.maxtattoo.pojo.model;
 import lombok.*;
 
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 @ToString
-@EqualsAndHashCode
 public class NeedleModel implements GenericModel {
 
     private Long id;

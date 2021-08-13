@@ -5,7 +5,7 @@ import com.maxtattoo.pojo.entity.*;
 import com.maxtattoo.pojo.model.*;
 import com.maxtattoo.utils.DateUtils;
 import org.springframework.beans.BeanUtils;
-import com.maxtattoo.utils.StateEnum;
+import com.maxtattoo.service.StateEnum;
 import org.springframework.stereotype.Service;
 
 import java.util.LinkedList;

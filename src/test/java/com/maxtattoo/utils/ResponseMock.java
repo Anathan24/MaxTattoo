@@ -1,10 +1,10 @@
 package com.maxtattoo.utils;
 
 import com.maxtattoo.pojo.model.*;
+import com.maxtattoo.service.StateEnum;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
-import java.sql.Timestamp;
 
 @Service
 public class ResponseMock {

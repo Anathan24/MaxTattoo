@@ -49,9 +49,9 @@ public class ClientCommand extends GenericCommand {
     public ClientModel save(ClientRequest request){
         var entity = (Client)EntityFactory.getEntity(Client.class.getSimpleName());
 
-        if(request.getLocationId() != null && locationRepository.existsById(request.getLocationId())){
+/*        if(request.getLocationId() != null && locationRepository.existsById(request.getLocationId())){
             entity.setLocation(locationRepository.getById(request.getLocationId()));
-        }
+        }*/
 
         BeanUtils.copyProperties(request, entity);
         logger.info("{}: {}", ENTITY, entity);

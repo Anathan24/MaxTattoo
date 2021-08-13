@@ -2,7 +2,6 @@ package com.maxtattoo.command;
 
 import com.maxtattoo.database.repository.CityRepository;
 import com.maxtattoo.database.repository.LocationRepository;
-import com.maxtattoo.exception.ForeignKeyViolationException;
 import com.maxtattoo.exception.ResourceNotFoundException;
 import com.maxtattoo.pojo.entity.City;
 import com.maxtattoo.pojo.model.CityModel;
@@ -38,12 +37,6 @@ public class CityCommand extends GenericCommand {
         var entity = new City();
         BeanUtils.copyProperties(request, entity);
 
-        //TODO da implementare il controllo sulla presenza della location indicata
-      /*  if(!locationRepository.existsById(entity.getLocationId())){
-            String message = "location id does not exist! Insert an existing location id.";
-            logger.error(message);
-            throw new ForeignKeyViolationException(message, HttpStatus.NOT_ACCEPTABLE);
-        }*/
         logger.info("{}: {}", ENTITY, entity);
         entity = cityRepository.save(entity);
         return super.modelBuilder.createCityModel(entity);

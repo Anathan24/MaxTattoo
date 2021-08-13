@@ -8,7 +8,6 @@ import java.util.List;
 
 @Data
 @ToString
-@EqualsAndHashCode
 public class SittingModel implements GenericModel {
 
     private Long id;

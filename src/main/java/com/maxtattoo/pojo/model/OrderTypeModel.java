@@ -7,8 +7,6 @@ import lombok.ToString;
 
 @Data
 @ToString
-@NoArgsConstructor
-@AllArgsConstructor
 public class OrderTypeModel implements GenericModel {
 
     private Long id;

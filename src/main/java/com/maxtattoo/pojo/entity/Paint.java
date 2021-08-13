@@ -13,7 +13,7 @@ public class Paint implements GenericEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "paint_id_pk")
+    @Column(name = "paint_id_pk", columnDefinition = "SERIAL")
     private Long id;
 
     @Column(name = "paint_producer")

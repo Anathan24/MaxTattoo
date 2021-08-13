@@ -15,13 +15,13 @@ public class Location implements GenericEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "location_id_pk")
+    @Column(name = "location_id_pk", columnDefinition = "SERIAL")
     private Long id;
 
     @Column(name = "location_name")
     private String name;
 
-    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "locations_cities", joinColumns = @JoinColumn(name = "location_id_fk"), inverseJoinColumns = @JoinColumn(name = "city_id_fk"))
     private Set<City> cities = new HashSet<>();
 

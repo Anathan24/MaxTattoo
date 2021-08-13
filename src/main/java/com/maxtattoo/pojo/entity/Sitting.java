@@ -16,7 +16,7 @@ public class Sitting implements GenericEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "sitting_id_pk")
+    @Column(name = "sitting_id_pk", columnDefinition = "SERIAL")
     private Long id;
 
     @Column(name = "sitting_date")
@@ -34,7 +34,7 @@ public class Sitting implements GenericEntity {
     @Column(name = "paid")
     private int paid;
 
-    @Column(name = "order_id_fk", updatable = false)
+    @Column(name = "order_id_fk")
     private Long orderId;
 
     @ManyToOne(cascade =  CascadeType.MERGE, fetch = FetchType.EAGER)

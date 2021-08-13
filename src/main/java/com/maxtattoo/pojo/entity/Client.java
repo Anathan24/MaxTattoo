@@ -16,7 +16,7 @@ public class Client implements GenericEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "client_id_pk")
+    @Column(name = "client_id_pk", columnDefinition = "SERIAL")
     private Long id;
 
     @Column @NotNull

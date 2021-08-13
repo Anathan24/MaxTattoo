@@ -6,10 +6,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 @ToString
-@EqualsAndHashCode
 public class OrderModel implements GenericModel {
 
     private Long id;

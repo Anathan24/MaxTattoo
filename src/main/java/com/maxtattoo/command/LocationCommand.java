@@ -1,8 +1,11 @@
 package com.maxtattoo.command;
 
+import com.maxtattoo.database.repository.LocationCitiesRepository;
 import com.maxtattoo.database.repository.LocationRepository;
 import com.maxtattoo.exception.ResourceNotFoundException;
+import com.maxtattoo.pojo.EntityFactory;
 import com.maxtattoo.pojo.entity.Location;
+import com.maxtattoo.pojo.entity.LocationCities;
 import com.maxtattoo.pojo.model.LocationModel;
 import com.maxtattoo.pojo.request.LocationRequest;
 import org.springframework.beans.BeanUtils;
@@ -11,16 +14,20 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 @Scope("prototype")
 public class LocationCommand extends GenericCommand {
 
     @Autowired
     private LocationRepository locationRepository;
+    @Autowired
+    private LocationCitiesRepository locationCitiesRepository;
 
     public LocationModel findById(Long id){
         var result = locationRepository.findById(id);
-        logger.info("{}: {}", ENTITY, result);
+        logger.info(MESSAGE_PATTERN, ENTITY, result);
 
         if(result.isPresent()) {
             return super.modelBuilder.createLocationModel(result.get());
@@ -31,12 +38,25 @@ public class LocationCommand extends GenericCommand {
         }
     }
 
-    public LocationModel saveLocation(LocationRequest request){
-        var entity = new Location();
+    public LocationModel save(LocationRequest request, List<Long> cities){
+        var entity = (Location) EntityFactory.getEntity(Location.class.getSimpleName());
         BeanUtils.copyProperties(request, entity);
 
-        logger.info("{}: {}", ENTITY, entity);
+        logger.info(MESSAGE_PATTERN, ENTITY, entity);
         entity = locationRepository.save(entity);
+        saveLocationCityRelation(entity.getId(), cities);
         return super.modelBuilder.createLocationModel(entity);
+    }
+
+    private void saveLocationCityRelation(Long locationId, List<Long> citiesId) {
+        if (citiesId != null) {
+            citiesId.forEach(cityId -> {
+                var entity = (LocationCities) EntityFactory.getEntity(LocationCities.class.getSimpleName());
+                entity.setLocationId(locationId);
+                entity.setCityId(cityId);
+                logger.info(MESSAGE_PATTERN, "LocationCities", entity);
+                locationCitiesRepository.save(entity);
+            });
+        }
     }
 }

@@ -3,7 +3,7 @@ package com.maxtattoo.builder;
 import com.maxtattoo.pojo.entity.*;
 import com.maxtattoo.pojo.model.*;
 import com.maxtattoo.utils.EntityMock;
-import com.maxtattoo.utils.StateEnum;
+import com.maxtattoo.service.StateEnum;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
