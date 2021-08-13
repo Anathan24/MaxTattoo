@@ -57,9 +57,9 @@ public class LocationCommand extends GenericCommand {
         return super.modelBuilder.createLocationModel(entity);
     }
 
-    private void saveLocationCityRelation(Long locationId, List<Long> citiesId) {
-        if (citiesId != null) {
-            citiesId.forEach(cityId -> {
+    private void saveLocationCityRelation(Long locationId, List<Long> cities) {
+        if (cities != null) {
+            cities.forEach(cityId -> {
                 var entity = (LocationCity) EntityFactory.getEntity(LocationCity.class.getSimpleName());
                 entity.setLocationId(locationId);
                 entity.setCityId(cityId);

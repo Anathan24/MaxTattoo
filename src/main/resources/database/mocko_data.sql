@@ -42,8 +42,8 @@ INSERT INTO sittings(sitting_id_pk, sitting_date, spent_hours, sitting_price, si
 INSERT INTO sittings(sitting_id_pk, sitting_date, spent_hours, sitting_price, sitting_note, paid, state_id_fk, order_id_fk)VALUES(117, '22/04/2020', 3, 65, 'SittingNote 7', 76, 114, 113);
 INSERT INTO sittings(sitting_id_pk, sitting_date, spent_hours, sitting_price, sitting_note, paid, state_id_fk, order_id_fk)VALUES(118, '22/04/2020', 6, 45, 'SittingNote 8', 33, 114, 113);
 INSERT INTO sittings(sitting_id_pk, sitting_date, spent_hours, sitting_price, sitting_note, paid, state_id_fk, order_id_fk)VALUES(119, '22/04/2020', 7, 15, 'SittingNote 9', 76, 114, 114);
-INSERT INTO sittings(sitting_id_pk, sitting_date, spent_hours, sitting_price, sitting_note, paid, state_id_fk, order_id_fk)VALUES(1110, '22/04/2020', 9, 95, 'SittingNote 10', 70, 114, 114);
-INSERT INTO sittings(sitting_id_pk, sitting_date, spent_hours, sitting_price, sitting_note, paid, state_id_fk, order_id_fk)VALUES(1111, '22/04/2020', 8, 65, 'SittingNote 11', 67, 114, 115);
+INSERT INTO sittings(sitting_id_pk, sitting_date, spent_hours, sitting_price, sitting_note, paid, state_id_fk, order_id_fk)VALUES(120, '22/04/2020', 9, 95, 'SittingNote 10', 70, 114, 114);
+INSERT INTO sittings(sitting_id_pk, sitting_date, spent_hours, sitting_price, sitting_note, paid, state_id_fk, order_id_fk)VALUES(121, '22/04/2020', 8, 65, 'SittingNote 11', 67, 114, 115);
 
 INSERT INTO paints(paint_id_pk, paint_producer, color) VALUES(111, 'Producer 1', 'Yellow');
 INSERT INTO paints(paint_id_pk, paint_producer, color) VALUES(112, 'Producer 2', 'Black');
@@ -52,7 +52,7 @@ INSERT INTO paints(paint_id_pk, paint_producer, color) VALUES(114, 'Producer 4',
 INSERT INTO paints(paint_id_pk, paint_producer, color) VALUES(115, 'Producer 5', 'Purpure');
 
 INSERT INTO sittings_paints(sitting_paint_id_pk, sitting_id_fk, paint_id_fk) VALUES (111, 111, 112);
-INSERT INTO sittings_paints(sitting_paint_id_pk, sitting_id_fk, paint_id_fk) VALUES (112, 1110, 114);
+INSERT INTO sittings_paints(sitting_paint_id_pk, sitting_id_fk, paint_id_fk) VALUES (112, 120, 114);
 INSERT INTO sittings_paints(sitting_paint_id_pk, sitting_id_fk, paint_id_fk) VALUES (113, 114, 113);
 INSERT INTO sittings_paints(sitting_paint_id_pk, sitting_id_fk, paint_id_fk) VALUES (114, 113, 115);
 INSERT INTO sittings_paints(sitting_paint_id_pk, sitting_id_fk, paint_id_fk) VALUES (115, 116, 112);

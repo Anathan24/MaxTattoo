@@ -7,6 +7,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 import static org.springframework.http.ResponseEntity.ok;
 
 @RestController
@@ -24,11 +26,13 @@ public class SittingController extends GenericController{
     }
 
     @PostMapping(value = "/save", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<SittingModel> saveSitting(@RequestBody SittingRequest request){
+    public ResponseEntity<SittingModel> save(@RequestBody SittingRequest request,
+                                             @RequestParam(name = "paintId", required = false) List<Long> paints,
+                                             @RequestParam(name = "needleId", required = false) List<Long> needles){
         logger.info(START);
         var command = super.beanFactory.getBean(SittingCommand.class);
         logger.info("{}: {}", REQUEST, request);
-        var model = command.save(request);
+        var model = command.save(request, paints, needles);
         logger.info(END);
         return ok(model);
     }
