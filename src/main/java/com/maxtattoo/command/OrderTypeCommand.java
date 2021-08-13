@@ -1,9 +1,9 @@
 package com.maxtattoo.command;
 
-import com.maxtattoo.builder.ListModelBuilder;
 import com.maxtattoo.database.repository.OrderTypeRepository;
 import com.maxtattoo.database.repository.StateRepository;
 import com.maxtattoo.exception.ResourceNotFoundException;
+import com.maxtattoo.pojo.EntityFactory;
 import com.maxtattoo.pojo.entity.OrderType;
 import com.maxtattoo.pojo.model.OrderTypeModel;
 import com.maxtattoo.pojo.request.OrderTypeRequest;
@@ -23,12 +23,10 @@ public class OrderTypeCommand extends GenericCommand {
     private OrderTypeRepository orderTypeRepository;
     @Autowired
     private StateRepository stateRepository;
-    @Autowired
-    private ListModelBuilder listModelBuilder;
 
     public OrderTypeModel findById(Long id){
         var result = orderTypeRepository.findById(id);
-        logger.info("{}: {}", ENTITY, result);
+        logger.info(MESSAGE_PATTERN, ENTITY, result);
 
         if(result.isPresent()) {
             return super.modelBuilder.createOrderTypeModel(result.get());
@@ -39,18 +37,18 @@ public class OrderTypeCommand extends GenericCommand {
         }
     }
 
-    public OrderTypeModel saveOrderType(OrderTypeRequest request){
-        var entity = new OrderType();
+    public OrderTypeModel save(OrderTypeRequest request){
+        var entity = (OrderType) EntityFactory.getEntity(OrderType.class.getSimpleName());
         BeanUtils.copyProperties(request, entity);
 
-        logger.info("{}: {}", ENTITY, entity);
+        logger.info(MESSAGE_PATTERN, ENTITY, entity);
         entity = orderTypeRepository.save(entity);
         return super.modelBuilder.createOrderTypeModel(entity);
     }
 
-    //TODO da valutare se creare il service per l'entità orderType
-    public List<OrderTypeModel> findAllOrderTypes(){
-        var orderTypes = orderTypeRepository.findAll();
-        return listModelBuilder.createOrderTypeModel(orderTypes);
+    public List<OrderTypeModel> findAll(){
+        var result = orderTypeRepository.findAll();
+        logger.info(MESSAGE_PATTERN, ENTITY, result);
+        return listModelBuilder.createOrderTypeModel(result);
     }
 }

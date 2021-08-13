@@ -37,15 +37,15 @@ public class Sitting implements GenericEntity {
     @Column(name = "order_id_fk")
     private Long orderId;
 
-    @ManyToOne(cascade =  CascadeType.MERGE, fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "state_id_fk")
     private State sittingState;
 
-    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "sittings_paints", joinColumns = @JoinColumn(name = "sitting_id_fk", updatable = false), inverseJoinColumns = @JoinColumn(name = "paint_id_fk", updatable = false))
     private Set<Paint> paints = new HashSet<>();
 
-    @ManyToMany(cascade =  CascadeType.MERGE, fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "sittings_needles", joinColumns = @JoinColumn(name = "sitting_id_fk", updatable = false), inverseJoinColumns = @JoinColumn(name = "needle_id_fk", updatable = false))
     private Set<Needle> needles = new HashSet<>();
 

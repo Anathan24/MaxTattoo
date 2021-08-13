@@ -7,6 +7,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 import static org.springframework.http.ResponseEntity.ok;
 
 @RestController
@@ -23,11 +25,21 @@ public class PaintController extends GenericController{
         return ok(model);
     }
 
-    @PostMapping(value = "/save", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<PaintModel> savePaint(@RequestBody PaintRequest request){
+    @GetMapping(value = "/findAll", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<PaintModel>> findAll(){
         logger.info(START);
         var command = super.beanFactory.getBean(PaintCommand.class);
-        var model = command.savePaint(request);
+        logger.info("{} ", REQUEST);
+        var model = command.findAll();
+        logger.info(END);
+        return ok(model);
+    }
+
+    @PostMapping(value = "/save", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<PaintModel> save(@RequestBody PaintRequest request){
+        logger.info(START);
+        var command = super.beanFactory.getBean(PaintCommand.class);
+        var model = command.save(request);
         logger.info(END);
         return ok(model);
     }

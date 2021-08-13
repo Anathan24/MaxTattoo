@@ -1,6 +1,5 @@
 package com.maxtattoo.command;
 
-import com.maxtattoo.builder.ListModelBuilder;
 import com.maxtattoo.database.repository.ClientRepository;
 import com.maxtattoo.database.repository.LocationRepository;
 import com.maxtattoo.exception.ResourceNotFoundException;
@@ -24,12 +23,10 @@ public class ClientCommand extends GenericCommand {
     private ClientRepository clientRepository;
     @Autowired
     private LocationRepository locationRepository;
-    @Autowired
-    private ListModelBuilder listModelBuilder;
 
     public ClientModel findById(Long id) {
         var result = clientRepository.findById(id);
-        logger.info("{}: {}", ENTITY, result);
+        logger.info(MESSAGE_PATTERN, ENTITY, result);
 
         if (result.isPresent()) {
             return super.modelBuilder.createClientModel(result.get());
@@ -40,18 +37,26 @@ public class ClientCommand extends GenericCommand {
         }
     }
 
+    public List<ClientModel> findAll(){
+        var result = clientRepository.findAll();
+        logger.info(MESSAGE_PATTERN, ENTITY, result);
+        return super.listModelBuilder.createClientModel(result);
+    }
+
     public List<ClientModel> findClientByNameAndSurname(String name, String surname) {
         //TODO da implementare il motore di ricerca
         var clientsEntity = clientRepository.findClientByNameAndSurname(name, surname);
-        return listModelBuilder.createClientModel(clientsEntity);
+        return super.listModelBuilder.createClientModel(clientsEntity);
     }
 
     public ClientModel save(ClientRequest request){
         var entity = (Client)EntityFactory.getEntity(Client.class.getSimpleName());
 
-/*        if(request.getLocationId() != null && locationRepository.existsById(request.getLocationId())){
+        if(request.getLocationId() != null && locationRepository.existsById(request.getLocationId())){
             entity.setLocation(locationRepository.getById(request.getLocationId()));
-        }*/
+        } else {
+            logger.info("LOCATION ID({}) DOES NOT EXIST!",request.getLocationId());
+        }
 
         BeanUtils.copyProperties(request, entity);
         logger.info("{}: {}", ENTITY, entity);

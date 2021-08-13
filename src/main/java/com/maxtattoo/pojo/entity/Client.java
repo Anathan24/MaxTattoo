@@ -4,7 +4,6 @@ import lombok.Data;
 import lombok.ToString;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -19,10 +18,10 @@ public class Client implements GenericEntity {
     @Column(name = "client_id_pk", columnDefinition = "SERIAL", updatable = false)
     private Long id;
 
-    @Column @NotNull
+    @Column
     private String name;
 
-    @Column @NotNull
+    @Column
     private String surname;
 
     @Column
@@ -31,12 +30,12 @@ public class Client implements GenericEntity {
     @Column
     private String description;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "location_id_fk")
     private Location location;
 
-    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
-    @JoinColumn(name = "client_id_fk", updatable = false)
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinColumn(name = "client_id_fk")
     private Set<Order> orders = new HashSet<>();
 
 }

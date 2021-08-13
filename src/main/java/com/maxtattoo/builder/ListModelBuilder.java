@@ -30,4 +30,12 @@ public class ListModelBuilder extends ModelBuilder {
     public List<OrderTypeModel> createOrderTypeModel(List<OrderType> orderTypes) {
         return orderTypes.stream().map(super::createOrderTypeModel).collect(Collectors.toCollection(LinkedList::new));
     }
+
+    public List<PaintModel> createPaintModel(List<Paint> paints){
+        return paints.stream().map(super::createPaintModel).collect(Collectors.toCollection(LinkedList::new));
+    }
+
+    public List<NeedleModel> createNeedleModel(List<Needle> needles){
+        return needles.stream().map(super::createNeedleModel).collect(Collectors.toCollection(LinkedList::new));
+    }
 }

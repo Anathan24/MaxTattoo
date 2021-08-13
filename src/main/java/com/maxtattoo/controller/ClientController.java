@@ -25,6 +25,16 @@ public class ClientController extends GenericController {
         return ok(model);
     }
 
+    @GetMapping(value = "/findAll", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<ClientModel>> findAll(){
+        logger.info(START);
+        var command = super.beanFactory.getBean(ClientCommand.class);
+        logger.info("{}", REQUEST);
+        var model = command.findAll();
+        logger.info(END);
+        return ok(model);
+    }
+
     @GetMapping(value = "/findByNameAndSurname", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<ClientModel>> findClientByNameAndSurname(@RequestParam String name, @RequestParam String surname) {
         logger.info(START);
@@ -36,7 +46,7 @@ public class ClientController extends GenericController {
     }
 
     @PostMapping(value = "/save", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<ClientModel> saveClient(@RequestBody ClientRequest request){
+    public ResponseEntity<ClientModel> save(@RequestBody ClientRequest request){
         logger.info(START);
         var command = beanFactory.getBean(ClientCommand.class);
         logger.info("{}: {}",REQUEST, request);

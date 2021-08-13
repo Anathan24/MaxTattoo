@@ -7,6 +7,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 import static org.springframework.http.ResponseEntity.ok;
 
 @RestController
@@ -14,7 +16,7 @@ import static org.springframework.http.ResponseEntity.ok;
 public class OrderTypeController extends GenericController{
 
     @GetMapping(value = "/findById", produces = MediaType.APPLICATION_JSON_VALUE)
-    private ResponseEntity<OrderTypeModel> findById(@RequestParam Long id){
+    public ResponseEntity<OrderTypeModel> findById(@RequestParam Long id){
         logger.info(START);
         var command = super.beanFactory.getBean(OrderTypeCommand.class);
         logger.info("{} id: {}", REQUEST, id);
@@ -23,12 +25,22 @@ public class OrderTypeController extends GenericController{
         return ok(model);
     }
 
+    @GetMapping(value = "/findAll", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<OrderTypeModel>> findAll(){
+        logger.info(START);
+        var command = super.beanFactory.getBean(OrderTypeCommand.class);
+        logger.info("{}", REQUEST);
+        var model = command.findAll();
+        logger.info(END);
+        return ok(model);
+    }
+
     @PostMapping(value = "/save", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<OrderTypeModel> saveOrderType(@RequestBody OrderTypeRequest request){
+    public ResponseEntity<OrderTypeModel> save(@RequestBody OrderTypeRequest request){
         logger.info(START);
         var command = super.beanFactory.getBean(OrderTypeCommand.class);
         logger.info("{}: {}", REQUEST, request);
-        var model = command.saveOrderType(request);
+        var model = command.save(request);
         logger.info(END);
         return ok(model);
     }
