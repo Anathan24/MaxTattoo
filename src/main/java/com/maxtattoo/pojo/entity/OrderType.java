@@ -13,7 +13,7 @@ public class OrderType implements GenericEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "order_type_id_pk", columnDefinition = "SERIAL")
+    @Column(name = "order_type_id_pk", columnDefinition = "SERIAL", updatable = false)
     private Long id;
 
     @Column(name = "type")

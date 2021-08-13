@@ -3,7 +3,6 @@ package com.maxtattoo.service;
 import com.maxtattoo.database.repository.*;
 import com.maxtattoo.exception.DateFormatException;
 import com.maxtattoo.exception.ResourceNotFoundException;
-import com.maxtattoo.pojo.entity.LocationCity;
 import com.maxtattoo.pojo.entity.OrderType;
 import com.maxtattoo.pojo.entity.State;
 import org.springframework.beans.factory.annotation.Autowired;
