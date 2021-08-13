@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 public interface OrderTypeRepository extends JpaRepository<OrderType, Long> {
 
     @Query("SELECT 1 FROM OrderType od WHERE od.value = :value")
-    Integer orderTypeExists(@Param("value") String value);
+    Integer orderTypeExistsByValue(@Param("value") String value);
 
     @Query("SELECT od FROM OrderType od WHERE od.value = :value")
     OrderType findOrderTypeByValue(@Param("value") String value);

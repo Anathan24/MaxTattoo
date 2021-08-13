@@ -9,11 +9,11 @@ import javax.persistence.*;
 @ToString
 @Entity
 @Table(name = "locations_cities")
-public class LocationCities implements GenericEntity{
+public class LocationCity implements GenericEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "locations_cities_id_pk", columnDefinition = "SERIAL")
+    @Column(name = "locations_cities_id_pk", columnDefinition = "SERIAL", updatable = false)
     private Long id;
 
     @Column(name = "location_id_fk")

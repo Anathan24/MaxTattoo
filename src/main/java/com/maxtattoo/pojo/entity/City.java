@@ -13,7 +13,7 @@ public class City implements GenericEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "city_id_pk", columnDefinition = "SERIAL")
+    @Column(name = "city_id_pk", columnDefinition = "SERIAL", updatable = false)
     private Long id;
 
     @Column(name = "city_name")

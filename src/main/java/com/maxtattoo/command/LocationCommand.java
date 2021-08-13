@@ -1,13 +1,14 @@
 package com.maxtattoo.command;
 
-import com.maxtattoo.database.repository.LocationCitiesRepository;
+import com.maxtattoo.database.repository.LocationCityRepository;
 import com.maxtattoo.database.repository.LocationRepository;
 import com.maxtattoo.exception.ResourceNotFoundException;
 import com.maxtattoo.pojo.EntityFactory;
 import com.maxtattoo.pojo.entity.Location;
-import com.maxtattoo.pojo.entity.LocationCities;
+import com.maxtattoo.pojo.entity.LocationCity;
 import com.maxtattoo.pojo.model.LocationModel;
 import com.maxtattoo.pojo.request.LocationRequest;
+import com.maxtattoo.service.DataValidator;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -23,7 +24,9 @@ public class LocationCommand extends GenericCommand {
     @Autowired
     private LocationRepository locationRepository;
     @Autowired
-    private LocationCitiesRepository locationCitiesRepository;
+    private LocationCityRepository locationCityRepository;
+    @Autowired
+    private DataValidator dataValidator;
 
     public LocationModel findById(Long id){
         var result = locationRepository.findById(id);
@@ -51,11 +54,11 @@ public class LocationCommand extends GenericCommand {
     private void saveLocationCityRelation(Long locationId, List<Long> citiesId) {
         if (citiesId != null) {
             citiesId.forEach(cityId -> {
-                var entity = (LocationCities) EntityFactory.getEntity(LocationCities.class.getSimpleName());
+                var entity = (LocationCity) EntityFactory.getEntity(LocationCity.class.getSimpleName());
                 entity.setLocationId(locationId);
                 entity.setCityId(cityId);
                 logger.info(MESSAGE_PATTERN, "LocationCities", entity);
-                locationCitiesRepository.save(entity);
+                locationCityRepository.save(entity);
             });
         }
     }

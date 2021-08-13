@@ -13,7 +13,7 @@ public interface StateRepository extends JpaRepository<State, Long> {
     State findStateById(@Param("stateId") Long stateId);
 
     @Query("SELECT 1 FROM State s WHERE s.value = :value")
-    Integer stateExists(@Param("value") String value);
+    Integer stateExistsByValue(@Param("value") String value);
 
     @Query("SELECT s FROM State s WHERE s.value = :value")
     State findStateByValue(@Param("value") String value);
