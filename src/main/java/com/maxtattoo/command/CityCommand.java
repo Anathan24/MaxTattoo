@@ -1,5 +1,6 @@
 package com.maxtattoo.command;
 
+import com.maxtattoo.builder.ListModelBuilder;
 import com.maxtattoo.database.repository.CityRepository;
 import com.maxtattoo.database.repository.LocationRepository;
 import com.maxtattoo.exception.ResourceNotFoundException;
@@ -12,6 +13,8 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 @Scope("prototype")
 public class CityCommand extends GenericCommand {
@@ -23,7 +26,7 @@ public class CityCommand extends GenericCommand {
 
     public CityModel findById(Long id){
         var result = cityRepository.findById(id);
-        logger.info("{}: {}", ENTITY, result);
+        logger.info(MESSAGE_PATTERN, ENTITY, result);
         if(result.isPresent()) {
             return super.modelBuilder.createCityModel(result.get());
         } else {
@@ -33,11 +36,18 @@ public class CityCommand extends GenericCommand {
         }
     }
 
-    public CityModel saveCity(CityRequest request){
+    public List<CityModel> findAll(){
+        var result = cityRepository.findAll();
+        logger.info(MESSAGE_PATTERN, ENTITY, result);
+
+        return super.listModelBuilder.createCityModel(result);
+    }
+
+    public CityModel save(CityRequest request){
         var entity = new City();
         BeanUtils.copyProperties(request, entity);
 
-        logger.info("{}: {}", ENTITY, entity);
+        logger.info(MESSAGE_PATTERN, ENTITY, entity);
         entity = cityRepository.save(entity);
         return super.modelBuilder.createCityModel(entity);
     }

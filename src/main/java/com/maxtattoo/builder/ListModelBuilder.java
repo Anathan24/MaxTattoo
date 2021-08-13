@@ -1,11 +1,7 @@
 package com.maxtattoo.builder;
 
-import com.maxtattoo.pojo.entity.Client;
-import com.maxtattoo.pojo.entity.Order;
-import com.maxtattoo.pojo.entity.OrderType;
-import com.maxtattoo.pojo.model.ClientModel;
-import com.maxtattoo.pojo.model.OrderModel;
-import com.maxtattoo.pojo.model.OrderTypeModel;
+import com.maxtattoo.pojo.entity.*;
+import com.maxtattoo.pojo.model.*;
 import org.springframework.stereotype.Service;
 
 import java.util.LinkedList;
@@ -17,6 +13,14 @@ public class ListModelBuilder extends ModelBuilder {
 
     public List<ClientModel> createClientModel(List<Client> clients) {
         return clients.stream().map(super::createClientModel).collect(Collectors.toCollection(LinkedList::new));
+    }
+
+    public List<CityModel> createCityModel(List<City> cities){
+        return cities.stream().map(super::createCityModel).collect(Collectors.toCollection(LinkedList::new));
+    }
+
+    public List<LocationModel> createLocationModel(List<Location> locations){
+        return locations.stream().map(super::createLocationModel).collect(Collectors.toCollection(LinkedList::new));
     }
 
     public List<OrderModel> createOrderModel(List<Order> orders) {

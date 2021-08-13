@@ -1,5 +1,6 @@
 package com.maxtattoo.command;
 
+import com.maxtattoo.builder.ListModelBuilder;
 import com.maxtattoo.builder.ModelBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,6 +15,8 @@ abstract class GenericCommand {
 
     @Autowired
     protected ModelBuilder modelBuilder;
+    @Autowired
+    protected ListModelBuilder listModelBuilder;
 
     String buildEntityNotFoundErrorMessage(String entityName, Long entityId){
         return FIND_BY_ID.getValue().concat(entityName + "(" + entityId + ")");

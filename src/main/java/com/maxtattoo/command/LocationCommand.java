@@ -41,6 +41,12 @@ public class LocationCommand extends GenericCommand {
         }
     }
 
+    public List<LocationModel> findAll(){
+        var result = locationRepository.findAll();
+        logger.info(MESSAGE_PATTERN, ENTITY, result);
+        return super.listModelBuilder.createLocationModel(result);
+    }
+
     public LocationModel save(LocationRequest request, List<Long> cities){
         var entity = (Location) EntityFactory.getEntity(Location.class.getSimpleName());
         BeanUtils.copyProperties(request, entity);
