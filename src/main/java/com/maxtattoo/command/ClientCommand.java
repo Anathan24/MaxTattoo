@@ -25,11 +25,11 @@ public class ClientCommand extends GenericCommand {
     private LocationRepository locationRepository;
 
     public ClientModel findById(Long id) {
-        var result = clientRepository.findById(id);
-        logger.info(MESSAGE_PATTERN, ENTITY, result);
+        var entity = clientRepository.findById(id);
+        logger.info(MESSAGE_PATTERN, ENTITY, entity);
 
-        if (result.isPresent()) {
-            return super.modelBuilder.createClientModel(result.get());
+        if (entity.isPresent()) {
+            return super.modelBuilder.createClientModel(entity.get());
         }else {
             String message = super.buildEntityNotFoundErrorMessage(Client.class.getSimpleName(), id);
             logger.warn(message);
@@ -38,13 +38,13 @@ public class ClientCommand extends GenericCommand {
     }
 
     public List<ClientModel> findAll(){
-        var result = clientRepository.findAll();
-        logger.info(MESSAGE_PATTERN, ENTITY, result);
-        return super.listModelBuilder.createClientModel(result);
+        var entity = clientRepository.findAll();
+        logger.info(MESSAGE_PATTERN, ENTITY, entity);
+
+        return super.listModelBuilder.createClientModel(entity);
     }
 
     public List<ClientModel> findClientByNameAndSurname(String name, String surname) {
-        //TODO da implementare il motore di ricerca
         var clientsEntity = clientRepository.findClientByNameAndSurname(name, surname);
         return super.listModelBuilder.createClientModel(clientsEntity);
     }
@@ -61,6 +61,7 @@ public class ClientCommand extends GenericCommand {
         BeanUtils.copyProperties(request, entity);
         logger.info("{}: {}", ENTITY, entity);
         entity = clientRepository.save(entity);
+
         return super.modelBuilder.createClientModel(entity);
     }
 

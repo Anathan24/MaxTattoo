@@ -1,6 +1,5 @@
 package com.maxtattoo.command;
 
-import com.maxtattoo.builder.ListModelBuilder;
 import com.maxtattoo.database.repository.CityRepository;
 import com.maxtattoo.database.repository.LocationRepository;
 import com.maxtattoo.exception.ResourceNotFoundException;
@@ -25,10 +24,10 @@ public class CityCommand extends GenericCommand {
     private LocationRepository locationRepository;
 
     public CityModel findById(Long id){
-        var result = cityRepository.findById(id);
-        logger.info(MESSAGE_PATTERN, ENTITY, result);
-        if(result.isPresent()) {
-            return super.modelBuilder.createCityModel(result.get());
+        var entity = cityRepository.findById(id);
+        logger.info(MESSAGE_PATTERN, ENTITY, entity);
+        if(entity.isPresent()) {
+            return super.modelBuilder.createCityModel(entity.get());
         } else {
             String message = super.buildEntityNotFoundErrorMessage(City.class.getSimpleName(), id);
             logger.warn(message);
@@ -37,10 +36,10 @@ public class CityCommand extends GenericCommand {
     }
 
     public List<CityModel> findAll(){
-        var result = cityRepository.findAll();
-        logger.info(MESSAGE_PATTERN, ENTITY, result);
+        var entity = cityRepository.findAll();
+        logger.info(MESSAGE_PATTERN, ENTITY, entity);
 
-        return super.listModelBuilder.createCityModel(result);
+        return super.listModelBuilder.createCityModel(entity);
     }
 
     public CityModel save(CityRequest request){

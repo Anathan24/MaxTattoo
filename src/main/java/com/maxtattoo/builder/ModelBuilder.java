@@ -3,7 +3,6 @@ package com.maxtattoo.builder;
 import com.maxtattoo.pojo.ModelFactory;
 import com.maxtattoo.pojo.entity.*;
 import com.maxtattoo.pojo.model.*;
-import com.maxtattoo.utils.DateUtils;
 import org.springframework.beans.BeanUtils;
 import com.maxtattoo.service.StateEnum;
 import org.springframework.stereotype.Service;
@@ -22,7 +21,6 @@ public class ModelBuilder extends GenericBuilder {
         BeanUtils.copyProperties(client, model);
         model.setLocation(createLocationModel(client.getLocation()));
         model.setOrders(client.getOrders().stream().map(this::createOrderModel).collect(Collectors.toCollection(LinkedList::new)));
-        logger.info(MODEL_STRING, model);
         return model;
     }
 
@@ -35,7 +33,6 @@ public class ModelBuilder extends GenericBuilder {
         model.setOrderType(createOrderTypeModel(order.getOrderType()));
         model.setState(StateEnum.findByValue(order.getOrderState().getValue()).getValue());
         model.setSittings(order.getSittings().stream().map(this::createSittingModel).collect(Collectors.toCollection(LinkedList::new)));
-        logger.info(MODEL_STRING, model);
         return model;
     }
 
@@ -49,7 +46,6 @@ public class ModelBuilder extends GenericBuilder {
         model.setState(StateEnum.findByValue(sitting.getSittingState().getValue()).getValue());
         model.setPaints(sitting.getPaints().stream().map(this::createPaintModel).collect(Collectors.toCollection(LinkedList::new)));
         model.setNeedles(sitting.getNeedles().stream().map(this::createNeedleModel).collect(Collectors.toCollection(LinkedList::new)));
-        logger.info(MODEL_STRING, model);
         return model;
     }
 
@@ -59,7 +55,6 @@ public class ModelBuilder extends GenericBuilder {
 
         var model = (CityModel)ModelFactory.getEntity(CityModel.class.getSimpleName());
         BeanUtils.copyProperties(city, model);
-        logger.info(MODEL_STRING, model);
         return model;
     }
 
@@ -70,7 +65,6 @@ public class ModelBuilder extends GenericBuilder {
         var model = (LocationModel)ModelFactory.getEntity(LocationModel.class.getSimpleName());
         BeanUtils.copyProperties(location, model);
         model.setCites(location.getCities().stream().map(this::createCityModel).collect(Collectors.toCollection(LinkedList::new)));
-        logger.info(MODEL_STRING, model);
         return model;
     }
 
@@ -80,7 +74,6 @@ public class ModelBuilder extends GenericBuilder {
 
         var model = (OrderTypeModel)ModelFactory.getEntity(OrderTypeModel.class.getSimpleName());
         BeanUtils.copyProperties(orderType, model);
-        logger.info(MODEL_STRING, model);
         return model;
     }
 
@@ -90,7 +83,6 @@ public class ModelBuilder extends GenericBuilder {
 
         var model = (PaintModel)ModelFactory.getEntity(PaintModel.class.getSimpleName());
         BeanUtils.copyProperties(paint, model);
-        logger.info(MODEL_STRING, model);
         return model;
     }
 
@@ -100,7 +92,6 @@ public class ModelBuilder extends GenericBuilder {
 
         var model = (NeedleModel)ModelFactory.getEntity(NeedleModel.class.getSimpleName());
         BeanUtils.copyProperties(needle, model);
-        logger.info(MODEL_STRING, model);
         return model;
     }
 }

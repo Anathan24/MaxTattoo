@@ -19,16 +19,18 @@ public class OrderController extends GenericController {
         var command = beanFactory.getBean(OrderCommand.class);
         logger.info("{} id: {}", REQUEST, id);
         var model = command.findById(id);
+        logger.info(MESSAGE_PATTERN, MODEL, model);
         logger.info(END);
         return ok(model);
     }
 
     @PostMapping(value = "/save", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<OrderModel> saveOrder(@RequestBody OrderRequest request) {
+    public ResponseEntity<OrderModel> save(@RequestBody OrderRequest request) {
         logger.info(START);
         var command = beanFactory.getBean(OrderCommand.class);
         logger.info("{}: {}", REQUEST, request);
         var model = command.save(request);
+        logger.info(MESSAGE_PATTERN, MODEL, model);
         logger.info(END);
         return ok(model);
     }

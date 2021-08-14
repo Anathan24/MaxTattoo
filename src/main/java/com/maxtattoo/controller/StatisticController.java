@@ -21,6 +21,7 @@ public class StatisticController extends GenericController{
         var command = super.beanFactory.getBean(StatisticCommand.class);
         logger.info("{} = StartDate: {}, EndDate: {}",REQUEST, startDate, endDate);
         var statistic = command.calculateStatisticByPeriod(startDate,endDate);
+        logger.info(MESSAGE_PATTERN, MODEL, statistic);
         logger.info(END);
         return ok(statistic);
     }

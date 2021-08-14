@@ -21,6 +21,7 @@ public class PaintController extends GenericController{
         var command = super.beanFactory.getBean(PaintCommand.class);
         logger.info("{} id: {}", REQUEST, id);
         var model = command.findById(id);
+        logger.info(MESSAGE_PATTERN, MODEL, model);
         logger.info(END);
         return ok(model);
     }
@@ -31,6 +32,7 @@ public class PaintController extends GenericController{
         var command = super.beanFactory.getBean(PaintCommand.class);
         logger.info("{} ", REQUEST);
         var model = command.findAll();
+        logger.info(MESSAGE_PATTERN, MODEL, model);
         logger.info(END);
         return ok(model);
     }
@@ -40,6 +42,7 @@ public class PaintController extends GenericController{
         logger.info(START);
         var command = super.beanFactory.getBean(PaintCommand.class);
         var model = command.save(request);
+        logger.info(MESSAGE_PATTERN, MODEL, model);
         logger.info(END);
         return ok(model);
     }

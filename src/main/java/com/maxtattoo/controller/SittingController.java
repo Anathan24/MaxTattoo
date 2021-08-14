@@ -21,6 +21,7 @@ public class SittingController extends GenericController{
         var command = super.beanFactory.getBean(SittingCommand.class);
         logger.info("{}: {}",REQUEST, id);
         var model = command.findById(id);
+        logger.info(MESSAGE_PATTERN, MODEL, model);
         logger.info(END);
         return ok(model);
     }
@@ -33,6 +34,7 @@ public class SittingController extends GenericController{
         var command = super.beanFactory.getBean(SittingCommand.class);
         logger.info("{}: {}", REQUEST, request);
         var model = command.save(request, paints, needles);
+        logger.info(MESSAGE_PATTERN, MODEL, model);
         logger.info(END);
         return ok(model);
     }

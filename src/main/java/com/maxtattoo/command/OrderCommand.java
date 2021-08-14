@@ -29,11 +29,11 @@ public class OrderCommand extends GenericCommand {
     private DataValidator dataValidator;
 
     public OrderModel findById(Long id) {
-        var result = orderRepository.findById(id);
-        logger.info("{}: {}", ENTITY, result);
+        var entity = orderRepository.findById(id);
+        logger.info(MESSAGE_PATTERN, ENTITY, entity);
 
-        if(result.isPresent()) {
-            return super.modelBuilder.createOrderModel(result.get());
+        if(entity.isPresent()) {
+            return super.modelBuilder.createOrderModel(entity.get());
         }else{
             String message = super.buildEntityNotFoundErrorMessage(Order.class.getSimpleName(), id);
             logger.warn(message);
@@ -55,7 +55,7 @@ public class OrderCommand extends GenericCommand {
         entity.setOrderType(dataValidator.orderTypeValidation(request.getOrderType()));
         entity.setOrderState(dataValidator.stateValidation(request.getOrderState()));
 
-        logger.info("{}: {}", ENTITY, entity);
+        logger.info(MESSAGE_PATTERN, ENTITY, entity);
         entity = orderRepository.save(entity);
         return super.modelBuilder.createOrderModel(entity);
     }

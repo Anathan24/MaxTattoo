@@ -21,6 +21,7 @@ public class ClientController extends GenericController {
         var command = beanFactory.getBean(ClientCommand.class);
         logger.info("{}: {}",REQUEST, id);
         var model = command.findById(id);
+        logger.info(MESSAGE_PATTERN, MODEL, model);
         logger.info(END);
         return ok(model);
     }
@@ -31,6 +32,7 @@ public class ClientController extends GenericController {
         var command = super.beanFactory.getBean(ClientCommand.class);
         logger.info("{}", REQUEST);
         var model = command.findAll();
+        logger.info(MESSAGE_PATTERN, MODEL, model);
         logger.info(END);
         return ok(model);
     }
@@ -41,6 +43,7 @@ public class ClientController extends GenericController {
         var command = beanFactory.getBean(ClientCommand.class);
         logger.info("{} = name: {}, surname: {}",REQUEST, name, surname);
         var model = command.findClientByNameAndSurname(name, surname);
+        logger.info(MESSAGE_PATTERN, MODEL, model);
         logger.info(END);
         return ok(model);
     }
@@ -51,6 +54,7 @@ public class ClientController extends GenericController {
         var command = beanFactory.getBean(ClientCommand.class);
         logger.info("{}: {}",REQUEST, request);
         var model = command.save(request);
+        logger.info(MESSAGE_PATTERN, MODEL, model);
         logger.info(END);
         return ok(model);
     }

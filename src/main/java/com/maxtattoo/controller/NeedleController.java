@@ -21,6 +21,7 @@ public class NeedleController extends GenericController{
         var command = super.beanFactory.getBean(NeedleCommand.class);
         logger.info("{} id: {}", REQUEST, id);
         var model = command.findById(id);
+        logger.info(MESSAGE_PATTERN, MODEL, model);
         logger.info(END);
         return ok(model);
     }
@@ -31,6 +32,7 @@ public class NeedleController extends GenericController{
         var command = super.beanFactory.getBean(NeedleCommand.class);
         logger.info("{}", REQUEST);
         var model = command.findAll();
+        logger.info(MESSAGE_PATTERN, MODEL, model);
         logger.info(END);
         return ok(model);
     }
@@ -41,6 +43,7 @@ public class NeedleController extends GenericController{
         var command = super.beanFactory.getBean(NeedleCommand.class);
         logger.info("{}: {}", REQUEST, request);
         var model = command.save(request);
+        logger.info(MESSAGE_PATTERN, MODEL, model);
         logger.info(END);
         return ok(model);
     }
