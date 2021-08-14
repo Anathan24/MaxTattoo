@@ -5,7 +5,6 @@ DROP TABLE IF EXISTS paints;
 DROP TABLE IF EXISTS needles;
 DROP TABLE IF EXISTS sittings;
 DROP TABLE IF EXISTS orders;
-DROP TABLE IF EXISTS states;
 DROP TABLE IF EXISTS order_types;
 DROP TABLE IF EXISTS cities;
 DROP TABLE IF EXISTS clients;
@@ -41,11 +40,6 @@ CREATE TABLE clients(
     FOREIGN KEY(location_id_fk) REFERENCES locations(location_id_pk)
 );
 
-CREATE TABLE states(
-    state_id_pk BIGSERIAL PRIMARY KEY,
-    state_name VARCHAR
-);
-
 CREATE TABLE order_types(
     order_type_id_pk BIGSERIAL PRIMARY KEY,
     type VARCHAR
@@ -55,14 +49,13 @@ CREATE TABLE orders(
     order_id_pk BIGSERIAL PRIMARY KEY,
     sitting_number NUMERIC,
     order_price NUMERIC,
+    state VARCHAR,
     prepayment NUMERIC,
     start_date date,
     end_date date,
 
-    state_id_fk BIGINT,
     order_type_id_fk BIGINT,
     client_id_fk BIGINT,
-    FOREIGN KEY(state_id_fk) REFERENCES states(state_id_pk),
     FOREIGN KEY(order_type_id_fk) REFERENCES order_types(order_type_id_pk),
     FOREIGN KEY(client_id_fk) REFERENCES clients(client_id_pk)
 );
@@ -70,14 +63,13 @@ CREATE TABLE orders(
 CREATE TABLE sittings(
     sitting_id_pk BIGSERIAL PRIMARY KEY,
     sitting_date TIMESTAMP,
+    state VARCHAR,
     spent_hours DOUBLE PRECISION,
     sitting_price NUMERIC,
     sitting_note VARCHAR,
     paid NUMERIC,
 
-    state_id_fk BIGINT,
     order_id_fk BIGINT,
-    FOREIGN KEY(state_id_fk) REFERENCES states(state_id_pk),
     FOREIGN KEY(order_id_fk) REFERENCES orders(order_id_pk)
 );
 

@@ -22,6 +22,9 @@ public class Sitting implements GenericEntity {
     @Column(name = "sitting_date")
     private Timestamp date;
 
+    @Column(name = "state")
+    private String sittingState;
+
     @Column(name = "spent_hours")
     private double spentHours;
 
@@ -36,10 +39,6 @@ public class Sitting implements GenericEntity {
 
     @Column(name = "order_id_fk")
     private Long orderId;
-
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "state_id_fk")
-    private State sittingState;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "sittings_paints", joinColumns = @JoinColumn(name = "sitting_id_fk"), inverseJoinColumns = @JoinColumn(name = "paint_id_fk"))

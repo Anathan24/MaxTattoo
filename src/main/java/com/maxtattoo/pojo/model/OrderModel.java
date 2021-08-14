@@ -12,12 +12,12 @@ public class OrderModel implements GenericModel {
     private Long id;
     private int sittingNumber;
     private int orderPrice;
+    private String orderState;
     private int prepayment;
     private Date startDate;
     private Date endDate;
 
     private OrderTypeModel orderType;
-    private String state;
 
     private List<SittingModel> sittings = new LinkedList<>();
 }

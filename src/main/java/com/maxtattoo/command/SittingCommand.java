@@ -1,6 +1,7 @@
 package com.maxtattoo.command;
 
 import com.maxtattoo.database.repository.*;
+import com.maxtattoo.exception.IllegalStateException;
 import com.maxtattoo.exception.ResourceNotFoundException;
 import com.maxtattoo.pojo.EntityFactory;
 import com.maxtattoo.pojo.entity.Sitting;
@@ -9,6 +10,7 @@ import com.maxtattoo.pojo.entity.SittingPaint;
 import com.maxtattoo.pojo.model.SittingModel;
 import com.maxtattoo.pojo.request.SittingRequest;
 import com.maxtattoo.service.DataValidator;
+import com.maxtattoo.service.StateEnum;
 import com.maxtattoo.utils.DateUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,7 +51,16 @@ public class SittingCommand extends GenericCommand {
         BeanUtils.copyProperties(request, entity);
 
         entity.setDate(DateUtils.getTimestampFromString(request.getDate()));
-        entity.setSittingState(dataValidator.stateValidation(request.getSittingState()));
+
+        String sittingState = request.getSittingState();
+        if(sittingState.equals(StateEnum.TO_DO.getValue()) || sittingState.equals(StateEnum.FINISHED.getValue())){
+            entity.setSittingState(sittingState);
+        }else{
+            String message = "Illegal state ("+sittingState+") for Sitting!";
+            logger.info(message);
+            throw new IllegalStateException(message, HttpStatus.NOT_ACCEPTABLE);
+        }
+
         entity.setOrderId(dataValidator.orderIdValidation(request.getOrderId()));
 
         logger.info(MESSAGE_PATTERN, ENTITY, entity);

@@ -8,7 +8,7 @@ public abstract class GenericException extends RuntimeException{
 
     private final HttpStatus status;
 
-    protected GenericException(String message, HttpStatus status){
+    public GenericException(String message, HttpStatus status){
         super(message);
         this.status = status;
     }

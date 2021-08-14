@@ -25,6 +25,9 @@ public class Order implements GenericEntity {
     @Column(name = "order_price")
     private int orderPrice;
 
+    @Column(name = "state")
+    private String orderState;
+
     @Column(name = "prepayment")
     private int prepayment;
 
@@ -40,10 +43,6 @@ public class Order implements GenericEntity {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "order_type_id_fk")
     private OrderType orderType;
-
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
-    @JoinColumn(name = "state_id_fk")
-    private State orderState;
 
     @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE}, fetch = FetchType.EAGER)
     @JoinColumn(name = "order_id_fk")

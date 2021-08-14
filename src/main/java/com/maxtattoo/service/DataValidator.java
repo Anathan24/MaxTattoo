@@ -4,7 +4,6 @@ import com.maxtattoo.database.repository.*;
 import com.maxtattoo.exception.DateFormatException;
 import com.maxtattoo.exception.ResourceNotFoundException;
 import com.maxtattoo.pojo.entity.OrderType;
-import com.maxtattoo.pojo.entity.State;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -26,8 +25,6 @@ public class DataValidator extends GenericService {
     private OrderRepository orderRepository;
     @Autowired
     private OrderTypeRepository orderTypeRepository;
-    @Autowired
-    private StateRepository stateRepository;
 
     public Long clientIdValidation(Long clientId) {
         if(clientId != null && clientRepository.existsById(clientId)){
@@ -44,16 +41,6 @@ public class DataValidator extends GenericService {
             return orderId;
         } else {
             String message = REQUEST_PARAMETER+"orderId("+orderId+") not found! Insert an existing client id.";
-            logger.warn(message);
-            throw new ResourceNotFoundException(message, HttpStatus.NOT_FOUND);
-        }
-    }
-
-    public State stateValidation(String state) {
-        if(state != null && stateRepository.stateExistsByValue(state) != null) {
-            return stateRepository.findStateByValue(state);
-        } else {
-            String message = REQUEST_PARAMETER+"State ("+state+") not found! Insert an existing state.";
             logger.warn(message);
             throw new ResourceNotFoundException(message, HttpStatus.NOT_FOUND);
         }

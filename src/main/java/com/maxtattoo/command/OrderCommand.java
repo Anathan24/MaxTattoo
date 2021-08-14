@@ -2,7 +2,6 @@ package com.maxtattoo.command;
 
 import com.maxtattoo.database.repository.OrderRepository;
 import com.maxtattoo.database.repository.OrderTypeRepository;
-import com.maxtattoo.database.repository.StateRepository;
 import com.maxtattoo.exception.ResourceNotFoundException;
 import com.maxtattoo.pojo.EntityFactory;
 import com.maxtattoo.pojo.entity.Order;
@@ -31,8 +30,6 @@ public class OrderCommand extends GenericCommand {
     @Autowired
     private OrderTypeRepository orderTypeRepository;
     @Autowired
-    private StateRepository stateRepository;
-    @Autowired
     private DataValidator dataValidator;
 
     public OrderModel findById(Long id) {
@@ -48,10 +45,29 @@ public class OrderCommand extends GenericCommand {
         }
     }
 
+    public OrderTypeModel findOrderTypeById(Long id){
+        var result = orderTypeRepository.findById(id);
+        logger.info(MESSAGE_PATTERN, ENTITY, result);
+
+        if(result.isPresent()) {
+            return super.modelBuilder.createOrderTypeModel(result.get());
+        }else{
+            String message = super.buildEntityNotFoundErrorMessage(OrderType.class.getSimpleName(), id);
+            logger.warn(message);
+            throw new ResourceNotFoundException(message, HttpStatus.NOT_FOUND);
+        }
+    }
+
     public List<OrderModel> findAll(){
         var entity = orderRepository.findAll();
         logger.info(MESSAGE_PATTERN, ENTITY, entity);
         return super.listModelBuilder.createOrderModel(entity);
+    }
+
+    public List<OrderTypeModel> findAllOrderTypes(){
+        var result = orderTypeRepository.findAll();
+        logger.info(MESSAGE_PATTERN, ENTITY, result);
+        return listModelBuilder.createOrderTypeModel(result);
     }
 
     public OrderModel save(OrderRequest request) {
@@ -66,7 +82,6 @@ public class OrderCommand extends GenericCommand {
         entity.setEndDate(endDate);
         entity.setClientId(dataValidator.clientIdValidation(request.getClientId()));
         entity.setOrderType(dataValidator.orderTypeValidation(request.getOrderType()));
-        entity.setOrderState(dataValidator.stateValidation(request.getOrderState()));
 
         logger.info(MESSAGE_PATTERN, ENTITY, entity);
         entity = orderRepository.save(entity);
@@ -81,25 +96,5 @@ public class OrderCommand extends GenericCommand {
         logger.info(MESSAGE_PATTERN, ENTITY, entity);
         entity = orderTypeRepository.save(entity);
         return super.modelBuilder.createOrderTypeModel(entity);
-    }
-
-
-    public OrderTypeModel findOrderTypeById(Long id){
-        var result = orderTypeRepository.findById(id);
-        logger.info(MESSAGE_PATTERN, ENTITY, result);
-
-        if(result.isPresent()) {
-            return super.modelBuilder.createOrderTypeModel(result.get());
-        }else{
-            String message = super.buildEntityNotFoundErrorMessage(OrderType.class.getSimpleName(), id);
-            logger.warn(message);
-            throw new ResourceNotFoundException(message, HttpStatus.NOT_FOUND);
-        }
-    }
-
-    public List<OrderTypeModel> findAllOrderTypes(){
-        var result = orderTypeRepository.findAll();
-        logger.info(MESSAGE_PATTERN, ENTITY, result);
-        return listModelBuilder.createOrderTypeModel(result);
     }
 }

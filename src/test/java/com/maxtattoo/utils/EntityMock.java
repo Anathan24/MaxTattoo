@@ -27,7 +27,7 @@ public class EntityMock {
         order.setEndDate(new Date(System.currentTimeMillis()));
         order.setSittingNumber(17);
         order.setPrepayment(200);
-        order.setOrderState(createStateEntity(1L, "Finished"));
+        order.setOrderState("Finished");
         order.setOrderType(createOrderTypeEntity(1L, "Tattoo"));
         return order;
     }
@@ -41,15 +41,8 @@ public class EntityMock {
         sitting.setNotes("Sitting Note");
         sitting.setPrice(75);
         sitting.setSpentHours(4);
-        sitting.setSittingState(createStateEntity(1L, "TODO"));
+        sitting.setSittingState("TODO");
         return sitting;
-    }
-
-    public State createStateEntity(Long stateId, String stateName){
-        State state = new State();
-        state.setId(stateId);
-        state.setValue(stateName);
-        return state;
     }
 
     public OrderType createOrderTypeEntity(Long orderTypeId, String type){
