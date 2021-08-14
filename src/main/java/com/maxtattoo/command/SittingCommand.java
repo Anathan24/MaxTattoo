@@ -51,16 +51,7 @@ public class SittingCommand extends GenericCommand {
         BeanUtils.copyProperties(request, entity);
 
         entity.setDate(DateUtils.getTimestampFromString(request.getDate()));
-
-        String sittingState = request.getSittingState();
-        if(sittingState.equals(StateEnum.TO_DO.getValue()) || sittingState.equals(StateEnum.FINISHED.getValue())){
-            entity.setSittingState(sittingState);
-        }else{
-            String message = "Illegal state ("+sittingState+") for Sitting!";
-            logger.info(message);
-            throw new IllegalStateException(message, HttpStatus.NOT_ACCEPTABLE);
-        }
-
+        entity.setSittingState(dataValidator.sittingStateValidation(request.getState()));
         entity.setOrderId(dataValidator.orderIdValidation(request.getOrderId()));
 
         logger.info(MESSAGE_PATTERN, ENTITY, entity);

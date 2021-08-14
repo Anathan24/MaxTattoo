@@ -2,6 +2,8 @@ package com.maxtattoo.service;
 
 import com.maxtattoo.database.repository.*;
 import com.maxtattoo.exception.DateFormatException;
+import com.maxtattoo.exception.IllegalStateException;
+import com.maxtattoo.exception.NullPointerException;
 import com.maxtattoo.exception.ResourceNotFoundException;
 import com.maxtattoo.pojo.entity.OrderType;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,11 +48,6 @@ public class DataValidator extends GenericService {
         }
     }
 
-    public OrderType orderTypeIdValidation(){
-        //TODO da implementare.
-        return null;
-    }
-
     public OrderType orderTypeValidation(String orderType){
         if (orderType != null && orderTypeRepository.orderTypeExistsByValue(orderType) != null){
             return orderTypeRepository.findOrderTypeByValue(orderType);
@@ -58,6 +55,22 @@ public class DataValidator extends GenericService {
             String message = "Order type ("+orderType+") not found! Insert an existing order type.";
             logger.warn(message);
             throw new ResourceNotFoundException(message, HttpStatus.NOT_FOUND);
+        }
+    }
+
+    public String sittingStateValidation(String sittingState){
+        if(sittingState == null){
+            String message = "The state is null! Sitting state con not be null.";
+            logger.info(message);
+            throw new NullPointerException(message, HttpStatus.NOT_ACCEPTABLE);
+        }
+
+        if(sittingState.equals(StateEnum.TO_DO.getValue()) || sittingState.equals(StateEnum.FINISHED.getValue())){
+            return sittingState;
+        } else {
+            String message = "ILLEGAL STATE ("+sittingState+") FOR SITTING!";
+            logger.info(message);
+            throw new IllegalStateException(message, HttpStatus.NOT_ACCEPTABLE);
         }
     }
 

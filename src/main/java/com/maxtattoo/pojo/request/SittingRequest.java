@@ -13,7 +13,7 @@ public class SittingRequest implements GenericRequest {
     private int price;
     private String notes;
     private int paid;
-    private String sittingState;
+    private String state;
     private Long orderId;
 
 }
