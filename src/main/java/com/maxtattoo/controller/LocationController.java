@@ -19,7 +19,6 @@ public class LocationController extends GenericController{
     public ResponseEntity<LocationModel> findById(@RequestParam Long id){
         logger.info(START);
         var command = super.beanFactory.getBean(LocationCommand.class);
-        logger.info("{}: {}",REQUEST, id);
         var model = command.findById(id);
         logger.info(MESSAGE_PATTERN, MODEL, model);
         logger.info(END);

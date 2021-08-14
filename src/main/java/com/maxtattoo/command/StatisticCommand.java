@@ -20,7 +20,7 @@ public class StatisticCommand extends GenericCommand{
     @Autowired
     private OrdersStatisticCalculusService ordersStatisticCalculusService;
     @Autowired
-    private OrderTypeCommand orderTypeCommand;
+    private OrderCommand orderCommand;
     @Autowired
     private DataValidator dataValidator;
 
@@ -34,7 +34,7 @@ public class StatisticCommand extends GenericCommand{
         totalClientsCalculusService.calculateClientsTotalStatistic(statistic, start, end);
         ordersStatisticCalculusService.calculateOrdersTotalStatistic(statistic, start, end);
 
-        var orderTypes = orderTypeCommand.findAll();
+        var orderTypes = orderCommand.findAllOrderTypes();
         var orderStatistic = statistic.getOrdersStatistic().getOrdersStatisticByType();
 
         orderTypes.forEach(type -> orderStatistic.add(ordersStatisticCalculusService.calculateOrdersStatisticByType(start, end, type.getValue())));

@@ -30,7 +30,6 @@ public class ClientController extends GenericController {
     public ResponseEntity<List<ClientModel>> findAll(){
         logger.info(START);
         var command = super.beanFactory.getBean(ClientCommand.class);
-        logger.info("{}", REQUEST);
         var model = command.findAll();
         logger.info(MESSAGE_PATTERN, MODEL, model);
         logger.info(END);

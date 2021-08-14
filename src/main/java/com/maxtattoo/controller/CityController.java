@@ -30,7 +30,6 @@ public class CityController extends GenericController {
     public ResponseEntity<List<CityModel>> findAllCities(){
         logger.info(START);
         var command = beanFactory.getBean(CityCommand.class);
-        logger.info("{}", REQUEST);
         var model = command.findAll();
         logger.info(MESSAGE_PATTERN, MODEL, model);
         logger.info(END);

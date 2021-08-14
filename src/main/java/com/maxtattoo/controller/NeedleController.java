@@ -30,7 +30,6 @@ public class NeedleController extends GenericController{
     public ResponseEntity<List<NeedleModel>> findAll(){
         logger.info(START);
         var command = super.beanFactory.getBean(NeedleCommand.class);
-        logger.info("{}", REQUEST);
         var model = command.findAll();
         logger.info(MESSAGE_PATTERN, MODEL, model);
         logger.info(END);

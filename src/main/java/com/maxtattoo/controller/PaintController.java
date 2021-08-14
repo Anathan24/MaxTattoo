@@ -30,7 +30,6 @@ public class PaintController extends GenericController{
     public ResponseEntity<List<PaintModel>> findAll(){
         logger.info(START);
         var command = super.beanFactory.getBean(PaintCommand.class);
-        logger.info("{} ", REQUEST);
         var model = command.findAll();
         logger.info(MESSAGE_PATTERN, MODEL, model);
         logger.info(END);

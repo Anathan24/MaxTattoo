@@ -12,7 +12,7 @@ import java.util.Optional;
 public enum StateEnum {
 
     PREVIEW("Preview"),
-    TODO("To do"),
+    TO_DO("To do"),
     IN_PROGRESS("In Progress"),
     FINISHED("Finished");
 

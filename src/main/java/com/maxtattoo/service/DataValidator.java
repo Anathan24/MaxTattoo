@@ -68,7 +68,7 @@ public class DataValidator extends GenericService {
         if (orderType != null && orderTypeRepository.orderTypeExistsByValue(orderType) != null){
             return orderTypeRepository.findOrderTypeByValue(orderType);
         } else {
-            String message = "Order type "+orderType+" not found! Insert an existing order type.";
+            String message = "Order type ("+orderType+") not found! Insert an existing order type.";
             logger.warn(message);
             throw new ResourceNotFoundException(message, HttpStatus.NOT_FOUND);
         }
