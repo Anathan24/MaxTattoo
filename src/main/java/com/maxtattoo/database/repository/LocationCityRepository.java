@@ -2,9 +2,19 @@ package com.maxtattoo.database.repository;
 
 import com.maxtattoo.pojo.entity.LocationCity;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public interface LocationCityRepository extends JpaRepository<LocationCity, Long> {
+
+    @Query("SELECT lc FROM LocationCity lc WHERE lc.cityId = :cityId")
+    List<LocationCity> findAllByCityId(@Param("cityId") Long cityId);
+
+    @Query("SELECT lc FROM LocationCity lc WHERE lc.locationId = :locationId")
+    List<LocationCity> findAllByLocationId(@Param("locationId") Long locationId);
 
 }

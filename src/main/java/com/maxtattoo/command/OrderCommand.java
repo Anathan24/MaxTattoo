@@ -10,7 +10,7 @@ import com.maxtattoo.pojo.model.OrderModel;
 import com.maxtattoo.pojo.model.OrderTypeModel;
 import com.maxtattoo.pojo.request.OrderRequest;
 import com.maxtattoo.pojo.request.OrderTypeRequest;
-import com.maxtattoo.service.DataValidator;
+import com.maxtattoo.service.DataValidatorService;
 import com.maxtattoo.utils.DateUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +30,7 @@ public class OrderCommand extends GenericCommand {
     @Autowired
     private OrderTypeRepository orderTypeRepository;
     @Autowired
-    private DataValidator dataValidator;
+    private DataValidatorService dataValidatorService;
 
     public OrderModel findById(Long id) {
         var entity = orderRepository.findById(id);
@@ -73,15 +73,15 @@ public class OrderCommand extends GenericCommand {
     public OrderModel save(OrderRequest request) {
         Date startDate = DateUtils.getDateFromString(request.getStartDate());
         Date endDate = DateUtils.getDateFromString(request.getEndDate());
-        dataValidator.startDateNotGreaterThenEndDateValidation(startDate, endDate);
+        dataValidatorService.startDateNotGreaterThenEndDateValidation(startDate, endDate);
 
         var entity = (Order) EntityFactory.getEntity(Order.class.getSimpleName());
         BeanUtils.copyProperties(request, entity);
 
         entity.setStartDate(startDate);
         entity.setEndDate(endDate);
-        entity.setClientId(dataValidator.clientIdValidation(request.getClientId()));
-        entity.setOrderType(dataValidator.orderTypeValidation(request.getOrderType()));
+        entity.setClientId(dataValidatorService.clientIdValidation(request.getClientId()));
+        entity.setOrderType(dataValidatorService.orderTypeValidation(request.getOrderType()));
 
         logger.info(MESSAGE_PATTERN, ENTITY, entity);
         entity = orderRepository.save(entity);

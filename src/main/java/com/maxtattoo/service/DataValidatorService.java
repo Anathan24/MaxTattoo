@@ -15,7 +15,7 @@ import java.sql.Date;
 import static com.maxtattoo.utils.ErrorMessage.START_DATE_GREATER_THEN_END_DATE;
 
 @Service
-public class DataValidator extends GenericService {
+public class DataValidatorService extends GenericService {
 
     private final String REQUEST_PARAMETER = "Request parameter ";
 
@@ -68,7 +68,7 @@ public class DataValidator extends GenericService {
         if(sittingState.equals(StateEnum.TO_DO.getValue()) || sittingState.equals(StateEnum.FINISHED.getValue())){
             return sittingState;
         } else {
-            String message = "ILLEGAL STATE ("+sittingState+") FOR SITTING!";
+            String message = "Illegal state ("+sittingState+") for Sitting!";
             logger.info(message);
             throw new IllegalStateException(message, HttpStatus.NOT_ACCEPTABLE);
         }

@@ -1,7 +1,7 @@
 package com.maxtattoo.command;
 
 import com.maxtattoo.pojo.statistic.TotalStatisticWrapper;
-import com.maxtattoo.service.DataValidator;
+import com.maxtattoo.service.DataValidatorService;
 import com.maxtattoo.service.OrdersStatisticCalculusService;
 import com.maxtattoo.service.TotalClientsCalculusService;
 import com.maxtattoo.utils.DateUtils;
@@ -22,13 +22,13 @@ public class StatisticCommand extends GenericCommand{
     @Autowired
     private OrderCommand orderCommand;
     @Autowired
-    private DataValidator dataValidator;
+    private DataValidatorService dataValidatorService;
 
     public TotalStatisticWrapper calculateStatisticByPeriod(String startDate, String endDate){
         Date start = DateUtils.getDateFromString(startDate);
         Date end = DateUtils.getDateFromString(endDate);
 
-        dataValidator.startDateNotGreaterThenEndDateValidation(start, end);
+        dataValidatorService.startDateNotGreaterThenEndDateValidation(start, end);
 
         final TotalStatisticWrapper statistic = new TotalStatisticWrapper();
         totalClientsCalculusService.calculateClientsTotalStatistic(statistic, start, end);

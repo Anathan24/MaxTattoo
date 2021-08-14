@@ -8,7 +8,8 @@ import com.maxtattoo.pojo.entity.Location;
 import com.maxtattoo.pojo.entity.LocationCity;
 import com.maxtattoo.pojo.model.LocationModel;
 import com.maxtattoo.pojo.request.LocationRequest;
-import com.maxtattoo.service.DataValidator;
+import com.maxtattoo.service.DataValidatorService;
+import com.maxtattoo.service.DeleteForeignKeyRelationService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -26,7 +27,9 @@ public class LocationCommand extends GenericCommand {
     @Autowired
     private LocationCityRepository locationCityRepository;
     @Autowired
-    private DataValidator dataValidator;
+    private DataValidatorService dataValidatorService;
+    @Autowired
+    private DeleteForeignKeyRelationService deleteForeignKeyRelationService;
 
     public LocationModel findById(Long id){
         var result = locationRepository.findById(id);
@@ -57,13 +60,23 @@ public class LocationCommand extends GenericCommand {
         return super.modelBuilder.createLocationModel(entity);
     }
 
-    private void saveLocationCityRelation(Long locationId, List<Long> cities) {
+    public String deleteById(Long locationId){
+        if(locationRepository.existsById(locationId)){
+            deleteForeignKeyRelationService.deleteLocationCityRelationByLocationId(locationId);
+            deleteForeignKeyRelationService.deleteClientLocationRelationByLocationId(locationId);
+            locationRepository.deleteById(locationId);
+            return "OK";
+        } else {
+            return "KO"+" - Location with id("+locationId+") does not exist!";
+        }
+    }
+
+    public void saveLocationCityRelation(Long locationId, List<Long> cities) {
         if (cities != null) {
             cities.forEach(cityId -> {
                 var entity = (LocationCity) EntityFactory.getEntity(LocationCity.class.getSimpleName());
                 entity.setLocationId(locationId);
                 entity.setCityId(cityId);
-                logger.info(MESSAGE_PATTERN, "LocationCities", entity);
                 locationCityRepository.save(entity);
             });
         }

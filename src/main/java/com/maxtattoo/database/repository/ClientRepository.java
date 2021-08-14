@@ -22,4 +22,7 @@ public interface ClientRepository extends JpaRepository<Client, Long> {
            "WHERE (o.startDate >= :startDate AND o.endDate <= :endDate) AND (:gender is null or c.gender = :gender)" )
     Integer countTotalClientsNumber(@Param("startDate") Date startDate, @Param("endDate") Date endDate, @Param("gender") String gender);
 
+    @Query("SELECT c FROM Client c WHERE c.location.id = :locationId")
+    List<Client> findAllByLocationId(@Param("locationId") Long locationId);
+
 }

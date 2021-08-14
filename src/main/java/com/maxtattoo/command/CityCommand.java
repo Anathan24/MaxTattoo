@@ -1,11 +1,12 @@
 package com.maxtattoo.command;
 
 import com.maxtattoo.database.repository.CityRepository;
-import com.maxtattoo.database.repository.LocationRepository;
 import com.maxtattoo.exception.ResourceNotFoundException;
+import com.maxtattoo.pojo.EntityFactory;
 import com.maxtattoo.pojo.entity.City;
 import com.maxtattoo.pojo.model.CityModel;
 import com.maxtattoo.pojo.request.CityRequest;
+import com.maxtattoo.service.DeleteForeignKeyRelationService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -21,7 +22,7 @@ public class CityCommand extends GenericCommand {
     @Autowired
     private CityRepository cityRepository;
     @Autowired
-    private LocationRepository locationRepository;
+    private DeleteForeignKeyRelationService deleteForeignKeyRelationService;
 
     public CityModel findById(Long id){
         var entity = cityRepository.findById(id);
@@ -43,11 +44,21 @@ public class CityCommand extends GenericCommand {
     }
 
     public CityModel save(CityRequest request){
-        var entity = new City();
+        var entity = (City) EntityFactory.getEntity(City.class.getSimpleName());
         BeanUtils.copyProperties(request, entity);
 
         logger.info(MESSAGE_PATTERN, ENTITY, entity);
         entity = cityRepository.save(entity);
         return super.modelBuilder.createCityModel(entity);
+    }
+
+    public String deleteById(Long cityId){
+        if(cityRepository.existsById(cityId)){
+            deleteForeignKeyRelationService.deleteLocationCityRelationByCityId(cityId);
+            cityRepository.deleteById(cityId);
+            return "OK";
+        } else {
+            return "KO"+" - City with id("+cityId+") does not exist!";
+        }
     }
 }

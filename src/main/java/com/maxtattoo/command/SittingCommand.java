@@ -1,7 +1,6 @@
 package com.maxtattoo.command;
 
 import com.maxtattoo.database.repository.*;
-import com.maxtattoo.exception.IllegalStateException;
 import com.maxtattoo.exception.ResourceNotFoundException;
 import com.maxtattoo.pojo.EntityFactory;
 import com.maxtattoo.pojo.entity.Sitting;
@@ -9,8 +8,7 @@ import com.maxtattoo.pojo.entity.SittingNeedle;
 import com.maxtattoo.pojo.entity.SittingPaint;
 import com.maxtattoo.pojo.model.SittingModel;
 import com.maxtattoo.pojo.request.SittingRequest;
-import com.maxtattoo.service.DataValidator;
-import com.maxtattoo.service.StateEnum;
+import com.maxtattoo.service.DataValidatorService;
 import com.maxtattoo.utils.DateUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +29,7 @@ public class SittingCommand extends GenericCommand {
     @Autowired
     private SittingNeedleRepository sittingNeedleRepository;
     @Autowired
-    private DataValidator dataValidator;
+    private DataValidatorService dataValidatorService;
 
     public SittingModel findById(Long id) {
         var result = sittingRepository.findById(id);
@@ -51,8 +49,8 @@ public class SittingCommand extends GenericCommand {
         BeanUtils.copyProperties(request, entity);
 
         entity.setDate(DateUtils.getTimestampFromString(request.getDate()));
-        entity.setSittingState(dataValidator.sittingStateValidation(request.getState()));
-        entity.setOrderId(dataValidator.orderIdValidation(request.getOrderId()));
+        entity.setSittingState(dataValidatorService.sittingStateValidation(request.getState()));
+        entity.setOrderId(dataValidatorService.orderIdValidation(request.getOrderId()));
 
         logger.info(MESSAGE_PATTERN, ENTITY, entity);
         entity = sittingRepository.save(entity);

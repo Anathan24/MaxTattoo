@@ -51,7 +51,6 @@ public class OrderController extends GenericController {
     public ResponseEntity<List<OrderTypeModel>> findAllOrderTypes(){
         logger.info(START);
         var command = super.beanFactory.getBean(OrderCommand.class);
-        logger.info("{}", REQUEST);
         var model = command.findAllOrderTypes();
         logger.info(MESSAGE_PATTERN, MODEL, model);
         logger.info(END);
@@ -70,7 +69,7 @@ public class OrderController extends GenericController {
     }
 
     @PostMapping(value = "/saveOrderType", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<OrderTypeModel> save(@RequestBody OrderTypeRequest request){
+    public ResponseEntity<OrderTypeModel> saveOrderType(@RequestBody OrderTypeRequest request){
         logger.info(START);
         var command = super.beanFactory.getBean(OrderCommand.class);
         logger.info("{}: {}", REQUEST, request);
