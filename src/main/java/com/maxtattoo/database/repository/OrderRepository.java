@@ -7,9 +7,16 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.sql.Date;
+import java.util.List;
 
 @Repository
 public interface OrderRepository extends JpaRepository<Order, Long> {
+
+    @Query("SELECT o FROM Order o WHERE o.clientId = :clientId")
+    List<Order> findAllByClientId(@Param("clientId") Long clientId);
+
+    @Query("SELECT o FROM Order o WHERE o.orderType.id = :orderTypeId")
+    List<Order> findAllByOrderTypeId(@Param("orderTypeId") Long orderTypeId);
 
     @Query("SELECT count(o) " +
            "FROM Order o " +

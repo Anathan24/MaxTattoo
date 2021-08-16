@@ -6,6 +6,8 @@ import com.maxtattoo.pojo.EntityFactory;
 import com.maxtattoo.pojo.entity.Paint;
 import com.maxtattoo.pojo.model.PaintModel;
 import com.maxtattoo.pojo.request.PaintRequest;
+import com.maxtattoo.service.DataValidatorService;
+import com.maxtattoo.service.DeleteForeignKeyRelationService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -20,6 +22,10 @@ public class PaintCommand extends GenericCommand{
 
     @Autowired
     private PaintRepository paintRepository;
+    @Autowired
+    private DataValidatorService dataValidatorService;
+    @Autowired
+    private DeleteForeignKeyRelationService deleteForeignKeyRelationService;
 
     public PaintModel findById(Long id){
         var result = paintRepository.findById(id);
@@ -47,5 +53,12 @@ public class PaintCommand extends GenericCommand{
         logger.info(MESSAGE_PATTERN, ENTITY, entity);
         entity = paintRepository.save(entity);
         return super.modelBuilder.createPaintModel(entity);
+    }
+
+    public String deleteById(Long id){
+        var paintId = dataValidatorService.paintIdValidation(id);
+        deleteForeignKeyRelationService.deleteSittingPaintRelationByPaintId(paintId);
+        paintRepository.deleteById(paintId);
+        return "OK";
     }
 }

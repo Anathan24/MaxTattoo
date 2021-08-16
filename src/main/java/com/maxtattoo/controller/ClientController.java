@@ -58,4 +58,14 @@ public class ClientController extends GenericController {
         return ok(model);
     }
 
+    @DeleteMapping(value = "/deleteById")
+    public ResponseEntity<String> deleteById(@RequestParam("clientId") Long id){
+        logger.info(START);
+        var command = super.beanFactory.getBean(ClientCommand.class);
+        logger.info(MESSAGE_PATTERN, REQUEST, id);
+        var result = command.deleteById(id);
+        logger.info("RESULT: {}", result);
+        logger.info(END);
+        return ok(result);
+    }
 }

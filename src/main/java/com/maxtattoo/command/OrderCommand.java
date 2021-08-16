@@ -11,6 +11,7 @@ import com.maxtattoo.pojo.model.OrderTypeModel;
 import com.maxtattoo.pojo.request.OrderRequest;
 import com.maxtattoo.pojo.request.OrderTypeRequest;
 import com.maxtattoo.service.DataValidatorService;
+import com.maxtattoo.service.DeleteForeignKeyRelationService;
 import com.maxtattoo.utils.DateUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,8 @@ public class OrderCommand extends GenericCommand {
     private OrderTypeRepository orderTypeRepository;
     @Autowired
     private DataValidatorService dataValidatorService;
+    @Autowired
+    private DeleteForeignKeyRelationService deleteForeignKeyRelationService;
 
     public OrderModel findById(Long id) {
         var entity = orderRepository.findById(id);
@@ -88,7 +91,6 @@ public class OrderCommand extends GenericCommand {
         return super.modelBuilder.createOrderModel(entity);
     }
 
-
     public OrderTypeModel saveOrderType(OrderTypeRequest request){
         var entity = (OrderType) EntityFactory.getEntity(OrderType.class.getSimpleName());
         BeanUtils.copyProperties(request, entity);
@@ -96,5 +98,18 @@ public class OrderCommand extends GenericCommand {
         logger.info(MESSAGE_PATTERN, ENTITY, entity);
         entity = orderTypeRepository.save(entity);
         return super.modelBuilder.createOrderTypeModel(entity);
+    }
+
+    public String deleteById(Long id){
+        var orderId = dataValidatorService.orderIdValidation(id);
+        orderRepository.deleteById(orderId);
+        return "OK";
+    }
+
+    public String deleteOrderTypeById(Long typeId){
+        var orderTypeId = dataValidatorService.orderTypeIdValidation(typeId);
+        deleteForeignKeyRelationService.deleteOrderOrderTypeRelationByOrderTypeId(orderTypeId);
+        orderTypeRepository.deleteById(orderTypeId);
+        return "OK";
     }
 }

@@ -6,6 +6,8 @@ import com.maxtattoo.pojo.EntityFactory;
 import com.maxtattoo.pojo.entity.Needle;
 import com.maxtattoo.pojo.model.NeedleModel;
 import com.maxtattoo.pojo.request.NeedleRequest;
+import com.maxtattoo.service.DataValidatorService;
+import com.maxtattoo.service.DeleteForeignKeyRelationService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -20,6 +22,10 @@ public class NeedleCommand extends GenericCommand {
 
     @Autowired
     private NeedleRepository needleRepository;
+    @Autowired
+    private DataValidatorService dataValidatorService;
+    @Autowired
+    private DeleteForeignKeyRelationService deleteForeignKeyRelationService;
 
     public NeedleModel findById(Long id) {
         var result = needleRepository.findById(id);
@@ -47,5 +53,12 @@ public class NeedleCommand extends GenericCommand {
         logger.info(MESSAGE_PATTERN, ENTITY, entity);
         entity = needleRepository.save(entity);
         return super.modelBuilder.createNeedleModel(entity);
+    }
+
+    public String deleteById(Long id){
+        var needleId = dataValidatorService.needleIdValidation(id);
+        deleteForeignKeyRelationService.deleteSittingNeedleRelationByNeedleId(needleId);
+        needleRepository.deleteById(needleId);
+        return "OK";
     }
 }

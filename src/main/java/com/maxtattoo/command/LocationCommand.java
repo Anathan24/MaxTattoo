@@ -44,7 +44,7 @@ public class LocationCommand extends GenericCommand {
         }
     }
 
-    public List<LocationModel> findAll(){
+    public List<LocationModel> findAll() {
         var result = locationRepository.findAll();
         logger.info(MESSAGE_PATTERN, ENTITY, result);
         return super.listModelBuilder.createLocationModel(result);
@@ -60,23 +60,20 @@ public class LocationCommand extends GenericCommand {
         return super.modelBuilder.createLocationModel(entity);
     }
 
-    public String deleteById(Long locationId){
-        if(locationRepository.existsById(locationId)){
-            deleteForeignKeyRelationService.deleteLocationCityRelationByLocationId(locationId);
-            deleteForeignKeyRelationService.deleteClientLocationRelationByLocationId(locationId);
-            locationRepository.deleteById(locationId);
-            return "OK";
-        } else {
-            return "KO"+" - Location with id("+locationId+") does not exist!";
-        }
+    public String deleteById(Long id) {
+        var locationId = dataValidatorService.locationIdValidation(id);
+        deleteForeignKeyRelationService.deleteLocationCityRelationByLocationId(locationId);
+        deleteForeignKeyRelationService.deleteClientLocationRelationByLocationId(locationId);
+        locationRepository.deleteById(locationId);
+        return "OK";
     }
 
     public void saveLocationCityRelation(Long locationId, List<Long> cities) {
         if (cities != null) {
             cities.forEach(cityId -> {
                 var entity = (LocationCity) EntityFactory.getEntity(LocationCity.class.getSimpleName());
-                entity.setLocationId(locationId);
-                entity.setCityId(cityId);
+                entity.setLocationIdFk(locationId);
+                entity.setCityIdFk(cityId);
                 locationCityRepository.save(entity);
             });
         }

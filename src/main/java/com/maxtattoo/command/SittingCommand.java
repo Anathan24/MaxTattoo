@@ -9,6 +9,7 @@ import com.maxtattoo.pojo.entity.SittingPaint;
 import com.maxtattoo.pojo.model.SittingModel;
 import com.maxtattoo.pojo.request.SittingRequest;
 import com.maxtattoo.service.DataValidatorService;
+import com.maxtattoo.service.DeleteForeignKeyRelationService;
 import com.maxtattoo.utils.DateUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,8 @@ public class SittingCommand extends GenericCommand {
     private SittingNeedleRepository sittingNeedleRepository;
     @Autowired
     private DataValidatorService dataValidatorService;
+    @Autowired
+    private DeleteForeignKeyRelationService deleteForeignKeyRelationService;
 
     public SittingModel findById(Long id) {
         var result = sittingRepository.findById(id);
@@ -59,6 +62,14 @@ public class SittingCommand extends GenericCommand {
         saveSittingNeedleRelation(entity.getId(), needles);
 
         return super.modelBuilder.createSittingModel(entity);
+    }
+
+    public String deleteById(Long id) {
+        var sittingId = dataValidatorService.sittingIdValidation(id);
+        deleteForeignKeyRelationService.deleteSittingPaintRelationBySittingId(sittingId);
+        deleteForeignKeyRelationService.deleteSittingNeedleRelationBySittingId(sittingId);
+        sittingRepository.deleteById(sittingId);
+        return "OK";
     }
 
     private void saveSittingPaintRelation(Long sittingId, List<Long> paints){

@@ -17,8 +17,8 @@ public class LocationCity implements GenericEntity{
     private Long id;
 
     @Column(name = "location_id_fk")
-    private Long locationId;
+    private Long locationIdFk;
 
     @Column(name = "city_id_fk")
-    private Long cityId;
+    private Long cityIdFk;
 }

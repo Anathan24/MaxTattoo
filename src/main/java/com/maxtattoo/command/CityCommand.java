@@ -6,6 +6,7 @@ import com.maxtattoo.pojo.EntityFactory;
 import com.maxtattoo.pojo.entity.City;
 import com.maxtattoo.pojo.model.CityModel;
 import com.maxtattoo.pojo.request.CityRequest;
+import com.maxtattoo.service.DataValidatorService;
 import com.maxtattoo.service.DeleteForeignKeyRelationService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,8 @@ public class CityCommand extends GenericCommand {
 
     @Autowired
     private CityRepository cityRepository;
+    @Autowired
+    private DataValidatorService dataValidatorService;
     @Autowired
     private DeleteForeignKeyRelationService deleteForeignKeyRelationService;
 
@@ -52,13 +55,10 @@ public class CityCommand extends GenericCommand {
         return super.modelBuilder.createCityModel(entity);
     }
 
-    public String deleteById(Long cityId){
-        if(cityRepository.existsById(cityId)){
-            deleteForeignKeyRelationService.deleteLocationCityRelationByCityId(cityId);
-            cityRepository.deleteById(cityId);
-            return "OK";
-        } else {
-            return "KO"+" - City with id("+cityId+") does not exist!";
-        }
+    public String deleteById(Long id){
+        var cityId = dataValidatorService.cityIdValidation(id);
+        deleteForeignKeyRelationService.deleteLocationCityRelationByCityId(cityId);
+        cityRepository.deleteById(cityId);
+        return "OK";
     }
 }

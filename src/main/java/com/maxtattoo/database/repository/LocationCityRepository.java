@@ -11,10 +11,10 @@ import java.util.List;
 @Repository
 public interface LocationCityRepository extends JpaRepository<LocationCity, Long> {
 
-    @Query("SELECT lc FROM LocationCity lc WHERE lc.cityId = :cityId")
+    @Query("SELECT lc FROM LocationCity lc WHERE lc.cityIdFk = :cityId")
     List<LocationCity> findAllByCityId(@Param("cityId") Long cityId);
 
-    @Query("SELECT lc FROM LocationCity lc WHERE lc.locationId = :locationId")
+    @Query("SELECT lc FROM LocationCity lc WHERE lc.locationIdFk = :locationId")
     List<LocationCity> findAllByLocationId(@Param("locationId") Long locationId);
 
 }

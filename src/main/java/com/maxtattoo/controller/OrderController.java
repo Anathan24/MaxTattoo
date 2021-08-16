@@ -78,4 +78,26 @@ public class OrderController extends GenericController {
         logger.info(END);
         return ok(model);
     }
+
+    @DeleteMapping(value = "/deleteById")
+    public ResponseEntity<String> deleteById(@RequestParam("orderId") Long id){
+        logger.info(START);
+        var command = super.beanFactory.getBean(OrderCommand.class);
+        logger.info(MESSAGE_PATTERN, REQUEST, id);
+        var result = command.deleteById(id);
+        logger.info("RESULT: {}", result);
+        logger.info(END);
+        return ok(result);
+    }
+
+    @DeleteMapping(value = "/deleteOrderTypeById")
+    public ResponseEntity<String> deleteOrderTypeById(@RequestParam("orderTypeId") Long id){
+        logger.info(START);
+        var command = super.beanFactory.getBean(OrderCommand.class);
+        logger.info(MESSAGE_PATTERN, REQUEST, id);
+        var result = command.deleteOrderTypeById(id);
+        logger.info("RESULT: {}", result);
+        logger.info(END);
+        return ok(result);
+    }
 }

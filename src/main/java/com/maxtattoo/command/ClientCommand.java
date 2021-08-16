@@ -7,6 +7,8 @@ import com.maxtattoo.pojo.EntityFactory;
 import com.maxtattoo.pojo.entity.Client;
 import com.maxtattoo.pojo.model.ClientModel;
 import com.maxtattoo.pojo.request.ClientRequest;
+import com.maxtattoo.service.DataValidatorService;
+import com.maxtattoo.service.DeleteForeignKeyRelationService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -23,6 +25,10 @@ public class ClientCommand extends GenericCommand {
     private ClientRepository clientRepository;
     @Autowired
     private LocationRepository locationRepository;
+    @Autowired
+    private DataValidatorService dataValidatorService;
+    @Autowired
+    private DeleteForeignKeyRelationService deleteForeignKeyRelationService;
 
     public ClientModel findById(Long id) {
         var entity = clientRepository.findById(id);
@@ -63,6 +69,13 @@ public class ClientCommand extends GenericCommand {
         entity = clientRepository.save(entity);
 
         return super.modelBuilder.createClientModel(entity);
+    }
+
+    public String deleteById(Long id){
+        var clientId = dataValidatorService.clientIdValidation(id);
+        deleteForeignKeyRelationService.deleteClientOrderRelationByClientId(clientId);
+        clientRepository.deleteById(clientId);
+        return "OK";
     }
 
 }
