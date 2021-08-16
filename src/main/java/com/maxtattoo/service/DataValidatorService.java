@@ -12,8 +12,6 @@ import org.springframework.stereotype.Service;
 
 import java.sql.Date;
 
-import static com.maxtattoo.utils.ErrorMessage.START_DATE_GREATER_THEN_END_DATE;
-
 @Service
 public class DataValidatorService extends GenericService {
 
@@ -48,7 +46,7 @@ public class DataValidatorService extends GenericService {
 
     public void startDateNotGreaterThenEndDateValidation(Date startDate, Date endDate) {
         if(startDate.after(endDate)){
-            String message = START_DATE_GREATER_THEN_END_DATE.getValue();
+            String message = "The start date can not be greater then end date!";
             logger.warn(message);
             throw new DateFormatException(message, HttpStatus.NOT_ACCEPTABLE);
         }

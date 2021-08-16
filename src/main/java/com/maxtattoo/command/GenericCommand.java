@@ -9,8 +9,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import static com.maxtattoo.utils.ErrorMessage.FIND_BY_ID;
-
 abstract class GenericCommand {
     final Logger logger = LoggerFactory.getLogger(this.getClass());
     final AbstractFactory entityFactory = FactoryProducer.getFactory(EntityFactory.class.getSimpleName());
@@ -23,6 +21,6 @@ abstract class GenericCommand {
     protected ListModelBuilder listModelBuilder;
 
     String buildEntityNotFoundErrorMessage(String entityName, Long entityId){
-        return FIND_BY_ID.getValue().concat(entityName + "(" + entityId + ")");
+        return "findById does not found any record for entity: "+entityName + " with id(" + entityId + ")";
     }
 }
