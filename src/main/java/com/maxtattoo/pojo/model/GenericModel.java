@@ -1,4 +1,6 @@
 package com.maxtattoo.pojo.model;
 
-public interface GenericModel {
+import com.maxtattoo.pojo.GenericObject;
+
+public interface GenericModel  extends GenericObject {
 }

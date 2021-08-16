@@ -1,4 +1,6 @@
 package com.maxtattoo.pojo.entity;
 
-public interface GenericEntity {
+import com.maxtattoo.pojo.GenericObject;
+
+public interface GenericEntity extends GenericObject {
 }

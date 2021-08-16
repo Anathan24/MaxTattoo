@@ -2,12 +2,11 @@ package com.maxtattoo.command;
 
 import com.maxtattoo.database.repository.CityRepository;
 import com.maxtattoo.exception.ResourceNotFoundException;
-import com.maxtattoo.pojo.EntityFactory;
 import com.maxtattoo.pojo.entity.City;
 import com.maxtattoo.pojo.model.CityModel;
 import com.maxtattoo.pojo.request.CityRequest;
-import com.maxtattoo.service.DataValidatorService;
 import com.maxtattoo.service.DeleteForeignKeyRelationService;
+import com.maxtattoo.service.IdValidatorService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -22,8 +21,9 @@ public class CityCommand extends GenericCommand {
 
     @Autowired
     private CityRepository cityRepository;
+
     @Autowired
-    private DataValidatorService dataValidatorService;
+    private IdValidatorService idValidatorService;
     @Autowired
     private DeleteForeignKeyRelationService deleteForeignKeyRelationService;
 
@@ -43,11 +43,11 @@ public class CityCommand extends GenericCommand {
         var entity = cityRepository.findAll();
         logger.info(MESSAGE_PATTERN, ENTITY, entity);
 
-        return super.listModelBuilder.createCityModel(entity);
+        return super.listModelBuilder.createListCityModel(entity);
     }
 
     public CityModel save(CityRequest request){
-        var entity = (City) EntityFactory.getEntity(City.class.getSimpleName());
+        var entity = (City) entityFactory.getObject(City.class.getSimpleName());
         BeanUtils.copyProperties(request, entity);
 
         logger.info(MESSAGE_PATTERN, ENTITY, entity);
@@ -56,7 +56,7 @@ public class CityCommand extends GenericCommand {
     }
 
     public String deleteById(Long id){
-        var cityId = dataValidatorService.cityIdValidation(id);
+        var cityId = idValidatorService.cityIdValidation(id);
         deleteForeignKeyRelationService.deleteLocationCityRelationByCityId(cityId);
         cityRepository.deleteById(cityId);
         return "OK";

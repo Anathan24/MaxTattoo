@@ -3,12 +3,11 @@ package com.maxtattoo.command;
 import com.maxtattoo.database.repository.ClientRepository;
 import com.maxtattoo.database.repository.LocationRepository;
 import com.maxtattoo.exception.ResourceNotFoundException;
-import com.maxtattoo.pojo.EntityFactory;
 import com.maxtattoo.pojo.entity.Client;
 import com.maxtattoo.pojo.model.ClientModel;
 import com.maxtattoo.pojo.request.ClientRequest;
-import com.maxtattoo.service.DataValidatorService;
 import com.maxtattoo.service.DeleteForeignKeyRelationService;
+import com.maxtattoo.service.IdValidatorService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -25,8 +24,9 @@ public class ClientCommand extends GenericCommand {
     private ClientRepository clientRepository;
     @Autowired
     private LocationRepository locationRepository;
+
     @Autowired
-    private DataValidatorService dataValidatorService;
+    private IdValidatorService idValidatorService;
     @Autowired
     private DeleteForeignKeyRelationService deleteForeignKeyRelationService;
 
@@ -43,25 +43,25 @@ public class ClientCommand extends GenericCommand {
         }
     }
 
-    public List<ClientModel> findAll(){
+    public List<ClientModel> findAll() {
         var entity = clientRepository.findAll();
         logger.info(MESSAGE_PATTERN, ENTITY, entity);
 
-        return super.listModelBuilder.createClientModel(entity);
+        return super.listModelBuilder.createListClientModel(entity);
     }
 
     public List<ClientModel> findClientByNameAndSurname(String name, String surname) {
         var clientsEntity = clientRepository.findClientByNameAndSurname(name, surname);
-        return super.listModelBuilder.createClientModel(clientsEntity);
+        return super.listModelBuilder.createListClientModel(clientsEntity);
     }
 
-    public ClientModel save(ClientRequest request){
-        var entity = (Client)EntityFactory.getEntity(Client.class.getSimpleName());
+    public ClientModel save(ClientRequest request) {
+        var entity = (Client) entityFactory.getObject(Client.class.getSimpleName());
 
         if(request.getLocationId() != null && locationRepository.existsById(request.getLocationId())){
             entity.setLocation(locationRepository.getById(request.getLocationId()));
         } else {
-            logger.info("LOCATION ID({}) DOES NOT EXIST!",request.getLocationId());
+            logger.info("REQUEST PARAMETER locationId({}) DOES NOT EXIST!",request.getLocationId());
         }
 
         BeanUtils.copyProperties(request, entity);
@@ -71,8 +71,8 @@ public class ClientCommand extends GenericCommand {
         return super.modelBuilder.createClientModel(entity);
     }
 
-    public String deleteById(Long id){
-        var clientId = dataValidatorService.clientIdValidation(id);
+    public String deleteById(Long id) {
+        var clientId = idValidatorService.clientIdValidation(id);
         deleteForeignKeyRelationService.deleteClientOrderRelationByClientId(clientId);
         clientRepository.deleteById(clientId);
         return "OK";

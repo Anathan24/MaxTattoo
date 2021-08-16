@@ -1,4 +1,6 @@
 package com.maxtattoo.pojo.request;
 
-public interface GenericRequest {
+import com.maxtattoo.pojo.GenericObject;
+
+public interface GenericRequest extends GenericObject {
 }

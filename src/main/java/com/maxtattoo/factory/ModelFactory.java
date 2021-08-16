@@ -1,13 +1,13 @@
-package com.maxtattoo.pojo;
+package com.maxtattoo.factory;
 
+import com.maxtattoo.pojo.GenericObject;
 import com.maxtattoo.pojo.model.*;
 
-public class ModelFactory {
+public class ModelFactory implements AbstractFactory {
 
-    private ModelFactory(){}
-
-    public static GenericModel getEntity(String entitySimpleName){
-        switch(entitySimpleName){
+    @Override
+    public GenericObject getObject(String objectSimpleName) {
+        switch(objectSimpleName){
             case "ClientModel":
                 return new ClientModel();
             case "LocationModel":
@@ -25,7 +25,7 @@ public class ModelFactory {
             case "PaintModel":
                 return new PaintModel();
 
-            default: throw new IllegalArgumentException("Entity with name "+entitySimpleName+" does not exist");
+            default: throw new IllegalArgumentException("Model with name "+objectSimpleName+" does not exist");
         }
     }
 }

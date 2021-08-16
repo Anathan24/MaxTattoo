@@ -1,15 +1,13 @@
-package com.maxtattoo.pojo;
+package com.maxtattoo.factory;
 
+import com.maxtattoo.pojo.GenericObject;
 import com.maxtattoo.pojo.entity.*;
-import org.springframework.stereotype.Service;
 
-@Service
-public class EntityFactory {
+public class EntityFactory implements AbstractFactory {
 
-    private EntityFactory(){}
-
-    public static GenericEntity getEntity(String entitySimpleName){
-        switch(entitySimpleName){
+    @Override
+    public GenericObject getObject(String objectSimpleName) {
+        switch(objectSimpleName) {
             case "Client":
                 return new Client();
             case "Location":
@@ -33,7 +31,7 @@ public class EntityFactory {
             case "Paint":
                 return new Paint();
 
-            default: throw new IllegalArgumentException("Entity with name "+entitySimpleName+" does not exist");
+            default: throw new IllegalArgumentException("Entity with name "+objectSimpleName+" does not exist");
         }
     }
 

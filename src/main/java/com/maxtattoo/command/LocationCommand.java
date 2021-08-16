@@ -3,13 +3,12 @@ package com.maxtattoo.command;
 import com.maxtattoo.database.repository.LocationCityRepository;
 import com.maxtattoo.database.repository.LocationRepository;
 import com.maxtattoo.exception.ResourceNotFoundException;
-import com.maxtattoo.pojo.EntityFactory;
 import com.maxtattoo.pojo.entity.Location;
 import com.maxtattoo.pojo.entity.LocationCity;
 import com.maxtattoo.pojo.model.LocationModel;
 import com.maxtattoo.pojo.request.LocationRequest;
-import com.maxtattoo.service.DataValidatorService;
 import com.maxtattoo.service.DeleteForeignKeyRelationService;
+import com.maxtattoo.service.IdValidatorService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -26,8 +25,9 @@ public class LocationCommand extends GenericCommand {
     private LocationRepository locationRepository;
     @Autowired
     private LocationCityRepository locationCityRepository;
+
     @Autowired
-    private DataValidatorService dataValidatorService;
+    private IdValidatorService idValidatorService;
     @Autowired
     private DeleteForeignKeyRelationService deleteForeignKeyRelationService;
 
@@ -47,11 +47,11 @@ public class LocationCommand extends GenericCommand {
     public List<LocationModel> findAll() {
         var result = locationRepository.findAll();
         logger.info(MESSAGE_PATTERN, ENTITY, result);
-        return super.listModelBuilder.createLocationModel(result);
+        return super.listModelBuilder.createListLocationModel(result);
     }
 
     public LocationModel save(LocationRequest request, List<Long> cities){
-        var entity = (Location) EntityFactory.getEntity(Location.class.getSimpleName());
+        var entity = (Location) entityFactory.getObject(Location.class.getSimpleName());
         BeanUtils.copyProperties(request, entity);
 
         logger.info(MESSAGE_PATTERN, ENTITY, entity);
@@ -61,7 +61,7 @@ public class LocationCommand extends GenericCommand {
     }
 
     public String deleteById(Long id) {
-        var locationId = dataValidatorService.locationIdValidation(id);
+        var locationId = idValidatorService.locationIdValidation(id);
         deleteForeignKeyRelationService.deleteLocationCityRelationByLocationId(locationId);
         deleteForeignKeyRelationService.deleteClientLocationRelationByLocationId(locationId);
         locationRepository.deleteById(locationId);
@@ -71,7 +71,7 @@ public class LocationCommand extends GenericCommand {
     public void saveLocationCityRelation(Long locationId, List<Long> cities) {
         if (cities != null) {
             cities.forEach(cityId -> {
-                var entity = (LocationCity) EntityFactory.getEntity(LocationCity.class.getSimpleName());
+                var entity = (LocationCity) entityFactory.getObject(LocationCity.class.getSimpleName());
                 entity.setLocationIdFk(locationId);
                 entity.setCityIdFk(cityId);
                 locationCityRepository.save(entity);

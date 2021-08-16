@@ -2,12 +2,11 @@ package com.maxtattoo.command;
 
 import com.maxtattoo.database.repository.NeedleRepository;
 import com.maxtattoo.exception.ResourceNotFoundException;
-import com.maxtattoo.pojo.EntityFactory;
 import com.maxtattoo.pojo.entity.Needle;
 import com.maxtattoo.pojo.model.NeedleModel;
 import com.maxtattoo.pojo.request.NeedleRequest;
-import com.maxtattoo.service.DataValidatorService;
 import com.maxtattoo.service.DeleteForeignKeyRelationService;
+import com.maxtattoo.service.IdValidatorService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -22,8 +21,9 @@ public class NeedleCommand extends GenericCommand {
 
     @Autowired
     private NeedleRepository needleRepository;
+
     @Autowired
-    private DataValidatorService dataValidatorService;
+    private IdValidatorService idValidatorService;
     @Autowired
     private DeleteForeignKeyRelationService deleteForeignKeyRelationService;
 
@@ -43,11 +43,11 @@ public class NeedleCommand extends GenericCommand {
     public List<NeedleModel> findAll(){
         var result = needleRepository.findAll();
         logger.info(MESSAGE_PATTERN, ENTITY, result);
-        return super.listModelBuilder.createNeedleModel(result);
+        return super.listModelBuilder.createListNeedleModel(result);
     }
 
     public NeedleModel save(NeedleRequest request){
-        var entity = (Needle) EntityFactory.getEntity(Needle.class.getSimpleName());
+        var entity = (Needle) entityFactory.getObject(Needle.class.getSimpleName());
         BeanUtils.copyProperties(request, entity);
 
         logger.info(MESSAGE_PATTERN, ENTITY, entity);
@@ -56,7 +56,7 @@ public class NeedleCommand extends GenericCommand {
     }
 
     public String deleteById(Long id){
-        var needleId = dataValidatorService.needleIdValidation(id);
+        var needleId = idValidatorService.needleIdValidation(id);
         deleteForeignKeyRelationService.deleteSittingNeedleRelationByNeedleId(needleId);
         needleRepository.deleteById(needleId);
         return "OK";

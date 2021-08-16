@@ -2,12 +2,11 @@ package com.maxtattoo.command;
 
 import com.maxtattoo.database.repository.PaintRepository;
 import com.maxtattoo.exception.ResourceNotFoundException;
-import com.maxtattoo.pojo.EntityFactory;
 import com.maxtattoo.pojo.entity.Paint;
 import com.maxtattoo.pojo.model.PaintModel;
 import com.maxtattoo.pojo.request.PaintRequest;
-import com.maxtattoo.service.DataValidatorService;
 import com.maxtattoo.service.DeleteForeignKeyRelationService;
+import com.maxtattoo.service.IdValidatorService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -22,8 +21,9 @@ public class PaintCommand extends GenericCommand{
 
     @Autowired
     private PaintRepository paintRepository;
+
     @Autowired
-    private DataValidatorService dataValidatorService;
+    private IdValidatorService idValidatorService;
     @Autowired
     private DeleteForeignKeyRelationService deleteForeignKeyRelationService;
 
@@ -43,11 +43,11 @@ public class PaintCommand extends GenericCommand{
     public List<PaintModel> findAll(){
         var result = paintRepository.findAll();
         logger.info(MESSAGE_PATTERN, ENTITY, result);
-        return super.listModelBuilder.createPaintModel(result);
+        return super.listModelBuilder.createListPaintModel(result);
     }
 
     public PaintModel save(PaintRequest request){
-        var entity = (Paint) EntityFactory.getEntity(Paint.class.getSimpleName());
+        var entity = (Paint) entityFactory.getObject(Paint.class.getSimpleName());
         BeanUtils.copyProperties(request, entity);
 
         logger.info(MESSAGE_PATTERN, ENTITY, entity);
@@ -56,7 +56,7 @@ public class PaintCommand extends GenericCommand{
     }
 
     public String deleteById(Long id){
-        var paintId = dataValidatorService.paintIdValidation(id);
+        var paintId = idValidatorService.paintIdValidation(id);
         deleteForeignKeyRelationService.deleteSittingPaintRelationByPaintId(paintId);
         paintRepository.deleteById(paintId);
         return "OK";
