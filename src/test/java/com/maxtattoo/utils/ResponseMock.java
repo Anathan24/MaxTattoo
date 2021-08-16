@@ -1,7 +1,6 @@
 package com.maxtattoo.utils;
 
-import com.maxtattoo.pojo.model.*;
-import com.maxtattoo.service.StateEnum;
+import com.maxtattoo.bean.model.*;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;

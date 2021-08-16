@@ -1,8 +1,9 @@
 package com.maxtattoo.controller;
 
 import com.maxtattoo.command.CityCommand;
-import com.maxtattoo.pojo.model.CityModel;
-import com.maxtattoo.pojo.request.CityRequest;
+import com.maxtattoo.bean.model.CityModel;
+import com.maxtattoo.bean.request.CityRequest;
+import com.maxtattoo.utils.GenericResponse;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -48,7 +49,7 @@ public class CityController extends GenericController {
     }
 
     @DeleteMapping(value = "/deleteById", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> deleteById(@RequestParam(name = "cityId") Long id){
+    public ResponseEntity<GenericResponse> deleteById(@RequestParam(name = "cityId") Long id){
         logger.info(START);
         var command = super.beanFactory.getBean(CityCommand.class);
         logger.info(MESSAGE_PATTERN, REQUEST, id);

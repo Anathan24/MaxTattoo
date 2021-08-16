@@ -2,15 +2,16 @@ package com.maxtattoo.command;
 
 import com.maxtattoo.database.repository.*;
 import com.maxtattoo.exception.ResourceNotFoundException;
-import com.maxtattoo.pojo.entity.Sitting;
-import com.maxtattoo.pojo.entity.SittingNeedle;
-import com.maxtattoo.pojo.entity.SittingPaint;
-import com.maxtattoo.pojo.model.SittingModel;
-import com.maxtattoo.pojo.request.SittingRequest;
+import com.maxtattoo.bean.entity.Sitting;
+import com.maxtattoo.bean.entity.SittingNeedle;
+import com.maxtattoo.bean.entity.SittingPaint;
+import com.maxtattoo.bean.model.SittingModel;
+import com.maxtattoo.bean.request.SittingRequest;
 import com.maxtattoo.service.DataValidatorService;
-import com.maxtattoo.service.DeleteForeignKeyRelationService;
+import com.maxtattoo.service.DeleteForeignKeyService;
 import com.maxtattoo.service.IdValidatorService;
 import com.maxtattoo.utils.DateUtils;
+import com.maxtattoo.utils.GenericResponse;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -35,7 +36,7 @@ public class SittingCommand extends GenericCommand {
     @Autowired
     private IdValidatorService idValidatorService;
     @Autowired
-    private DeleteForeignKeyRelationService deleteForeignKeyRelationService;
+    private DeleteForeignKeyService deleteForeignKeyService;
 
     public SittingModel findById(Long id) {
         var result = sittingRepository.findById(id);
@@ -67,12 +68,12 @@ public class SittingCommand extends GenericCommand {
         return super.modelBuilder.createSittingModel(entity);
     }
 
-    public String deleteById(Long id) {
+    public GenericResponse deleteById(Long id) {
         var sittingId = idValidatorService.sittingIdValidation(id);
-        deleteForeignKeyRelationService.deleteSittingPaintRelationBySittingId(sittingId);
-        deleteForeignKeyRelationService.deleteSittingNeedleRelationBySittingId(sittingId);
+        deleteForeignKeyService.deleteSittingPaintRelationBySittingId(sittingId);
+        deleteForeignKeyService.deleteSittingNeedleRelationBySittingId(sittingId);
         sittingRepository.deleteById(sittingId);
-        return "OK";
+        return GenericResponse.OK;
     }
 
     private void saveSittingPaintRelation(Long sittingId, List<Long> paints){

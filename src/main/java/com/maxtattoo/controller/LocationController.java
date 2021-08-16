@@ -1,8 +1,9 @@
 package com.maxtattoo.controller;
 
 import com.maxtattoo.command.LocationCommand;
-import com.maxtattoo.pojo.model.LocationModel;
-import com.maxtattoo.pojo.request.LocationRequest;
+import com.maxtattoo.bean.model.LocationModel;
+import com.maxtattoo.bean.request.LocationRequest;
+import com.maxtattoo.utils.GenericResponse;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -48,7 +49,7 @@ public class LocationController extends GenericController{
     }
 
     @DeleteMapping(value = "/deleteById", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> deleteById(@RequestParam(name = "locationId") Long id){
+    public ResponseEntity<GenericResponse> deleteById(@RequestParam(name = "locationId") Long id){
         logger.info(START);
         var command = super.beanFactory.getBean(LocationCommand.class);
         logger.info(MESSAGE_PATTERN, REQUEST, id);

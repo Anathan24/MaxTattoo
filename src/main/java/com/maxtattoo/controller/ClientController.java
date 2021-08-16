@@ -1,8 +1,9 @@
 package com.maxtattoo.controller;
 
 import com.maxtattoo.command.ClientCommand;
-import com.maxtattoo.pojo.model.ClientModel;
-import com.maxtattoo.pojo.request.ClientRequest;
+import com.maxtattoo.bean.model.ClientModel;
+import com.maxtattoo.bean.request.ClientRequest;
+import com.maxtattoo.utils.GenericResponse;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -59,7 +60,7 @@ public class ClientController extends GenericController {
     }
 
     @DeleteMapping(value = "/deleteById")
-    public ResponseEntity<String> deleteById(@RequestParam("clientId") Long id){
+    public ResponseEntity<GenericResponse> deleteById(@RequestParam("clientId") Long id){
         logger.info(START);
         var command = super.beanFactory.getBean(ClientCommand.class);
         logger.info(MESSAGE_PATTERN, REQUEST, id);

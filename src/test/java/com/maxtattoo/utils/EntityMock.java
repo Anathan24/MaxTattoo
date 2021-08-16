@@ -1,10 +1,9 @@
 package com.maxtattoo.utils;
 
-import com.maxtattoo.pojo.entity.*;
+import com.maxtattoo.bean.entity.*;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
-import java.sql.Timestamp;
 
 @Service
 public class EntityMock {

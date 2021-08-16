@@ -3,16 +3,17 @@ package com.maxtattoo.command;
 import com.maxtattoo.database.repository.OrderRepository;
 import com.maxtattoo.database.repository.OrderTypeRepository;
 import com.maxtattoo.exception.ResourceNotFoundException;
-import com.maxtattoo.pojo.entity.Order;
-import com.maxtattoo.pojo.entity.OrderType;
-import com.maxtattoo.pojo.model.OrderModel;
-import com.maxtattoo.pojo.model.OrderTypeModel;
-import com.maxtattoo.pojo.request.OrderRequest;
-import com.maxtattoo.pojo.request.OrderTypeRequest;
+import com.maxtattoo.bean.entity.Order;
+import com.maxtattoo.bean.entity.OrderType;
+import com.maxtattoo.bean.model.OrderModel;
+import com.maxtattoo.bean.model.OrderTypeModel;
+import com.maxtattoo.bean.request.OrderRequest;
+import com.maxtattoo.bean.request.OrderTypeRequest;
 import com.maxtattoo.service.DataValidatorService;
-import com.maxtattoo.service.DeleteForeignKeyRelationService;
+import com.maxtattoo.service.DeleteForeignKeyService;
 import com.maxtattoo.service.IdValidatorService;
 import com.maxtattoo.utils.DateUtils;
+import com.maxtattoo.utils.GenericResponse;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -36,7 +37,7 @@ public class OrderCommand extends GenericCommand {
     @Autowired
     private IdValidatorService idValidatorService;
     @Autowired
-    private DeleteForeignKeyRelationService deleteForeignKeyRelationService;
+    private DeleteForeignKeyService deleteForeignKeyService;
 
     public OrderModel findById(Long id) {
         var entity = orderRepository.findById(id);
@@ -103,16 +104,16 @@ public class OrderCommand extends GenericCommand {
         return super.modelBuilder.createOrderTypeModel(entity);
     }
 
-    public String deleteById(Long id){
+    public GenericResponse deleteById(Long id){
         var orderId = idValidatorService.orderIdValidation(id);
         orderRepository.deleteById(orderId);
-        return "OK";
+        return GenericResponse.OK;
     }
 
-    public String deleteOrderTypeById(Long typeId){
+    public GenericResponse deleteOrderTypeById(Long typeId){
         var orderTypeId = idValidatorService.orderTypeIdValidation(typeId);
-        deleteForeignKeyRelationService.deleteOrderOrderTypeRelationByOrderTypeId(orderTypeId);
+        deleteForeignKeyService.deleteOrdersOrderTypeFk(orderTypeId);
         orderTypeRepository.deleteById(orderTypeId);
-        return "OK";
+        return GenericResponse.OK;
     }
 }

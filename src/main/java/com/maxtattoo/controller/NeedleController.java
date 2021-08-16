@@ -1,8 +1,9 @@
 package com.maxtattoo.controller;
 
 import com.maxtattoo.command.NeedleCommand;
-import com.maxtattoo.pojo.model.NeedleModel;
-import com.maxtattoo.pojo.request.NeedleRequest;
+import com.maxtattoo.bean.model.NeedleModel;
+import com.maxtattoo.bean.request.NeedleRequest;
+import com.maxtattoo.utils.GenericResponse;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -48,7 +49,7 @@ public class NeedleController extends GenericController{
     }
 
     @DeleteMapping(value = "/deleteById")
-    public ResponseEntity<String> deleteById(@RequestParam("needleId") Long id){
+    public ResponseEntity<GenericResponse> deleteById(@RequestParam("needleId") Long id){
         logger.info(START);
         var command = super.beanFactory.getBean(NeedleCommand.class);
         logger.info(MESSAGE_PATTERN, REQUEST, id);

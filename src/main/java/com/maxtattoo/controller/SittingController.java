@@ -1,8 +1,9 @@
 package com.maxtattoo.controller;
 
 import com.maxtattoo.command.SittingCommand;
-import com.maxtattoo.pojo.model.SittingModel;
-import com.maxtattoo.pojo.request.SittingRequest;
+import com.maxtattoo.bean.model.SittingModel;
+import com.maxtattoo.bean.request.SittingRequest;
+import com.maxtattoo.utils.GenericResponse;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -40,7 +41,7 @@ public class SittingController extends GenericController{
     }
 
     @DeleteMapping(value = "/deleteById")
-    public ResponseEntity<String> deleteById(@RequestParam("sittingId") Long id){
+    public ResponseEntity<GenericResponse> deleteById(@RequestParam("sittingId") Long id){
         logger.info(START);
         var command = super.beanFactory.getBean(SittingCommand.class);
         logger.info(MESSAGE_PATTERN, REQUEST, id);

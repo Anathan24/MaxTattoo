@@ -3,11 +3,12 @@ package com.maxtattoo.command;
 import com.maxtattoo.database.repository.ClientRepository;
 import com.maxtattoo.database.repository.LocationRepository;
 import com.maxtattoo.exception.ResourceNotFoundException;
-import com.maxtattoo.pojo.entity.Client;
-import com.maxtattoo.pojo.model.ClientModel;
-import com.maxtattoo.pojo.request.ClientRequest;
-import com.maxtattoo.service.DeleteForeignKeyRelationService;
+import com.maxtattoo.bean.entity.Client;
+import com.maxtattoo.bean.model.ClientModel;
+import com.maxtattoo.bean.request.ClientRequest;
+import com.maxtattoo.service.DeleteForeignKeyService;
 import com.maxtattoo.service.IdValidatorService;
+import com.maxtattoo.utils.GenericResponse;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -28,7 +29,7 @@ public class ClientCommand extends GenericCommand {
     @Autowired
     private IdValidatorService idValidatorService;
     @Autowired
-    private DeleteForeignKeyRelationService deleteForeignKeyRelationService;
+    private DeleteForeignKeyService deleteForeignKeyService;
 
     public ClientModel findById(Long id) {
         var entity = clientRepository.findById(id);
@@ -65,17 +66,17 @@ public class ClientCommand extends GenericCommand {
         }
 
         BeanUtils.copyProperties(request, entity);
-        logger.info("{}: {}", ENTITY, entity);
+        logger.info(MESSAGE_PATTERN, ENTITY, entity);
         entity = clientRepository.save(entity);
 
         return super.modelBuilder.createClientModel(entity);
     }
 
-    public String deleteById(Long id) {
+    public GenericResponse deleteById(Long id) {
         var clientId = idValidatorService.clientIdValidation(id);
-        deleteForeignKeyRelationService.deleteClientOrderRelationByClientId(clientId);
+        deleteForeignKeyService.deleteOrdersClientFk(clientId);
         clientRepository.deleteById(clientId);
-        return "OK";
+        return GenericResponse.OK;
     }
 
 }

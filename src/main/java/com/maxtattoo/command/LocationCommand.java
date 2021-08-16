@@ -3,12 +3,13 @@ package com.maxtattoo.command;
 import com.maxtattoo.database.repository.LocationCityRepository;
 import com.maxtattoo.database.repository.LocationRepository;
 import com.maxtattoo.exception.ResourceNotFoundException;
-import com.maxtattoo.pojo.entity.Location;
-import com.maxtattoo.pojo.entity.LocationCity;
-import com.maxtattoo.pojo.model.LocationModel;
-import com.maxtattoo.pojo.request.LocationRequest;
-import com.maxtattoo.service.DeleteForeignKeyRelationService;
+import com.maxtattoo.bean.entity.Location;
+import com.maxtattoo.bean.entity.LocationCity;
+import com.maxtattoo.bean.model.LocationModel;
+import com.maxtattoo.bean.request.LocationRequest;
+import com.maxtattoo.service.DeleteForeignKeyService;
 import com.maxtattoo.service.IdValidatorService;
+import com.maxtattoo.utils.GenericResponse;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -29,7 +30,7 @@ public class LocationCommand extends GenericCommand {
     @Autowired
     private IdValidatorService idValidatorService;
     @Autowired
-    private DeleteForeignKeyRelationService deleteForeignKeyRelationService;
+    private DeleteForeignKeyService deleteForeignKeyService;
 
     public LocationModel findById(Long id){
         var result = locationRepository.findById(id);
@@ -60,12 +61,12 @@ public class LocationCommand extends GenericCommand {
         return super.modelBuilder.createLocationModel(entity);
     }
 
-    public String deleteById(Long id) {
+    public GenericResponse deleteById(Long id) {
         var locationId = idValidatorService.locationIdValidation(id);
-        deleteForeignKeyRelationService.deleteLocationCityRelationByLocationId(locationId);
-        deleteForeignKeyRelationService.deleteClientLocationRelationByLocationId(locationId);
+        deleteForeignKeyService.deleteLocationCityRelationByLocationId(locationId);
+        deleteForeignKeyService.deleteClientsLocationFk(locationId);
         locationRepository.deleteById(locationId);
-        return "OK";
+        return GenericResponse.OK;
     }
 
     public void saveLocationCityRelation(Long locationId, List<Long> cities) {

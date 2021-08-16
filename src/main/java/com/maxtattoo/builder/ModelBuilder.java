@@ -3,8 +3,8 @@ package com.maxtattoo.builder;
 import com.maxtattoo.factory.AbstractFactory;
 import com.maxtattoo.factory.FactoryProducer;
 import com.maxtattoo.factory.ModelFactory;
-import com.maxtattoo.pojo.entity.*;
-import com.maxtattoo.pojo.model.*;
+import com.maxtattoo.bean.entity.*;
+import com.maxtattoo.bean.model.*;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 

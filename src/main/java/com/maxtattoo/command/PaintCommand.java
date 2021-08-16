@@ -2,11 +2,12 @@ package com.maxtattoo.command;
 
 import com.maxtattoo.database.repository.PaintRepository;
 import com.maxtattoo.exception.ResourceNotFoundException;
-import com.maxtattoo.pojo.entity.Paint;
-import com.maxtattoo.pojo.model.PaintModel;
-import com.maxtattoo.pojo.request.PaintRequest;
-import com.maxtattoo.service.DeleteForeignKeyRelationService;
+import com.maxtattoo.bean.entity.Paint;
+import com.maxtattoo.bean.model.PaintModel;
+import com.maxtattoo.bean.request.PaintRequest;
+import com.maxtattoo.service.DeleteForeignKeyService;
 import com.maxtattoo.service.IdValidatorService;
+import com.maxtattoo.utils.GenericResponse;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -25,7 +26,7 @@ public class PaintCommand extends GenericCommand{
     @Autowired
     private IdValidatorService idValidatorService;
     @Autowired
-    private DeleteForeignKeyRelationService deleteForeignKeyRelationService;
+    private DeleteForeignKeyService deleteForeignKeyService;
 
     public PaintModel findById(Long id){
         var result = paintRepository.findById(id);
@@ -55,10 +56,10 @@ public class PaintCommand extends GenericCommand{
         return super.modelBuilder.createPaintModel(entity);
     }
 
-    public String deleteById(Long id){
+    public GenericResponse deleteById(Long id){
         var paintId = idValidatorService.paintIdValidation(id);
-        deleteForeignKeyRelationService.deleteSittingPaintRelationByPaintId(paintId);
+        deleteForeignKeyService.deleteSittingPaintRelationByPaintId(paintId);
         paintRepository.deleteById(paintId);
-        return "OK";
+        return GenericResponse.OK;
     }
 }

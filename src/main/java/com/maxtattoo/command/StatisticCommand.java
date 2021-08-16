@@ -1,6 +1,6 @@
 package com.maxtattoo.command;
 
-import com.maxtattoo.pojo.statistic.TotalStatisticWrapper;
+import com.maxtattoo.bean.statistic.TotalStatisticWrapper;
 import com.maxtattoo.service.DataValidatorService;
 import com.maxtattoo.service.OrdersStatisticCalculusService;
 import com.maxtattoo.service.TotalClientsCalculusService;

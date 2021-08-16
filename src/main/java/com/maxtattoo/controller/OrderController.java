@@ -1,10 +1,11 @@
 package com.maxtattoo.controller;
 
 import com.maxtattoo.command.OrderCommand;
-import com.maxtattoo.pojo.model.OrderModel;
-import com.maxtattoo.pojo.model.OrderTypeModel;
-import com.maxtattoo.pojo.request.OrderRequest;
-import com.maxtattoo.pojo.request.OrderTypeRequest;
+import com.maxtattoo.bean.model.OrderModel;
+import com.maxtattoo.bean.model.OrderTypeModel;
+import com.maxtattoo.bean.request.OrderRequest;
+import com.maxtattoo.bean.request.OrderTypeRequest;
+import com.maxtattoo.utils.GenericResponse;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -80,7 +81,7 @@ public class OrderController extends GenericController {
     }
 
     @DeleteMapping(value = "/deleteById")
-    public ResponseEntity<String> deleteById(@RequestParam("orderId") Long id){
+    public ResponseEntity<GenericResponse> deleteById(@RequestParam("orderId") Long id){
         logger.info(START);
         var command = super.beanFactory.getBean(OrderCommand.class);
         logger.info(MESSAGE_PATTERN, REQUEST, id);
@@ -91,7 +92,7 @@ public class OrderController extends GenericController {
     }
 
     @DeleteMapping(value = "/deleteOrderTypeById")
-    public ResponseEntity<String> deleteOrderTypeById(@RequestParam("orderTypeId") Long id){
+    public ResponseEntity<GenericResponse> deleteOrderTypeById(@RequestParam("orderTypeId") Long id){
         logger.info(START);
         var command = super.beanFactory.getBean(OrderCommand.class);
         logger.info(MESSAGE_PATTERN, REQUEST, id);

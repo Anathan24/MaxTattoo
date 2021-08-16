@@ -1,7 +1,7 @@
 package com.maxtattoo.factory;
 
-import com.maxtattoo.pojo.GenericObject;
-import com.maxtattoo.pojo.entity.*;
+import com.maxtattoo.bean.GenericObject;
+import com.maxtattoo.bean.entity.*;
 
 public class EntityFactory implements AbstractFactory {
 

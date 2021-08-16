@@ -1,8 +1,9 @@
 package com.maxtattoo.controller;
 
 import com.maxtattoo.command.PaintCommand;
-import com.maxtattoo.pojo.model.PaintModel;
-import com.maxtattoo.pojo.request.PaintRequest;
+import com.maxtattoo.bean.model.PaintModel;
+import com.maxtattoo.bean.request.PaintRequest;
+import com.maxtattoo.utils.GenericResponse;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -47,7 +48,7 @@ public class PaintController extends GenericController{
     }
 
     @DeleteMapping(value = "/deleteById")
-    public ResponseEntity<String> deleteById(@RequestParam("paintId") Long id){
+    public ResponseEntity<GenericResponse> deleteById(@RequestParam("paintId") Long id){
         logger.info(START);
         var command = super.beanFactory.getBean(PaintCommand.class);
         logger.info(MESSAGE_PATTERN, REQUEST, id);

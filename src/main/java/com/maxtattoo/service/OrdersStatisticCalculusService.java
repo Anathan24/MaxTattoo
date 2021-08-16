@@ -1,8 +1,8 @@
 package com.maxtattoo.service;
 
 import com.maxtattoo.database.repository.OrderRepository;
-import com.maxtattoo.pojo.statistic.OrderStatistic;
-import com.maxtattoo.pojo.statistic.TotalStatisticWrapper;
+import com.maxtattoo.bean.statistic.OrderStatistic;
+import com.maxtattoo.bean.statistic.TotalStatisticWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

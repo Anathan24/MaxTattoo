@@ -2,11 +2,12 @@ package com.maxtattoo.command;
 
 import com.maxtattoo.database.repository.CityRepository;
 import com.maxtattoo.exception.ResourceNotFoundException;
-import com.maxtattoo.pojo.entity.City;
-import com.maxtattoo.pojo.model.CityModel;
-import com.maxtattoo.pojo.request.CityRequest;
-import com.maxtattoo.service.DeleteForeignKeyRelationService;
+import com.maxtattoo.bean.entity.City;
+import com.maxtattoo.bean.model.CityModel;
+import com.maxtattoo.bean.request.CityRequest;
+import com.maxtattoo.service.DeleteForeignKeyService;
 import com.maxtattoo.service.IdValidatorService;
+import com.maxtattoo.utils.GenericResponse;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -25,7 +26,7 @@ public class CityCommand extends GenericCommand {
     @Autowired
     private IdValidatorService idValidatorService;
     @Autowired
-    private DeleteForeignKeyRelationService deleteForeignKeyRelationService;
+    private DeleteForeignKeyService deleteForeignKeyService;
 
     public CityModel findById(Long id){
         var entity = cityRepository.findById(id);
@@ -55,10 +56,10 @@ public class CityCommand extends GenericCommand {
         return super.modelBuilder.createCityModel(entity);
     }
 
-    public String deleteById(Long id){
+    public GenericResponse deleteById(Long id){
         var cityId = idValidatorService.cityIdValidation(id);
-        deleteForeignKeyRelationService.deleteLocationCityRelationByCityId(cityId);
+        deleteForeignKeyService.deleteLocationCityRelationByCityId(cityId);
         cityRepository.deleteById(cityId);
-        return "OK";
+        return GenericResponse.OK;
     }
 }

@@ -5,7 +5,7 @@ import com.maxtattoo.exception.DateFormatException;
 import com.maxtattoo.exception.IllegalStateException;
 import com.maxtattoo.exception.NullPointerException;
 import com.maxtattoo.exception.ResourceNotFoundException;
-import com.maxtattoo.pojo.entity.OrderType;
+import com.maxtattoo.bean.entity.OrderType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;

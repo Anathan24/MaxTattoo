@@ -2,11 +2,12 @@ package com.maxtattoo.command;
 
 import com.maxtattoo.database.repository.NeedleRepository;
 import com.maxtattoo.exception.ResourceNotFoundException;
-import com.maxtattoo.pojo.entity.Needle;
-import com.maxtattoo.pojo.model.NeedleModel;
-import com.maxtattoo.pojo.request.NeedleRequest;
-import com.maxtattoo.service.DeleteForeignKeyRelationService;
+import com.maxtattoo.bean.entity.Needle;
+import com.maxtattoo.bean.model.NeedleModel;
+import com.maxtattoo.bean.request.NeedleRequest;
+import com.maxtattoo.service.DeleteForeignKeyService;
 import com.maxtattoo.service.IdValidatorService;
+import com.maxtattoo.utils.GenericResponse;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -25,7 +26,7 @@ public class NeedleCommand extends GenericCommand {
     @Autowired
     private IdValidatorService idValidatorService;
     @Autowired
-    private DeleteForeignKeyRelationService deleteForeignKeyRelationService;
+    private DeleteForeignKeyService deleteForeignKeyService;
 
     public NeedleModel findById(Long id) {
         var result = needleRepository.findById(id);
@@ -55,10 +56,10 @@ public class NeedleCommand extends GenericCommand {
         return super.modelBuilder.createNeedleModel(entity);
     }
 
-    public String deleteById(Long id){
+    public GenericResponse deleteById(Long id){
         var needleId = idValidatorService.needleIdValidation(id);
-        deleteForeignKeyRelationService.deleteSittingNeedleRelationByNeedleId(needleId);
+        deleteForeignKeyService.deleteSittingNeedleRelationByNeedleId(needleId);
         needleRepository.deleteById(needleId);
-        return "OK";
+        return GenericResponse.OK;
     }
 }
