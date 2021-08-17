@@ -4,6 +4,7 @@ import com.maxtattoo.bean.model.*;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 @Service
 public class ResponseMock {
@@ -22,8 +23,7 @@ public class ResponseMock {
         OrderModel order = new OrderModel();
         order.setId(orderId);
         order.setOrderPrice(100);
-        order.setStartDate(new Date(System.currentTimeMillis()));
-        order.setEndDate(new Date(System.currentTimeMillis()));
+
         order.setSittingNumber(17);
         order.setPrepayment(200);
         order.setOrderState("Finished");

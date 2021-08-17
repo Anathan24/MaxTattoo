@@ -33,6 +33,8 @@ public class ModelBuilder extends GenericBuilder {
 
         var model = (OrderModel) modelFactory.getObject(OrderModel.class.getSimpleName());
         BeanUtils.copyProperties(order, model);
+        model.setStartDate(order.getStartDate().toLocalDate());
+        model.setEndDate(order.getEndDate().toLocalDate());
         model.setOrderType(createOrderTypeModel(order.getOrderType()));
         model.setSittings(order.getSittings().stream().map(this::createSittingModel).collect(Collectors.toCollection(LinkedList::new)));
         return model;
@@ -44,7 +46,7 @@ public class ModelBuilder extends GenericBuilder {
 
         var model = (SittingModel) modelFactory.getObject(SittingModel.class.getSimpleName());
         BeanUtils.copyProperties(sitting, model);
-        //model.setDate(DateUtils.getTimestampFromString(sitting.getDate().toString()));
+        model.setDate(sitting.getDate().toLocalDateTime());
         model.setPaints(sitting.getPaints().stream().map(this::createPaintModel).collect(Collectors.toCollection(LinkedList::new)));
         model.setNeedles(sitting.getNeedles().stream().map(this::createNeedleModel).collect(Collectors.toCollection(LinkedList::new)));
         return model;

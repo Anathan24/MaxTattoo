@@ -1,7 +1,7 @@
 package com.maxtattoo.bean.model;
 
 import lombok.*;
-import java.sql.Date;
+import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -14,8 +14,8 @@ public class OrderModel implements GenericModel {
     private int orderPrice;
     private String orderState;
     private int prepayment;
-    private Date startDate;
-    private Date endDate;
+    private LocalDate startDate;
+    private LocalDate endDate;
 
     private OrderTypeModel orderType;
 

@@ -2,7 +2,7 @@ package com.maxtattoo.bean.model;
 
 import lombok.*;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -11,7 +11,7 @@ import java.util.List;
 public class SittingModel implements GenericModel {
 
     private Long id;
-    private Timestamp date;
+    private LocalDateTime date;
     private String sittingState;
     private double spentHours;
     private int price;

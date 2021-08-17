@@ -48,11 +48,11 @@ public class ClientController extends GenericController {
         return ok(model);
     }
 
-    @PostMapping(value = "/save", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<ClientModel> save(@RequestBody ClientRequest request){
+    @PostMapping(value = "/save", consumes = MediaType.APPLICATION_JSON_VALUE,  produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<ClientModel> save(@RequestBody ClientRequest request) {
         logger.info(START);
         var command = beanFactory.getBean(ClientCommand.class);
-        logger.info("{}: {}",REQUEST, request);
+        logger.info(MESSAGE_PATTERN,REQUEST, request);
         var model = command.save(request);
         logger.info(MESSAGE_PATTERN, MODEL, model);
         logger.info(END);

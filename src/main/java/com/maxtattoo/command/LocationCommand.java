@@ -71,6 +71,7 @@ public class LocationCommand extends GenericCommand {
 
     public void saveLocationCityRelation(Long locationId, List<Long> cities) {
         if (cities != null) {
+            cities.forEach(city -> idValidatorService.cityIdValidation(city));
             cities.forEach(cityId -> {
                 var entity = (LocationCity) entityFactory.getObject(LocationCity.class.getSimpleName());
                 entity.setLocationIdFk(locationId);

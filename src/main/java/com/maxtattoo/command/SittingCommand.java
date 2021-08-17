@@ -78,6 +78,7 @@ public class SittingCommand extends GenericCommand {
 
     private void saveSittingPaintRelation(Long sittingId, List<Long> paints){
         if(paints != null){
+            paints.forEach(paint -> idValidatorService.paintIdValidation(paint));
             paints.forEach(paint -> {
                 var entity = (SittingPaint)entityFactory.getObject(SittingPaint.class.getSimpleName());
                 entity.setSittingIdFk(sittingId);
@@ -89,6 +90,7 @@ public class SittingCommand extends GenericCommand {
 
     private void saveSittingNeedleRelation(Long sittingId, List<Long> needles){
         if(needles != null){
+            needles.forEach(needle -> idValidatorService.needleIdValidation(needle));
             needles.forEach(needle -> {
                 var entity = (SittingNeedle) entityFactory.getObject(SittingNeedle.class.getSimpleName());
                 entity.setSittingIdFk(sittingId);
