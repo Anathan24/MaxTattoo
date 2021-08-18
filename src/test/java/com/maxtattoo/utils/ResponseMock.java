@@ -38,8 +38,7 @@ public class ResponseMock {
         //sitting.setDate(new Timestamp(System.currentTimeMillis()));
         sitting.setPaid(0);
         sitting.setNotes("Sitting Note");
-        sitting.setPrice(75);
-        sitting.setSpentHours(4);
+        sitting.setSpentHours(4d);
         sitting.setSittingState("To do");
         return sitting;
     }

@@ -11,34 +11,34 @@ INSERT INTO locations_cities(locations_cities_id_pk, location_id_fk, city_id_fk)
 INSERT INTO locations_cities(locations_cities_id_pk, location_id_fk, city_id_fk) VALUES (113, 111, 113);
 INSERT INTO locations_cities(locations_cities_id_pk, location_id_fk, city_id_fk) VALUES (114, 112, 114);
 
-INSERT INTO clients(client_id_pk, name, surname, gender, description, location_id_fk) VALUES (111, 'User Name 1', 'User Surname 1', 'Male', 'Description', 111);
-INSERT INTO clients(client_id_pk, name, surname, gender, description, location_id_fk) VALUES (112, 'User Name 2', 'User Surname 2', 'Female', 'Description', 111);
-INSERT INTO clients(client_id_pk, name, surname, gender, description, location_id_fk) VALUES (113, 'User Name 3', 'User Surname 3', 'Male', 'Description', 112);
-INSERT INTO clients(client_id_pk, name, surname, gender, description, location_id_fk) VALUES (114, 'User Name 4', 'User Surname 4', 'Female', 'Description', 112);
-INSERT INTO clients(client_id_pk, name, surname, gender, description, location_id_fk) VALUES (115, 'User Name 5', 'User Surname 5', 'Male', 'Description', 111);
+INSERT INTO clients(client_id_pk, name, surname, gender, telephone_number, description, location_id_fk) VALUES (111, 'User Name 1', 'User Surname 1', 'Male', '393844697812', 'Description', 111);
+INSERT INTO clients(client_id_pk, name, surname, gender, telephone_number, description, location_id_fk) VALUES (112, 'User Name 2', 'User Surname 2', 'Female', '393844697812', 'Description', 111);
+INSERT INTO clients(client_id_pk, name, surname, gender, telephone_number, description, location_id_fk) VALUES (113, 'User Name 3', 'User Surname 3', 'Male', '393844697812', 'Description', 112);
+INSERT INTO clients(client_id_pk, name, surname, gender, telephone_number, description, location_id_fk) VALUES (114, 'User Name 4', 'User Surname 4', 'Female', '393844697812', 'Description', 112);
+INSERT INTO clients(client_id_pk, name, surname, gender, telephone_number, description, location_id_fk) VALUES (115, 'User Name 5', 'User Surname 5', 'Male', '393844697812', 'Description', 111);
 
 INSERT INTO order_types(order_type_id_pk, type) VALUES(111, 'Tattoo');
 INSERT INTO order_types(order_type_id_pk, type) VALUES(112, 'Permanent Makeup');
 
-INSERT INTO orders(order_id_pk, sitting_number, order_price, state, prepayment, start_date, end_date, order_type_id_fk, client_id_fk) VALUES(111, 5, 200, 'Preview', 100, '20/04/2021','20/06/2022', 111, 111);
-INSERT INTO orders(order_id_pk, sitting_number, order_price, state, prepayment, start_date, end_date, order_type_id_fk, client_id_fk) VALUES(112, 3, 456, 'To do', 150, '20/04/2021','20/06/2022', 111, 111);
-INSERT INTO orders(order_id_pk, sitting_number, order_price, state, prepayment, start_date, end_date, order_type_id_fk, client_id_fk) VALUES(113, 6, 777, 'In Progress', 200, '20/04/2021','20/06/2022', 111, 111);
-INSERT INTO orders(order_id_pk, sitting_number, order_price, state, prepayment, start_date, end_date, order_type_id_fk, client_id_fk) VALUES(114, 7, 444, 'Finished', 450, '20/04/2021','20/06/2022', 111, 112);
-INSERT INTO orders(order_id_pk, sitting_number, order_price, state, prepayment, start_date, end_date, order_type_id_fk, client_id_fk) VALUES(115, 2, 456, 'To do', 744, '20/04/2021','20/06/2022', 111, 113);
-INSERT INTO orders(order_id_pk, sitting_number, order_price, state, prepayment, start_date, end_date, order_type_id_fk, client_id_fk) VALUES(116, 5, 200, 'In Progress', 100, '20/04/2021','20/06/2022', 112, 114);
-INSERT INTO orders(order_id_pk, sitting_number, order_price, state, prepayment, start_date, end_date, order_type_id_fk, client_id_fk) VALUES(117, 5, 555, 'Preview', 100, '20/04/2021','20/06/2022', 112, 115);
+INSERT INTO orders(order_id_pk, sitting_number, avg_sitting_cost, order_price, already_paid, prepayment, state, start_date, end_date, order_type_id_fk, client_id_fk) VALUES(111, 5, 100, 200, 100, 100, 'Preview', '20/04/2021','20/06/2022', 111, 111);
+INSERT INTO orders(order_id_pk, sitting_number, avg_sitting_cost, order_price, already_paid, prepayment, state, start_date, end_date, order_type_id_fk, client_id_fk) VALUES(112, 3, 120, 450, 225, 150, 'To do', '20/04/2021','20/06/2022', 111, 111);
+INSERT INTO orders(order_id_pk, sitting_number, avg_sitting_cost, order_price, already_paid, prepayment, state, start_date, end_date, order_type_id_fk, client_id_fk) VALUES(113, 6, 130, 770, 335, 200, 'In Progress', '20/04/2021','20/06/2022', 111, 111);
+INSERT INTO orders(order_id_pk, sitting_number, avg_sitting_cost, order_price, already_paid, prepayment, state, start_date, end_date, order_type_id_fk, client_id_fk) VALUES(114, 7, 150, 440, 220, 450, 'Finished', '20/04/2021','20/06/2022', 111, 112);
+INSERT INTO orders(order_id_pk, sitting_number, avg_sitting_cost, order_price, already_paid, prepayment, state, start_date, end_date, order_type_id_fk, client_id_fk) VALUES(115, 2, 100, 450, 225, 744, 'To do', '20/04/2021','20/06/2022', 111, 113);
+INSERT INTO orders(order_id_pk, sitting_number, avg_sitting_cost, order_price, already_paid, prepayment, state, start_date, end_date, order_type_id_fk, client_id_fk) VALUES(116, 5, 190, 200, 100, 100, 'In Progress', '20/04/2021','20/06/2022', 112, 114);
+INSERT INTO orders(order_id_pk, sitting_number, avg_sitting_cost, order_price, already_paid, prepayment, state, start_date, end_date, order_type_id_fk, client_id_fk) VALUES(117, 5, 175, 555, 500, 100,  'Preview','20/04/2021','20/06/2022', 112, 115);
 
-INSERT INTO sittings(sitting_id_pk, sitting_date, state, spent_hours, sitting_price, sitting_note, paid, order_id_fk)VALUES(111, '22/04/2020', 'To do', 1.5, 50, 'SittingNote 1', 120, 111);
-INSERT INTO sittings(sitting_id_pk, sitting_date, state, spent_hours, sitting_price, sitting_note, paid, order_id_fk)VALUES(112, '22/04/2020', 'Finished', 5.5, 25, 'SittingNote 2', 10, 111);
-INSERT INTO sittings(sitting_id_pk, sitting_date, state, spent_hours, sitting_price, sitting_note, paid, order_id_fk)VALUES(113, '22/04/2020', 'To do', 3, 100, 'SittingNote 3', 50, 112);
-INSERT INTO sittings(sitting_id_pk, sitting_date, state, spent_hours, sitting_price, sitting_note, paid, order_id_fk)VALUES(114, '22/04/2020', 'Finished', 6, 10, 'SittingNote 4', 600, 112);
-INSERT INTO sittings(sitting_id_pk, sitting_date, state, spent_hours, sitting_price, sitting_note, paid, order_id_fk)VALUES(115, '22/04/2020', 'To do', 8.5, 70, 'SittingNote 5', 233, 112);
-INSERT INTO sittings(sitting_id_pk, sitting_date, state, spent_hours, sitting_price, sitting_note, paid, order_id_fk)VALUES(116, '22/04/2020', 'Finished', 10, 45, 'SittingNote 6', 44, 113);
-INSERT INTO sittings(sitting_id_pk, sitting_date, state, spent_hours, sitting_price, sitting_note, paid, order_id_fk)VALUES(117, '22/04/2020', 'To do', 3, 65, 'SittingNote 7', 76, 113);
-INSERT INTO sittings(sitting_id_pk, sitting_date, state, spent_hours, sitting_price, sitting_note, paid, order_id_fk)VALUES(118, '22/04/2020', 'Finished', 6, 45, 'SittingNote 8', 33, 113);
-INSERT INTO sittings(sitting_id_pk, sitting_date, state, spent_hours, sitting_price, sitting_note, paid, order_id_fk)VALUES(119, '22/04/2020', 'To do', 7, 15, 'SittingNote 9', 76, 114);
-INSERT INTO sittings(sitting_id_pk, sitting_date, state, spent_hours, sitting_price, sitting_note, paid, order_id_fk)VALUES(120, '22/04/2020', 'Finished', 9, 95, 'SittingNote 10', 70, 114);
-INSERT INTO sittings(sitting_id_pk, sitting_date, state, spent_hours, sitting_price, sitting_note, paid, order_id_fk)VALUES(121, '22/04/2020', 'To do', 8, 65, 'SittingNote 11', 67, 115);
+INSERT INTO sittings(sitting_id_pk, date_time, state, spent_hours, paid, note, order_id_fk)VALUES(111, '22/04/2020', 'To do', 1.5, 120, 'SittingNote 1', 111);
+INSERT INTO sittings(sitting_id_pk, date_time, state, spent_hours, paid, note, order_id_fk)VALUES(112, '22/04/2020', 'Finished', 5.5, 10, 'SittingNote 2', 111);
+INSERT INTO sittings(sitting_id_pk, date_time, state, spent_hours, paid, note, order_id_fk)VALUES(113, '22/04/2020', 'To do', 3, 50, 'SittingNote 3', 112);
+INSERT INTO sittings(sitting_id_pk, date_time, state, spent_hours, paid, note, order_id_fk)VALUES(114, '22/04/2020', 'Finished', 6, 600, 'SittingNote 4', 112);
+INSERT INTO sittings(sitting_id_pk, date_time, state, spent_hours, paid, note, order_id_fk)VALUES(115, '22/04/2020', 'To do', 8.5, 233, 'SittingNote 5', 112);
+INSERT INTO sittings(sitting_id_pk, date_time, state, spent_hours, paid, note, order_id_fk)VALUES(116, '22/04/2020', 'Finished', 10, 44, 'SittingNote 6', 113);
+INSERT INTO sittings(sitting_id_pk, date_time, state, spent_hours, paid, note, order_id_fk)VALUES(117, '22/04/2020', 'To do', 3, 76, 'SittingNote 7', 113);
+INSERT INTO sittings(sitting_id_pk, date_time, state, spent_hours, paid, note, order_id_fk)VALUES(118, '22/04/2020', 'Finished', 6, 33, 'SittingNote 8', 113);
+INSERT INTO sittings(sitting_id_pk, date_time, state, spent_hours, paid, note, order_id_fk)VALUES(119, '22/04/2020', 'To do', 7, 76, 'SittingNote 9', 114);
+INSERT INTO sittings(sitting_id_pk, date_time, state, spent_hours, paid, note, order_id_fk)VALUES(120, '22/04/2020', 'Finished', 9, 70, 'SittingNote 10', 114);
+INSERT INTO sittings(sitting_id_pk, date_time, state, spent_hours, paid, note, order_id_fk)VALUES(121, '22/04/2020', 'To do', 8, 67, 'SittingNote 11', 115);
 
 INSERT INTO paints(paint_id_pk, paint_producer, color) VALUES(111, 'Producer 1', 'Yellow');
 INSERT INTO paints(paint_id_pk, paint_producer, color) VALUES(112, 'Producer 2', 'Black');

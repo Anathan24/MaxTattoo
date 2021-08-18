@@ -31,9 +31,10 @@ CREATE TABLE locations_cities(
 
 CREATE TABLE clients(
     client_id_pk BIGSERIAL PRIMARY KEY,
-    name VARCHAR NOT NULL,
-    surname VARCHAR NOT NULL,
+    name VARCHAR,
+    surname VARCHAR,
     gender VARCHAR,
+    telephone_number VARCHAR,
     description VARCHAR,
     location_id_fk BIGINT,
 
@@ -47,10 +48,12 @@ CREATE TABLE order_types(
 
 CREATE TABLE orders(
     order_id_pk BIGSERIAL PRIMARY KEY,
-    sitting_number NUMERIC,
-    order_price NUMERIC,
+    sitting_number INTEGER,
+    avg_sitting_cost DOUBLE PRECISION,
+    order_price INTEGER,
+    already_paid INTEGER,
+    prepayment INTEGER,
     state VARCHAR,
-    prepayment NUMERIC,
     start_date date,
     end_date date,
 
@@ -62,12 +65,11 @@ CREATE TABLE orders(
 
 CREATE TABLE sittings(
     sitting_id_pk BIGSERIAL PRIMARY KEY,
-    sitting_date TIMESTAMP,
+    date_time TIMESTAMP,
     state VARCHAR,
     spent_hours DOUBLE PRECISION,
-    sitting_price NUMERIC,
-    sitting_note VARCHAR,
-    paid NUMERIC,
+    paid INTEGER,
+    note VARCHAR,
 
     order_id_fk BIGINT,
     FOREIGN KEY(order_id_fk) REFERENCES orders(order_id_pk)

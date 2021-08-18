@@ -18,16 +18,19 @@ public class Client implements GenericEntity {
     @Column(name = "client_id_pk", columnDefinition = "SERIAL", updatable = false)
     private Long id;
 
-    @Column
+    @Column(name = "name")
     private String name;
 
-    @Column
+    @Column(name = "surname")
     private String surname;
 
-    @Column
+    @Column(name = "gender")
     private String gender;
 
-    @Column
+    @Column(name = "telephone_number")
+    private Integer telephoneNumber;
+
+    @Column(name = "description")
     private String description;
 
     @ManyToOne(fetch = FetchType.EAGER)

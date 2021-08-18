@@ -46,7 +46,7 @@ public class ModelBuilder extends GenericBuilder {
 
         var model = (SittingModel) modelFactory.getObject(SittingModel.class.getSimpleName());
         BeanUtils.copyProperties(sitting, model);
-        model.setDate(sitting.getDate().toLocalDateTime());
+        model.setDate(sitting.getDateTime().toLocalDateTime());
         model.setPaints(sitting.getPaints().stream().map(this::createPaintModel).collect(Collectors.toCollection(LinkedList::new)));
         model.setNeedles(sitting.getNeedles().stream().map(this::createNeedleModel).collect(Collectors.toCollection(LinkedList::new)));
         return model;

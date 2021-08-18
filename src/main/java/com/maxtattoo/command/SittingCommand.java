@@ -55,7 +55,7 @@ public class SittingCommand extends GenericCommand {
         var entity = (Sitting) entityFactory.getObject(Sitting.class.getSimpleName());
         BeanUtils.copyProperties(request, entity);
 
-        entity.setDate(DateUtils.getTimestampFromString(request.getDate()));
+        entity.setDateTime(DateUtils.getTimestampFromString(request.getDate()));
         entity.setSittingState(dataValidatorService.sittingStateValidation(request.getState()));
         entity.setOrderId(idValidatorService.orderIdValidation(request.getOrderId()));
 

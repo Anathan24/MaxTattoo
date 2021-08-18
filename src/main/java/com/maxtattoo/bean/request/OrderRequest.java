@@ -8,9 +8,11 @@ import lombok.ToString;
 public class OrderRequest implements GenericRequest {
 
     private Long id;
-    private int sittingNumber;
-    private int orderPrice;
-    private int prepayment;
+    private Integer sittingNumber;
+    private Double avgSittingCost;
+    private Integer orderPrice;
+    private Integer alreadyPaid;
+    private Integer prepayment;
     private String startDate;
     private String endDate;
     private Long clientId;

@@ -20,16 +20,22 @@ public class Order implements GenericEntity {
     private Long id;
 
     @Column(name = "sitting_number")
-    private int sittingNumber;
+    private Integer sittingNumber;
+
+    @Column(name = "avg_sitting_cost")
+    private Double avgSittingCost;
 
     @Column(name = "order_price")
-    private int orderPrice;
+    private Integer orderPrice;
+
+    @Column(name = "already_paid")
+    private Integer alreadyPaid;
+
+    @Column(name = "prepayment")
+    private Integer prepayment;
 
     @Column(name = "state")
     private String orderState;
-
-    @Column(name = "prepayment")
-    private int prepayment;
 
     @Column(name = "start_date")
     private Date startDate;

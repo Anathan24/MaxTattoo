@@ -19,23 +19,20 @@ public class Sitting implements GenericEntity {
     @Column(name = "sitting_id_pk", columnDefinition = "SERIAL", updatable = false)
     private Long id;
 
-    @Column(name = "sitting_date")
-    private Timestamp date;
+    @Column(name = "date_time")
+    private Timestamp dateTime;
 
     @Column(name = "state")
     private String sittingState;
 
     @Column(name = "spent_hours")
-    private double spentHours;
-
-    @Column(name = "sitting_price")
-    private int price;
-
-    @Column(name = "sitting_note")
-    private String notes;
+    private Double spentHours;
 
     @Column(name = "paid")
-    private int paid;
+    private Integer paid;
+
+    @Column(name = "note")
+    private String notes;
 
     @Column(name = "order_id_fk")
     private Long orderId;
