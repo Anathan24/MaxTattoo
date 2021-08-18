@@ -7,7 +7,7 @@ import lombok.ToString;
 @ToString
 public class NeedleRequest implements GenericRequest {
 
-    private Long id;
+    private Long needleId;
     private String producer;
     private String code;
     private String sharpening;

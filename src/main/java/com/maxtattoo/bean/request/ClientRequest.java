@@ -7,11 +7,11 @@ import lombok.ToString;
 @ToString
 public class ClientRequest implements GenericRequest {
 
-    private Long id;
+    private Long clientId;
     private String name;
     private String surname;
     private String gender;
-    private Integer telephoneNumber;
+    private String telephoneNumber;
     private String description;
     private Long locationId;
 

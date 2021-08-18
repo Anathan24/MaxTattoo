@@ -6,7 +6,7 @@ import lombok.*;
 @ToString
 public class NeedleModel implements GenericModel {
 
-    private Long id;
+    private Long needleId;
     private String producer;
     private String code;
     private String sharpening;

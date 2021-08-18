@@ -7,12 +7,11 @@ import lombok.ToString;
 @ToString
 public class SittingRequest implements GenericRequest {
 
-    private Long id;
+    private Long sittingId;
     private String date;
+    private String sittingState;
     private Double spentHours;
     private Integer paid;
     private String notes;
-    private String state;
     private Long orderId;
-
 }

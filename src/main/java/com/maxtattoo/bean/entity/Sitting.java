@@ -17,7 +17,7 @@ public class Sitting implements GenericEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "sitting_id_pk", columnDefinition = "SERIAL", updatable = false)
-    private Long id;
+    private Long sittingId;
 
     @Column(name = "date_time")
     private Timestamp dateTime;
@@ -31,7 +31,7 @@ public class Sitting implements GenericEntity {
     @Column(name = "paid")
     private Integer paid;
 
-    @Column(name = "note")
+    @Column(name = "notes")
     private String notes;
 
     @Column(name = "order_id_fk")

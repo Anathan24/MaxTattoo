@@ -14,7 +14,7 @@ public class LocationCity implements GenericEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "locations_cities_id_pk", columnDefinition = "SERIAL", updatable = false)
-    private Long id;
+    private Long lcId;
 
     @Column(name = "location_id_fk")
     private Long locationIdFk;

@@ -28,9 +28,25 @@ public class DataValidatorService extends GenericService {
         }
     }
 
+    public String orderStateValidation(String orderState){
+        if(orderState == null){
+            String message = "The order state is null! Order state may not be null.";
+            logger.info(message);
+            throw new NullPointerException(message, HttpStatus.NOT_ACCEPTABLE);
+        }
+
+        if(StateEnum.findByValue(orderState) == null){
+            String message = "The order state("+orderState+") not found! Insert an existing order state.";
+            logger.info(message);
+            throw new ResourceNotFoundException(message, HttpStatus.NOT_ACCEPTABLE);
+        }
+
+        return orderState;
+    }
+
     public String sittingStateValidation(String sittingState) {
         if(sittingState == null){
-            String message = "The state is null! Sitting state con not be null.";
+            String message = "The sitting state is null! Sitting state may not be null.";
             logger.info(message);
             throw new NullPointerException(message, HttpStatus.NOT_ACCEPTABLE);
         }

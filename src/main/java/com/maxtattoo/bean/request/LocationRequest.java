@@ -7,7 +7,7 @@ import lombok.ToString;
 @ToString
 public class LocationRequest implements GenericRequest {
 
-    private Long id;
+    private Long locationId;
     private String name;
 
 }

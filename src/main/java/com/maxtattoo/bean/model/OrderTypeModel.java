@@ -7,7 +7,7 @@ import lombok.ToString;
 @ToString
 public class OrderTypeModel implements GenericModel {
 
-    private Long id;
+    private Long orderTypeId;
     private String value;
 
 }

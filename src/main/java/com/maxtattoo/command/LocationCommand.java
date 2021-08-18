@@ -57,7 +57,7 @@ public class LocationCommand extends GenericCommand {
 
         logger.info(MESSAGE_PATTERN, ENTITY, entity);
         entity = locationRepository.save(entity);
-        saveLocationCityRelation(entity.getId(), cities);
+        saveLocationCityRelation(entity.getLocationId(), cities);
         return super.modelBuilder.createLocationModel(entity);
     }
 

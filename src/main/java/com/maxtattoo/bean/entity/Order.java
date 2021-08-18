@@ -17,7 +17,7 @@ public class Order implements GenericEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "order_id_pk", columnDefinition = "SERIAL", updatable = false)
-    private Long id;
+    private Long orderId;
 
     @Column(name = "sitting_number")
     private Integer sittingNumber;

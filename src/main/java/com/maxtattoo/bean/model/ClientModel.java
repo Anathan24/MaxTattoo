@@ -9,11 +9,11 @@ import java.util.List;
 @ToString
 public class ClientModel implements GenericModel {
 
-    private Long id;
+    private Long clientId;
     private String name;
     private String surname;
     private String gender;
-    private Integer telephoneNumber;
+    private String telephoneNumber;
     private String description;
 
     private LocationModel location;

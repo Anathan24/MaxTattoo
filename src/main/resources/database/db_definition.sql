@@ -69,7 +69,7 @@ CREATE TABLE sittings(
     state VARCHAR,
     spent_hours DOUBLE PRECISION,
     paid INTEGER,
-    note VARCHAR,
+    notes VARCHAR,
 
     order_id_fk BIGINT,
     FOREIGN KEY(order_id_fk) REFERENCES orders(order_id_pk)

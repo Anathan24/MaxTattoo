@@ -9,7 +9,7 @@ import java.util.List;
 @ToString
 public class OrderModel implements GenericModel {
 
-    private Long id;
+    private Long orderId;
     private Integer sittingNumber;
     private Double avgSittingCost;
     private Integer orderPrice;

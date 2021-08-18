@@ -89,6 +89,8 @@ public class OrderCommand extends GenericCommand {
         entity.setEndDate(endDate);
         entity.setClientId(idValidatorService.clientIdValidation(request.getClientId()));
         entity.setOrderType(dataValidatorService.orderTypeValidation(request.getOrderType()));
+        entity.setOrderState(dataValidatorService.orderStateValidation(request.getOrderState()));
+
 
         logger.info(MESSAGE_PATTERN, ENTITY, entity);
         entity = orderRepository.save(entity);

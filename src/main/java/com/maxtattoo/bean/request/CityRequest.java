@@ -7,7 +7,7 @@ import lombok.ToString;
 @ToString
 public class CityRequest implements GenericRequest{
 
-    private Long id;
+    private Long cityId;
     private String name;
 
 }

@@ -6,7 +6,7 @@ import lombok.*;
 @ToString
 public class CityModel implements GenericModel {
 
-    private Long id;
+    private Long cityId;
     private String name;
 
 }

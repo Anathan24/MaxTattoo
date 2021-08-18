@@ -25,6 +25,6 @@ public enum StateEnum {
                 .flatMap(v -> Arrays.stream(values())
                         .filter(el -> Objects.equals(v, el.getValue()))
                         .findFirst()
-                ).orElseThrow(() -> new IllegalArgumentException("Unexpected StateEnum state: "+value));
+                ).orElse(null);
     }
 }

@@ -56,14 +56,14 @@ public class SittingCommand extends GenericCommand {
         BeanUtils.copyProperties(request, entity);
 
         entity.setDateTime(DateUtils.getTimestampFromString(request.getDate()));
-        entity.setSittingState(dataValidatorService.sittingStateValidation(request.getState()));
+        entity.setSittingState(dataValidatorService.sittingStateValidation(request.getSittingState()));
         entity.setOrderId(idValidatorService.orderIdValidation(request.getOrderId()));
 
         logger.info(MESSAGE_PATTERN, ENTITY, entity);
         entity = sittingRepository.save(entity);
 
-        saveSittingPaintRelation(entity.getId(), paints);
-        saveSittingNeedleRelation(entity.getId(), needles);
+        saveSittingPaintRelation(entity.getSittingId(), paints);
+        saveSittingNeedleRelation(entity.getSittingId(), needles);
 
         return super.modelBuilder.createSittingModel(entity);
     }

@@ -7,7 +7,7 @@ import lombok.ToString;
 @ToString
 public class PaintRequest implements GenericRequest {
 
-    private Long id;
+    private Long paintId;
     private String producer;
     private String color;
 

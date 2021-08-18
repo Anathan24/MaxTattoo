@@ -11,7 +11,7 @@ public class ResponseMock {
 
     public ClientModel createClientModel(Long clientId){
         ClientModel client = new ClientModel();
-        client.setId(clientId);
+        client.setClientId(clientId);
         client.setName("Client Name");
         client.setSurname("Client Surname");
         client.setGender("Male/Female");
@@ -21,7 +21,7 @@ public class ResponseMock {
 
     public OrderModel createOrderModel(Long orderId){
         OrderModel order = new OrderModel();
-        order.setId(orderId);
+        order.setOrderId(orderId);
         order.setOrderPrice(100);
 
         order.setSittingNumber(17);
@@ -33,7 +33,7 @@ public class ResponseMock {
 
     public SittingModel createSittingModel(Long sittingId, Long orderId){
         SittingModel sitting = new SittingModel();
-        sitting.setId(sittingId);
+        sitting.setSittingId(sittingId);
         sitting.setOrderId(orderId);
         //sitting.setDate(new Timestamp(System.currentTimeMillis()));
         sitting.setPaid(0);
@@ -45,14 +45,14 @@ public class ResponseMock {
 
     public OrderTypeModel createOrderTypeModel(Long orderTypeId, String type){
         OrderTypeModel orderType = new OrderTypeModel();
-        orderType.setId(orderTypeId);
+        orderType.setOrderTypeId(orderTypeId);
         orderType.setValue(type);
         return orderType;
     }
 
     public PaintModel createPaintModel(Long paintId){
         PaintModel paint = new PaintModel();
-        paint.setId(paintId);
+        paint.setPaintId(paintId);
         paint.setProducer("Paint producer");
         paint.setColor("Blue");
         return paint;
@@ -60,7 +60,7 @@ public class ResponseMock {
 
     public NeedleModel createNeedleModel(Long needleId){
         NeedleModel needle = new NeedleModel();
-        needle.setId(needleId);
+        needle.setNeedleId(needleId);
         needle.setCode("12c");
         needle.setProducer("Needle producer");
         needle.setSharpening("Needle Sharpening");

@@ -10,7 +10,7 @@ import java.util.List;
 @ToString
 public class SittingModel implements GenericModel {
 
-    private Long id;
+    private Long sittingId;
     private LocalDateTime date;
     private String sittingState;
     private Double spentHours;

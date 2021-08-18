@@ -9,7 +9,7 @@ import java.util.List;
 @ToString
 public class LocationModel implements GenericModel {
 
-    private Long id;
+    private Long locationId;
     private String name;
     private List<CityModel> cites = new ArrayList<>();
 

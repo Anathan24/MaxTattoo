@@ -7,16 +7,15 @@ import lombok.ToString;
 @ToString
 public class OrderRequest implements GenericRequest {
 
-    private Long id;
+    private Long orderId;
     private Integer sittingNumber;
     private Double avgSittingCost;
     private Integer orderPrice;
     private Integer alreadyPaid;
     private Integer prepayment;
+    private String orderState;
     private String startDate;
     private String endDate;
-    private Long clientId;
     private String orderType;
-    private String orderState;
-
+    private Long clientId;
 }
