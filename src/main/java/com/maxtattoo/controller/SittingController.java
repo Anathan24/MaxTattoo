@@ -27,6 +27,16 @@ public class SittingController extends GenericController{
         return ok(model);
     }
 
+    @GetMapping(value = "/findAllSittingStates", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<String>> findAllSittingStates(){
+        logger.info(START);
+        var command = super.beanFactory.getBean(SittingCommand.class);
+        var result = command.findAllSittingStates();
+        logger.info("RESULT: {}", result);
+        logger.info(END);
+        return ok(result);
+    }
+
     @PostMapping(value = "/save", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<SittingModel> save(@RequestBody SittingRequest request,
                                              @RequestParam(name = "paintId", required = false) List<Long> paints,

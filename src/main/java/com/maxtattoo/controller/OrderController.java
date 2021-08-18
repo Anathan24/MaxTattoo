@@ -49,13 +49,23 @@ public class OrderController extends GenericController {
     }
 
     @GetMapping(value = "/findAllOrderTypes", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<OrderTypeModel>> findAllOrderTypes(){
+    public ResponseEntity<List<OrderTypeModel>> findAllOrderTypes() {
         logger.info(START);
         var command = super.beanFactory.getBean(OrderCommand.class);
         var model = command.findAllOrderTypes();
         logger.info(MESSAGE_PATTERN, MODEL, model);
         logger.info(END);
         return ok(model);
+    }
+
+    @GetMapping(value = "/findAllOrderStates", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<String>> findAllOrderStates() {
+        logger.info(START);
+        var command = super.beanFactory.getBean(OrderCommand.class);
+        var result = command.findAllOrderStates();
+        logger.info("RESULT: {}", result);
+        logger.info(END);
+        return ok(result);
     }
 
     @PostMapping(value = "/save", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)

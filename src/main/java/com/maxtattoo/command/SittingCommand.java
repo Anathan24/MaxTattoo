@@ -10,6 +10,7 @@ import com.maxtattoo.bean.request.SittingRequest;
 import com.maxtattoo.service.DataValidatorService;
 import com.maxtattoo.service.DeleteForeignKeyService;
 import com.maxtattoo.service.IdValidatorService;
+import com.maxtattoo.service.StateEnum;
 import com.maxtattoo.utils.DateUtils;
 import com.maxtattoo.utils.GenericResponse;
 import org.springframework.beans.BeanUtils;
@@ -18,6 +19,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -49,6 +51,13 @@ public class SittingCommand extends GenericCommand {
             logger.warn(message);
             throw new ResourceNotFoundException(message, HttpStatus.NOT_FOUND);
         }
+    }
+
+    public List<String> findAllSittingStates(){
+        List<String> states = new ArrayList<>(2);
+        states.add(StateEnum.TO_DO.getValue());
+        states.add(StateEnum.FINISHED.getValue());
+        return states;
     }
 
     public SittingModel save(SittingRequest request, List<Long> paints, List<Long> needles) {
