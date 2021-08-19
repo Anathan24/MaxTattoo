@@ -12,7 +12,7 @@ import com.maxtattoo.bean.request.OrderTypeRequest;
 import com.maxtattoo.service.DataValidatorService;
 import com.maxtattoo.service.DeleteForeignKeyService;
 import com.maxtattoo.service.IdValidatorService;
-import com.maxtattoo.service.StateEnum;
+import com.maxtattoo.service.enums.OrderState;
 import com.maxtattoo.utils.DateUtils;
 import com.maxtattoo.utils.GenericResponse;
 import org.springframework.beans.BeanUtils;
@@ -23,7 +23,9 @@ import org.springframework.stereotype.Component;
 
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 @Scope("prototype")
@@ -67,7 +69,7 @@ public class OrderCommand extends GenericCommand {
         }
     }
 
-    public List<OrderModel> findAll(){
+    public List<OrderModel> findAll() {
         var entity = orderRepository.findAll();
         logger.info(MESSAGE_PATTERN, ENTITY, entity);
         return super.listModelBuilder.createListOrderModel(entity);
@@ -79,13 +81,8 @@ public class OrderCommand extends GenericCommand {
         return listModelBuilder.createListOrderTypeModel(result);
     }
 
-    public List<String> findAllOrderStates(){
-        List<String> states = new ArrayList<>(4);
-        states.add(StateEnum.PREVIEW.getValue());
-        states.add(StateEnum.TO_DO.getValue());
-        states.add(StateEnum.IN_PROGRESS.getValue());
-        states.add(StateEnum.FINISHED.getValue());
-        return states;
+    public List<String> findAllOrderStates() {
+        return Arrays.stream(OrderState.values()).map(OrderState::getValue).collect(Collectors.toCollection(ArrayList::new));
     }
 
     public OrderModel save(OrderRequest request) {
@@ -101,7 +98,6 @@ public class OrderCommand extends GenericCommand {
         entity.setClientId(idValidatorService.clientIdValidation(request.getClientId()));
         entity.setOrderType(dataValidatorService.orderTypeValidation(request.getOrderType()));
         entity.setOrderState(dataValidatorService.orderStateValidation(request.getOrderState()));
-
 
         logger.info(MESSAGE_PATTERN, ENTITY, entity);
         entity = orderRepository.save(entity);

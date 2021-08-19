@@ -6,6 +6,7 @@ import com.maxtattoo.exception.IllegalStateException;
 import com.maxtattoo.exception.NullPointerException;
 import com.maxtattoo.exception.ResourceNotFoundException;
 import com.maxtattoo.bean.entity.OrderType;
+import com.maxtattoo.service.enums.GenericState;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -35,7 +36,7 @@ public class DataValidatorService extends GenericService {
             throw new NullPointerException(message, HttpStatus.NOT_ACCEPTABLE);
         }
 
-        if(StateEnum.findByValue(orderState) == null){
+        if(GenericState.findByValue(orderState) == null){
             String message = "The order state("+orderState+") not found! Insert an existing order state.";
             logger.info(message);
             throw new ResourceNotFoundException(message, HttpStatus.NOT_ACCEPTABLE);
@@ -51,7 +52,7 @@ public class DataValidatorService extends GenericService {
             throw new NullPointerException(message, HttpStatus.NOT_ACCEPTABLE);
         }
 
-        if(sittingState.equals(StateEnum.TO_DO.getValue()) || sittingState.equals(StateEnum.FINISHED.getValue())){
+        if(sittingState.equals(GenericState.TO_DO.getValue()) || sittingState.equals(GenericState.FINISHED.getValue())){
             return sittingState;
         } else {
             String message = "Illegal state ("+sittingState+") for Sitting!";

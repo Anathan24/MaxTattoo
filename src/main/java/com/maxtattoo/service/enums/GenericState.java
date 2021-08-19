@@ -1,4 +1,4 @@
-package com.maxtattoo.service;
+package com.maxtattoo.service.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,9 +9,9 @@ import java.util.Objects;
 import java.util.Optional;
 
 @Getter
-@AllArgsConstructor
 @ToString
-public enum StateEnum {
+@AllArgsConstructor
+public enum GenericState {
 
     PREVIEW("Preview"),
     TO_DO("To do"),
@@ -20,7 +20,7 @@ public enum StateEnum {
 
     private final String value;
 
-    public static StateEnum findByValue(String value) {
+    public static GenericState findByValue(String value) {
         return Optional.ofNullable(value)
                 .flatMap(v -> Arrays.stream(values())
                         .filter(el -> Objects.equals(v, el.getValue()))
