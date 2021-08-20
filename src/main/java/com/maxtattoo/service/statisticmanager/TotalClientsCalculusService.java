@@ -1,7 +1,8 @@
-package com.maxtattoo.service;
+package com.maxtattoo.service.statisticmanager;
 
 import com.maxtattoo.database.repository.ClientRepository;
 import com.maxtattoo.bean.statistic.TotalStatisticWrapper;
+import com.maxtattoo.service.GenericService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

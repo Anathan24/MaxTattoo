@@ -22,8 +22,13 @@ public class ModelBuilder extends GenericBuilder {
 
         var model = (ClientModel) modelFactory.getObject(ClientModel.class.getSimpleName());
         BeanUtils.copyProperties(client, model);
+
         model.setLocation(createLocationModel(client.getLocation()));
-        model.setOrders(client.getOrders().stream().map(this::createOrderModel).collect(Collectors.toCollection(LinkedList::new)));
+        model.setOrders(client.getOrders()
+                .stream()
+                .map(this::createOrderModel)
+                .collect(Collectors.toCollection(LinkedList::new)));
+
         return model;
     }
 
@@ -33,10 +38,15 @@ public class ModelBuilder extends GenericBuilder {
 
         var model = (OrderModel) modelFactory.getObject(OrderModel.class.getSimpleName());
         BeanUtils.copyProperties(order, model);
+
         model.setStartDate(order.getStartDate().toLocalDate());
         model.setEndDate(order.getEndDate().toLocalDate());
         model.setOrderType(createOrderTypeModel(order.getOrderType()));
-        model.setSittings(order.getSittings().stream().map(this::createSittingModel).collect(Collectors.toCollection(LinkedList::new)));
+        model.setSittings(order.getSittings()
+                .stream()
+                .map(this::createSittingModel)
+                .collect(Collectors.toCollection(LinkedList::new)));
+
         return model;
     }
 
@@ -46,9 +56,17 @@ public class ModelBuilder extends GenericBuilder {
 
         var model = (SittingModel) modelFactory.getObject(SittingModel.class.getSimpleName());
         BeanUtils.copyProperties(sitting, model);
+
         model.setDate(sitting.getDateTime().toLocalDateTime());
-        model.setPaints(sitting.getPaints().stream().map(this::createPaintModel).collect(Collectors.toCollection(LinkedList::new)));
-        model.setNeedles(sitting.getNeedles().stream().map(this::createNeedleModel).collect(Collectors.toCollection(LinkedList::new)));
+        model.setPaints(sitting.getPaints()
+                .stream()
+                .map(this::createPaintModel)
+                .collect(Collectors.toCollection(LinkedList::new)));
+        model.setNeedles(sitting.getNeedles()
+                .stream()
+                .map(this::createNeedleModel)
+                .collect(Collectors.toCollection(LinkedList::new)));
+
         return model;
     }
 
@@ -67,7 +85,12 @@ public class ModelBuilder extends GenericBuilder {
 
         var model = (LocationModel) modelFactory.getObject(LocationModel.class.getSimpleName());
         BeanUtils.copyProperties(location, model);
-        model.setCites(location.getCities().stream().map(this::createCityModel).collect(Collectors.toCollection(LinkedList::new)));
+
+        model.setCites(location.getCities()
+                .stream()
+                .map(this::createCityModel)
+                .collect(Collectors.toCollection(LinkedList::new)));
+
         return model;
     }
 

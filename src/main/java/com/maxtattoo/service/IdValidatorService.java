@@ -30,7 +30,6 @@ public class IdValidatorService extends GenericService {
     @Autowired
     private NeedleRepository needleRepository;
 
-
     public Long clientIdValidation(Long clientId) {
         if(clientId != null && clientRepository.existsById(clientId)) {
             return clientId;

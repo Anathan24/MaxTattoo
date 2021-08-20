@@ -9,11 +9,10 @@ import com.maxtattoo.bean.model.OrderModel;
 import com.maxtattoo.bean.model.OrderTypeModel;
 import com.maxtattoo.bean.request.OrderRequest;
 import com.maxtattoo.bean.request.OrderTypeRequest;
-import com.maxtattoo.service.DataValidatorService;
 import com.maxtattoo.service.DeleteForeignKeyService;
 import com.maxtattoo.service.IdValidatorService;
+import com.maxtattoo.service.OrderDataService;
 import com.maxtattoo.service.enums.OrderState;
-import com.maxtattoo.utils.DateUtils;
 import com.maxtattoo.utils.GenericResponse;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +20,6 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -37,7 +35,7 @@ public class OrderCommand extends GenericCommand {
     private OrderTypeRepository orderTypeRepository;
 
     @Autowired
-    private DataValidatorService dataValidatorService;
+    private OrderDataService orderDataService;
     @Autowired
     private IdValidatorService idValidatorService;
     @Autowired
@@ -75,29 +73,23 @@ public class OrderCommand extends GenericCommand {
         return super.listModelBuilder.createListOrderModel(entity);
     }
 
-    public List<OrderTypeModel> findAllOrderTypes(){
+    public List<OrderTypeModel> findAllOrderTypes() {
         var result = orderTypeRepository.findAll();
         logger.info(MESSAGE_PATTERN, ENTITY, result);
         return listModelBuilder.createListOrderTypeModel(result);
     }
 
     public List<String> findAllOrderStates() {
-        return Arrays.stream(OrderState.values()).map(OrderState::getValue).collect(Collectors.toCollection(ArrayList::new));
+        return Arrays.stream(OrderState.values())
+                .map(OrderState::getValue)
+                .collect(Collectors.toCollection(ArrayList::new));
     }
 
     public OrderModel save(OrderRequest request) {
-        Date startDate = DateUtils.getDateFromString(request.getStartDate());
-        Date endDate = DateUtils.getDateFromString(request.getEndDate());
-        dataValidatorService.startDateNotGreaterThenEndDateValidation(startDate, endDate);
-
         var entity = (Order) entityFactory.getObject(Order.class.getSimpleName());
         BeanUtils.copyProperties(request, entity);
 
-        entity.setStartDate(startDate);
-        entity.setEndDate(endDate);
-        entity.setClientId(idValidatorService.clientIdValidation(request.getClientId()));
-        entity.setOrderType(dataValidatorService.orderTypeValidation(request.getOrderType()));
-        entity.setOrderState(dataValidatorService.orderStateValidation(request.getOrderState()));
+        entity = orderDataService.orderDataValidation(request, entity);
 
         logger.info(MESSAGE_PATTERN, ENTITY, entity);
         entity = orderRepository.save(entity);

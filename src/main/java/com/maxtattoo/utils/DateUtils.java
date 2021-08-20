@@ -45,4 +45,12 @@ public class DateUtils {
         }
         return new Timestamp(new SimpleDateFormat(DATE_TIME_FORMAT).parse(dateTime).getTime());
     }
+
+    public static void checkForStartDateNoGreaterThenEndDate(Date startDate, Date endDate) {
+        if(startDate.after(endDate)){
+            String message = "The start date can not be greater then end date!";
+            logger.warn(message);
+            throw new DateFormatException(message, HttpStatus.NOT_ACCEPTABLE);
+        }
+    }
 }

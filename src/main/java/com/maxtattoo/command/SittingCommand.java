@@ -7,7 +7,6 @@ import com.maxtattoo.bean.entity.SittingNeedle;
 import com.maxtattoo.bean.entity.SittingPaint;
 import com.maxtattoo.bean.model.SittingModel;
 import com.maxtattoo.bean.request.SittingRequest;
-import com.maxtattoo.service.DataValidatorService;
 import com.maxtattoo.service.DeleteForeignKeyService;
 import com.maxtattoo.service.IdValidatorService;
 import com.maxtattoo.service.enums.SittingState;
@@ -36,8 +35,6 @@ public class SittingCommand extends GenericCommand {
     private SittingNeedleRepository sittingNeedleRepository;
 
     @Autowired
-    private DataValidatorService dataValidatorService;
-    @Autowired
     private IdValidatorService idValidatorService;
     @Autowired
     private DeleteForeignKeyService deleteForeignKeyService;
@@ -56,7 +53,9 @@ public class SittingCommand extends GenericCommand {
     }
 
     public List<String> findAllSittingStates(){
-        return Arrays.stream(SittingState.values()).map(SittingState::getValue).collect(Collectors.toCollection(ArrayList::new));
+        return Arrays.stream(SittingState.values())
+                .map(SittingState::getValue)
+                .collect(Collectors.toCollection(ArrayList::new));
     }
 
     public SittingModel save(SittingRequest request, List<Long> paints, List<Long> needles) {
@@ -64,7 +63,7 @@ public class SittingCommand extends GenericCommand {
         BeanUtils.copyProperties(request, entity);
 
         entity.setDateTime(DateUtils.getTimestampFromString(request.getDate()));
-        entity.setSittingState(dataValidatorService.sittingStateValidation(request.getSittingState()));
+        entity.setSittingState(SittingState.findByValue(request.getSittingState()) == null ? SittingState.TO_DO.getValue() : request.getSittingState());
         entity.setOrderId(idValidatorService.orderIdValidation(request.getOrderId()));
 
         logger.info(MESSAGE_PATTERN, ENTITY, entity);
