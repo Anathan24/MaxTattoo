@@ -22,7 +22,7 @@ public class Location implements GenericEntity {
     private String name;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "locations_cities", joinColumns = @JoinColumn(name = "location_id_fk"), inverseJoinColumns = @JoinColumn(name = "city_id_fk"))
+    @JoinTable(name = "locations_cities", joinColumns = @JoinColumn(name = "location_id_fk", updatable = false), inverseJoinColumns = @JoinColumn(name = "city_id_fk", updatable = false))
     private Set<City> cities = new HashSet<>();
 
 }

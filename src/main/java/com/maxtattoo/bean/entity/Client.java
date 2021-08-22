@@ -38,7 +38,7 @@ public class Client implements GenericEntity {
     private Location location;
 
     @OneToMany(fetch = FetchType.EAGER)
-    @JoinColumn(name = "client_id_fk")
+    @JoinColumn(name = "client_id_fk", updatable = false)
     private Set<Order> orders = new HashSet<>();
 
 }

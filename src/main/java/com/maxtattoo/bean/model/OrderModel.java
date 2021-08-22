@@ -11,7 +11,7 @@ public class OrderModel implements GenericModel {
 
     private Long orderId;
     private Integer sittingNumber;
-    private Double avgSittingCost;
+    private Integer avgSittingCost;
     private Integer orderPrice;
     private Integer alreadyPaid;
     private Integer prepayment;

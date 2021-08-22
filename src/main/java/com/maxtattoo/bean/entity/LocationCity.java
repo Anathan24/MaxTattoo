@@ -16,9 +16,9 @@ public class LocationCity implements GenericEntity{
     @Column(name = "locations_cities_id_pk", columnDefinition = "SERIAL", updatable = false)
     private Long lcId;
 
-    @Column(name = "location_id_fk")
+    @Column(name = "location_id_fk", updatable = false)
     private Long locationIdFk;
 
-    @Column(name = "city_id_fk")
+    @Column(name = "city_id_fk", updatable = false)
     private Long cityIdFk;
 }

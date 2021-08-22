@@ -23,7 +23,7 @@ public class Order implements GenericEntity {
     private Integer sittingNumber;
 
     @Column(name = "avg_sitting_cost")
-    private Double avgSittingCost;
+    private Integer avgSittingCost;
 
     @Column(name = "order_price")
     private Integer orderPrice;
@@ -47,11 +47,11 @@ public class Order implements GenericEntity {
     private Long clientId;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "order_type_id_fk")
+    @JoinColumn(name = "order_type_id_fk", updatable = false)
     private OrderType orderType;
 
     @OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
-    @JoinColumn(name = "order_id_fk")
+    @JoinColumn(name = "order_id_fk", updatable = false)
     private Set<Sitting> sittings = new HashSet<>();
 
 }

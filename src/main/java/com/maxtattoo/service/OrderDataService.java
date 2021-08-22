@@ -36,6 +36,7 @@ public class OrderDataService{
         Date startDate = DateUtils.getDateFromString(request.getStartDate());
         Date endEnd = DateUtils.getDateFromString( request.getEndDate());
         DateUtils.checkForStartDateNoGreaterThenEndDate(startDate, endEnd);
+
         entity.setStartDate(startDate);
         entity.setEndDate(endEnd);
         entity.setOrderType(orderTypeValidation(request.getOrderType()));
@@ -46,7 +47,7 @@ public class OrderDataService{
         } else {
             idValidatorService.orderIdValidation(entity.getOrderId());
             checkForNoStateRegression(entity.getOrderId(), entity.getOrderState());
-            cheForFinishedOrderState(entity, entity.getOrderState());
+            cheForFinishedOrderState(entity);
         }
 
         return entity;
@@ -64,8 +65,8 @@ public class OrderDataService{
 
     public void checkForNoStateRegression(Long orderId, String orderState) {
         Order lastOrderVersion = orderRepository.getById(orderId);
-        OrderState newState = OrderState.findByValue(orderState);
         OrderState oldState = OrderState.findByValue(lastOrderVersion.getOrderState());
+        OrderState newState = OrderState.findByValue(orderState);
 
         if(oldState.getPosition() > newState.getPosition()) {
             String message = "The Order state regression is verified! New order state can not be ("+newState.getValue()+"), because old order state is ("+oldState.getValue()+")";
@@ -74,27 +75,30 @@ public class OrderDataService{
         }
     }
 
-    public void cheForFinishedOrderState(Order entity, String orderState) {
-        OrderState state = OrderState.findByValue(orderState);
+    public void cheForFinishedOrderState(Order entity) {
+        OrderState state = OrderState.findByValue(entity.getOrderState());
 
-        if(state.equals(OrderState.FINISHED)){
+        if(state.equals(OrderState.FINISHED)) {
             Order order = orderRepository.getById(entity.getOrderId());
 
-            int alreadyPaid = 0;
-            for(Sitting sitting : order.getSittings()){
-                alreadyPaid += Integer.sum(alreadyPaid, sitting.getPaid());
+            int alreadyPaid = entity.getPrepayment();
+            for(Sitting sitting : order.getSittings()) {
+                alreadyPaid += sitting.getPaid();
             }
 
-            boolean orderPriceGreaterThenAlreadyPaid = order.getOrderPrice() > alreadyPaid;
-            if(orderPriceGreaterThenAlreadyPaid){
-                String message = "The order price is greater then already paid!";
+            if(entity.getOrderPrice() > alreadyPaid) {
+                String message = "The order price("+entity.getOrderPrice()+") is greater then already paid("+alreadyPaid+")!";
                 logger.warn(message);
                 throw new OrderPriceGreaterThenAlreadyPaidException(message, HttpStatus.NOT_ACCEPTABLE);
             }
 
+            int sittingNumber = order.getSittings().size();
+            int avgSittingCost = alreadyPaid/sittingNumber;
+
             entity.setAlreadyPaid(alreadyPaid);
-            entity.setSittingNumber(order.getSittings().size());
-            entity.setAvgSittingCost((double)alreadyPaid/order.getSittings().size());
+            entity.setSittingNumber(sittingNumber);
+            entity.setAvgSittingCost(avgSittingCost);
+            entity.setOrderPrice(alreadyPaid);
         }
     }
 }
