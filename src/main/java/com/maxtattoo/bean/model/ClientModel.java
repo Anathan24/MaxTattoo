@@ -13,7 +13,7 @@ public class ClientModel implements GenericModel {
     private String name;
     private String surname;
     private String gender;
-    private String telephoneNumber;
+    private String phoneNumber;
     private String description;
 
     private LocationModel location;

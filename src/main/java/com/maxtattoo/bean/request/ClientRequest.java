@@ -11,7 +11,7 @@ public class ClientRequest implements GenericRequest {
     private String name;
     private String surname;
     private String gender;
-    private String telephoneNumber;
+    private String phoneNumber;
     private String description;
     private Long locationId;
 

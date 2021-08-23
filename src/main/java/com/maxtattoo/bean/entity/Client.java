@@ -28,7 +28,7 @@ public class Client implements GenericEntity {
     private String gender;
 
     @Column(name = "telephone_number")
-    private String telephoneNumber;
+    private String phoneNumber;
 
     @Column(name = "description")
     private String description;
