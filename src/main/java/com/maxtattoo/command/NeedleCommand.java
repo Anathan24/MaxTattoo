@@ -2,9 +2,9 @@ package com.maxtattoo.command;
 
 import com.maxtattoo.database.repository.NeedleRepository;
 import com.maxtattoo.exception.ResourceNotFoundException;
-import com.maxtattoo.bean.entity.Needle;
-import com.maxtattoo.bean.model.NeedleModel;
-import com.maxtattoo.bean.request.NeedleRequest;
+import com.maxtattoo.dto.entity.Needle;
+import com.maxtattoo.dto.model.NeedleModel;
+import com.maxtattoo.dto.request.NeedleRequest;
 import com.maxtattoo.service.DeleteForeignKeyService;
 import com.maxtattoo.service.IdValidatorService;
 import com.maxtattoo.utils.GenericResponse;

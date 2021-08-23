@@ -1,8 +1,8 @@
 package com.maxtattoo.controller;
 
 import com.maxtattoo.command.NeedleCommand;
-import com.maxtattoo.bean.model.NeedleModel;
-import com.maxtattoo.bean.request.NeedleRequest;
+import com.maxtattoo.dto.model.NeedleModel;
+import com.maxtattoo.dto.request.NeedleRequest;
 import com.maxtattoo.utils.GenericResponse;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;

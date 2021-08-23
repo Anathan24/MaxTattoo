@@ -1,8 +1,8 @@
 package com.maxtattoo.controller;
 
 import com.maxtattoo.command.SittingCommand;
-import com.maxtattoo.bean.model.SittingModel;
-import com.maxtattoo.bean.request.SittingRequest;
+import com.maxtattoo.dto.model.SittingModel;
+import com.maxtattoo.dto.request.SittingRequest;
 import com.maxtattoo.utils.GenericResponse;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;

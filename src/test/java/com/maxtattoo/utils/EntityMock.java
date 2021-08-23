@@ -1,6 +1,6 @@
 package com.maxtattoo.utils;
 
-import com.maxtattoo.bean.entity.*;
+import com.maxtattoo.dto.entity.*;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;

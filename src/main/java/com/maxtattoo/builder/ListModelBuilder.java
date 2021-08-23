@@ -1,7 +1,7 @@
 package com.maxtattoo.builder;
 
-import com.maxtattoo.bean.entity.*;
-import com.maxtattoo.bean.model.*;
+import com.maxtattoo.dto.entity.*;
+import com.maxtattoo.dto.model.*;
 import org.springframework.stereotype.Service;
 
 import java.util.LinkedList;

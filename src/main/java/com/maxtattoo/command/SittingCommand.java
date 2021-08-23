@@ -2,11 +2,11 @@ package com.maxtattoo.command;
 
 import com.maxtattoo.database.repository.*;
 import com.maxtattoo.exception.ResourceNotFoundException;
-import com.maxtattoo.bean.entity.Sitting;
-import com.maxtattoo.bean.entity.SittingNeedle;
-import com.maxtattoo.bean.entity.SittingPaint;
-import com.maxtattoo.bean.model.SittingModel;
-import com.maxtattoo.bean.request.SittingRequest;
+import com.maxtattoo.dto.entity.Sitting;
+import com.maxtattoo.dto.entity.SittingNeedle;
+import com.maxtattoo.dto.entity.SittingPaint;
+import com.maxtattoo.dto.model.SittingModel;
+import com.maxtattoo.dto.request.SittingRequest;
 import com.maxtattoo.service.DeleteForeignKeyService;
 import com.maxtattoo.service.IdValidatorService;
 import com.maxtattoo.service.enums.SittingState;

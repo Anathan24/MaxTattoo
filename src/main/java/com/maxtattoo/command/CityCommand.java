@@ -2,9 +2,9 @@ package com.maxtattoo.command;
 
 import com.maxtattoo.database.repository.CityRepository;
 import com.maxtattoo.exception.ResourceNotFoundException;
-import com.maxtattoo.bean.entity.City;
-import com.maxtattoo.bean.model.CityModel;
-import com.maxtattoo.bean.request.CityRequest;
+import com.maxtattoo.dto.entity.City;
+import com.maxtattoo.dto.model.CityModel;
+import com.maxtattoo.dto.request.CityRequest;
 import com.maxtattoo.service.DeleteForeignKeyService;
 import com.maxtattoo.service.IdValidatorService;
 import com.maxtattoo.utils.GenericResponse;

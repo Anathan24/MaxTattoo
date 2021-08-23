@@ -2,9 +2,9 @@ package com.maxtattoo.command;
 
 import com.maxtattoo.database.repository.PaintRepository;
 import com.maxtattoo.exception.ResourceNotFoundException;
-import com.maxtattoo.bean.entity.Paint;
-import com.maxtattoo.bean.model.PaintModel;
-import com.maxtattoo.bean.request.PaintRequest;
+import com.maxtattoo.dto.entity.Paint;
+import com.maxtattoo.dto.model.PaintModel;
+import com.maxtattoo.dto.request.PaintRequest;
 import com.maxtattoo.service.DeleteForeignKeyService;
 import com.maxtattoo.service.IdValidatorService;
 import com.maxtattoo.utils.GenericResponse;

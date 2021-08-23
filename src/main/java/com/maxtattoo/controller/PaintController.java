@@ -1,8 +1,8 @@
 package com.maxtattoo.controller;
 
 import com.maxtattoo.command.PaintCommand;
-import com.maxtattoo.bean.model.PaintModel;
-import com.maxtattoo.bean.request.PaintRequest;
+import com.maxtattoo.dto.model.PaintModel;
+import com.maxtattoo.dto.request.PaintRequest;
 import com.maxtattoo.utils.GenericResponse;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;

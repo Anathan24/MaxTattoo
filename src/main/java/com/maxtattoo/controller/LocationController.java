@@ -1,8 +1,8 @@
 package com.maxtattoo.controller;
 
 import com.maxtattoo.command.LocationCommand;
-import com.maxtattoo.bean.model.LocationModel;
-import com.maxtattoo.bean.request.LocationRequest;
+import com.maxtattoo.dto.model.LocationModel;
+import com.maxtattoo.dto.request.LocationRequest;
 import com.maxtattoo.utils.GenericResponse;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;

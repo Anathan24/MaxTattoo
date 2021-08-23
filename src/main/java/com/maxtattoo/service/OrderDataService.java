@@ -1,9 +1,9 @@
 package com.maxtattoo.service;
 
-import com.maxtattoo.bean.entity.Order;
-import com.maxtattoo.bean.entity.OrderType;
-import com.maxtattoo.bean.entity.Sitting;
-import com.maxtattoo.bean.request.OrderRequest;
+import com.maxtattoo.dto.entity.Order;
+import com.maxtattoo.dto.entity.OrderType;
+import com.maxtattoo.dto.entity.Sitting;
+import com.maxtattoo.dto.request.OrderRequest;
 import com.maxtattoo.database.repository.OrderRepository;
 import com.maxtattoo.database.repository.OrderTypeRepository;
 import com.maxtattoo.exception.IllegalStateException;

@@ -1,6 +1,6 @@
 package com.maxtattoo.database.repository;
 
-import com.maxtattoo.bean.entity.Location;
+import com.maxtattoo.dto.entity.Location;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

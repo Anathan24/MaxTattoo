@@ -1,10 +1,10 @@
 package com.maxtattoo.controller;
 
 import com.maxtattoo.command.OrderCommand;
-import com.maxtattoo.bean.model.OrderModel;
-import com.maxtattoo.bean.model.OrderTypeModel;
-import com.maxtattoo.bean.request.OrderRequest;
-import com.maxtattoo.bean.request.OrderTypeRequest;
+import com.maxtattoo.dto.model.OrderModel;
+import com.maxtattoo.dto.model.OrderTypeModel;
+import com.maxtattoo.dto.request.OrderRequest;
+import com.maxtattoo.dto.request.OrderTypeRequest;
 import com.maxtattoo.utils.GenericResponse;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;

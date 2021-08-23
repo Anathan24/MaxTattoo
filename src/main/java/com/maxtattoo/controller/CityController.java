@@ -1,8 +1,8 @@
 package com.maxtattoo.controller;
 
 import com.maxtattoo.command.CityCommand;
-import com.maxtattoo.bean.model.CityModel;
-import com.maxtattoo.bean.request.CityRequest;
+import com.maxtattoo.dto.model.CityModel;
+import com.maxtattoo.dto.request.CityRequest;
 import com.maxtattoo.utils.GenericResponse;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;

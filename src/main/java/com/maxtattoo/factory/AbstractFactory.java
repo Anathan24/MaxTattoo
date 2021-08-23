@@ -1,6 +1,6 @@
 package com.maxtattoo.factory;
 
-import com.maxtattoo.bean.GenericObject;
+import com.maxtattoo.dto.GenericObject;
 
 public interface AbstractFactory {
 

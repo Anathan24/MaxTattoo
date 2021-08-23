@@ -1,10 +1,7 @@
 package com.maxtattoo.utils;
 
-import com.maxtattoo.bean.model.*;
+import com.maxtattoo.dto.model.*;
 import org.springframework.stereotype.Service;
-
-import java.sql.Date;
-import java.time.LocalDate;
 
 @Service
 public class ResponseMock {
