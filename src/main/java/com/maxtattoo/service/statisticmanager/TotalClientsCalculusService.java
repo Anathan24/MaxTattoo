@@ -18,8 +18,12 @@ public class TotalClientsCalculusService extends GenericService {
     private ClientRepository clientRepository;
 
     public void calculateClientsTotalStatistic(TotalStatisticWrapper statistic, Date startDate, Date endDate) {
-        statistic.getClientsStatistic().setTotalClientsNumber(clientRepository.countTotalClientsNumber(startDate, endDate, null));
-        statistic.getClientsStatistic().setNumberOfMales(clientRepository.countTotalClientsNumber(startDate, endDate, MALE));
-        statistic.getClientsStatistic().setNumberOfFemales(clientRepository.countTotalClientsNumber(startDate, endDate, FEMALE));
+        Integer totalClients = clientRepository.countTotalClientsNumber(startDate, endDate, null);
+        Integer numberOfMales = clientRepository.countTotalClientsNumber(startDate, endDate, MALE);
+        Integer numberOfFemales = clientRepository.countTotalClientsNumber(startDate, endDate, FEMALE);
+
+        statistic.getClientsStatistic().setTotalClientsNumber(totalClients);
+        statistic.getClientsStatistic().setNumberOfMales(numberOfMales);
+        statistic.getClientsStatistic().setNumberOfFemales(numberOfFemales);
     }
 }

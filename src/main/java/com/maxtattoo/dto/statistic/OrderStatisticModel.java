@@ -3,13 +3,12 @@ package com.maxtattoo.dto.statistic;
 import lombok.*;
 
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 @ToString
-@EqualsAndHashCode
-public class OrderStatistic {
+@NoArgsConstructor
+public class OrderStatisticModel implements StatisticObject {
 
     private String orderType;
     private Integer totalOrders;
     private Integer totalPrice;
+
 }

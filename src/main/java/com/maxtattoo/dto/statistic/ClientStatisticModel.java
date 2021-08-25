@@ -5,7 +5,7 @@ import lombok.*;
 @Data
 @ToString
 @EqualsAndHashCode
-public class TotalClientWrapper {
+public class ClientStatisticModel implements StatisticObject {
 
     private Integer totalClientsNumber;
     private Integer numberOfMales;
