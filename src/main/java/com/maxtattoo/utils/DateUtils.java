@@ -13,6 +13,7 @@ import java.util.regex.Pattern;
 
 public class DateUtils {
     private static final Logger logger = LoggerFactory.getLogger(DateUtils.class.getSimpleName());
+    private static final String YEAR_FORMAT = "yyyy";
     private static final String DATE_FORMAT = "yyyy-MM-dd";
     private static final String DATE_TIME_FORMAT = "yy-MM-dd HH:mm";
 
@@ -46,6 +47,18 @@ public class DateUtils {
         return new Timestamp(new SimpleDateFormat(DATE_TIME_FORMAT).parse(dateTime).getTime());
     }
 
+    @SneakyThrows
+    public static Integer validateYearFormat(String year){
+        final String yearFormat = "\\d{4}";
+
+        if(!Pattern.matches(yearFormat, year)){
+            String message = "Wrong year format! The format must be: " + YEAR_FORMAT;
+            logger.warn(message);
+            throw new DateFormatException(message, HttpStatus.NOT_ACCEPTABLE);
+        }
+        return Integer.parseInt(year);
+    }
+
     public static void checkForStartDateNoGreaterThenEndDate(Date startDate, Date endDate) {
         if(startDate.after(endDate)){
             String message = "The start date can not be greater then end date!";
@@ -53,4 +66,5 @@ public class DateUtils {
             throw new DateFormatException(message, HttpStatus.NOT_ACCEPTABLE);
         }
     }
+
 }

@@ -11,6 +11,6 @@ public class TotalOrdersStatisticWrapper implements StatisticObject {
 
     private Integer totalOrders;
     private Integer totalPrice;
-    private List<OrderStatisticModel> ordersStatisticByType;
+    private List<OrderStatisticModel> ordersStatisticByOrderType;
 
 }

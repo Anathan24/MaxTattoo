@@ -1,10 +1,7 @@
 package com.maxtattoo.factory;
 
 import com.maxtattoo.dto.GenericObject;
-import com.maxtattoo.dto.statistic.ClientStatisticModel;
-import com.maxtattoo.dto.statistic.OrderStatisticModel;
-import com.maxtattoo.dto.statistic.TotalOrdersStatisticWrapper;
-import com.maxtattoo.dto.statistic.TotalStatisticWrapper;
+import com.maxtattoo.dto.statistic.*;
 
 public class StatisticFactory implements AbstractFactory {
 
@@ -20,6 +17,8 @@ public class StatisticFactory implements AbstractFactory {
                 return new TotalOrdersStatisticWrapper();
             case "TotalStatisticWrapper":
                 return new TotalStatisticWrapper();
+            case "MonthOfYearStatisticModel":
+                return new MonthOfYearStatisticModel();
 
             default: throw new IllegalArgumentException("Model with name "+objectSimpleName+" does not exist");
         }

@@ -8,7 +8,7 @@ import lombok.*;
 public class ClientStatisticModel implements StatisticObject {
 
     private Integer totalClientsNumber;
-    private Integer numberOfMales;
-    private Integer numberOfFemales;
+    private Integer totalMalesNumber;
+    private Integer totalFemalesNumber;
 
 }

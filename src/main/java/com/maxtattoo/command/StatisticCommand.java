@@ -1,29 +1,36 @@
 package com.maxtattoo.command;
 
+import com.maxtattoo.dto.statistic.MonthOfYearStatisticModel;
 import com.maxtattoo.dto.statistic.OrderStatisticModel;
 import com.maxtattoo.dto.statistic.TotalStatisticWrapper;
-import com.maxtattoo.service.statisticmanager.OrdersStatisticCalculusService;
-import com.maxtattoo.service.statisticmanager.TotalClientsCalculusService;
+import com.maxtattoo.factory.AbstractFactory;
+import com.maxtattoo.factory.FactoryProducer;
+import com.maxtattoo.service.statisticmanager.OrderStatisticCalculusService;
+import com.maxtattoo.service.statisticmanager.ClientStatisticCalculusService;
 import com.maxtattoo.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.LinkedList;
+import java.util.List;
 
 @Component
 @Scope("prototype")
 public class StatisticCommand extends GenericCommand {
 
     @Autowired
-    private TotalClientsCalculusService totalClientsCalculusService;
+    private ClientStatisticCalculusService clientStatisticCalculusService;
     @Autowired
-    private OrdersStatisticCalculusService ordersStatisticCalculusService;
+    private OrderStatisticCalculusService orderStatisticCalculusService;
     @Autowired
     private OrderCommand orderCommand;
 
-    public TotalStatisticWrapper calculateStatisticByPeriod(String startDate, String endDate) {
+    private final AbstractFactory factory = FactoryProducer.getFactory("StatisticFactory");
+
+    public TotalStatisticWrapper getStatisticByPeriod(String startDate, String endDate) {
         Date start = DateUtils.getDateFromString(startDate);
         Date end = DateUtils.getDateFromString(endDate);
         DateUtils.checkForStartDateNoGreaterThenEndDate(start, end);
@@ -32,12 +39,31 @@ public class StatisticCommand extends GenericCommand {
         var orderTypes = orderCommand.findAllOrderTypes();
         var statisticByOrderType = new LinkedList<OrderStatisticModel>();
 
-        orderTypes.forEach(type -> statisticByOrderType.add(ordersStatisticCalculusService.calculateOrdersStatisticByType(start, end, type.getValue())));
+        orderTypes.forEach(type -> statisticByOrderType.add(orderStatisticCalculusService.calculateOrdersStatisticByType(start, end, type.getValue())));
 
-        totalClientsCalculusService.calculateClientsTotalStatistic(statistic, start, end);
-        ordersStatisticCalculusService.calculateOrdersTotalStatistic(statistic, start, end);
+        clientStatisticCalculusService.calculateClientsTotalStatistic(statistic, start, end);
+        orderStatisticCalculusService.calculateOrdersTotalStatistic(statistic, start, end);
         statistic.getOrdersStatistic().setOrdersStatisticByType(statisticByOrderType);
 
         return statistic;
+    }
+
+    public List<MonthOfYearStatisticModel> getStatisticByYear(String year){
+        int validatedYear = DateUtils.validateYearFormat(year);
+        List<MonthOfYearStatisticModel> yearStatistic = new LinkedList<>();
+
+        for(int i = 1; i <= 12; i++) {
+            MonthOfYearStatisticModel monthStatistic = (MonthOfYearStatisticModel) factory.getObject("MonthOfYearStatisticModel");
+            LocalDate firstMonthDay = LocalDate.of(validatedYear, i, 1);
+            LocalDate lastMonthDay = LocalDate.of(validatedYear, i, firstMonthDay.lengthOfMonth());
+
+            monthStatistic.setMonth(firstMonthDay.getMonth().toString());
+            monthStatistic.setTotalClientsNumber(clientStatisticCalculusService.calculateTotalClientsNumber(Date.valueOf(firstMonthDay), Date.valueOf(lastMonthDay)));
+            monthStatistic.setTotalOrdersNumber(orderStatisticCalculusService.calculateTotalOrdersNumber(Date.valueOf(firstMonthDay), Date.valueOf(lastMonthDay)));
+            monthStatistic.setTotalOrdersPrice(orderStatisticCalculusService.calculateTotalOrdersPrice(Date.valueOf(firstMonthDay), Date.valueOf(lastMonthDay)));
+
+            yearStatistic.add(monthStatistic);
+        }
+        return yearStatistic;
     }
 }

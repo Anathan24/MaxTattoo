@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import java.sql.Date;
 
 @Service
-public class OrdersStatisticCalculusService extends GenericService {
+public class OrderStatisticCalculusService extends GenericService {
 
     @Autowired
     private OrderRepository orderRepository;
@@ -20,11 +20,8 @@ public class OrdersStatisticCalculusService extends GenericService {
     private final AbstractFactory factory = FactoryProducer.getFactory("StatisticFactory");
 
     public void calculateOrdersTotalStatistic(TotalStatisticWrapper statistic, Date startDate, Date endDate){
-        Integer totalOrdersNumber = orderRepository.calculateOrdersTotalNumber(startDate, endDate, null);
-        Integer totalOrdersPrice = orderRepository.calculateOrdersTotalPrice(startDate, endDate, null);
-
-        statistic.getOrdersStatistic().setTotalOrders(totalOrdersNumber);
-        statistic.getOrdersStatistic().setTotalPrice(totalOrdersPrice);
+        statistic.getOrdersStatistic().setTotalOrders(calculateTotalOrdersNumber(startDate, endDate));
+        statistic.getOrdersStatistic().setTotalPrice(calculateTotalOrdersPrice(startDate, endDate));
     }
 
     public OrderStatisticModel calculateOrdersStatisticByType(Date startDate, Date endDate, String orderType) {
@@ -37,5 +34,13 @@ public class OrdersStatisticCalculusService extends GenericService {
         orderStatistic.setTotalPrice(totalOrdersPriceByOrderType);
 
         return orderStatistic;
+    }
+
+    public Integer calculateTotalOrdersNumber(Date startDate, Date endDate){
+        return orderRepository.calculateOrdersTotalNumber(startDate, endDate, null);
+    }
+
+    public Integer calculateTotalOrdersPrice(Date startDate, Date endDate){
+        return orderRepository.calculateOrdersTotalPrice(startDate, endDate, null);
     }
 }
