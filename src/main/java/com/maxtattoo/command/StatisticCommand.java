@@ -43,7 +43,7 @@ public class StatisticCommand extends GenericCommand {
 
         clientStatisticCalculusService.calculateClientsTotalStatistic(statistic, start, end);
         orderStatisticCalculusService.calculateOrdersTotalStatistic(statistic, start, end);
-        statistic.getOrdersStatistic().setOrdersStatisticByType(statisticByOrderType);
+        statistic.getOrdersStatistic().setOrdersStatisticByOrderType(statisticByOrderType);
 
         return statistic;
     }
