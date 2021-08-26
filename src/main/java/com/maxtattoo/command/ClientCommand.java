@@ -51,9 +51,16 @@ public class ClientCommand extends GenericCommand {
         return super.listModelBuilder.createListClientModel(entity);
     }
 
-    public List<ClientModel> findClientByNameAndSurname(String name, String surname) {
-        var clientsEntity = clientRepository.findClientByNameAndSurname(name, surname);
-        return super.listModelBuilder.createListClientModel(clientsEntity);
+    public List<ClientModel> findByNameAndSurname(String name, String surname) {
+        var entity = clientRepository.findByNameAndSurname(name, surname);
+        logger.info(MESSAGE_PATTERN, ENTITY, entity);
+        return super.listModelBuilder.createListClientModel(entity);
+    }
+
+    public List<ClientModel> findByInitialLetters(String initialLetters){
+        var result = clientRepository.findByInitialLetters(initialLetters);
+        logger.info(MESSAGE_PATTERN, ENTITY, result);
+        return super.listModelBuilder.createListClientModel(result);
     }
 
     public ClientModel save(ClientRequest request) {

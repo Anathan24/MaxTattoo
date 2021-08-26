@@ -15,7 +15,10 @@ public interface ClientRepository extends JpaRepository<Client, Long> {
     @Query("SELECT c " +
            "FROM Client c " +
            "WHERE c.name = :name AND c.surname= :surname")
-    List<Client> findClientByNameAndSurname(@Param("name") String name, @Param("surname") String surname);
+    List<Client> findByNameAndSurname(@Param("name") String name, @Param("surname") String surname);
+
+    @Query("SELECT c FROM Client c WHERE c.name like :initialLetters% or c.surname like :initialLetters%")
+    List<Client> findByInitialLetters(@Param("initialLetters") String initialLetters);
 
     @Query("SELECT COUNT(DISTINCT(c.clientId)) " +
            "FROM Client c INNER JOIN Order o ON c.clientId = o.clientId " +

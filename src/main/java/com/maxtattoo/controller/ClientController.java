@@ -38,14 +38,25 @@ public class ClientController extends GenericController {
     }
 
     @GetMapping(value = "/findByNameAndSurname", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<ClientModel>> findClientByNameAndSurname(@RequestParam String name, @RequestParam String surname) {
+    public ResponseEntity<List<ClientModel>> findByNameAndSurname(@RequestParam String name, @RequestParam String surname) {
         logger.info(START);
         var command = beanFactory.getBean(ClientCommand.class);
         logger.info("{} = name: {}, surname: {}",REQUEST, name, surname);
-        var model = command.findClientByNameAndSurname(name, surname);
+        var model = command.findByNameAndSurname(name, surname);
         logger.info(MESSAGE_PATTERN, MODEL, model);
         logger.info(END);
         return ok(model);
+    }
+
+    @GetMapping(value = "/findClientsByInitialLetters", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<ClientModel>> findByInitialLetters(@RequestParam String initialLetters){
+        logger.info(START);
+        var command = beanFactory.getBean(ClientCommand.class);
+        logger.info(MESSAGE_PATTERN, REQUEST, initialLetters);
+        var result = command.findByInitialLetters(initialLetters);
+        logger.info("RESULT: {}", result);
+        logger.info(END);
+        return ok(result);
     }
 
     @PostMapping(value = "/save", consumes = MediaType.APPLICATION_JSON_VALUE,  produces = MediaType.APPLICATION_JSON_VALUE)
