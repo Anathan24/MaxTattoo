@@ -2,6 +2,7 @@ package com.maxtattoo.command;
 
 import com.maxtattoo.database.repository.ClientRepository;
 import com.maxtattoo.database.repository.LocationRepository;
+import com.maxtattoo.dto.GenericObject;
 import com.maxtattoo.exception.ResourceNotFoundException;
 import com.maxtattoo.dto.entity.Client;
 import com.maxtattoo.dto.model.ClientModel;
@@ -12,6 +13,7 @@ import com.maxtattoo.utils.GenericResponse;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
@@ -31,14 +33,14 @@ public class ClientCommand extends GenericCommand {
     @Autowired
     private DeleteForeignKeyService deleteForeignKeyService;
 
-    public ClientModel findById(Long id) {
-        var entity = clientRepository.findById(id);
+    public <INPUT, OUTPUT> OUTPUT findById(JpaRepository<INPUT, Long> repository, Class<OUTPUT> output, Long id) {
+        var entity = repository.findById(id);
         logger.info(MESSAGE_PATTERN, ENTITY, entity);
 
         if (entity.isPresent()) {
-            return super.modelBuilder.createClientModel(entity.get());
-        }else {
-            String message = super.buildEntityNotFoundErrorMessage(Client.class.getSimpleName(), id);
+            return super.modelBuilder.createModel(entity.get(), output);
+        } else {
+            String message = super.buildEntityNotFoundErrorMessage("", id);
             logger.warn(message);
             throw new ResourceNotFoundException(message, HttpStatus.NOT_FOUND);
         }

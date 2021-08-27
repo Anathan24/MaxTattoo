@@ -16,6 +16,21 @@ public class ModelBuilder extends GenericBuilder {
 
     private final AbstractFactory modelFactory = FactoryProducer.getFactory(ModelFactory.class.getSimpleName());
 
+    public <INPUT, OUTPUT> OUTPUT createModel(INPUT input, Class<OUTPUT> output) {
+        String objectName = input.getClass().getSimpleName();
+        switch(objectName){
+            case "Client":
+                Client client = (Client) input;
+                return  output.cast(createClientModel(client));
+            case "Order":
+                Order order = (Order) input;
+                return output.cast(createOrderModel(order));
+
+            default: return null;
+        }
+
+    }
+
     public ClientModel createClientModel(Client client){
         if(client == null)
             return null;
