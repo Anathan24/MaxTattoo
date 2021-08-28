@@ -1,9 +1,12 @@
 package com.maxtattoo.controller;
 
+import com.maxtattoo.command.CrudCommand;
 import com.maxtattoo.command.SittingCommand;
+import com.maxtattoo.database.repository.SittingRepository;
 import com.maxtattoo.dto.model.SittingModel;
 import com.maxtattoo.dto.request.SittingRequest;
 import com.maxtattoo.utils.GenericResponse;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,12 +19,15 @@ import static org.springframework.http.ResponseEntity.ok;
 @RequestMapping(value = "/sitting")
 public class SittingController extends GenericController{
 
+    @Autowired
+    private SittingRepository sittingRepository;
+
     @GetMapping(value = "/findById", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<SittingModel> findById(@RequestParam Long id){
         logger.info(START);
-        var command = super.beanFactory.getBean(SittingCommand.class);
-        logger.info("{}: {}",REQUEST, id);
-        var model = command.findById(id);
+        var command = super.beanFactory.getBean(CrudCommand.class);
+        logger.info(MESSAGE_PATTERN, REQUEST, id);
+        var model = command.findById(sittingRepository, SittingModel.class, id);
         logger.info(MESSAGE_PATTERN, MODEL, model);
         logger.info(END);
         return ok(model);

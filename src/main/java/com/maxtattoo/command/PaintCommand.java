@@ -1,7 +1,6 @@
 package com.maxtattoo.command;
 
 import com.maxtattoo.database.repository.PaintRepository;
-import com.maxtattoo.exception.ResourceNotFoundException;
 import com.maxtattoo.dto.entity.Paint;
 import com.maxtattoo.dto.model.PaintModel;
 import com.maxtattoo.dto.request.PaintRequest;
@@ -11,10 +10,7 @@ import com.maxtattoo.utils.GenericResponse;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
-
-import java.util.List;
 
 @Component
 @Scope("prototype")
@@ -27,25 +23,6 @@ public class PaintCommand extends GenericCommand{
     private IdValidatorService idValidatorService;
     @Autowired
     private DeleteForeignKeyService deleteForeignKeyService;
-
-    public PaintModel findById(Long id){
-        var result = paintRepository.findById(id);
-        logger.info(MESSAGE_PATTERN, ENTITY, result);
-
-        if(result.isPresent()) {
-            return super.modelBuilder.createPaintModel(result.get());
-        }else{
-            String message = super.buildEntityNotFoundErrorMessage(Paint.class.getSimpleName(), id);
-            logger.warn(message);
-            throw new ResourceNotFoundException(message, HttpStatus.NOT_FOUND);
-        }
-    }
-
-    public List<PaintModel> findAll(){
-        var result = paintRepository.findAll();
-        logger.info(MESSAGE_PATTERN, ENTITY, result);
-        return super.listModelBuilder.createListPaintModel(result);
-    }
 
     public PaintModel save(PaintRequest request){
         var entity = (Paint) entityFactory.getObject(Paint.class.getSimpleName());

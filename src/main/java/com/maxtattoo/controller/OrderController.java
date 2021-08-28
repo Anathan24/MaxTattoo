@@ -1,11 +1,15 @@
 package com.maxtattoo.controller;
 
+import com.maxtattoo.command.CrudCommand;
 import com.maxtattoo.command.OrderCommand;
+import com.maxtattoo.database.repository.OrderRepository;
+import com.maxtattoo.database.repository.OrderTypeRepository;
 import com.maxtattoo.dto.model.OrderModel;
 import com.maxtattoo.dto.model.OrderTypeModel;
 import com.maxtattoo.dto.request.OrderRequest;
 import com.maxtattoo.dto.request.OrderTypeRequest;
 import com.maxtattoo.utils.GenericResponse;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,11 +22,16 @@ import static org.springframework.http.ResponseEntity.ok;
 @RequestMapping(value = "/order")
 public class OrderController extends GenericController {
 
+    @Autowired
+    private OrderRepository orderRepository;
+    @Autowired
+    private OrderTypeRepository orderTypeRepository;
+
     @GetMapping(value = "/findById", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<OrderModel> findById(@RequestParam Long id) {
         logger.info(START);
-        var command = beanFactory.getBean(OrderCommand.class);
-        var model = command.findById(id);
+        var command = beanFactory.getBean(CrudCommand.class);
+        var model = command.findById(orderRepository, OrderModel.class, id);
         logger.info(MESSAGE_PATTERN, MODEL, model);
         logger.info(END);
         return ok(model);
@@ -31,8 +40,8 @@ public class OrderController extends GenericController {
     @GetMapping(value = "/findAll", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<OrderModel>> findAll(){
         logger.info(START);
-        var command = super.beanFactory.getBean(OrderCommand.class);
-        var model = command.findAll();
+        var command = super.beanFactory.getBean(CrudCommand.class);
+        var model = command.findAll(orderRepository, OrderModel.class);
         logger.info(END);
         return ok(model);
     }
@@ -40,9 +49,9 @@ public class OrderController extends GenericController {
     @GetMapping(value = "/findOrderTypeById", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<OrderTypeModel> findOrderTypeById(@RequestParam Long id){
         logger.info(START);
-        var command = super.beanFactory.getBean(OrderCommand.class);
-        logger.info("{} id: {}", REQUEST, id);
-        var model = command.findOrderTypeById(id);
+        var command = super.beanFactory.getBean(CrudCommand.class);
+        logger.info(MESSAGE_PATTERN, REQUEST, id);
+        var model = command.findById(orderTypeRepository, OrderTypeModel.class, id);
         logger.info(MESSAGE_PATTERN, MODEL, model);
         logger.info(END);
         return ok(model);
@@ -51,8 +60,8 @@ public class OrderController extends GenericController {
     @GetMapping(value = "/findAllOrderTypes", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<OrderTypeModel>> findAllOrderTypes() {
         logger.info(START);
-        var command = super.beanFactory.getBean(OrderCommand.class);
-        var model = command.findAllOrderTypes();
+        var command = super.beanFactory.getBean(CrudCommand.class);
+        var model = command.findAll(orderTypeRepository, OrderTypeModel.class);
         logger.info(MESSAGE_PATTERN, MODEL, model);
         logger.info(END);
         return ok(model);

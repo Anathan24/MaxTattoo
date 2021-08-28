@@ -2,7 +2,6 @@ package com.maxtattoo.command;
 
 import com.maxtattoo.database.repository.OrderRepository;
 import com.maxtattoo.database.repository.OrderTypeRepository;
-import com.maxtattoo.exception.ResourceNotFoundException;
 import com.maxtattoo.dto.entity.Order;
 import com.maxtattoo.dto.entity.OrderType;
 import com.maxtattoo.dto.model.OrderModel;
@@ -17,7 +16,6 @@ import com.maxtattoo.utils.GenericResponse;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -40,44 +38,6 @@ public class OrderCommand extends GenericCommand {
     private IdValidatorService idValidatorService;
     @Autowired
     private DeleteForeignKeyService deleteForeignKeyService;
-
-    public OrderModel findById(Long id) {
-        var entity = orderRepository.findById(id);
-        logger.info(MESSAGE_PATTERN, ENTITY, entity);
-
-        if(entity.isPresent()) {
-            return super.modelBuilder.createOrderModel(entity.get());
-        }else{
-            String message = super.buildEntityNotFoundErrorMessage(Order.class.getSimpleName(), id);
-            logger.warn(message);
-            throw new ResourceNotFoundException(message, HttpStatus.NOT_FOUND);
-        }
-    }
-
-    public OrderTypeModel findOrderTypeById(Long id){
-        var result = orderTypeRepository.findById(id);
-        logger.info(MESSAGE_PATTERN, ENTITY, result);
-
-        if(result.isPresent()) {
-            return super.modelBuilder.createOrderTypeModel(result.get());
-        }else{
-            String message = super.buildEntityNotFoundErrorMessage(OrderType.class.getSimpleName(), id);
-            logger.warn(message);
-            throw new ResourceNotFoundException(message, HttpStatus.NOT_FOUND);
-        }
-    }
-
-    public List<OrderModel> findAll() {
-        var entity = orderRepository.findAll();
-        logger.info(MESSAGE_PATTERN, ENTITY, entity);
-        return super.listModelBuilder.createListOrderModel(entity);
-    }
-
-    public List<OrderTypeModel> findAllOrderTypes() {
-        var result = orderTypeRepository.findAll();
-        logger.info(MESSAGE_PATTERN, ENTITY, result);
-        return listModelBuilder.createListOrderTypeModel(result);
-    }
 
     public List<String> findAllOrderStates() {
         return Arrays.stream(OrderState.values())

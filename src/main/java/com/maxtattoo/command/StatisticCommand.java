@@ -1,5 +1,7 @@
 package com.maxtattoo.command;
 
+import com.maxtattoo.database.repository.OrderTypeRepository;
+import com.maxtattoo.dto.model.OrderTypeModel;
 import com.maxtattoo.dto.statistic.MonthOfYearStatisticModel;
 import com.maxtattoo.dto.statistic.OrderStatisticModel;
 import com.maxtattoo.dto.statistic.TotalStatisticWrapper;
@@ -25,8 +27,11 @@ public class StatisticCommand extends GenericCommand {
     private ClientStatisticCalculusService clientStatisticCalculusService;
     @Autowired
     private OrderStatisticCalculusService orderStatisticCalculusService;
+
     @Autowired
-    private OrderCommand orderCommand;
+    private CrudCommand crudCommand;
+    @Autowired
+    private OrderTypeRepository orderTypeRepository;
 
     private final AbstractFactory factory = FactoryProducer.getFactory("StatisticFactory");
 
@@ -36,7 +41,7 @@ public class StatisticCommand extends GenericCommand {
         DateUtils.checkForStartDateNoGreaterThenEndDate(start, end);
 
         final TotalStatisticWrapper statistic = new TotalStatisticWrapper();
-        var orderTypes = orderCommand.findAllOrderTypes();
+        var orderTypes = crudCommand.findAll(orderTypeRepository, OrderTypeModel.class);
         var statisticByOrderType = new LinkedList<OrderStatisticModel>();
 
         orderTypes.forEach(type -> statisticByOrderType.add(orderStatisticCalculusService.calculateOrdersStatisticByType(start, end, type.getValue())));

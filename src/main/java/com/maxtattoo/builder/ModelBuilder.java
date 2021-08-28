@@ -9,29 +9,55 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.LinkedList;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class ModelBuilder extends GenericBuilder {
+public class ModelBuilder implements GenericBuilder {
 
     private final AbstractFactory modelFactory = FactoryProducer.getFactory(ModelFactory.class.getSimpleName());
 
-    public <INPUT, OUTPUT> OUTPUT createModel(INPUT input, Class<OUTPUT> output) {
+    @Override
+    public <INPUT, OUTPUT> List<OUTPUT> buildListModel(List<INPUT> input, Class<OUTPUT> output) {
+        List<OUTPUT> result = new LinkedList<>();
+        input.forEach(entity -> result.add(buildModel(entity, output)));
+        return result;
+    }
+
+    @Override
+    public <INPUT, OUTPUT> OUTPUT buildModel(INPUT input, Class<OUTPUT> output) {
         String objectName = input.getClass().getSimpleName();
-        switch(objectName){
+        switch(objectName) {
+            case "City":
+                City city = (City) input;
+                return output.cast(createCityModel(city));
             case "Client":
                 Client client = (Client) input;
                 return  output.cast(createClientModel(client));
+            case "Location":
+                Location location = (Location) input;
+                return output.cast(createLocationModel(location));
+            case "Needle":
+                Needle needle = (Needle) input;
+                return output.cast(createNeedleModel(needle));
             case "Order":
                 Order order = (Order) input;
                 return output.cast(createOrderModel(order));
+            case "OrderType":
+                OrderType orderType = (OrderType) input;
+                return output.cast(createOrderTypeModel(orderType));
+            case "Paint":
+                Paint paint = (Paint) input;
+                return output.cast(createPaintModel(paint));
+            case "Sitting":
+                Sitting sitting = (Sitting) input;
+                return output.cast(createSittingModel(sitting));
 
-            default: return null;
+            default: throw new IllegalArgumentException("Does not found model with name: "+objectName);
         }
-
     }
 
-    public ClientModel createClientModel(Client client){
+    public ClientModel createClientModel(Client client) {
         if(client == null)
             return null;
 

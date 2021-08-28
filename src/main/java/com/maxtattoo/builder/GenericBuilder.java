@@ -1,9 +1,10 @@
 package com.maxtattoo.builder;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import java.util.List;
 
-abstract class GenericBuilder {
-    final Logger logger = LoggerFactory.getLogger(this.getClass());
+interface GenericBuilder {
+
+    <INPUT, OUTPUT> OUTPUT buildModel(INPUT input, Class<OUTPUT> output);
+    <INPUT, OUTPUT> List<OUTPUT> buildListModel(List<INPUT> input, Class<OUTPUT> output);
 
 }
