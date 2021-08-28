@@ -56,9 +56,9 @@ public class PaintController extends GenericController{
     @DeleteMapping(value = "/deleteById")
     public ResponseEntity<GenericResponse> deleteById(@RequestParam("paintId") Long id){
         logger.info(START);
-        var command = super.beanFactory.getBean(PaintCommand.class);
+        var command = super.beanFactory.getBean(CrudCommand.class);
         logger.info(MESSAGE_PATTERN, REQUEST, id);
-        var result = command.deleteById(id);
+        var result = command.deleteById(paintRepository, "Paint", id);
         logger.info("RESULT: {}", result);
         logger.info(END);
         return ok(result);

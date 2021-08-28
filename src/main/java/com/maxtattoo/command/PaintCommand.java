@@ -6,7 +6,6 @@ import com.maxtattoo.dto.model.PaintModel;
 import com.maxtattoo.dto.request.PaintRequest;
 import com.maxtattoo.service.DeleteForeignKeyService;
 import com.maxtattoo.service.IdValidatorService;
-import com.maxtattoo.utils.GenericResponse;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -31,12 +30,5 @@ public class PaintCommand extends GenericCommand{
         logger.info(MESSAGE_PATTERN, ENTITY, entity);
         entity = paintRepository.save(entity);
         return super.modelBuilder.createPaintModel(entity);
-    }
-
-    public GenericResponse deleteById(Long id){
-        var paintId = idValidatorService.paintIdValidation(id);
-        deleteForeignKeyService.deleteSittingPaintRelationByPaintId(paintId);
-        paintRepository.deleteById(paintId);
-        return GenericResponse.OK;
     }
 }

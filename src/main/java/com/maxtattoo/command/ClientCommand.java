@@ -7,7 +7,6 @@ import com.maxtattoo.dto.model.ClientModel;
 import com.maxtattoo.dto.request.ClientRequest;
 import com.maxtattoo.service.DeleteForeignKeyService;
 import com.maxtattoo.service.IdValidatorService;
-import com.maxtattoo.utils.GenericResponse;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -56,12 +55,4 @@ public class ClientCommand extends GenericCommand {
 
         return super.modelBuilder.createClientModel(entity);
     }
-
-    public GenericResponse deleteById(Long id) {
-        var clientId = idValidatorService.clientIdValidation(id);
-        deleteForeignKeyService.deleteOrdersClientFk(clientId);
-        clientRepository.deleteById(clientId);
-        return GenericResponse.OK;
-    }
-
 }

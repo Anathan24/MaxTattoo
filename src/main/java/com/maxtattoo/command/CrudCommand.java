@@ -2,6 +2,9 @@ package com.maxtattoo.command;
 
 import com.maxtattoo.builder.ModelBuilder;
 import com.maxtattoo.exception.ResourceNotFoundException;
+import com.maxtattoo.service.DeleteForeignKeyService;
+import com.maxtattoo.service.IdValidatorService;
+import com.maxtattoo.utils.GenericResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +26,11 @@ public class CrudCommand {
     @Autowired
     protected ModelBuilder modelBuilder;
 
+    @Autowired
+    private IdValidatorService idValidatorService;
+    @Autowired
+    private DeleteForeignKeyService deleteForeignKeyService;
+
     public  <INPUT, OUTPUT> OUTPUT findById(JpaRepository<INPUT, Long> repository, Class<OUTPUT> output, Long id) {
         var entity = repository.findById(id);
         logger.info(MESSAGE_PATTERN, ENTITY, entity);
@@ -41,5 +49,12 @@ public class CrudCommand {
         logger.info(MESSAGE_PATTERN, ENTITY, entity);
 
        return modelBuilder.buildListModel(entity, output);
+    }
+
+    public <INPUT> GenericResponse deleteById(JpaRepository<INPUT, Long> repository, String entityName, Long id) {
+        var entityId = idValidatorService.entityIdValidation(repository, id);
+        deleteForeignKeyService.controller(entityName, entityId);
+        repository.deleteById(entityId);
+        return GenericResponse.OK;
     }
 }

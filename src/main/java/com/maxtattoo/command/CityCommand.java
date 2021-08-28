@@ -6,7 +6,6 @@ import com.maxtattoo.dto.model.CityModel;
 import com.maxtattoo.dto.request.CityRequest;
 import com.maxtattoo.service.DeleteForeignKeyService;
 import com.maxtattoo.service.IdValidatorService;
-import com.maxtattoo.utils.GenericResponse;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -31,12 +30,5 @@ public class CityCommand extends GenericCommand {
         logger.info(MESSAGE_PATTERN, ENTITY, entity);
         entity = cityRepository.save(entity);
         return super.modelBuilder.createCityModel(entity);
-    }
-
-    public GenericResponse deleteById(Long id) {
-        var cityId = idValidatorService.cityIdValidation(id);
-        deleteForeignKeyService.deleteLocationCityRelationByCityId(cityId);
-        cityRepository.deleteById(cityId);
-        return GenericResponse.OK;
     }
 }

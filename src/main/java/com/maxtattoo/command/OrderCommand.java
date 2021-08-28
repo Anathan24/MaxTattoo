@@ -12,7 +12,6 @@ import com.maxtattoo.service.DeleteForeignKeyService;
 import com.maxtattoo.service.IdValidatorService;
 import com.maxtattoo.service.OrderDataService;
 import com.maxtattoo.service.enums.OrderState;
-import com.maxtattoo.utils.GenericResponse;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -56,25 +55,12 @@ public class OrderCommand extends GenericCommand {
         return super.modelBuilder.createOrderModel(entity);
     }
 
-    public OrderTypeModel saveOrderType(OrderTypeRequest request){
+    public OrderTypeModel saveOrderType(OrderTypeRequest request) {
         var entity = (OrderType) entityFactory.getObject(OrderType.class.getSimpleName());
         BeanUtils.copyProperties(request, entity);
 
         logger.info(MESSAGE_PATTERN, ENTITY, entity);
         entity = orderTypeRepository.save(entity);
         return super.modelBuilder.createOrderTypeModel(entity);
-    }
-
-    public GenericResponse deleteById(Long id){
-        var orderId = idValidatorService.orderIdValidation(id);
-        orderRepository.deleteById(orderId);
-        return GenericResponse.OK;
-    }
-
-    public GenericResponse deleteOrderTypeById(Long typeId){
-        var orderTypeId = idValidatorService.orderTypeIdValidation(typeId);
-        deleteForeignKeyService.deleteOrdersOrderTypeFk(orderTypeId);
-        orderTypeRepository.deleteById(orderTypeId);
-        return GenericResponse.OK;
     }
 }

@@ -79,9 +79,9 @@ public class ClientController extends GenericController {
     @DeleteMapping(value = "/deleteById")
     public ResponseEntity<GenericResponse> deleteById(@RequestParam("clientId") Long id){
         logger.info(START);
-        var command = super.beanFactory.getBean(ClientCommand.class);
+        var command = super.beanFactory.getBean(CrudCommand.class);
         logger.info(MESSAGE_PATTERN, REQUEST, id);
-        var result = command.deleteById(id);
+        var result = command.deleteById(clientRepository, "Client", id);
         logger.info("RESULT: {}", result);
         logger.info(END);
         return ok(result);

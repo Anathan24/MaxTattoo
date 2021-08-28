@@ -55,11 +55,11 @@ public class NeedleController extends GenericController{
     }
 
     @DeleteMapping(value = "/deleteById")
-    public ResponseEntity<GenericResponse> deleteById(@RequestParam("needleId") Long id){
+    public ResponseEntity<GenericResponse> deleteById(@RequestParam("needleId") Long id) {
         logger.info(START);
-        var command = super.beanFactory.getBean(NeedleCommand.class);
+        var command = super.beanFactory.getBean(CrudCommand.class);
         logger.info(MESSAGE_PATTERN, REQUEST, id);
-        var result = command.deleteById(id);
+        var result = command.deleteById(needleRepository, "Needle", id);
         logger.info("RESULT: {}", result);
         logger.info(END);
         return ok(result);

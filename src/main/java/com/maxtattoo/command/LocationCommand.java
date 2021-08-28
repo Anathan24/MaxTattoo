@@ -1,5 +1,6 @@
 package com.maxtattoo.command;
 
+import com.maxtattoo.database.repository.CityRepository;
 import com.maxtattoo.database.repository.LocationCityRepository;
 import com.maxtattoo.database.repository.LocationRepository;
 import com.maxtattoo.dto.entity.Location;
@@ -8,7 +9,6 @@ import com.maxtattoo.dto.model.LocationModel;
 import com.maxtattoo.dto.request.LocationRequest;
 import com.maxtattoo.service.DeleteForeignKeyService;
 import com.maxtattoo.service.IdValidatorService;
-import com.maxtattoo.utils.GenericResponse;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -22,6 +22,8 @@ public class LocationCommand extends GenericCommand {
 
     @Autowired
     private LocationRepository locationRepository;
+    @Autowired
+    private CityRepository cityRepository;
     @Autowired
     private LocationCityRepository locationCityRepository;
 
@@ -40,17 +42,9 @@ public class LocationCommand extends GenericCommand {
         return super.modelBuilder.createLocationModel(entity);
     }
 
-    public GenericResponse deleteById(Long id) {
-        var locationId = idValidatorService.locationIdValidation(id);
-        deleteForeignKeyService.deleteLocationCityRelationByLocationId(locationId);
-        deleteForeignKeyService.deleteClientsLocationFk(locationId);
-        locationRepository.deleteById(locationId);
-        return GenericResponse.OK;
-    }
-
     public void saveLocationCityRelation(Long locationId, List<Long> cities) {
         if (cities != null) {
-            cities.forEach(city -> idValidatorService.cityIdValidation(city));
+            cities.forEach(city -> idValidatorService.entityIdValidation(cityRepository, city));
             cities.forEach(cityId -> {
                 var entity = (LocationCity) entityFactory.getObject(LocationCity.class.getSimpleName());
                 entity.setLocationIdFk(locationId);

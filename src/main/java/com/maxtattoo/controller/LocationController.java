@@ -57,9 +57,9 @@ public class LocationController extends GenericController {
     @DeleteMapping(value = "/deleteById", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<GenericResponse> deleteById(@RequestParam(name = "locationId") Long id){
         logger.info(START);
-        var command = super.beanFactory.getBean(LocationCommand.class);
+        var command = super.beanFactory.getBean(CrudCommand.class);
         logger.info(MESSAGE_PATTERN, REQUEST, id);
-        var result = command.deleteById(id);
+        var result = command.deleteById(locationRepository, "Location", id);
         logger.info("RESULT: {}", result);
         logger.info(END);
         return ok(result);

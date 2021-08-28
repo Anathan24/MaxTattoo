@@ -1,5 +1,6 @@
 package com.maxtattoo.service;
 
+import com.maxtattoo.database.repository.ClientRepository;
 import com.maxtattoo.dto.entity.Order;
 import com.maxtattoo.dto.entity.OrderType;
 import com.maxtattoo.dto.entity.Sitting;
@@ -27,6 +28,8 @@ public class OrderDataService{
     @Autowired
     private OrderRepository orderRepository;
     @Autowired
+    private ClientRepository clientRepository;
+    @Autowired
     private OrderTypeRepository orderTypeRepository;
 
     @Autowired
@@ -40,14 +43,14 @@ public class OrderDataService{
         entity.setStartDate(startDate);
         entity.setEndDate(endEnd);
         entity.setOrderType(orderTypeValidation(request.getOrderType()));
-        entity.setClientId(idValidatorService.clientIdValidation(request.getClientId()));
+        entity.setClientId(idValidatorService.entityIdValidation(clientRepository, request.getClientId()));
 
         if(request.getOrderId() == null) {
             entity.setOrderState(OrderState.findByValue(request.getOrderState()) == null ? OrderState.PREVIEW.getValue() : request.getOrderState());
         } else {
-            idValidatorService.orderIdValidation(entity.getOrderId());
+            idValidatorService.entityIdValidation(orderRepository, entity.getOrderId());
             checkForNoStateRegression(entity.getOrderId(), entity.getOrderState());
-            cheForFinishedOrderState(entity);
+            checkForFinishedOrderState(entity);
         }
 
         return entity;
@@ -75,7 +78,7 @@ public class OrderDataService{
         }
     }
 
-    public void cheForFinishedOrderState(Order entity) {
+    public void checkForFinishedOrderState(Order entity) {
         OrderState state = OrderState.findByValue(entity.getOrderState());
 
         if(state.equals(OrderState.FINISHED)) {

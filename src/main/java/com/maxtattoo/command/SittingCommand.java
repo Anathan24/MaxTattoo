@@ -10,7 +10,6 @@ import com.maxtattoo.service.DeleteForeignKeyService;
 import com.maxtattoo.service.IdValidatorService;
 import com.maxtattoo.service.enums.SittingState;
 import com.maxtattoo.utils.DateUtils;
-import com.maxtattoo.utils.GenericResponse;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -26,7 +25,13 @@ import java.util.stream.Collectors;
 public class SittingCommand extends GenericCommand {
 
     @Autowired
+    private OrderRepository orderRepository;
+    @Autowired
     private SittingRepository sittingRepository;
+    @Autowired
+    private PaintRepository paintRepository;
+    @Autowired
+    private NeedleRepository needleRepository;
     @Autowired
     private SittingPaintRepository sittingPaintRepository;
     @Autowired
@@ -49,7 +54,7 @@ public class SittingCommand extends GenericCommand {
 
         entity.setDateTime(DateUtils.getTimestampFromString(request.getDate()));
         entity.setSittingState(SittingState.findByValue(request.getSittingState()) == null ? SittingState.TO_DO.getValue() : request.getSittingState());
-        entity.setOrderId(idValidatorService.orderIdValidation(request.getOrderId()));
+        entity.setOrderId(idValidatorService.entityIdValidation(orderRepository, request.getOrderId()));
 
         logger.info(MESSAGE_PATTERN, ENTITY, entity);
         entity = sittingRepository.save(entity);
@@ -60,17 +65,9 @@ public class SittingCommand extends GenericCommand {
         return super.modelBuilder.createSittingModel(entity);
     }
 
-    public GenericResponse deleteById(Long id) {
-        var sittingId = idValidatorService.sittingIdValidation(id);
-        deleteForeignKeyService.deleteSittingPaintRelationBySittingId(sittingId);
-        deleteForeignKeyService.deleteSittingNeedleRelationBySittingId(sittingId);
-        sittingRepository.deleteById(sittingId);
-        return GenericResponse.OK;
-    }
-
     private void saveSittingPaintRelation(Long sittingId, List<Long> paints){
         if(paints != null){
-            paints.forEach(paint -> idValidatorService.paintIdValidation(paint));
+            paints.forEach(paint -> idValidatorService.entityIdValidation(paintRepository, paint));
             paints.forEach(paint -> {
                 var entity = (SittingPaint)entityFactory.getObject(SittingPaint.class.getSimpleName());
                 entity.setSittingIdFk(sittingId);
@@ -82,7 +79,7 @@ public class SittingCommand extends GenericCommand {
 
     private void saveSittingNeedleRelation(Long sittingId, List<Long> needles){
         if(needles != null){
-            needles.forEach(needle -> idValidatorService.needleIdValidation(needle));
+            needles.forEach(needle -> idValidatorService.entityIdValidation(needleRepository, needle));
             needles.forEach(needle -> {
                 var entity = (SittingNeedle) entityFactory.getObject(SittingNeedle.class.getSimpleName());
                 entity.setSittingIdFk(sittingId);

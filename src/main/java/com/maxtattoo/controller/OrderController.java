@@ -102,9 +102,9 @@ public class OrderController extends GenericController {
     @DeleteMapping(value = "/deleteById")
     public ResponseEntity<GenericResponse> deleteById(@RequestParam("orderId") Long id){
         logger.info(START);
-        var command = super.beanFactory.getBean(OrderCommand.class);
+        var command = super.beanFactory.getBean(CrudCommand.class);
         logger.info(MESSAGE_PATTERN, REQUEST, id);
-        var result = command.deleteById(id);
+        var result = command.deleteById(orderRepository, "Order", id);
         logger.info("RESULT: {}", result);
         logger.info(END);
         return ok(result);
@@ -113,9 +113,9 @@ public class OrderController extends GenericController {
     @DeleteMapping(value = "/deleteOrderTypeById")
     public ResponseEntity<GenericResponse> deleteOrderTypeById(@RequestParam("orderTypeId") Long id){
         logger.info(START);
-        var command = super.beanFactory.getBean(OrderCommand.class);
+        var command = super.beanFactory.getBean(CrudCommand.class);
         logger.info(MESSAGE_PATTERN, REQUEST, id);
-        var result = command.deleteOrderTypeById(id);
+        var result = command.deleteById(orderTypeRepository, "OrderType", id);
         logger.info("RESULT: {}", result);
         logger.info(END);
         return ok(result);
