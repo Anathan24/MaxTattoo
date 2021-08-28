@@ -22,6 +22,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.maxtattoo.utils.StringUtils.ENTITY;
+import static com.maxtattoo.utils.StringUtils.MESSAGE_PATTERN;
+
 @Component
 @Scope("prototype")
 public class OrderCommand extends GenericCommand {

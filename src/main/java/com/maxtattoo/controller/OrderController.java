@@ -2,21 +2,18 @@ package com.maxtattoo.controller;
 
 import com.maxtattoo.command.CrudCommand;
 import com.maxtattoo.command.OrderCommand;
-import com.maxtattoo.database.repository.OrderRepository;
-import com.maxtattoo.database.repository.OrderTypeRepository;
 import com.maxtattoo.dto.model.OrderModel;
 import com.maxtattoo.dto.model.OrderTypeModel;
 import com.maxtattoo.dto.request.OrderRequest;
 import com.maxtattoo.dto.request.OrderTypeRequest;
-import com.maxtattoo.service.enums.Entity;
 import com.maxtattoo.utils.GenericResponse;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import static com.maxtattoo.service.enums.Entity.*;
 import static com.maxtattoo.utils.StringUtils.*;
 import static org.springframework.http.ResponseEntity.ok;
 
@@ -24,16 +21,11 @@ import static org.springframework.http.ResponseEntity.ok;
 @RequestMapping(value = "/order")
 public class OrderController extends GenericController {
 
-    @Autowired
-    private OrderRepository orderRepository;
-    @Autowired
-    private OrderTypeRepository orderTypeRepository;
-
     @GetMapping(value = "/findById", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<OrderModel> findById(@RequestParam Long id) {
         logger.info(START);
         var command = beanFactory.getBean(CrudCommand.class);
-        var model = command.findById(orderRepository, OrderModel.class, id);
+        var model = command.findById(repositoryFactory.getRepository(ORDER), OrderModel.class, id);
         logger.info(MESSAGE_PATTERN, MODEL, model);
         logger.info(END);
         return ok(model);
@@ -43,7 +35,7 @@ public class OrderController extends GenericController {
     public ResponseEntity<List<OrderModel>> findAll(){
         logger.info(START);
         var command = super.beanFactory.getBean(CrudCommand.class);
-        var model = command.findAll(orderRepository, OrderModel.class);
+        var model = command.findAll(repositoryFactory.getRepository(ORDER), OrderModel.class);
         logger.info(END);
         return ok(model);
     }
@@ -53,7 +45,7 @@ public class OrderController extends GenericController {
         logger.info(START);
         var command = super.beanFactory.getBean(CrudCommand.class);
         logger.info(MESSAGE_PATTERN, REQUEST, id);
-        var model = command.findById(orderTypeRepository, OrderTypeModel.class, id);
+        var model = command.findById(repositoryFactory.getRepository(ORDER_TYPE), OrderTypeModel.class, id);
         logger.info(MESSAGE_PATTERN, MODEL, model);
         logger.info(END);
         return ok(model);
@@ -63,7 +55,7 @@ public class OrderController extends GenericController {
     public ResponseEntity<List<OrderTypeModel>> findAllOrderTypes() {
         logger.info(START);
         var command = super.beanFactory.getBean(CrudCommand.class);
-        var model = command.findAll(orderTypeRepository, OrderTypeModel.class);
+        var model = command.findAll(repositoryFactory.getRepository(ORDER_TYPE), OrderTypeModel.class);
         logger.info(MESSAGE_PATTERN, MODEL, model);
         logger.info(END);
         return ok(model);
@@ -106,7 +98,7 @@ public class OrderController extends GenericController {
         logger.info(START);
         var command = super.beanFactory.getBean(CrudCommand.class);
         logger.info(MESSAGE_PATTERN, REQUEST, id);
-        var result = command.deleteById(orderRepository, Entity.ORDER, id);
+        var result = command.deleteById(repositoryFactory.getRepository(ORDER), ORDER, id);
         logger.info("RESULT: {}", result);
         logger.info(END);
         return ok(result);
@@ -117,7 +109,7 @@ public class OrderController extends GenericController {
         logger.info(START);
         var command = super.beanFactory.getBean(CrudCommand.class);
         logger.info(MESSAGE_PATTERN, REQUEST, id);
-        var result = command.deleteById(orderTypeRepository, Entity.ORDER_TYPE, id);
+        var result = command.deleteById(repositoryFactory.getRepository(ORDER_TYPE), ORDER_TYPE, id);
         logger.info("RESULT: {}", result);
         logger.info(END);
         return ok(result);

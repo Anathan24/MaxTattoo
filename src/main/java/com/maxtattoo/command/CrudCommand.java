@@ -1,13 +1,10 @@
 package com.maxtattoo.command;
 
-import com.maxtattoo.builder.ModelBuilder;
 import com.maxtattoo.exception.ResourceNotFoundException;
 import com.maxtattoo.service.DeleteForeignKeyService;
 import com.maxtattoo.service.IdValidatorService;
 import com.maxtattoo.service.enums.Entity;
 import com.maxtattoo.utils.GenericResponse;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -21,12 +18,7 @@ import static com.maxtattoo.utils.StringUtils.MESSAGE_PATTERN;
 
 @Component
 @Scope("prototype")
-public class CrudCommand {
-
-    final Logger logger = LoggerFactory.getLogger(this.getClass());
-
-    @Autowired
-    protected ModelBuilder modelBuilder;
+public class CrudCommand extends GenericCommand {
 
     @Autowired
     private IdValidatorService idValidatorService;

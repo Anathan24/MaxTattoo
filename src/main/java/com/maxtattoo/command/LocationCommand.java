@@ -16,6 +16,9 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+import static com.maxtattoo.utils.StringUtils.ENTITY;
+import static com.maxtattoo.utils.StringUtils.MESSAGE_PATTERN;
+
 @Component
 @Scope("prototype")
 public class LocationCommand extends GenericCommand {

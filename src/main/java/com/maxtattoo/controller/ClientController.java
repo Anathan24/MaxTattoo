@@ -2,18 +2,16 @@ package com.maxtattoo.controller;
 
 import com.maxtattoo.command.ClientCommand;
 import com.maxtattoo.command.CrudCommand;
-import com.maxtattoo.database.repository.ClientRepository;
 import com.maxtattoo.dto.model.ClientModel;
 import com.maxtattoo.dto.request.ClientRequest;
-import com.maxtattoo.service.enums.Entity;
 import com.maxtattoo.utils.GenericResponse;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import static com.maxtattoo.service.enums.Entity.CLIENT;
 import static com.maxtattoo.utils.StringUtils.*;
 import static org.springframework.http.ResponseEntity.ok;
 
@@ -21,15 +19,12 @@ import static org.springframework.http.ResponseEntity.ok;
 @RequestMapping(value = "/client")
 public class ClientController extends GenericController {
 
-    @Autowired
-    private ClientRepository clientRepository;
-
     @GetMapping(value = "/findById", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ClientModel> findById(@RequestParam Long id) {
         logger.info(START);
         var command = beanFactory.getBean(CrudCommand.class);
         logger.info(MESSAGE_PATTERN, REQUEST, id);
-        var model = command.findById(clientRepository, ClientModel.class, id);
+        var model = command.findById(repositoryFactory.getRepository(CLIENT), ClientModel.class, id);
         logger.info(MESSAGE_PATTERN, MODEL, model);
         logger.info(END);
         return ok(model);
@@ -39,7 +34,7 @@ public class ClientController extends GenericController {
     public ResponseEntity<List<ClientModel>> findAll(){
         logger.info(START);
         var command = super.beanFactory.getBean(CrudCommand.class);
-        var result = command.findAll(clientRepository, ClientModel.class);
+        var result = command.findAll(repositoryFactory.getRepository(CLIENT), ClientModel.class);
         logger.info(MESSAGE_PATTERN, MODEL, result);
         logger.info(END);
         return ok(result);
@@ -83,7 +78,7 @@ public class ClientController extends GenericController {
         logger.info(START);
         var command = super.beanFactory.getBean(CrudCommand.class);
         logger.info(MESSAGE_PATTERN, REQUEST, id);
-        var result = command.deleteById(clientRepository, Entity.CLIENT, id);
+        var result = command.deleteById(repositoryFactory.getRepository(CLIENT), CLIENT, id);
         logger.info("RESULT: {}", result);
         logger.info(END);
         return ok(result);

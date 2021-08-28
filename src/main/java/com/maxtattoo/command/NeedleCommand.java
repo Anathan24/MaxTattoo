@@ -11,6 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import static com.maxtattoo.utils.StringUtils.ENTITY;
+import static com.maxtattoo.utils.StringUtils.MESSAGE_PATTERN;
+
 @Component
 @Scope("prototype")
 public class NeedleCommand extends GenericCommand {

@@ -11,8 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 abstract class GenericCommand {
     final Logger logger = LoggerFactory.getLogger(this.getClass());
     final AbstractFactory entityFactory = FactoryProducer.getFactory(EntityFactory.class.getSimpleName());
-    final String MESSAGE_PATTERN = "{}: {}";
-    final String ENTITY = "ENTITY";
 
     @Autowired
     protected ModelBuilder modelBuilder;
