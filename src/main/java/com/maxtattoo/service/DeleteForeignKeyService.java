@@ -1,6 +1,7 @@
 package com.maxtattoo.service;
 
 import com.maxtattoo.database.repository.*;
+import com.maxtattoo.service.enums.Entity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,29 +19,29 @@ public class DeleteForeignKeyService extends GenericService {
     @Autowired
     private SittingNeedleRepository sittingNeedleRepository;
 
-    public void controller(String entityName, Long entityId) {
+    public void controller(Entity entityName, Long entityId) {
         switch (entityName){
-            case "City":
+            case CITY:
                 deleteLocationCityRelationByCityId(entityId);
                 break;
-            case "Client":
+            case CLIENT:
                 deleteOrdersClientFk(entityId);
                 break;
-            case "OrderType":
+            case ORDER_TYPE:
                 deleteOrdersOrderTypeFk(entityId);
                 break;
-            case "Location":
+            case LOCATION:
                 deleteLocationCityRelationByLocationId(entityId);
                 deleteClientsLocationFk(entityId);
                 break;
-            case "Sitting":
+            case SITTING:
                 deleteSittingPaintRelationBySittingId(entityId);
                 deleteSittingNeedleRelationBySittingId(entityId);
                 break;
-            case "Paint":
+            case PAINT:
                 deleteSittingPaintRelationByPaintId(entityId);
                 break;
-            case "Needle":
+            case NEEDLE:
                 deleteSittingNeedleRelationByNeedleId(entityId);
                 break;
 

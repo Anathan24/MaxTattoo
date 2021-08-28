@@ -5,6 +5,7 @@ import com.maxtattoo.command.NeedleCommand;
 import com.maxtattoo.database.repository.NeedleRepository;
 import com.maxtattoo.dto.model.NeedleModel;
 import com.maxtattoo.dto.request.NeedleRequest;
+import com.maxtattoo.service.enums.Entity;
 import com.maxtattoo.utils.GenericResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import static com.maxtattoo.utils.StringUtils.*;
 import static org.springframework.http.ResponseEntity.ok;
 
 @RestController
@@ -59,7 +61,7 @@ public class NeedleController extends GenericController{
         logger.info(START);
         var command = super.beanFactory.getBean(CrudCommand.class);
         logger.info(MESSAGE_PATTERN, REQUEST, id);
-        var result = command.deleteById(needleRepository, "Needle", id);
+        var result = command.deleteById(needleRepository, Entity.NEEDLE, id);
         logger.info("RESULT: {}", result);
         logger.info(END);
         return ok(result);

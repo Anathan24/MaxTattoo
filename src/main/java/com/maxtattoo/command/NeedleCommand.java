@@ -29,6 +29,6 @@ public class NeedleCommand extends GenericCommand {
 
         logger.info(MESSAGE_PATTERN, ENTITY, entity);
         entity = needleRepository.save(entity);
-        return super.modelBuilder.createNeedleModel(entity);
+        return modelBuilder.buildModel(entity, NeedleModel.class);
     }
 }

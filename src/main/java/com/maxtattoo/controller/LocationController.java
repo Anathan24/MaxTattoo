@@ -5,6 +5,7 @@ import com.maxtattoo.command.LocationCommand;
 import com.maxtattoo.database.repository.LocationRepository;
 import com.maxtattoo.dto.model.LocationModel;
 import com.maxtattoo.dto.request.LocationRequest;
+import com.maxtattoo.service.enums.Entity;
 import com.maxtattoo.utils.GenericResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import static com.maxtattoo.utils.StringUtils.*;
 import static org.springframework.http.ResponseEntity.ok;
 
 @RestController
@@ -59,7 +61,7 @@ public class LocationController extends GenericController {
         logger.info(START);
         var command = super.beanFactory.getBean(CrudCommand.class);
         logger.info(MESSAGE_PATTERN, REQUEST, id);
-        var result = command.deleteById(locationRepository, "Location", id);
+        var result = command.deleteById(locationRepository, Entity.LOCATION, id);
         logger.info("RESULT: {}", result);
         logger.info(END);
         return ok(result);

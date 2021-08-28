@@ -31,13 +31,13 @@ public class ClientCommand extends GenericCommand {
     public List<ClientModel> findByNameAndSurname(String name, String surname) {
         var result = clientRepository.findByNameAndSurname(name, surname);
         logger.info(MESSAGE_PATTERN, ENTITY, result);
-        return modelBuilder.buildListModel(result, ClientModel.class);
+        return modelBuilder.buildModel(result, ClientModel.class);
     }
 
     public List<ClientModel> findByInitialLetters(String initialLetters){
         var result = clientRepository.findByInitialLetters(initialLetters);
         logger.info(MESSAGE_PATTERN, ENTITY, result);
-        return modelBuilder.buildListModel(result, ClientModel.class);
+        return modelBuilder.buildModel(result, ClientModel.class);
     }
 
     public ClientModel save(ClientRequest request) {
@@ -53,6 +53,6 @@ public class ClientCommand extends GenericCommand {
         logger.info(MESSAGE_PATTERN, ENTITY, entity);
         entity = clientRepository.save(entity);
 
-        return super.modelBuilder.createClientModel(entity);
+        return modelBuilder.buildModel(entity, ClientModel.class);
     }
 }

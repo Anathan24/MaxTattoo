@@ -52,7 +52,7 @@ public class OrderCommand extends GenericCommand {
 
         logger.info(MESSAGE_PATTERN, ENTITY, entity);
         entity = orderRepository.save(entity);
-        return super.modelBuilder.createOrderModel(entity);
+        return modelBuilder.buildModel(entity, OrderModel.class);
     }
 
     public OrderTypeModel saveOrderType(OrderTypeRequest request) {
@@ -61,6 +61,6 @@ public class OrderCommand extends GenericCommand {
 
         logger.info(MESSAGE_PATTERN, ENTITY, entity);
         entity = orderTypeRepository.save(entity);
-        return super.modelBuilder.createOrderTypeModel(entity);
+        return modelBuilder.buildModel(entity, OrderTypeModel.class);
     }
 }

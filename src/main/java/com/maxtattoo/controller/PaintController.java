@@ -5,6 +5,7 @@ import com.maxtattoo.command.PaintCommand;
 import com.maxtattoo.database.repository.PaintRepository;
 import com.maxtattoo.dto.model.PaintModel;
 import com.maxtattoo.dto.request.PaintRequest;
+import com.maxtattoo.service.enums.Entity;
 import com.maxtattoo.utils.GenericResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import static com.maxtattoo.utils.StringUtils.*;
 import static org.springframework.http.ResponseEntity.ok;
 
 @RestController
@@ -58,7 +60,7 @@ public class PaintController extends GenericController{
         logger.info(START);
         var command = super.beanFactory.getBean(CrudCommand.class);
         logger.info(MESSAGE_PATTERN, REQUEST, id);
-        var result = command.deleteById(paintRepository, "Paint", id);
+        var result = command.deleteById(paintRepository, Entity.PAINT, id);
         logger.info("RESULT: {}", result);
         logger.info(END);
         return ok(result);

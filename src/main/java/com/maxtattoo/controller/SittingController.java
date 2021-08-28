@@ -5,6 +5,7 @@ import com.maxtattoo.command.SittingCommand;
 import com.maxtattoo.database.repository.SittingRepository;
 import com.maxtattoo.dto.model.SittingModel;
 import com.maxtattoo.dto.request.SittingRequest;
+import com.maxtattoo.service.enums.Entity;
 import com.maxtattoo.utils.GenericResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import static com.maxtattoo.utils.StringUtils.*;
 import static org.springframework.http.ResponseEntity.ok;
 
 @RestController
@@ -61,7 +63,7 @@ public class SittingController extends GenericController{
         logger.info(START);
         var command = super.beanFactory.getBean(CrudCommand.class);
         logger.info(MESSAGE_PATTERN, REQUEST, id);
-        var result = command.deleteById(sittingRepository, "Sitting", id);
+        var result = command.deleteById(sittingRepository, Entity.SITTING, id);
         logger.info("RESULT: {}", result);
         logger.info(END);
         return ok(result);

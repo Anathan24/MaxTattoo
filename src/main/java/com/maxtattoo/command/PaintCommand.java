@@ -29,6 +29,6 @@ public class PaintCommand extends GenericCommand{
 
         logger.info(MESSAGE_PATTERN, ENTITY, entity);
         entity = paintRepository.save(entity);
-        return super.modelBuilder.createPaintModel(entity);
+        return modelBuilder.buildModel(entity, PaintModel.class);
     }
 }

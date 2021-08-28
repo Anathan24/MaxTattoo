@@ -5,6 +5,7 @@ import com.maxtattoo.factory.FactoryProducer;
 import com.maxtattoo.factory.ModelFactory;
 import com.maxtattoo.dto.entity.*;
 import com.maxtattoo.dto.model.*;
+import com.maxtattoo.service.enums.Entity;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +19,7 @@ public class ModelBuilder implements GenericBuilder {
     private final AbstractFactory modelFactory = FactoryProducer.getFactory(ModelFactory.class.getSimpleName());
 
     @Override
-    public <INPUT, OUTPUT> List<OUTPUT> buildListModel(List<INPUT> input, Class<OUTPUT> output) {
+    public <INPUT, OUTPUT> List<OUTPUT> buildModel(List<INPUT> input, Class<OUTPUT> output) {
         List<OUTPUT> result = new LinkedList<>();
         input.forEach(entity -> result.add(buildModel(entity, output)));
         return result;
@@ -26,38 +27,38 @@ public class ModelBuilder implements GenericBuilder {
 
     @Override
     public <INPUT, OUTPUT> OUTPUT buildModel(INPUT input, Class<OUTPUT> output) {
-        String objectName = input.getClass().getSimpleName();
+        Entity objectName = Entity.findByValue(input.getClass().getSimpleName());
         switch(objectName) {
-            case "City":
+            case CITY:
                 City city = (City) input;
                 return output.cast(createCityModel(city));
-            case "Client":
+            case CLIENT:
                 Client client = (Client) input;
                 return  output.cast(createClientModel(client));
-            case "Location":
+            case LOCATION:
                 Location location = (Location) input;
                 return output.cast(createLocationModel(location));
-            case "Needle":
+            case NEEDLE:
                 Needle needle = (Needle) input;
                 return output.cast(createNeedleModel(needle));
-            case "Order":
+            case ORDER:
                 Order order = (Order) input;
                 return output.cast(createOrderModel(order));
-            case "OrderType":
+            case ORDER_TYPE:
                 OrderType orderType = (OrderType) input;
                 return output.cast(createOrderTypeModel(orderType));
-            case "Paint":
+            case PAINT:
                 Paint paint = (Paint) input;
                 return output.cast(createPaintModel(paint));
-            case "Sitting":
+            case SITTING:
                 Sitting sitting = (Sitting) input;
                 return output.cast(createSittingModel(sitting));
 
-            default: throw new IllegalArgumentException("Does not found model with name: "+objectName);
+            default: throw new IllegalArgumentException("Does not found any model with name: "+objectName);
         }
     }
 
-    public ClientModel createClientModel(Client client) {
+    private ClientModel createClientModel(Client client) {
         if(client == null)
             return null;
 
@@ -73,7 +74,7 @@ public class ModelBuilder implements GenericBuilder {
         return model;
     }
 
-    public OrderModel createOrderModel(Order order) {
+    private OrderModel createOrderModel(Order order) {
         if(order == null)
             return null;
 
@@ -91,7 +92,7 @@ public class ModelBuilder implements GenericBuilder {
         return model;
     }
 
-    public SittingModel createSittingModel(Sitting sitting) {
+    private SittingModel createSittingModel(Sitting sitting) {
         if(sitting == null)
             return null;
 
@@ -111,7 +112,7 @@ public class ModelBuilder implements GenericBuilder {
         return model;
     }
 
-    public CityModel createCityModel(City city) {
+    private CityModel createCityModel(City city) {
         if(city == null)
             return null;
 
@@ -120,7 +121,7 @@ public class ModelBuilder implements GenericBuilder {
         return model;
     }
 
-    public LocationModel createLocationModel(Location location) {
+    private LocationModel createLocationModel(Location location) {
         if (location == null)
             return null;
 
@@ -135,7 +136,7 @@ public class ModelBuilder implements GenericBuilder {
         return model;
     }
 
-    public OrderTypeModel createOrderTypeModel(OrderType orderType) {
+    private OrderTypeModel createOrderTypeModel(OrderType orderType) {
         if(orderType == null)
             return null;
 
@@ -144,7 +145,7 @@ public class ModelBuilder implements GenericBuilder {
         return model;
     }
 
-    public PaintModel createPaintModel(Paint paint) {
+    private PaintModel createPaintModel(Paint paint) {
         if(paint == null)
             return null;
 
@@ -153,7 +154,7 @@ public class ModelBuilder implements GenericBuilder {
         return model;
     }
 
-    public NeedleModel createNeedleModel(Needle needle) {
+    private NeedleModel createNeedleModel(Needle needle) {
         if(needle == null)
             return null;
 

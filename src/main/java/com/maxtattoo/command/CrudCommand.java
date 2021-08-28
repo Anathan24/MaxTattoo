@@ -4,6 +4,7 @@ import com.maxtattoo.builder.ModelBuilder;
 import com.maxtattoo.exception.ResourceNotFoundException;
 import com.maxtattoo.service.DeleteForeignKeyService;
 import com.maxtattoo.service.IdValidatorService;
+import com.maxtattoo.service.enums.Entity;
 import com.maxtattoo.utils.GenericResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,13 +16,14 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+import static com.maxtattoo.utils.StringUtils.ENTITY;
+import static com.maxtattoo.utils.StringUtils.MESSAGE_PATTERN;
+
 @Component
 @Scope("prototype")
 public class CrudCommand {
 
     final Logger logger = LoggerFactory.getLogger(this.getClass());
-    final String MESSAGE_PATTERN = "{}: {}";
-    final String ENTITY = "ENTITY";
 
     @Autowired
     protected ModelBuilder modelBuilder;
@@ -48,10 +50,10 @@ public class CrudCommand {
         var entity = repository.findAll();
         logger.info(MESSAGE_PATTERN, ENTITY, entity);
 
-       return modelBuilder.buildListModel(entity, output);
+       return modelBuilder.buildModel(entity, output);
     }
 
-    public <INPUT> GenericResponse deleteById(JpaRepository<INPUT, Long> repository, String entityName, Long id) {
+    public <INPUT> GenericResponse deleteById(JpaRepository<INPUT, Long> repository, Entity entityName, Long id) {
         var entityId = idValidatorService.entityIdValidation(repository, id);
         deleteForeignKeyService.controller(entityName, entityId);
         repository.deleteById(entityId);

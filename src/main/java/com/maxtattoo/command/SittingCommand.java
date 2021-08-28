@@ -62,7 +62,7 @@ public class SittingCommand extends GenericCommand {
         saveSittingPaintRelation(entity.getSittingId(), paints);
         saveSittingNeedleRelation(entity.getSittingId(), needles);
 
-        return super.modelBuilder.createSittingModel(entity);
+        return modelBuilder.buildModel(entity, SittingModel.class);
     }
 
     private void saveSittingPaintRelation(Long sittingId, List<Long> paints){

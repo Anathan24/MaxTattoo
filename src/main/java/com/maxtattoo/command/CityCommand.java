@@ -29,6 +29,6 @@ public class CityCommand extends GenericCommand {
 
         logger.info(MESSAGE_PATTERN, ENTITY, entity);
         entity = cityRepository.save(entity);
-        return super.modelBuilder.createCityModel(entity);
+        return modelBuilder.buildModel(entity, CityModel.class);
     }
 }

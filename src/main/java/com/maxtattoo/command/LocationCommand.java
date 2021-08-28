@@ -39,7 +39,7 @@ public class LocationCommand extends GenericCommand {
         logger.info(MESSAGE_PATTERN, ENTITY, entity);
         entity = locationRepository.save(entity);
         saveLocationCityRelation(entity.getLocationId(), cities);
-        return super.modelBuilder.createLocationModel(entity);
+        return modelBuilder.buildModel(entity, LocationModel.class);
     }
 
     public void saveLocationCityRelation(Long locationId, List<Long> cities) {
