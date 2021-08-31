@@ -10,7 +10,6 @@ abstract class GenericController {
 
     final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-
     @Autowired
     BeanFactory beanFactory;
     @Autowired

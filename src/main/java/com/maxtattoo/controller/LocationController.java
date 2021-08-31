@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-import static com.maxtattoo.service.enums.Entity.LOCATION;
+import static com.maxtattoo.service.enums.EntityName.LOCATION;
 import static com.maxtattoo.utils.StringUtils.*;
 import static org.springframework.http.ResponseEntity.ok;
 

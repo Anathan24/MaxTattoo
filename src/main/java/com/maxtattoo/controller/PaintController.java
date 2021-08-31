@@ -1,7 +1,7 @@
 package com.maxtattoo.controller;
 
 import com.maxtattoo.command.CrudCommand;
-import com.maxtattoo.command.PaintCommand;
+import com.maxtattoo.dto.entity.Paint;
 import com.maxtattoo.dto.model.PaintModel;
 import com.maxtattoo.dto.request.PaintRequest;
 import com.maxtattoo.utils.GenericResponse;
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-import static com.maxtattoo.service.enums.Entity.PAINT;
+import static com.maxtattoo.service.enums.EntityName.PAINT;
 import static com.maxtattoo.utils.StringUtils.*;
 import static org.springframework.http.ResponseEntity.ok;
 
@@ -43,8 +43,8 @@ public class PaintController extends GenericController{
     @PostMapping(value = "/save", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<PaintModel> save(@RequestBody PaintRequest request){
         logger.info(START);
-        var command = super.beanFactory.getBean(PaintCommand.class);
-        var model = command.save(request);
+        var command = super.beanFactory.getBean(CrudCommand.class);
+        var model = command.save(repositoryFactory.getRepository(PAINT), Paint.class, PaintModel.class, request);
         logger.info(MESSAGE_PATTERN, MODEL, model);
         logger.info(END);
         return ok(model);

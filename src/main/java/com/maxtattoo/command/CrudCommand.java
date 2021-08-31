@@ -1,10 +1,12 @@
 package com.maxtattoo.command;
 
+import com.maxtattoo.dto.request.GenericRequest;
 import com.maxtattoo.exception.ResourceNotFoundException;
 import com.maxtattoo.service.DeleteForeignKeyService;
 import com.maxtattoo.service.IdValidatorService;
-import com.maxtattoo.service.enums.Entity;
+import com.maxtattoo.service.enums.EntityName;
 import com.maxtattoo.utils.GenericResponse;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -25,12 +27,12 @@ public class CrudCommand extends GenericCommand {
     @Autowired
     private DeleteForeignKeyService deleteForeignKeyService;
 
-    public  <INPUT, OUTPUT> OUTPUT findById(JpaRepository<INPUT, Long> repository, Class<OUTPUT> output, Long id) {
+    public  <INPUT, OUTPUT> OUTPUT findById(JpaRepository<INPUT, Long> repository, Class<OUTPUT> outputClass, Long id) {
         var entity = repository.findById(id);
         logger.info(MESSAGE_PATTERN, ENTITY, entity);
 
         if (entity.isPresent()) {
-            return modelBuilder.buildModel(entity.get(), output);
+            return modelBuilder.buildModel(entity.get(), outputClass);
         } else {
             String message = "findById does not found any record with id(" + id + ")";
             logger.warn(message);
@@ -38,14 +40,24 @@ public class CrudCommand extends GenericCommand {
         }
     }
 
-    public <INPUT, OUTPUT> List<OUTPUT> findAll(JpaRepository<INPUT, Long> repository, Class<OUTPUT> output) {
+    public <INPUT, OUTPUT> List<OUTPUT> findAll(JpaRepository<INPUT, Long> repository, Class<OUTPUT> outputClass) {
         var entity = repository.findAll();
         logger.info(MESSAGE_PATTERN, ENTITY, entity);
 
-       return modelBuilder.buildModel(entity, output);
+       return modelBuilder.buildModel(entity, outputClass);
     }
 
-    public <INPUT> GenericResponse deleteById(JpaRepository<INPUT, Long> repository, Entity entityName, Long id) {
+    @SuppressWarnings("unchecked")
+    public <INPUT, OUTPUT> OUTPUT save(JpaRepository<INPUT, Long> repository, Class<INPUT> inputClass, Class<OUTPUT> outputClass, GenericRequest request){
+        var entity = (INPUT) entityFactory.getObject(inputClass.getSimpleName());
+        BeanUtils.copyProperties(request, entity);
+
+        logger.info(MESSAGE_PATTERN, ENTITY, entity);
+        entity = repository.save(entity);
+        return modelBuilder.buildModel(entity, outputClass);
+    }
+
+    public <INPUT> GenericResponse deleteById(JpaRepository<INPUT, Long> repository, EntityName entityName, Long id) {
         var entityId = idValidatorService.entityIdValidation(repository, id);
         deleteForeignKeyService.controller(entityName, entityId);
         repository.deleteById(entityId);

@@ -5,7 +5,7 @@ import com.maxtattoo.factory.FactoryProducer;
 import com.maxtattoo.factory.ModelFactory;
 import com.maxtattoo.dto.entity.*;
 import com.maxtattoo.dto.model.*;
-import com.maxtattoo.service.enums.Entity;
+import com.maxtattoo.service.enums.EntityName;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
@@ -27,7 +27,7 @@ public class ModelBuilder implements GenericBuilder {
 
     @Override
     public <INPUT, OUTPUT> OUTPUT buildModel(INPUT input, Class<OUTPUT> output) {
-        Entity objectName = Entity.findByValue(input.getClass().getSimpleName());
+        EntityName objectName = EntityName.findByValue(input.getClass().getSimpleName());
         switch(objectName) {
             case CITY:
                 City city = (City) input;

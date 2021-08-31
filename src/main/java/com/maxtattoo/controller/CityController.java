@@ -1,10 +1,10 @@
 package com.maxtattoo.controller;
 
-import com.maxtattoo.command.CityCommand;
 import com.maxtattoo.command.CrudCommand;
+import com.maxtattoo.dto.entity.City;
 import com.maxtattoo.dto.model.CityModel;
 import com.maxtattoo.dto.request.CityRequest;
-import com.maxtattoo.service.enums.Entity;
+import com.maxtattoo.service.enums.EntityName;
 import com.maxtattoo.utils.GenericResponse;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +14,7 @@ import java.util.List;
 
 import static com.maxtattoo.utils.StringUtils.*;
 import static org.springframework.http.ResponseEntity.ok;
-import static com.maxtattoo.service.enums.Entity.CITY;
+import static com.maxtattoo.service.enums.EntityName.CITY;
 
 @RestController
 @RequestMapping(value = "/city")
@@ -42,11 +42,11 @@ public class CityController extends GenericController {
     }
 
     @PostMapping(value = "/save", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<CityModel> save(@RequestBody CityRequest request){
+    public ResponseEntity<CityModel> save(@RequestBody CityRequest request) {
         logger.info(START);
-        var command = super.beanFactory.getBean(CityCommand.class);
+        var command = beanFactory.getBean(CrudCommand.class);
         logger.info("{} id: {}", REQUEST, request);
-        var model = command.save(request);
+        var model = command.save(repositoryFactory.getRepository(CITY), City.class, CityModel.class, request);
         logger.info(MESSAGE_PATTERN, MODEL, model);
         logger.info(END);
         return ok(model);
@@ -55,9 +55,9 @@ public class CityController extends GenericController {
     @DeleteMapping(value = "/deleteById", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<GenericResponse> deleteById(@RequestParam(name = "cityId") Long id){
         logger.info(START);
-        var command = super.beanFactory.getBean(CrudCommand.class);
+        var command = beanFactory.getBean(CrudCommand.class);
         logger.info(MESSAGE_PATTERN, REQUEST, id);
-        var result = command.deleteById(repositoryFactory.getRepository(CITY), Entity.CITY, id);
+        var result = command.deleteById(repositoryFactory.getRepository(CITY), EntityName.CITY, id);
         logger.info("RESULT: {}", result);
         logger.info(END);
         return ok(result);

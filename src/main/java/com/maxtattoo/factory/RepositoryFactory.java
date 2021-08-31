@@ -1,7 +1,7 @@
 package com.maxtattoo.factory;
 
 import com.maxtattoo.database.repository.*;
-import com.maxtattoo.service.enums.Entity;
+import com.maxtattoo.service.enums.EntityName;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
@@ -27,8 +27,8 @@ public class RepositoryFactory {
     private NeedleRepository needleRepository;
 
     @SuppressWarnings("unchecked")
-    public <ENTITY, ID> JpaRepository<ENTITY, ID> getRepository(Entity entity) {
-            switch (entity){
+    public <ENTITY, ID> JpaRepository<ENTITY, ID> getRepository(EntityName entityName) {
+            switch (entityName){
                 case CITY:
                     return (JpaRepository<ENTITY, ID>) cityRepository;
                 case LOCATION:
@@ -46,7 +46,7 @@ public class RepositoryFactory {
                 case NEEDLE:
                     return (JpaRepository<ENTITY, ID>) needleRepository;
 
-                default: throw new IllegalArgumentException("Not found entity with name: "+entity);
+                default: throw new IllegalArgumentException("Not found entity with name: "+ entityName);
             }
     }
 }

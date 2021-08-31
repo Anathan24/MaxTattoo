@@ -11,7 +11,7 @@ import java.util.Optional;
 @Getter
 @ToString
 @AllArgsConstructor
-public enum Entity {
+public enum EntityName {
 
     CITY("City"),
     LOCATION("Location"),
@@ -24,7 +24,7 @@ public enum Entity {
 
     private String value;
 
-    public static Entity findByValue(String value) {
+    public static EntityName findByValue(String value) {
         return Optional.ofNullable(value)
                 .flatMap(v -> Arrays.stream(values())
                         .filter(el -> Objects.equals(v, el.getValue()))
