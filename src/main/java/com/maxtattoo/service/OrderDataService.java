@@ -21,7 +21,7 @@ import org.springframework.stereotype.Service;
 import java.sql.Date;
 
 @Service
-public class OrderDataService{
+public class OrderDataService {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -57,7 +57,7 @@ public class OrderDataService{
     }
 
     public OrderType orderTypeValidation(String orderType) {
-        if (orderType != null && orderTypeRepository.orderTypeExistsByValue(orderType) != null){
+        if (orderType != null && orderTypeRepository.orderTypeExistsByValue(orderType) != null) {
             return orderTypeRepository.findOrderTypeByValue(orderType);
         } else {
             String message = "Request parameter orderType("+orderType+") not found! Insert an existing order type.";

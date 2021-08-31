@@ -3,11 +3,8 @@ package com.maxtattoo.command;
 import com.maxtattoo.database.repository.OrderRepository;
 import com.maxtattoo.database.repository.OrderTypeRepository;
 import com.maxtattoo.dto.entity.Order;
-import com.maxtattoo.dto.entity.OrderType;
 import com.maxtattoo.dto.model.OrderModel;
-import com.maxtattoo.dto.model.OrderTypeModel;
 import com.maxtattoo.dto.request.OrderRequest;
-import com.maxtattoo.dto.request.OrderTypeRequest;
 import com.maxtattoo.service.DeleteForeignKeyService;
 import com.maxtattoo.service.IdValidatorService;
 import com.maxtattoo.service.OrderDataService;
@@ -58,12 +55,4 @@ public class OrderCommand extends GenericCommand {
         return modelBuilder.buildModel(entity, OrderModel.class);
     }
 
-    public OrderTypeModel saveOrderType(OrderTypeRequest request) {
-        var entity = (OrderType) entityFactory.getObject(OrderType.class.getSimpleName());
-        BeanUtils.copyProperties(request, entity);
-
-        logger.info(MESSAGE_PATTERN, ENTITY, entity);
-        entity = orderTypeRepository.save(entity);
-        return modelBuilder.buildModel(entity, OrderTypeModel.class);
-    }
 }

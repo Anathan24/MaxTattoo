@@ -2,12 +2,9 @@ package com.maxtattoo.command;
 
 import com.maxtattoo.database.repository.ClientRepository;
 import com.maxtattoo.database.repository.LocationRepository;
-import com.maxtattoo.dto.entity.Client;
 import com.maxtattoo.dto.model.ClientModel;
-import com.maxtattoo.dto.request.ClientRequest;
 import com.maxtattoo.service.DeleteForeignKeyService;
 import com.maxtattoo.service.IdValidatorService;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -41,21 +38,5 @@ public class ClientCommand extends GenericCommand {
         var result = clientRepository.findByInitialLetters(initialLetters);
         logger.info(MESSAGE_PATTERN, ENTITY, result);
         return modelBuilder.buildModel(result, ClientModel.class);
-    }
-
-    public ClientModel save(ClientRequest request) {
-        var entity = (Client) entityFactory.getObject(Client.class.getSimpleName());
-
-        if(request.getLocationId() != null && locationRepository.existsById(request.getLocationId())){
-            entity.setLocation(locationRepository.getById(request.getLocationId()));
-        } else {
-            logger.info("REQUEST PARAMETER locationId({}) DOES NOT EXIST!",request.getLocationId());
-        }
-
-        BeanUtils.copyProperties(request, entity);
-        logger.info(MESSAGE_PATTERN, ENTITY, entity);
-        entity = clientRepository.save(entity);
-
-        return modelBuilder.buildModel(entity, ClientModel.class);
     }
 }

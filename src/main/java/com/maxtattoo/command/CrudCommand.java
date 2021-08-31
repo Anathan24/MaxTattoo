@@ -1,6 +1,11 @@
 package com.maxtattoo.command;
 
+import com.maxtattoo.database.repository.LocationRepository;
+import com.maxtattoo.dto.entity.Client;
+import com.maxtattoo.dto.request.ClientRequest;
 import com.maxtattoo.dto.request.GenericRequest;
+import com.maxtattoo.dto.request.OrderRequest;
+import com.maxtattoo.dto.request.SittingRequest;
 import com.maxtattoo.exception.ResourceNotFoundException;
 import com.maxtattoo.service.DeleteForeignKeyService;
 import com.maxtattoo.service.IdValidatorService;
@@ -21,6 +26,9 @@ import static com.maxtattoo.utils.StringUtils.MESSAGE_PATTERN;
 @Component
 @Scope("prototype")
 public class CrudCommand extends GenericCommand {
+
+    @Autowired
+    private LocationRepository locationRepository;
 
     @Autowired
     private IdValidatorService idValidatorService;
@@ -51,6 +59,22 @@ public class CrudCommand extends GenericCommand {
     public <INPUT, OUTPUT> OUTPUT save(JpaRepository<INPUT, Long> repository, Class<INPUT> inputClass, Class<OUTPUT> outputClass, GenericRequest request){
         var entity = (INPUT) entityFactory.getObject(inputClass.getSimpleName());
         BeanUtils.copyProperties(request, entity);
+
+        if(request instanceof ClientRequest) {
+            ClientRequest clientRequest = (ClientRequest)request;
+            Client client = (Client) entity;
+            idValidatorService.entityIdValidation(locationRepository, clientRequest.getLocationId());
+            client.setLocation(locationRepository.getById(clientRequest.getLocationId()));
+            //LocationId diventa obbligatorio per inserimento del cliente.
+        }
+
+        if(request instanceof OrderRequest){
+
+        }
+
+        if(request instanceof SittingRequest){
+
+        }
 
         logger.info(MESSAGE_PATTERN, ENTITY, entity);
         entity = repository.save(entity);

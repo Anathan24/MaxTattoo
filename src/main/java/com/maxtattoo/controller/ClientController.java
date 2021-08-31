@@ -2,6 +2,7 @@ package com.maxtattoo.controller;
 
 import com.maxtattoo.command.ClientCommand;
 import com.maxtattoo.command.CrudCommand;
+import com.maxtattoo.dto.entity.Client;
 import com.maxtattoo.dto.model.ClientModel;
 import com.maxtattoo.dto.request.ClientRequest;
 import com.maxtattoo.utils.GenericResponse;
@@ -65,9 +66,9 @@ public class ClientController extends GenericController {
     @PostMapping(value = "/save", consumes = MediaType.APPLICATION_JSON_VALUE,  produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ClientModel> save(@RequestBody ClientRequest request) {
         logger.info(START);
-        var command = beanFactory.getBean(ClientCommand.class);
+        var command = beanFactory.getBean(CrudCommand.class);
         logger.info(MESSAGE_PATTERN,REQUEST, request);
-        var model = command.save(request);
+        var model = command.save(repositoryFactory.getRepository(CLIENT), Client.class, ClientModel.class, request);
         logger.info(MESSAGE_PATTERN, MODEL, model);
         logger.info(END);
         return ok(model);
