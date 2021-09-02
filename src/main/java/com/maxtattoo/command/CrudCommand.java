@@ -63,17 +63,7 @@ public class CrudCommand extends GenericCommand {
         if(request instanceof ClientRequest) {
             ClientRequest clientRequest = (ClientRequest)request;
             Client client = (Client) entity;
-            idValidatorService.entityIdValidation(locationRepository, clientRequest.getLocationId());
-            client.setLocation(locationRepository.getById(clientRequest.getLocationId()));
-            //LocationId diventa obbligatorio per inserimento del cliente.
-        }
-
-        if(request instanceof OrderRequest){
-
-        }
-
-        if(request instanceof SittingRequest){
-
+            client.setLocation(clientRequest.getLocationId() == null ? null : locationRepository.getById(clientRequest.getLocationId()));
         }
 
         logger.info(MESSAGE_PATTERN, ENTITY, entity);
