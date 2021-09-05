@@ -6,7 +6,6 @@ import com.maxtattoo.dto.entity.SittingNeedle;
 import com.maxtattoo.dto.entity.SittingPaint;
 import com.maxtattoo.dto.model.SittingModel;
 import com.maxtattoo.dto.request.SittingRequest;
-import com.maxtattoo.service.DeleteForeignKeyService;
 import com.maxtattoo.service.IdValidatorService;
 import com.maxtattoo.service.enums.SittingState;
 import com.maxtattoo.utils.DateUtils;
@@ -15,17 +14,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static com.maxtattoo.utils.StringUtils.ENTITY;
 import static com.maxtattoo.utils.StringUtils.MESSAGE_PATTERN;
 
 @Component
 @Scope("prototype")
-public class SittingCommand extends GenericCommand {
+public class SaveSittingCmd extends GenericCommand {
 
     @Autowired
     private OrderRepository orderRepository;
@@ -42,16 +38,8 @@ public class SittingCommand extends GenericCommand {
 
     @Autowired
     private IdValidatorService idValidatorService;
-    @Autowired
-    private DeleteForeignKeyService deleteForeignKeyService;
 
-    public List<String> findAllSittingStates(){
-        return Arrays.stream(SittingState.values())
-                .map(SittingState::getValue)
-                .collect(Collectors.toCollection(ArrayList::new));
-    }
-
-    public SittingModel save(SittingRequest request, List<Long> paints, List<Long> needles) {
+    public SittingModel execute(SittingRequest request, List<Long> paints, List<Long> needles) {
         var entity = (Sitting) entityFactory.getObject(Sitting.class.getSimpleName());
         BeanUtils.copyProperties(request, entity);
 
@@ -72,7 +60,7 @@ public class SittingCommand extends GenericCommand {
         if(paints != null){
             paints.forEach(paint -> idValidatorService.entityIdValidation(paintRepository, paint));
             paints.forEach(paint -> {
-                var entity = (SittingPaint)entityFactory.getObject(SittingPaint.class.getSimpleName());
+                var entity = (SittingPaint) entityFactory.getObject(SittingPaint.class.getSimpleName());
                 entity.setSittingIdFk(sittingId);
                 entity.setPaintIdFk(paint);
                 sittingPaintRepository.save(entity);

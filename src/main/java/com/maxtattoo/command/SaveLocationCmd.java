@@ -7,7 +7,6 @@ import com.maxtattoo.dto.entity.Location;
 import com.maxtattoo.dto.entity.LocationCity;
 import com.maxtattoo.dto.model.LocationModel;
 import com.maxtattoo.dto.request.LocationRequest;
-import com.maxtattoo.service.DeleteForeignKeyService;
 import com.maxtattoo.service.IdValidatorService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +20,7 @@ import static com.maxtattoo.utils.StringUtils.MESSAGE_PATTERN;
 
 @Component
 @Scope("prototype")
-public class LocationCommand extends GenericCommand {
+public class SaveLocationCmd extends GenericCommand {
 
     @Autowired
     private LocationRepository locationRepository;
@@ -32,10 +31,8 @@ public class LocationCommand extends GenericCommand {
 
     @Autowired
     private IdValidatorService idValidatorService;
-    @Autowired
-    private DeleteForeignKeyService deleteForeignKeyService;
 
-    public LocationModel save(LocationRequest request, List<Long> cities){
+    public LocationModel execute(LocationRequest request, List<Long> cities){
         var entity = (Location) entityFactory.getObject(Location.class.getSimpleName());
         BeanUtils.copyProperties(request, entity);
 

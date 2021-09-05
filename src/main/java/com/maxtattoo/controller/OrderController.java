@@ -1,18 +1,25 @@
 package com.maxtattoo.controller;
 
-import com.maxtattoo.command.CrudCommand;
-import com.maxtattoo.command.OrderCommand;
+import com.maxtattoo.command.SaveCmd;
+import com.maxtattoo.command.DeleteByIdCmd;
+import com.maxtattoo.command.FindAllCmd;
+import com.maxtattoo.command.FindByIdCmd;
+import com.maxtattoo.dto.entity.Order;
 import com.maxtattoo.dto.entity.OrderType;
 import com.maxtattoo.dto.model.OrderModel;
 import com.maxtattoo.dto.model.OrderTypeModel;
 import com.maxtattoo.dto.request.OrderRequest;
 import com.maxtattoo.dto.request.OrderTypeRequest;
+import com.maxtattoo.service.enums.OrderState;
 import com.maxtattoo.utils.GenericResponse;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.maxtattoo.service.enums.EntityName.*;
 import static com.maxtattoo.utils.StringUtils.*;
@@ -25,8 +32,8 @@ public class OrderController extends GenericController {
     @GetMapping(value = "/findById", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<OrderModel> findById(@RequestParam Long id) {
         logger.info(START);
-        var command = beanFactory.getBean(CrudCommand.class);
-        var model = command.findById(repositoryFactory.getRepository(ORDER), OrderModel.class, id);
+        var command = beanFactory.getBean(FindByIdCmd.class);
+        var model = command.execute(repositoryFactory.getRepository(ORDER), OrderModel.class, id);
         logger.info(MESSAGE_PATTERN, MODEL, model);
         logger.info(END);
         return ok(model);
@@ -35,8 +42,8 @@ public class OrderController extends GenericController {
     @GetMapping(value = "/findAll", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<OrderModel>> findAll(){
         logger.info(START);
-        var command = super.beanFactory.getBean(CrudCommand.class);
-        var model = command.findAll(repositoryFactory.getRepository(ORDER), OrderModel.class);
+        var command = super.beanFactory.getBean(FindAllCmd.class);
+        var model = command.execute(repositoryFactory.getRepository(ORDER), OrderModel.class);
         logger.info(END);
         return ok(model);
     }
@@ -44,9 +51,9 @@ public class OrderController extends GenericController {
     @GetMapping(value = "/findOrderTypeById", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<OrderTypeModel> findOrderTypeById(@RequestParam Long id){
         logger.info(START);
-        var command = super.beanFactory.getBean(CrudCommand.class);
+        var command = super.beanFactory.getBean(FindByIdCmd.class);
         logger.info(MESSAGE_PATTERN, REQUEST, id);
-        var model = command.findById(repositoryFactory.getRepository(ORDER_TYPE), OrderTypeModel.class, id);
+        var model = command.execute(repositoryFactory.getRepository(ORDER_TYPE), OrderTypeModel.class, id);
         logger.info(MESSAGE_PATTERN, MODEL, model);
         logger.info(END);
         return ok(model);
@@ -55,8 +62,8 @@ public class OrderController extends GenericController {
     @GetMapping(value = "/findAllOrderTypes", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<OrderTypeModel>> findAllOrderTypes() {
         logger.info(START);
-        var command = super.beanFactory.getBean(CrudCommand.class);
-        var model = command.findAll(repositoryFactory.getRepository(ORDER_TYPE), OrderTypeModel.class);
+        var command = super.beanFactory.getBean(FindAllCmd.class);
+        var model = command.execute(repositoryFactory.getRepository(ORDER_TYPE), OrderTypeModel.class);
         logger.info(MESSAGE_PATTERN, MODEL, model);
         logger.info(END);
         return ok(model);
@@ -65,8 +72,7 @@ public class OrderController extends GenericController {
     @GetMapping(value = "/findAllOrderStates", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<String>> findAllOrderStates() {
         logger.info(START);
-        var command = super.beanFactory.getBean(OrderCommand.class);
-        var result = command.findAllOrderStates();
+        var result = Arrays.stream(OrderState.values()).map(OrderState::getValue).collect(Collectors.toCollection(ArrayList::new));
         logger.info("RESULT: {}", result);
         logger.info(END);
         return ok(result);
@@ -75,9 +81,9 @@ public class OrderController extends GenericController {
     @PostMapping(value = "/save", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<OrderModel> save(@RequestBody OrderRequest request) {
         logger.info(START);
-        var command = beanFactory.getBean(OrderCommand.class);
+        var command = beanFactory.getBean(SaveCmd.class);
         logger.info("{}: {}", REQUEST, request);
-        var model = command.save(request);
+        var model = command.execute(repositoryFactory.getRepository(ORDER), Order.class, OrderModel.class ,request);
         logger.info(MESSAGE_PATTERN, MODEL, model);
         logger.info(END);
         return ok(model);
@@ -86,9 +92,9 @@ public class OrderController extends GenericController {
     @PostMapping(value = "/saveOrderType", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<OrderTypeModel> saveOrderType(@RequestBody OrderTypeRequest request){
         logger.info(START);
-        var command = super.beanFactory.getBean(CrudCommand.class);
+        var command = super.beanFactory.getBean(SaveCmd.class);
         logger.info("{}: {}", REQUEST, request);
-        var model = command.save(repositoryFactory.getRepository(ORDER_TYPE), OrderType.class, OrderTypeModel.class, request);
+        var model = command.execute(repositoryFactory.getRepository(ORDER_TYPE), OrderType.class, OrderTypeModel.class, request);
         logger.info(MESSAGE_PATTERN, MODEL, model);
         logger.info(END);
         return ok(model);
@@ -97,9 +103,9 @@ public class OrderController extends GenericController {
     @DeleteMapping(value = "/deleteById")
     public ResponseEntity<GenericResponse> deleteById(@RequestParam("orderId") Long id){
         logger.info(START);
-        var command = super.beanFactory.getBean(CrudCommand.class);
+        var command = super.beanFactory.getBean(DeleteByIdCmd.class);
         logger.info(MESSAGE_PATTERN, REQUEST, id);
-        var result = command.deleteById(repositoryFactory.getRepository(ORDER), ORDER, id);
+        var result = command.execute(repositoryFactory.getRepository(ORDER), ORDER, id);
         logger.info("RESULT: {}", result);
         logger.info(END);
         return ok(result);
@@ -108,9 +114,9 @@ public class OrderController extends GenericController {
     @DeleteMapping(value = "/deleteOrderTypeById")
     public ResponseEntity<GenericResponse> deleteOrderTypeById(@RequestParam("orderTypeId") Long id){
         logger.info(START);
-        var command = super.beanFactory.getBean(CrudCommand.class);
+        var command = super.beanFactory.getBean(DeleteByIdCmd.class);
         logger.info(MESSAGE_PATTERN, REQUEST, id);
-        var result = command.deleteById(repositoryFactory.getRepository(ORDER_TYPE), ORDER_TYPE, id);
+        var result = command.execute(repositoryFactory.getRepository(ORDER_TYPE), ORDER_TYPE, id);
         logger.info("RESULT: {}", result);
         logger.info(END);
         return ok(result);

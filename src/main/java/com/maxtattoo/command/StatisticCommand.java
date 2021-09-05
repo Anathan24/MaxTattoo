@@ -29,7 +29,7 @@ public class StatisticCommand extends GenericCommand {
     private OrderStatisticCalculusService orderStatisticCalculusService;
 
     @Autowired
-    private CrudCommand crudCommand;
+    private FindAllCmd findAll;
     @Autowired
     private OrderTypeRepository orderTypeRepository;
 
@@ -41,7 +41,7 @@ public class StatisticCommand extends GenericCommand {
         DateUtils.checkForStartDateNoGreaterThenEndDate(start, end);
 
         final TotalStatisticWrapper statistic = new TotalStatisticWrapper();
-        var orderTypes = crudCommand.findAll(orderTypeRepository, OrderTypeModel.class);
+        var orderTypes = findAll.execute(orderTypeRepository, OrderTypeModel.class);
         var statisticByOrderType = new LinkedList<OrderStatisticModel>();
 
         orderTypes.forEach(type -> statisticByOrderType.add(orderStatisticCalculusService.calculateOrdersStatisticByType(start, end, type.getValue())));

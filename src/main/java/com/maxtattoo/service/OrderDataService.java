@@ -67,7 +67,7 @@ public class OrderDataService {
     }
 
     public void checkForNoStateRegression(Long orderId, String orderState) {
-        Order lastOrderVersion = orderRepository.getById(orderId);
+        Order lastOrderVersion = orderRepository.findById(orderId).get();
         OrderState oldState = OrderState.findByValue(lastOrderVersion.getOrderState());
         OrderState newState = OrderState.findByValue(orderState);
 
@@ -82,7 +82,7 @@ public class OrderDataService {
         OrderState state = OrderState.findByValue(entity.getOrderState());
 
         if(state.equals(OrderState.FINISHED)) {
-            Order order = orderRepository.getById(entity.getOrderId());
+            Order order = orderRepository.findById(entity.getOrderId()).get();
 
             int alreadyPaid = entity.getPrepayment();
             for(Sitting sitting : order.getSittings()) {
@@ -96,7 +96,9 @@ public class OrderDataService {
             }
 
             int sittingNumber = order.getSittings().size();
-            int avgSittingCost = alreadyPaid/sittingNumber;
+            int avgSittingCost = 0;
+            if(sittingNumber != 0 )
+                avgSittingCost = alreadyPaid/sittingNumber;
 
             entity.setAlreadyPaid(alreadyPaid);
             entity.setSittingNumber(sittingNumber);

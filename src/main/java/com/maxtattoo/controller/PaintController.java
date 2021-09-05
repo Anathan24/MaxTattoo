@@ -1,6 +1,9 @@
 package com.maxtattoo.controller;
 
-import com.maxtattoo.command.CrudCommand;
+import com.maxtattoo.command.SaveCmd;
+import com.maxtattoo.command.DeleteByIdCmd;
+import com.maxtattoo.command.FindAllCmd;
+import com.maxtattoo.command.FindByIdCmd;
 import com.maxtattoo.dto.entity.Paint;
 import com.maxtattoo.dto.model.PaintModel;
 import com.maxtattoo.dto.request.PaintRequest;
@@ -22,9 +25,9 @@ public class PaintController extends GenericController{
     @GetMapping(value = "/findById", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<PaintModel> findById(@RequestParam Long id){
         logger.info(START);
-        var command = super.beanFactory.getBean(CrudCommand.class);
+        var command = super.beanFactory.getBean(FindByIdCmd.class);
         logger.info(MESSAGE_PATTERN, REQUEST, id);
-        var model = command.findById(repositoryFactory.getRepository(PAINT), PaintModel.class, id);
+        var model = command.execute(repositoryFactory.getRepository(PAINT), PaintModel.class, id);
         logger.info(MESSAGE_PATTERN, MODEL, model);
         logger.info(END);
         return ok(model);
@@ -33,8 +36,8 @@ public class PaintController extends GenericController{
     @GetMapping(value = "/findAll", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<PaintModel>> findAll(){
         logger.info(START);
-        var command = super.beanFactory.getBean(CrudCommand.class);
-        var model = command.findAll(repositoryFactory.getRepository(PAINT), PaintModel.class);
+        var command = super.beanFactory.getBean(FindAllCmd.class);
+        var model = command.execute(repositoryFactory.getRepository(PAINT), PaintModel.class);
         logger.info(MESSAGE_PATTERN, MODEL, model);
         logger.info(END);
         return ok(model);
@@ -43,8 +46,8 @@ public class PaintController extends GenericController{
     @PostMapping(value = "/save", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<PaintModel> save(@RequestBody PaintRequest request){
         logger.info(START);
-        var command = super.beanFactory.getBean(CrudCommand.class);
-        var model = command.save(repositoryFactory.getRepository(PAINT), Paint.class, PaintModel.class, request);
+        var command = super.beanFactory.getBean(SaveCmd.class);
+        var model = command.execute(repositoryFactory.getRepository(PAINT), Paint.class, PaintModel.class, request);
         logger.info(MESSAGE_PATTERN, MODEL, model);
         logger.info(END);
         return ok(model);
@@ -53,9 +56,9 @@ public class PaintController extends GenericController{
     @DeleteMapping(value = "/deleteById")
     public ResponseEntity<GenericResponse> deleteById(@RequestParam("paintId") Long id){
         logger.info(START);
-        var command = super.beanFactory.getBean(CrudCommand.class);
+        var command = super.beanFactory.getBean(DeleteByIdCmd.class);
         logger.info(MESSAGE_PATTERN, REQUEST, id);
-        var result = command.deleteById(repositoryFactory.getRepository(PAINT), PAINT, id);
+        var result = command.execute(repositoryFactory.getRepository(PAINT), PAINT, id);
         logger.info("RESULT: {}", result);
         logger.info(END);
         return ok(result);

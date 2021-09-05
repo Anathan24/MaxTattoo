@@ -1,6 +1,9 @@
 package com.maxtattoo.controller;
 
-import com.maxtattoo.command.CrudCommand;
+import com.maxtattoo.command.SaveCmd;
+import com.maxtattoo.command.DeleteByIdCmd;
+import com.maxtattoo.command.FindAllCmd;
+import com.maxtattoo.command.FindByIdCmd;
 import com.maxtattoo.dto.entity.Needle;
 import com.maxtattoo.dto.model.NeedleModel;
 import com.maxtattoo.dto.request.NeedleRequest;
@@ -22,9 +25,9 @@ public class NeedleController extends GenericController{
     @GetMapping(value = "/findById", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<NeedleModel> findById(@RequestParam Long id){
         logger.info(START);
-        var command = beanFactory.getBean(CrudCommand.class);
+        var command = beanFactory.getBean(FindByIdCmd.class);
         logger.info(MESSAGE_PATTERN , REQUEST, id);
-        var model = command.findById(repositoryFactory.getRepository(NEEDLE), NeedleModel.class, id);
+        var model = command.execute(repositoryFactory.getRepository(NEEDLE), NeedleModel.class, id);
         logger.info(MESSAGE_PATTERN, MODEL, model);
         logger.info(END);
         return ok(model);
@@ -33,8 +36,8 @@ public class NeedleController extends GenericController{
     @GetMapping(value = "/findAll", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<NeedleModel>> findAll(){
         logger.info(START);
-        var command = beanFactory.getBean(CrudCommand.class);
-        var model = command.findAll(repositoryFactory.getRepository(NEEDLE), NeedleModel.class);
+        var command = beanFactory.getBean(FindAllCmd.class);
+        var model = command.execute(repositoryFactory.getRepository(NEEDLE), NeedleModel.class);
         logger.info(MESSAGE_PATTERN, MODEL, model);
         logger.info(END);
         return ok(model);
@@ -43,9 +46,9 @@ public class NeedleController extends GenericController{
     @PostMapping(value = "/save", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<NeedleModel> save(@RequestBody NeedleRequest request){
         logger.info(START);
-        var command = beanFactory.getBean(CrudCommand.class);
+        var command = beanFactory.getBean(SaveCmd.class);
         logger.info("{}: {}", REQUEST, request);
-        var model = command.save(repositoryFactory.getRepository(NEEDLE), Needle.class, NeedleModel.class, request);
+        var model = command.execute(repositoryFactory.getRepository(NEEDLE), Needle.class, NeedleModel.class, request);
         logger.info(MESSAGE_PATTERN, MODEL, model);
         logger.info(END);
         return ok(model);
@@ -54,9 +57,9 @@ public class NeedleController extends GenericController{
     @DeleteMapping(value = "/deleteById")
     public ResponseEntity<GenericResponse> deleteById(@RequestParam("needleId") Long id) {
         logger.info(START);
-        var command = beanFactory.getBean(CrudCommand.class);
+        var command = beanFactory.getBean(DeleteByIdCmd.class);
         logger.info(MESSAGE_PATTERN, REQUEST, id);
-        var result = command.deleteById(repositoryFactory.getRepository(NEEDLE), NEEDLE, id);
+        var result = command.execute(repositoryFactory.getRepository(NEEDLE), NEEDLE, id);
         logger.info("RESULT: {}", result);
         logger.info(END);
         return ok(result);
