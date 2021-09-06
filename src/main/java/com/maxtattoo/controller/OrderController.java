@@ -1,10 +1,6 @@
 package com.maxtattoo.controller;
 
-import com.maxtattoo.command.SaveCmd;
-import com.maxtattoo.command.DeleteByIdCmd;
-import com.maxtattoo.command.FindAllCmd;
-import com.maxtattoo.command.FindByIdCmd;
-import com.maxtattoo.dto.entity.Order;
+import com.maxtattoo.command.*;
 import com.maxtattoo.dto.entity.OrderType;
 import com.maxtattoo.dto.model.OrderModel;
 import com.maxtattoo.dto.model.OrderTypeModel;
@@ -81,9 +77,9 @@ public class OrderController extends GenericController {
     @PostMapping(value = "/save", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<OrderModel> save(@RequestBody OrderRequest request) {
         logger.info(START);
-        var command = beanFactory.getBean(SaveCmd.class);
+        var command = beanFactory.getBean(SaveOrderCmd.class);
         logger.info("{}: {}", REQUEST, request);
-        var model = command.execute(repositoryFactory.getRepository(ORDER), Order.class, OrderModel.class ,request);
+        var model = command.execute(OrderModel.class ,request);
         logger.info(MESSAGE_PATTERN, MODEL, model);
         logger.info(END);
         return ok(model);
