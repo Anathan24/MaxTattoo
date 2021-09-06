@@ -2,7 +2,7 @@ package com.maxtattoo.command;
 
 import com.maxtattoo.service.DeleteForeignKeyService;
 import com.maxtattoo.service.IdValidatorService;
-import com.maxtattoo.service.enums.EntityName;
+import com.maxtattoo.service.enums.Entity;
 import com.maxtattoo.utils.GenericResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -18,7 +18,7 @@ public class DeleteByIdCmd extends GenericCommand {
     @Autowired
     private DeleteForeignKeyService deleteForeignKeyService;
 
-    public <INPUT> GenericResponse execute(JpaRepository<INPUT, Long> repository, EntityName entityName, Long id) {
+    public <INPUT> GenericResponse execute(JpaRepository<INPUT, Long> repository, Entity entityName, Long id) {
         var entityId = idValidatorService.entityIdValidation(repository, id);
         deleteForeignKeyService.controller(entityName, entityId);
         repository.deleteById(entityId);

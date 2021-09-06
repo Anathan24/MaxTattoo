@@ -42,7 +42,7 @@ public class SaveLocationCmd extends GenericCommand {
         return modelBuilder.buildModel(entity, LocationModel.class);
     }
 
-    public void saveLocationCityRelation(Long locationId, List<Long> cities) {
+    private void saveLocationCityRelation(Long locationId, List<Long> cities) {
         if (cities != null) {
             cities.forEach(city -> idValidatorService.entityIdValidation(cityRepository, city));
             cities.forEach(cityId -> {

@@ -2,33 +2,35 @@ package com.maxtattoo.factory;
 
 import com.maxtattoo.dto.GenericObject;
 import com.maxtattoo.dto.entity.*;
+import com.maxtattoo.service.enums.Entity;
 
 public class EntityFactory implements AbstractFactory {
 
     @Override
     public GenericObject getObject(String objectSimpleName) {
-        switch(objectSimpleName) {
-            case "Client":
+        Entity entity = Entity.findByEntityName(objectSimpleName);
+        switch(entity) {
+            case CLIENT:
                 return new Client();
-            case "Location":
+            case LOCATION:
                 return new Location();
-            case "LocationCity":
+            case LOCATION_CITY:
                 return new LocationCity();
-            case "City":
+            case CITY:
                 return new City();
-            case "Order":
+            case ORDER:
                 return new Order();
-            case "OrderType":
+            case ORDER_TYPE:
                 return new OrderType();
-            case "Sitting":
+            case SITTING:
                 return new Sitting();
-            case "SittingNeedle":
+            case SITTING_NEEDLE:
                 return new SittingNeedle();
-            case "Needle":
+            case NEEDLE:
                 return new Needle();
-            case "SittingPaint":
+            case SITTING_PAINT:
                 return new SittingPaint();
-            case "Paint":
+            case PAINT:
                 return new Paint();
 
             default: throw new IllegalArgumentException("Entity with name "+objectSimpleName+" does not exist");

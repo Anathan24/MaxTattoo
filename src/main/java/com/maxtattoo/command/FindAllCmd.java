@@ -16,7 +16,6 @@ public class FindAllCmd extends GenericCommand {
     public <INPUT, OUTPUT> List<OUTPUT> execute(JpaRepository<INPUT, Long> repository, Class<OUTPUT> outputClass) {
         var entity = repository.findAll();
         logger.info(MESSAGE_PATTERN, ENTITY, entity);
-
         return modelBuilder.buildModel(entity, outputClass);
     }
 }

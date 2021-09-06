@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-import static com.maxtattoo.service.enums.EntityName.PAINT;
+import static com.maxtattoo.service.enums.Entity.PAINT;
 import static com.maxtattoo.utils.StringUtils.*;
 import static org.springframework.http.ResponseEntity.ok;
 

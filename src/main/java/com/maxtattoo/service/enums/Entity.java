@@ -11,24 +11,27 @@ import java.util.Optional;
 @Getter
 @ToString
 @AllArgsConstructor
-public enum EntityName {
+public enum Entity {
 
     CITY("City"),
     LOCATION("Location"),
+    LOCATION_CITY("LocationCity"),
     CLIENT("Client"),
     ORDER("Order"),
     ORDER_TYPE("OrderType"),
     SITTING("Sitting"),
     PAINT("Paint"),
-    NEEDLE("Needle");
+    SITTING_PAINT("SittingPaint"),
+    NEEDLE("Needle"),
+    SITTING_NEEDLE("SittingNeedle");
 
-    private String value;
+    private String entityName;
 
-    public static EntityName findByValue(String value) {
-        return Optional.ofNullable(value)
+    public static Entity findByEntityName(String modelName) {
+        return Optional.ofNullable(modelName)
                 .flatMap(v -> Arrays.stream(values())
-                        .filter(el -> Objects.equals(v, el.getValue()))
+                        .filter(el -> Objects.equals(v, el.getEntityName()))
                         .findFirst()
-                ).orElseThrow(() -> new IllegalArgumentException("Not found entity with specified value: "+value));
+                ).orElseThrow(() -> new IllegalArgumentException("Not found entity with specified value: "+modelName));
     }
 }

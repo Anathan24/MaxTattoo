@@ -16,7 +16,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.maxtattoo.service.enums.EntityName.SITTING;
+import static com.maxtattoo.service.enums.Entity.SITTING;
 import static com.maxtattoo.utils.StringUtils.*;
 import static org.springframework.http.ResponseEntity.ok;
 

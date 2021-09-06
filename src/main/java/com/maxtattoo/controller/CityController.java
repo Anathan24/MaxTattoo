@@ -7,7 +7,6 @@ import com.maxtattoo.command.FindByIdCmd;
 import com.maxtattoo.dto.entity.City;
 import com.maxtattoo.dto.model.CityModel;
 import com.maxtattoo.dto.request.CityRequest;
-import com.maxtattoo.service.enums.EntityName;
 import com.maxtattoo.utils.GenericResponse;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -17,14 +16,14 @@ import java.util.List;
 
 import static com.maxtattoo.utils.StringUtils.*;
 import static org.springframework.http.ResponseEntity.ok;
-import static com.maxtattoo.service.enums.EntityName.CITY;
+import static com.maxtattoo.service.enums.Entity.CITY;
 
 @RestController
 @RequestMapping(value = "/city")
 public class CityController extends GenericController {
 
     @GetMapping(value = "/findById", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<CityModel> findById(@RequestParam Long id){
+    public ResponseEntity<CityModel> findById(@RequestParam Long id) {
         logger.info(START);
         var command = beanFactory.getBean(FindByIdCmd.class);
         logger.info(MESSAGE_PATTERN, REQUEST, id);
@@ -35,7 +34,7 @@ public class CityController extends GenericController {
     }
 
     @GetMapping(value = "/findAll", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<CityModel>> findAll(){
+    public ResponseEntity<List<CityModel>> findAll() {
         logger.info(START);
         var command = beanFactory.getBean(FindAllCmd.class);
         var model = command.execute(repositoryFactory.getRepository(CITY), CityModel.class);
@@ -56,11 +55,11 @@ public class CityController extends GenericController {
     }
 
     @DeleteMapping(value = "/deleteById", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<GenericResponse> deleteById(@RequestParam(name = "cityId") Long id){
+    public ResponseEntity<GenericResponse> deleteById(@RequestParam(name = "cityId") Long id) {
         logger.info(START);
         var command = beanFactory.getBean(DeleteByIdCmd.class);
         logger.info(MESSAGE_PATTERN, REQUEST, id);
-        var result = command.execute(repositoryFactory.getRepository(CITY), EntityName.CITY, id);
+        var result = command.execute(repositoryFactory.getRepository(CITY), CITY, id);
         logger.info("RESULT: {}", result);
         logger.info(END);
         return ok(result);

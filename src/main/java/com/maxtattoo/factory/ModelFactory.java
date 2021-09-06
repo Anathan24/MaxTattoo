@@ -2,28 +2,30 @@ package com.maxtattoo.factory;
 
 import com.maxtattoo.dto.GenericObject;
 import com.maxtattoo.dto.model.*;
+import com.maxtattoo.service.enums.Model;
 
 public class ModelFactory implements AbstractFactory {
 
     @Override
     public GenericObject getObject(String objectSimpleName) {
-        switch(objectSimpleName){
-            case "ClientModel":
+        Model model = Model.findByModel(objectSimpleName);
+        switch(model) {
+            case CLIENT:
                 return new ClientModel();
-            case "LocationModel":
+            case LOCATION:
                 return new LocationModel();
-            case "CityModel":
+            case CITY:
                 return new CityModel();
-            case "OrderModel":
+            case ORDER:
                 return new OrderModel();
-            case "OrderTypeModel":
+            case ORDER_TYPE:
                 return new OrderTypeModel();
-            case "SittingModel":
+            case SITTING:
                 return new SittingModel();
-            case "NeedleModel":
-                return new NeedleModel();
-            case "PaintModel":
+            case PAINT:
                 return new PaintModel();
+            case NEEDLE:
+                return new NeedleModel();
 
             default: throw new IllegalArgumentException("Model with name "+objectSimpleName+" does not exist");
         }
