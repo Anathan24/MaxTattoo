@@ -10,21 +10,21 @@ public class ModelFactory implements AbstractFactory {
     public GenericObject getObject(String objectSimpleName) {
         Model model = Model.findByModel(objectSimpleName);
         switch(model) {
-            case CLIENT:
+            case CLIENT_MODEL:
                 return new ClientModel();
-            case LOCATION:
+            case LOCATION_MODEL:
                 return new LocationModel();
-            case CITY:
+            case CITY_MODEL:
                 return new CityModel();
-            case ORDER:
+            case ORDER_MODEL:
                 return new OrderModel();
-            case ORDER_TYPE:
+            case ORDER_TYPE_MODEL:
                 return new OrderTypeModel();
-            case SITTING:
+            case SITTING_MODEL:
                 return new SittingModel();
-            case PAINT:
+            case PAINT_MODEL:
                 return new PaintModel();
-            case NEEDLE:
+            case NEEDLE_MODEL:
                 return new NeedleModel();
 
             default: throw new IllegalArgumentException("Model with name "+objectSimpleName+" does not exist");

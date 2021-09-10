@@ -13,14 +13,14 @@ import java.util.Optional;
 @AllArgsConstructor
 public enum Model {
 
-    CITY("CityModel"),
-    LOCATION("LocationModel"),
-    CLIENT("ClientModel"),
-    ORDER("OrderModel"),
-    ORDER_TYPE( "OrderTypeModel"),
-    SITTING("SittingModel"),
-    PAINT("PaintModel"),
-    NEEDLE("NeedleModel");
+    CITY_MODEL("CityModel"),
+    LOCATION_MODEL("LocationModel"),
+    CLIENT_MODEL("ClientModel"),
+    ORDER_MODEL("OrderModel"),
+    ORDER_TYPE_MODEL( "OrderTypeModel"),
+    SITTING_MODEL("SittingModel"),
+    PAINT_MODEL("PaintModel"),
+    NEEDLE_MODEL("NeedleModel");
 
     private String modelName;
 
