@@ -24,7 +24,7 @@ public enum Model {
 
     private String modelName;
 
-    public static Model findByModel(String modelName) {
+    public static Model findByModelName(String modelName) {
         return Optional.ofNullable(modelName)
                 .flatMap(v -> Arrays.stream(values())
                         .filter(el -> Objects.equals(v, el.getModelName()))

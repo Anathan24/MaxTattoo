@@ -8,7 +8,7 @@ public class ModelFactory implements AbstractFactory {
 
     @Override
     public GenericObject getObject(String objectSimpleName) {
-        Model model = Model.findByModel(objectSimpleName);
+        Model model = Model.findByModelName(objectSimpleName);
         switch(model) {
             case CLIENT_MODEL:
                 return new ClientModel();

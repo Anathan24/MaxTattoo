@@ -25,7 +25,7 @@ public class OrderStatisticCalculusService extends GenericService {
     }
 
     public OrderStatisticModel calculateOrdersStatisticByType(Date startDate, Date endDate, String orderType) {
-        OrderStatisticModel orderStatistic = (OrderStatisticModel) factory.getObject("OrderStatisticModel");
+        OrderStatisticModel orderStatistic = (OrderStatisticModel) factory.getObject(OrderStatisticModel.class.getSimpleName());
         Integer totalOrdersNumberByOrderType = orderRepository.calculateOrdersTotalNumber(startDate, endDate, orderType);
         Integer totalOrdersPriceByOrderType = orderRepository.calculateOrdersTotalPrice(startDate, endDate, orderType);
 

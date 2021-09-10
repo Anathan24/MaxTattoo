@@ -58,7 +58,7 @@ public class StatisticCommand extends GenericCommand {
         List<MonthOfYearStatisticModel> yearStatistic = new LinkedList<>();
 
         for(int i = 1; i <= 12; i++) {
-            MonthOfYearStatisticModel monthStatistic = (MonthOfYearStatisticModel) factory.getObject("MonthOfYearStatisticModel");
+            MonthOfYearStatisticModel monthStatistic = (MonthOfYearStatisticModel) factory.getObject(MonthOfYearStatisticModel.class.getSimpleName());
             LocalDate firstMonthDay = LocalDate.of(validatedYear, i, 1);
             LocalDate lastMonthDay = LocalDate.of(validatedYear, i, firstMonthDay.lengthOfMonth());
 
