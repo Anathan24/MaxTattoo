@@ -26,6 +26,8 @@ public class ModelFactory implements AbstractFactory {
                 return new PaintModel();
             case NEEDLE_MODEL:
                 return new NeedleModel();
+            case IMAGE_MODEL:
+                return new ImageModel();
 
             default: throw new IllegalArgumentException("Model with name "+objectSimpleName+" does not exist");
         }

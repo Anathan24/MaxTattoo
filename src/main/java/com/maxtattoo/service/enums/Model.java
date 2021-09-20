@@ -20,7 +20,8 @@ public enum Model {
     ORDER_TYPE_MODEL( "OrderTypeModel"),
     SITTING_MODEL("SittingModel"),
     PAINT_MODEL("PaintModel"),
-    NEEDLE_MODEL("NeedleModel");
+    NEEDLE_MODEL("NeedleModel"),
+    IMAGE_MODEL("ImageModel");
 
     private String modelName;
 

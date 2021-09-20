@@ -1,7 +1,6 @@
 package com.maxtattoo.dto.entity;
 
 import lombok.Data;
-import lombok.ToString;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -9,7 +8,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Data
-@ToString
 @Entity
 @Table(name = "sittings")
 public class Sitting implements GenericEntity {

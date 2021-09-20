@@ -1,14 +1,12 @@
 package com.maxtattoo.dto.entity;
 
 import lombok.Data;
-import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
 @Data
-@ToString
 @Entity
 @Table(name = "clients")
 public class Client implements GenericEntity {

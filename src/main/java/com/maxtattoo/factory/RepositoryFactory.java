@@ -25,6 +25,8 @@ public class RepositoryFactory {
     private PaintRepository paintRepository;
     @Autowired
     private NeedleRepository needleRepository;
+    @Autowired
+    private ImageRepository imageRepository;
 
     @SuppressWarnings("unchecked")
     public <ENTITY, ID> JpaRepository<ENTITY, ID> getRepository(Entity entityName) {
@@ -45,6 +47,8 @@ public class RepositoryFactory {
                     return (JpaRepository<ENTITY, ID>) paintRepository;
                 case NEEDLE:
                     return (JpaRepository<ENTITY, ID>) needleRepository;
+                case IMAGE:
+                    return (JpaRepository<ENTITY, ID>)imageRepository;
 
                 default: throw new IllegalArgumentException("Not found entity with name: "+ entityName);
             }

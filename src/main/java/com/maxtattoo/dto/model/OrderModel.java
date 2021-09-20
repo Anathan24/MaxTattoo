@@ -1,12 +1,12 @@
 package com.maxtattoo.dto.model;
 
-import lombok.*;
+import lombok.Data;
+
 import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.List;
 
 @Data
-@ToString
 public class OrderModel implements GenericModel {
 
     private Long orderId;

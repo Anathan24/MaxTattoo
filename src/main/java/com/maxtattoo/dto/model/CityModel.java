@@ -1,9 +1,8 @@
 package com.maxtattoo.dto.model;
 
-import lombok.*;
+import lombok.Data;
 
 @Data
-@ToString
 public class CityModel implements GenericModel {
 
     private Long cityId;

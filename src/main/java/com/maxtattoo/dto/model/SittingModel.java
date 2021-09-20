@@ -1,13 +1,12 @@
 package com.maxtattoo.dto.model;
 
-import lombok.*;
+import lombok.Data;
 
 import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.List;
 
 @Data
-@ToString
 public class SittingModel implements GenericModel {
 
     private Long sittingId;

@@ -1,12 +1,11 @@
 package com.maxtattoo.dto.model;
 
-import lombok.*;
+import lombok.Data;
 
 import java.util.LinkedList;
 import java.util.List;
 
 @Data
-@ToString
 public class ClientModel implements GenericModel {
 
     private Long clientId;

@@ -53,6 +53,9 @@ public class ModelBuilder implements GenericBuilder {
             case SITTING:
                 Sitting sitting = (Sitting) input;
                 return output.cast(createSittingModel(sitting));
+            case IMAGE:
+                Image image = (Image) input;
+                return output.cast(createImageModel(image));
 
             default: throw new IllegalArgumentException("Does not found any model with name: "+objectName);
         }
@@ -108,6 +111,16 @@ public class ModelBuilder implements GenericBuilder {
                 .stream()
                 .map(this::createNeedleModel)
                 .collect(Collectors.toCollection(LinkedList::new)));
+
+        return model;
+    }
+
+    private ImageModel createImageModel(Image image) {
+        if (image == null)
+            return null;
+
+        var model = (ImageModel) modelFactory.getObject(ImageModel.class.getSimpleName());
+        BeanUtils.copyProperties(image, model);
 
         return model;
     }

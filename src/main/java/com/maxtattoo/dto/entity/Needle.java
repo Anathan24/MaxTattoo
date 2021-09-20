@@ -1,12 +1,10 @@
 package com.maxtattoo.dto.entity;
 
 import lombok.Data;
-import lombok.ToString;
 
 import javax.persistence.*;
 
 @Data
-@ToString
 @Entity
 @Table(name = "needles")
 public class Needle implements GenericEntity {
