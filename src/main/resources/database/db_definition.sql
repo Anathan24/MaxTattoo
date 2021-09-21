@@ -9,7 +9,7 @@ DROP TABLE IF EXISTS order_types;
 DROP TABLE IF EXISTS cities;
 DROP TABLE IF EXISTS clients;
 DROP TABLE IF EXISTS locations;
-DROP TABLE IF EXISTS images;
+DROP TABLE IF EXISTS collection;
 
 CREATE TABLE locations(
     location_id_pk BIGSERIAL PRIMARY KEY,
@@ -30,7 +30,7 @@ CREATE TABLE locations_cities(
     FOREIGN KEY (city_id_fk) REFERENCES cities(city_id_pk)
 );
 
-CREATE TABLE images(
+CREATE TABLE collection(
     image_id_pk BIGSERIAL PRIMARY KEY,
     name VARCHAR,
     content bytea,
@@ -46,9 +46,7 @@ CREATE TABLE clients(
     description VARCHAR,
 
     location_id_fk BIGINT,
-    image_id_fk BIGINT,
-    FOREIGN KEY(location_id_fk) REFERENCES locations(location_id_pk),
-    FOREIGN KEY(image_id_fk) REFERENCES image(image_id_pk)
+    FOREIGN KEY(location_id_fk) REFERENCES locations(location_id_pk)
 );
 
 CREATE TABLE order_types(
@@ -69,10 +67,12 @@ CREATE TABLE orders(
 
     order_type_id_fk BIGINT,
     client_id_fk BIGINT,
-    image_id_fk BIGINT,
+    initial_image_state_id_fk BIGINT,
+    final_image_state_id_fk BIGINT,
     FOREIGN KEY(order_type_id_fk) REFERENCES order_types(order_type_id_pk),
     FOREIGN KEY(client_id_fk) REFERENCES clients(client_id_pk),
-    FOREIGN KEY(image_id_fk) REFERENCES image(image_id_pk)
+    FOREIGN KEY(initial_image_state_id_fk) REFERENCES collection(image_id_pk),
+    FOREIGN KEY(final_image_state_id_fk) REFERENCES collection(image_id_pk)
 );
 
 CREATE TABLE sittings(
@@ -86,7 +86,7 @@ CREATE TABLE sittings(
     order_id_fk BIGINT,
     image_id_fk BIGINT,
     FOREIGN KEY(order_id_fk) REFERENCES orders(order_id_pk),
-    FOREIGN KEY(image_id_fk) REFERENCES image(image_id_pk)
+    FOREIGN KEY(image_id_fk) REFERENCES collection(image_id_pk)
 );
 
 CREATE TABLE paints(

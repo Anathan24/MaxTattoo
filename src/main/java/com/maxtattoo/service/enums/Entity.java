@@ -24,7 +24,7 @@ public enum Entity {
     SITTING_PAINT("SittingPaint"),
     NEEDLE("Needle"),
     SITTING_NEEDLE("SittingNeedle"),
-    IMAGE("Image");
+    COLLECTION("Collection");
 
     private String entityName;
 

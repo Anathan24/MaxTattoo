@@ -32,8 +32,8 @@ public class EntityFactory implements AbstractFactory {
                 return new SittingPaint();
             case PAINT:
                 return new Paint();
-            case IMAGE:
-                return new Image();
+            case COLLECTION:
+                return new Collection();
 
             default: throw new IllegalArgumentException("Entity with name "+objectSimpleName+" does not exist");
         }

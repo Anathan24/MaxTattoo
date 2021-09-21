@@ -53,9 +53,9 @@ public class ModelBuilder implements GenericBuilder {
             case SITTING:
                 Sitting sitting = (Sitting) input;
                 return output.cast(createSittingModel(sitting));
-            case IMAGE:
-                Image image = (Image) input;
-                return output.cast(createImageModel(image));
+            case COLLECTION:
+                Collection collection = (Collection) input;
+                return output.cast(createImageModel(collection));
 
             default: throw new IllegalArgumentException("Does not found any model with name: "+objectName);
         }
@@ -115,12 +115,12 @@ public class ModelBuilder implements GenericBuilder {
         return model;
     }
 
-    private ImageModel createImageModel(Image image) {
-        if (image == null)
+    private ImageModel createImageModel(Collection collection) {
+        if (collection == null)
             return null;
 
         var model = (ImageModel) modelFactory.getObject(ImageModel.class.getSimpleName());
-        BeanUtils.copyProperties(image, model);
+        BeanUtils.copyProperties(collection, model);
 
         return model;
     }

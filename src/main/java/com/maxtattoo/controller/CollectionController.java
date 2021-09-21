@@ -15,20 +15,20 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.util.List;
 
-import static com.maxtattoo.service.enums.Entity.IMAGE;
+import static com.maxtattoo.service.enums.Entity.COLLECTION;
 import static com.maxtattoo.utils.StringUtils.*;
 import static org.springframework.http.ResponseEntity.ok;
 
 @RestController
 @RequestMapping(value = "/collection")
-public class ImageController extends GenericController {
+public class CollectionController extends GenericController {
 
     @GetMapping(value = "/findById", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ImageModel> findById(@RequestParam Long id){
         logger.info(START);
         var command = beanFactory.getBean(FindByIdCmd.class);
         logger.info("{}, id: {}", REQUEST, id);
-        var model = command.execute(repositoryFactory.getRepository(IMAGE), ImageModel.class, id);
+        var model = command.execute(repositoryFactory.getRepository(COLLECTION), ImageModel.class, id);
         logger.info(MESSAGE_PATTERN, MODEL, model);
         logger.info(END);
         return ok(model);
@@ -38,7 +38,7 @@ public class ImageController extends GenericController {
     public ResponseEntity<List<ImageModel>> findAll(){
         logger.info(START);
         var command = super.beanFactory.getBean(FindAllCmd.class);
-        var result = command.execute(repositoryFactory.getRepository(IMAGE), ImageModel.class);
+        var result = command.execute(repositoryFactory.getRepository(COLLECTION), ImageModel.class);
         logger.info(MESSAGE_PATTERN, MODEL, result);
         logger.info(END);
         return ok(result);
@@ -64,7 +64,7 @@ public class ImageController extends GenericController {
         logger.info(START);
         var command = beanFactory.getBean(DeleteByIdCmd.class);
         logger.info(MESSAGE_PATTERN, REQUEST, id);
-        var result = command.execute(repositoryFactory.getRepository(IMAGE), IMAGE, id);
+        var result = command.execute(repositoryFactory.getRepository(COLLECTION), COLLECTION, id);
         logger.info("RESULT: {}", result);
         logger.info(END);
         return ok(result);

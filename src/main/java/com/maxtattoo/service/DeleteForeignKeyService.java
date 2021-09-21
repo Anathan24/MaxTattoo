@@ -27,7 +27,7 @@ public class DeleteForeignKeyService extends GenericService {
             case CLIENT:
                 deleteOrdersClientFk(entityId);
                 break;
-            case IMAGE:
+            case COLLECTION:
             case ORDER:
                 //Per l'ordine e Image non ci sono chiavi esterne che bloccano la cancellazione del record
                 break;
