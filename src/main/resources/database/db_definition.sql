@@ -84,7 +84,7 @@ CREATE TABLE sittings(
     notes VARCHAR,
 
     order_id_fk BIGINT,
-    image_id_fk BIGINT,
+    image_id_fk BIGINT UNIQUE,
     FOREIGN KEY(order_id_fk) REFERENCES orders(order_id_pk),
     FOREIGN KEY(image_id_fk) REFERENCES collection(image_id_pk)
 );

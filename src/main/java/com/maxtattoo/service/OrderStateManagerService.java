@@ -60,9 +60,9 @@ public class OrderStateManagerService {
         }
     }
 
-    private Order getPreviousOrderState(Long orderId){
+    private Order getPreviousOrderState(Long orderId) {
        Optional<Order> order = orderRepository.findById(orderId);
-        return order.orElse(order.orElseThrow());
+        return order.orElseThrow();
     }
 
     private void checkOrderPriceIsNotGreaterThenAlreadyPaid(Integer orderPrice, int alreadyPaid){

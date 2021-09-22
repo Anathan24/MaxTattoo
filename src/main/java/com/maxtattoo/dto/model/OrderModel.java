@@ -20,6 +20,8 @@ public class OrderModel implements GenericModel {
     private LocalDate endDate;
 
     private OrderTypeModel orderType;
+    private CollectionModel sketch;
+    private CollectionModel finalVersion;
 
     private List<SittingModel> sittings = new LinkedList<>();
 }

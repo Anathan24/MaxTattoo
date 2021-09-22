@@ -35,6 +35,10 @@ public class Sitting implements GenericEntity {
     @Column(name = "order_id_fk", updatable = false)
     private Long orderId;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "image_id_fk")
+    private Collection image;
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "sittings_paints", joinColumns = @JoinColumn(name = "sitting_id_fk", updatable = false), inverseJoinColumns = @JoinColumn(name = "paint_id_fk", updatable = false))
     private Set<Paint> paints = new HashSet<>();

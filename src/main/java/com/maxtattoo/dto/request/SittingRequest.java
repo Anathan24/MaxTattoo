@@ -14,4 +14,6 @@ public class SittingRequest implements GenericRequest {
     private Integer paid;
     private String notes;
     private Long orderId;
+    private Long imageId;
+
 }

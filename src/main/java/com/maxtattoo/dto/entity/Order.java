@@ -48,6 +48,14 @@ public class Order implements GenericEntity {
     @JoinColumn(name = "order_type_id_fk")
     private OrderType orderType;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "initial_image_state_id_fk")
+    private Collection sketch;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "final_image_state_id_fk")
+    private Collection finalVersion;
+
     @OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
     @JoinColumn(name = "order_id_fk", updatable = false)
     private Set<Sitting> sittings = new HashSet<>();

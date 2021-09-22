@@ -21,7 +21,7 @@ public enum Model {
     SITTING_MODEL("SittingModel"),
     PAINT_MODEL("PaintModel"),
     NEEDLE_MODEL("NeedleModel"),
-    IMAGE_MODEL("ImageModel");
+    COLLECTION_MODEL("CollectionModel");
 
     private String modelName;
 

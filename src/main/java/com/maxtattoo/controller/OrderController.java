@@ -80,7 +80,7 @@ public class OrderController extends GenericController {
         logger.info(START);
         var command = beanFactory.getBean(SaveOrderCmd.class);
         logger.info("{}: {}", REQUEST, request);
-        var model = command.execute(OrderModel.class ,request);
+        var model = command.execute(OrderModel.class, request);
         logger.info(MESSAGE_PATTERN, MODEL, model);
         logger.info(END);
         return ok(model);

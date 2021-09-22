@@ -1,10 +1,12 @@
 package com.maxtattoo.dto.entity;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "collection")
 public class Collection implements GenericEntity {
@@ -22,5 +24,10 @@ public class Collection implements GenericEntity {
 
     @Column(name = "description")
     private String description;
+
+    @Override
+    public String toString(){
+        return "imageId="+ imageId + ", name=" + name + ", description=" + description;
+    }
 
 }

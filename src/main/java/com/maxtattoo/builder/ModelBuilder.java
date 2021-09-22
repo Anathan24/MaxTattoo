@@ -87,6 +87,8 @@ public class ModelBuilder implements GenericBuilder {
         model.setStartDate(order.getStartDate().toLocalDate());
         model.setEndDate(order.getEndDate().toLocalDate());
         model.setOrderType(createOrderTypeModel(order.getOrderType()));
+        model.setSketch(createImageModel(order.getSketch()));
+        model.setFinalVersion(createImageModel(order.getFinalVersion()));
         model.setSittings(order.getSittings()
                 .stream()
                 .map(this::createSittingModel)
@@ -103,6 +105,7 @@ public class ModelBuilder implements GenericBuilder {
         BeanUtils.copyProperties(sitting, model);
 
         model.setDate(sitting.getDateTime().toLocalDateTime());
+        model.setImage(createImageModel(sitting.getImage()));
         model.setPaints(sitting.getPaints()
                 .stream()
                 .map(this::createPaintModel)
@@ -115,11 +118,11 @@ public class ModelBuilder implements GenericBuilder {
         return model;
     }
 
-    private ImageModel createImageModel(Collection collection) {
+    private CollectionModel createImageModel(Collection collection) {
         if (collection == null)
             return null;
 
-        var model = (ImageModel) modelFactory.getObject(ImageModel.class.getSimpleName());
+        var model = (CollectionModel) modelFactory.getObject(CollectionModel.class.getSimpleName());
         BeanUtils.copyProperties(collection, model);
 
         return model;

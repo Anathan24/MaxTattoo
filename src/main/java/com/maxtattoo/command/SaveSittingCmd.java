@@ -6,6 +6,7 @@ import com.maxtattoo.dto.entity.SittingNeedle;
 import com.maxtattoo.dto.entity.SittingPaint;
 import com.maxtattoo.dto.model.SittingModel;
 import com.maxtattoo.dto.request.SittingRequest;
+import com.maxtattoo.service.GetEntityIfExistsService;
 import com.maxtattoo.service.IdValidatorService;
 import com.maxtattoo.service.enums.SittingState;
 import com.maxtattoo.utils.DateUtils;
@@ -38,6 +39,8 @@ public class SaveSittingCmd extends GenericCommand {
 
     @Autowired
     private IdValidatorService idValidatorService;
+    @Autowired
+    private GetEntityIfExistsService getEntityIfExistsService;
 
     public SittingModel execute(SittingRequest request, List<Long> paints, List<Long> needles) {
         var entity = (Sitting) entityFactory.getObject(Sitting.class.getSimpleName());
@@ -46,6 +49,7 @@ public class SaveSittingCmd extends GenericCommand {
         entity.setDateTime(DateUtils.getTimestampFromString(request.getDate()));
         entity.setSittingState(SittingState.findByValue(request.getSittingState()) == null ? SittingState.TO_DO.getValue() : request.getSittingState());
         entity.setOrderId(idValidatorService.entityIdValidation(orderRepository, request.getOrderId()));
+        entity.setImage(getEntityIfExistsService.isImageExistsOrReturnNull(request.getImageId()));
 
         logger.info(MESSAGE_PATTERN, ENTITY, entity);
         entity = sittingRepository.save(entity);
