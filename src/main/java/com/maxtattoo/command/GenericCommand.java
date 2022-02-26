@@ -8,7 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-abstract class GenericCommand {
+public abstract class GenericCommand {
     final Logger logger = LoggerFactory.getLogger(this.getClass());
     final AbstractFactory entityFactory = FactoryProducer.getFactory(EntityFactory.class.getSimpleName());
 
