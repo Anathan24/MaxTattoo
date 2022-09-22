@@ -4,9 +4,11 @@ import com.maxtattoo.command.DeleteByIdCmd;
 import com.maxtattoo.command.FindAllCmd;
 import com.maxtattoo.command.FindByIdCmd;
 import com.maxtattoo.command.SaveImageCmd;
+import com.maxtattoo.database.repository.CollectionRepository;
 import com.maxtattoo.dto.model.CollectionModel;
 import com.maxtattoo.dto.request.CollectionRequest;
 import com.maxtattoo.utils.GenericResponse;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,22 +25,25 @@ import static org.springframework.http.ResponseEntity.ok;
 @RequestMapping(value = "/collection")
 public class CollectionController extends GenericController {
 
+    @Autowired
+    private CollectionRepository collectionRepository;
+
     @GetMapping(value = "/findById", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<CollectionModel> findById(@RequestParam Long id){
+    public ResponseEntity<CollectionModel> findById(@RequestParam Long id) {
         logger.info(START);
         var command = beanFactory.getBean(FindByIdCmd.class);
         logger.info("{}, id: {}", REQUEST, id);
-        var model = command.execute(repositoryFactory.getRepository(COLLECTION), CollectionModel.class, id);
+        var model = command.execute(collectionRepository, CollectionModel.class, id);
         logger.info(MESSAGE_PATTERN, MODEL, model);
         logger.info(END);
         return ok(model);
     }
 
     @GetMapping(value = "/findAll", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<CollectionModel>> findAll(){
+    public ResponseEntity<List<CollectionModel>> findAll() {
         logger.info(START);
         var command = super.beanFactory.getBean(FindAllCmd.class);
-        var result = command.execute(repositoryFactory.getRepository(COLLECTION), CollectionModel.class);
+        var result = command.execute(collectionRepository, CollectionModel.class);
         logger.info(MESSAGE_PATTERN, MODEL, result);
         logger.info(END);
         return ok(result);
@@ -46,9 +51,9 @@ public class CollectionController extends GenericController {
 
     @PostMapping(value = "/save", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<CollectionModel> save(@RequestParam(required = false) Long id,
-                                           @RequestParam(required = false) String name,
-                                           @RequestParam(name = "image") MultipartFile image,
-                                           @RequestParam(required = false) String description) throws IOException {
+                                                @RequestParam(required = false) String name,
+                                                @RequestParam(name = "image") MultipartFile image,
+                                                @RequestParam(required = false) String description) throws IOException {
         logger.info(START);
         CollectionRequest request = new CollectionRequest(id, name, image.getBytes(), description);
         var command = beanFactory.getBean(SaveImageCmd.class);
@@ -64,7 +69,7 @@ public class CollectionController extends GenericController {
         logger.info(START);
         var command = beanFactory.getBean(DeleteByIdCmd.class);
         logger.info(MESSAGE_PATTERN, REQUEST, id);
-        var result = command.execute(repositoryFactory.getRepository(COLLECTION), COLLECTION, id);
+        var result = command.execute(collectionRepository, COLLECTION, id);
         logger.info("RESULT: {}", result);
         logger.info(END);
         return ok(result);

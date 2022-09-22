@@ -70,21 +70,22 @@ public class LogRequestResponseAspect {
         long startTime = System.currentTimeMillis();
         Signature signature = pjp.getSignature();
         final String signatureName = signature.getName();
-        String s1 = signature.getDeclaringType().getName() + "." +signatureName;
+        //String s1 = signature.getDeclaringType().getName() + "." +signatureName;
         //String caller = abbreviator.abbreviate(s1);
 
         Object[] args = pjp.getArgs();
         final String s = this.getStringFromType(type);
+        final String caller = "caller";
         try {
-            logger.info("Start {} {} [{}] with request: {}.", s, signatureName, "caller", args);
+            logger.info("Start {} {} [{}] with request: {}.", s, signatureName, caller, args);
             Object retVal = pjp.proceed();
 
             boolean isByteArray = retVal instanceof byte[];
-            logger.info("Stop {} {} [{}] in {} ms with response: {}.", s, signatureName, "caller", System.currentTimeMillis()-startTime, !isByteArray ? retVal: "byte[] skipped");
+            logger.info("Stop {} {} [{}] in {} ms with response: {}.", s, signatureName, caller, System.currentTimeMillis()-startTime, !isByteArray ? retVal: "byte[] skipped");
 
             return retVal;
         }catch(Exception throwable){
-            logger.error("Stop {} {} [{}] in {} ms with error.", s, signatureName, "caller", System.currentTimeMillis()-startTime);
+            logger.error("Stop {} {} [{}] in {} ms with error.", s, signatureName, caller, System.currentTimeMillis()-startTime);
             throw throwable;
         }
     }
