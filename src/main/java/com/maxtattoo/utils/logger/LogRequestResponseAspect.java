@@ -1,6 +1,7 @@
 package com.maxtattoo.utils.logger;
 
 //import ch.qos.logback.classic.pattern.TargetLengthBasedClassNameAbbreviator;
+
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.Around;
@@ -15,7 +16,7 @@ import javax.annotation.PostConstruct;
 
 @Aspect
 @Component
-@ConditionalOnProperty(name = "LOG_LEVEL", havingValue="INFO")
+@ConditionalOnProperty(name = "LOG_LEVEL", havingValue = "INFO")
 public class LogRequestResponseAspect {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -37,17 +38,17 @@ public class LogRequestResponseAspect {
     }
 
     @Pointcut("within(com.maxtattoo.controller..*)")
-    void inControllerLayer(){
+    void inControllerLayer() {
         //pointcut
     }
 
     @Around("inControllerLayer()")
     public Object inControllerLayer(ProceedingJoinPoint pjp) throws Throwable {
-        return  this.proceed(pjp, Type.CONTROLLER);
+        return this.proceed(pjp, Type.CONTROLLER);
     }
 
     @Pointcut("within(com.maxtattoo.command..*)")
-    void inCommandLayer(){
+    void inCommandLayer() {
         //pointcut
     }
 
@@ -57,7 +58,7 @@ public class LogRequestResponseAspect {
     }
 
     @Pointcut("within(com.maxtattoo.service..*) || within(com.maxtattoo.factory..*)")
-    void inServiceLayer(){
+    void inServiceLayer() {
         //pointcut
     }
 
@@ -70,35 +71,36 @@ public class LogRequestResponseAspect {
         long startTime = System.currentTimeMillis();
         Signature signature = pjp.getSignature();
         final String signatureName = signature.getName();
-        String s1 = signature.getDeclaringType().getName() + "." +signatureName;
+        //String s1 = signature.getDeclaringType().getName() + "." + signatureName;
         //String caller = abbreviator.abbreviate(s1);
 
         Object[] args = pjp.getArgs();
         final String s = this.getStringFromType(type);
+        final String CALLER = "caller";
         try {
-            logger.info("Start {} {} [{}] with request: {}.", s, signatureName, "caller", args);
+            logger.info("Start {} {} [{}] with request: {}.", s, signatureName, CALLER, args);
             Object retVal = pjp.proceed();
 
             boolean isByteArray = retVal instanceof byte[];
-            logger.info("Stop {} {} [{}] in {} ms with response: {}.", s, signatureName, "caller", System.currentTimeMillis()-startTime, !isByteArray ? retVal: "byte[] skipped");
+            logger.info("End {} {} [{}] in {} ms with response: {}.", s, signatureName, CALLER, System.currentTimeMillis() - startTime, !isByteArray ? retVal : "byte[] skipped");
 
             return retVal;
-        }catch(Exception throwable){
-            logger.error("Stop {} {} [{}] in {} ms with error.", s, signatureName, "caller", System.currentTimeMillis()-startTime);
+        } catch (Exception throwable) {
+            logger.error("Stop {} {} [{}] in {} ms with error.", s, signatureName, CALLER, System.currentTimeMillis() - startTime);
             throw throwable;
         }
     }
 
-    private enum Type{
+    private enum Type {
         DEFAULT,
         CONTROLLER,
         COMMAND,
         SERVICE,
     }
 
-    private String getStringFromType(Type type){
+    private String getStringFromType(Type type) {
         final String s;
-        switch(type){
+        switch (type) {
             case CONTROLLER:
                 s = "controller";
                 break;
@@ -106,10 +108,10 @@ public class LogRequestResponseAspect {
                 s = "command";
                 break;
             case SERVICE:
-                s= "service";
+                s = "service";
                 break;
             default:
-                s ="";
+                s = "";
                 break;
         }
         return s;

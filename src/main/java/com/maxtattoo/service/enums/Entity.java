@@ -26,7 +26,7 @@ public enum Entity {
     SITTING_NEEDLE("SittingNeedle"),
     COLLECTION("Collection");
 
-    private String entityName;
+    private final String entityName;
 
     public static Entity findByEntityName(String modelName) {
         return Optional.ofNullable(modelName)
